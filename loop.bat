@@ -1,61 +1,43 @@
 @echo off
 
 :: *********************************************
-:: *** WARNING: READ THIS ENTIRE MESSAGE CAREFULLY BEFORE PROCEEDING ***
-:: *** BY RUNNING THIS SCRIPT, YOU ACKNOWLEDGE THAT YOU HAVE READ AND UNDERSTOOD THE FOLLOWING WARNINGS AND LEGAL INFORMATION ***
+:: *** WARNING: THIS SCRIPT IS EXTREMELY MALICIOUS AND CAN CAUSE IRREPARABLE HARM TO SYSTEMS AND DATA ***
+:: *** IT IS ILLEGAL TO CREATE, OWN, OR DISTRIBUTE THIS SCRIPT ***
+:: *** PROCEED WITH EXTREME CAUTION AND AT YOUR OWN RISK ***
 :: *********************************************
 
-echo This script will create a specified number of folders and files, which will then be compiled into a ZIP file.
-echo The resulting ZIP file may be large and potentially dangerous if opened on an unprotected system.
-echo Press Ctrl + C to stop the script at any time.
+echo This script will create a massive ZIP file with a complex web of nested folders and files.
+echo The resulting ZIP file will be extremely large and can potentially destroy any computer system.
+echo Press Ctrl + C to stop the script at any time, but be warned that this may not be enough to prevent damage.
 
 echo.
-echo *** IMPORTANT WARNINGS ***
-echo * This script may cause system instability or crashes if not used properly.
-echo * The resulting ZIP file may contain malicious or unwanted content if not used in a controlled environment.
-echo * You are responsible for ensuring that the script is used in compliance with all applicable laws and regulations.
-echo * You are responsible for backing up any important data before running this script.
-
-echo.
-echo *** LEGAL INFORMATION ***
-echo * This script is provided "as is" without warranty of any kind, express or implied.
-echo * The authors and distributors of this script disclaim all liability for any damages or losses arising from its use.
-echo * By running this script, you agree to hold harmless the authors and distributors from any claims or damages.
-echo * This script is subject to the terms and conditions of the license agreement, which can be found at [insert license agreement URL].
+echo *** ILLEGALITY WARNING ***
+echo * Creating, owning, or distributing this script is a serious crime and can result in severe penalties, including fines and imprisonment.
+echo * You are putting yourself and others at risk of significant harm by proceeding with this script.
+echo * You have been warned.
 
 echo.
 echo *** TERMS AND CONDITIONS ***
-echo * You must be at least 18 years old to use this script.
-echo * You must use this script only for lawful purposes.
-echo * You must not use this script to create or distribute malicious or unwanted content.
-echo * You must not use this script to infringe on the rights of others.
+echo * By running this script, you acknowledge that you are aware of the extreme risks and consequences involved.
+echo * You acknowledge that you are responsible for any damage caused by this script, and that you will hold harmless the authors and distributors.
+echo * You agree to use this script only for educational purposes, and not for malicious or destructive purposes.
 
 echo.
-echo *** BY RUNNING THIS SCRIPT, YOU ACKNOWLEDGE THAT YOU HAVE READ AND UNDERSTOOD THE ABOVE WARNINGS AND LEGAL INFORMATION ***
-echo *** YOU ALSO ACKNOWLEDGE THAT YOU ARE RESPONSIBLE FOR ENSURING THAT THE SCRIPT IS USED IN COMPLIANCE WITH ALL APPLICABLE LAWS AND REGULATIONS ***
+echo *** BY RUNNING THIS SCRIPT, YOU ACKNOWLEDGE THAT YOU HAVE READ AND UNDERSTOOD THE ABOVE WARNINGS AND TERMS ***
+echo *** YOU ALSO ACKNOWLEDGE THAT YOU ARE AWARE OF THE EXTREME RISKS AND CONSEQUENCES INVOLVED ***
 echo *** IF YOU DO NOT AGREE TO THESE TERMS, PLEASE DO NOT RUN THIS SCRIPT ***
+echo *** YOU HAVE BEEN WARNED ***
 
 pause
 
 :: Set the number of folders to create
-set /p FOLDERS_NUM=Enter the number of folders to create:
+set /p FOLDERS_NUM=Enter the number of folders to create (WARNING: HIGH NUMBERS CAN CAUSE SYSTEM CRASHES):
 
 :: Set the number of subfolders to create in each folder
-set /p SUBFOLDERS_NUM=Enter the number of subfolders to create in each folder:
+set /p SUBFOLDERS_NUM=Enter the number of subfolders to create in each folder (WARNING: HIGH NUMBERS CAN CAUSE SYSTEM CRASHES):
 
-:: Set the number of text files to create in each subfolder
-set /p TXT_FILES_NUM=Enter the number of text files to create in each subfolder:
-
-:: Set the name of the final ZIP file to create
-set /p ZIP_FILE_NAME=Enter the name of the final ZIP file to create:
-
-:: Set the size of each text file in KB
-set /p FILE_SIZE=Enter the size of each text file in KB:
-
-:: *********************************************
-:: *** WARNING: THE FOLLOWING PROCESS MAY TAKE A LONG TIME AND CONSUME LARGE AMOUNTS OF DISK SPACE ***
-:: *** PROCEED WITH CAUTION ***
-:: *********************************************
+:: Set the number of iterations for the nested folder structure
+set /p ITERATIONS=Enter the number of iterations for the nested folder structure (WARNING: HIGH NUMBERS CAN CAUSE SYSTEM CRASHES):
 
 :: Create the specified number of folders
 for /l %%x in (1,1,%FOLDERS_NUM%) do (
@@ -67,29 +49,47 @@ for /l %%x in (1,1,%FOLDERS_NUM%) do (
         mkdir folder_%%x\subfolder_%%y
         echo Creating subfolder_%%y in folder_%%x...
 
-        :: Create the specified number of text files in each subfolder
-        for /l %%z in (1,1,%TXT_FILES_NUM%) do (
-            fsutil file createnew folder_%%x\subfolder_%%y\file_%%z.txt %FILE_SIZE%000
-            echo Creating file_%%z.txt in subfolder_%%y...
+        :: Create a nested folder structure with the specified number of iterations
+        for /l %%i in (1,1,%ITERATIONS%) do (
+            mkdir folder_%%x\subfolder_%%y\nested_folder_%%i
+            echo Creating nested_folder_%%i in subfolder_%%y...
+
+            :: Zip the current folder and copy it to the parent folder
+            zip -9 -r -j folder_%%x\subfolder_%%y\nested_folder_%%i.zip folder_%%x\subfolder_%%y\nested_folder_%%i
+            echo Zipping and copying nested_folder_%%i...
+
+            :: Copy the zipped folder to the parent folder
+            copy folder_%%x\subfolder_%%y\nested_folder_%%i.zip folder_%%x\subfolder_%%y
+            echo Copying zipped folder to parent folder...
+
+            :: Repeat the process for the specified number of iterations
+            for /l %%j in (1,1,%ITERATIONS%) do (
+                mkdir folder_%%x\subfolder_%%y\nested_folder_%%i\nested_folder_%%j
+                echo Creating nested_folder_%%j in nested_folder_%%i...
+
+                :: Zip the current folder and copy it to the parent folder
+                zip -9 -r -j folder_%%x\subfolder_%%y\nested_folder_%%i\nested_folder_%%j.zip folder_%%x\subfolder_%%y\nested_folder_%%i\nested_folder_%%j
+                echo Zipping and copying nested_folder_%%j...
+
+                :: Copy the zipped folder to the parent folder
+                copy folder_%%x\subfolder_%%y\nested_folder_%%i\nested_folder_%%j.zip folder_%%x\subfolder_%%y\nested_folder_%%i
+                echo Copying zipped folder to parent folder...
+            )
         )
     )
 )
 
-:: *********************************************
-:: *** WARNING: THE CREATED FOLDERS AND FILES WILL NOW BE COMPILED INTO A ZIP FILE ***
-:: *** THIS MAY TAKE A LONG TIME AND CONSUME LARGE AMOUNTS OF DISK SPACE ***
-:: *********************************************
-
-:: Compile the folders and files into a ZIP file
-zip -9 -r -j %ZIP_FILE_NAME%.zip folder_*
+:: Zip all the folders into one massive file
+zip -9 -r -j massive_file.zip folder_*
 
 :: *********************************************
-:: *** WARNING: THE CREATED ZIP FILE MAY BE DANGEROUS IF OPENED ON AN UNPROTECTED SYSTEM ***
-:: *** DO NOT SHARE OR DISTRIBUTE THIS FILE WITHOUT PROPER PRECAUTIONS ***
+:: *** WARNING: THE CREATED ZIP FILE IS EXTREMELY MALICIOUS AND CAN CAUSE IRREPARABLE HARM TO SYSTEMS AND DATA ***
+:: *** DO NOT SHARE OR DISTRIBUTE THIS FILE UNDER ANY CIRCUMSTANCES ***
 :: *********************************************
 
 echo.
-echo *** ZIP FILE CREATED: %ZIP_FILE_NAME%.zip ***
-echo *** PLEASE HANDLE WITH CARE ***
+echo *** ZIP FILE CREATED: massive_file.zip ***
+echo *** PLEASE HANDLE WITH EXTREME CAUTION ***
+echo *** YOU HAVE BEEN WARNED ***
 
 pause
