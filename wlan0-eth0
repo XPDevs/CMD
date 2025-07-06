@@ -1,0 +1,42 @@
+#!/bin/bash
+
+echo "🔧 Setting static IP for eth0..."
+echo -e "\ninterface eth0\nstatic ip_address=192.168.137.1/24\nnohook wpa_supplicant" | sudo tee -a /etc/dhcpcd.conf > /dev/null
+sudo systemctl restart dhcpcd
+
+echo "🌐 Enabling IP forwarding..."
+sudo sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
+sudo sysctl -w net.ipv4.ip_forward=1
+
+echo "🔥 Setting up NAT using iptables..."
+sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
+sudo iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
+sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+
+echo "💾 Saving iptables rules..."
+sudo apt-get update
+sudo apt-get install -y iptables-persistent netfilter-persistent
+sudo netfilter-persistent save
+
+echo "📡 Installing DHCP server..."
+sudo apt-get install -y isc-dhcp-server
+
+echo "⚙️ Configuring DHCP server..."
+sudo bash -c 'cat > /etc/dhcp/dhcpd.conf <<EOF
+default-lease-time 600;
+max-lease-time 7200;
+authoritative;
+
+subnet 192.168.137.0 netmask 255.255.255.0 {
+  range 192.168.137.10 192.168.137.50;
+  option routers 192.168.137.1;
+  option domain-name-servers 8.8.8.8, 1.1.1.1;
+}
+EOF'
+
+sudo sed -i 's/^INTERFACESv4=.*/INTERFACESv4="eth0"/' /etc/default/isc-dhcp-server
+
+echo "🔁 Restarting DHCP server..."
+sudo systemctl restart isc-dhcp-server
+
+echo "✅ Setup complete! You can now plug your desktop into the Pi via Ethernet and get internet access."
