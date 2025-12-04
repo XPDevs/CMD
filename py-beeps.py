@@ -2,6 +2,7 @@ import time
 import sys
 import json
 import os
+import random # Added for randomization
 
 SEQUENCE_FILENAME = "beep_sequence.json"
 
@@ -61,6 +62,40 @@ def create_new_sequence():
     print("\nSequence created successfully.")
     print(f"Beeps: {num_beeps}. Initial Wait: {initial_wait}s. Delays: {delays}")
     return sequence
+
+def create_random_sequence():
+    """Generates a completely random beep sequence configuration."""
+    print("\n--- 5. CREATE RANDOM SEQUENCE (SURPRISE!) ---")
+    
+    # Define reasonable ranges for randomization
+    MIN_BEATS = 3
+    MAX_BEATS = 15
+    MIN_TIME = 0.1
+    MAX_TIME = 5.0
+
+    # 1. Random Initial Wait (rounded to two decimals for cleaner data)
+    initial_wait = round(random.uniform(MIN_TIME, MAX_TIME), 2)
+
+    # 2. Random Number of Beeps
+    num_beeps = random.randint(MIN_BEATS, MAX_BEATS)
+    
+    delays = []
+    if num_beeps > 1:
+        for i in range(num_beeps - 1):
+            # Random delay for each segment
+            delay = round(random.uniform(MIN_TIME, MAX_TIME), 2)
+            delays.append(delay)
+    
+    sequence = {
+        "initial_wait": initial_wait,
+        "num_beeps": num_beeps,
+        "delays": delays
+    }
+    
+    # Only report the count, keeping the timing secret, as requested
+    print(f"\nRandom sequence created with {num_beeps} beeps. Get ready for a surprise!")
+    return sequence
+
 
 def save_sequence(sequence):
     """Saves the sequence to the predefined JSON file."""
@@ -148,9 +183,10 @@ def main_menu():
         print(f"2. Save Current Sequence to file ({SEQUENCE_FILENAME})")
         print(f"3. Load Sequence from file ({SEQUENCE_FILENAME})")
         print("4. RUN Current Sequence")
-        print("5. Exit")
+        print("5. Create RANDOM Sequence (Surprise!)")
+        print("6. Exit")
         
-        choice = input("\nEnter choice (1-5): ")
+        choice = input("\nEnter choice (1-6): ")
         
         if choice == '1':
             current_sequence = create_new_sequence()
@@ -167,14 +203,17 @@ def main_menu():
             if current_sequence:
                 execute_sequence(current_sequence)
             else:
-                print("\nCannot run. Please create (1) or load (3) a sequence first.")
+                print("\nCannot run. Please create (1), load (3), or randomize (5) a sequence first.")
 
         elif choice == '5':
+            current_sequence = create_random_sequence()
+
+        elif choice == '6':
             print("\nExiting PC Speaker Controller. Goodbye!")
             break
             
         else:
-            print("\nInvalid choice. Please enter a number between 1 and 5.")
+            print("\nInvalid choice. Please enter a number between 1 and 6.")
 
 
 if __name__ == "__main__":
