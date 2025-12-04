@@ -6,6 +6,19 @@ import random # Added for randomization
 
 SEQUENCE_FILENAME = "beep_sequence.json"
 
+# Morse Code Dictionary for commonly used characters
+MORSE_CODE = {
+    'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
+    'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
+    'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.',
+    'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+    'Y': '-.--', 'Z': '--..',
+    '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-',
+    '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.',
+    '.': '.-.-.-', ',': '--..--', '?': '..-..', '/': '-..-.', '-': '-....-',
+    '(': '-.--.', ')': '-.--.-', ' ': ' ' # Space is handled separately
+}
+
 def get_valid_float(prompt, min_val=0.0):
     """Helper function to get a validated float input."""
     while True:
@@ -131,8 +144,7 @@ def load_sequence():
 
 def execute_sequence(sequence):
     """
-    Executes the beeping sequence using the PC speaker bell character.
-    This relies on the terminal being configured to map \a to the speaker.
+    Executes the custom sequence using the PC speaker bell character.
     """
     if not sequence:
         print("\nError: No sequence defined to run.")
@@ -164,56 +176,152 @@ def execute_sequence(sequence):
         
     print("\n--- Sequence finished ---")
 
+def text_to_morse_speaker():
+    """Gets user input for text and WPM, then executes the Morse sequence."""
+    print("\n--- 6. TEXT-TO-MORSE SPEAKER (EXPERIMENTAL) ---")
+    
+    text = input("Enter text to translate (A-Z, 0-9, limited punctuation): ").upper()
+    
+    wpm = get_valid_int(
+        "Enter playback speed (Words Per Minute, e.g., 20 WPM): ", min_val=5
+    )
+    
+    execute_morse_sequence(text, wpm)
+
+
+def execute_morse_sequence(text, wpm):
+    """
+    Converts text to Morse Code and executes the beep sequence based on WPM timing.
+    Paris standard timing used: Dot = T, Dash = 3T, Element Space = T, Char Space = 3T, Word Space = 7T.
+    T (dot duration) = 1.2 / WPM (seconds)
+    """
+    print(f"\nTranslating '{text}' at {wpm} WPM...")
+    
+    # Calculate the base time unit (T) for the dot
+    T = 1.2 / wpm
+    
+    # Define timing constants
+    DUR_DOT = T
+    DUR_DASH = 3 * T
+    WAIT_ELEMENT = T       # Wait between dots/dashes within a letter
+    WAIT_CHAR = 3 * T      # Wait between letters
+    WAIT_WORD = 7 * T      # Wait between words
+    
+    print(f"Base Dot Duration (T): {DUR_DOT:.3f}s. Starting transmission...")
+
+    for i, char in enumerate(text):
+        if char == ' ':
+            print("  [Word Space]")
+            time.sleep(WAIT_WORD)
+            continue
+
+        morse = MORSE_CODE.get(char)
+        if morse is None:
+            print(f"  [Skipping unknown character: {char}]")
+            continue
+            
+        print(f"  Character '{char}' ({morse}):")
+        
+        # Transmit the Morse sequence for the character
+        for j, element in enumerate(morse):
+            # 1. Produce Sound (Beep)
+            if element == '.':
+                duration = DUR_DOT
+                print(f"    - Dot ({duration:.3f}s)")
+            elif element == '-':
+                duration = DUR_DASH
+                print(f"    - Dash ({duration:.3f}s)")
+            else:
+                continue # Should not happen with valid Morse
+
+            # The PC speaker beep is instant, so we just signal it and wait for the duration
+            sys.stdout.write('\a')
+            sys.stdout.flush()
+            time.sleep(duration)
+            
+            # 2. Produce Gap between elements
+            if j < len(morse) - 1:
+                time.sleep(WAIT_ELEMENT)
+        
+        # 3. Produce Gap between characters
+        time.sleep(WAIT_CHAR)
+        
+    print("\n--- Morse Transmission finished ---")
+
+
 def main_menu():
-    """The main application loop and menu system."""
+    """The main application loop and menu system with TUI."""
     current_sequence = None
     
-    print("====================================")
-    print(" TCore PC Speaker Sequence Controller")
-    print("====================================")
-    
     while True:
-        print("\n--- MAIN MENU ---")
+        # Clear screen placeholder (print many newlines)
+        print('\n' * 50) 
+
+        # TUI Header and Status
+        print("╔═════════════════════════════════════════════════════════════╗")
+        print("║          TCore PC Speaker Sequence Controller (TUI)         ║")
+        print("╠═════════════════════════════════════════════════════════════╣")
+        
         if current_sequence:
-            print(f"Current Sequence Loaded: {current_sequence['num_beeps']} beeps.")
+            status = f"STATUS: Active Sequence - {current_sequence['num_beeps']} total beeps."
         else:
-            print("Current Sequence Loaded: None.")
-            
-        print("1. Create New Sequence (Interactive Input)")
-        print(f"2. Save Current Sequence to file ({SEQUENCE_FILENAME})")
-        print(f"3. Load Sequence from file ({SEQUENCE_FILENAME})")
-        print("4. RUN Current Sequence")
-        print("5. Create RANDOM Sequence (Surprise!)")
-        print("6. Exit")
+            status = "STATUS: No sequence loaded."
+
+        print(f"║ {status:<57} ║")
+        print("╠═════════════════════════════════════════════════════════════╣")
         
-        choice = input("\nEnter choice (1-6): ")
+        # Menu Options
+        print("║ 1. Create New Sequence (Interactive Input)                  ║")
+        print(f"║ 2. Save Current Sequence to file ({SEQUENCE_FILENAME})             ║")
+        print(f"║ 3. Load Sequence from file ({SEQUENCE_FILENAME})                   ║")
+        print("║ 4. RUN Custom Sequence                                      ║")
+        print("║ 5. Create RANDOM Sequence (Surprise!)                       ║")
+        print("║ 6. Text-to-Morse Speaker (Experimental)                     ║")
+        print("║ 7. Exit                                                     ║")
+        print("╚═════════════════════════════════════════════════════════════╝")
         
+        choice = input("\n[ACTION] Enter choice (1-7) and press Enter: ")
+        
+        print("\n" + "="*70) # Separator for action output
+
+        # Handle user choice
         if choice == '1':
             current_sequence = create_new_sequence()
+            input("\n[PAUSE] Press Enter to return to the menu...")
         
         elif choice == '2':
             save_sequence(current_sequence)
+            input("\n[PAUSE] Press Enter to return to the menu...")
             
         elif choice == '3':
             loaded_seq = load_sequence()
             if loaded_seq:
                 current_sequence = loaded_seq
+            input("\n[PAUSE] Press Enter to return to the menu...")
                 
         elif choice == '4':
             if current_sequence:
                 execute_sequence(current_sequence)
             else:
-                print("\nCannot run. Please create (1), load (3), or randomize (5) a sequence first.")
+                print("\n[ERROR] Cannot run. Please create (1), load (3), or randomize (5) a sequence first.")
+            input("\n[PAUSE] Press Enter to return to the menu...")
 
         elif choice == '5':
             current_sequence = create_random_sequence()
+            input("\n[PAUSE] Press Enter to return to the menu...")
 
         elif choice == '6':
+            # New Morse Code function
+            text_to_morse_speaker()
+            input("\n[PAUSE] Press Enter to return to the menu...")
+
+        elif choice == '7':
             print("\nExiting PC Speaker Controller. Goodbye!")
             break
             
         else:
-            print("\nInvalid choice. Please enter a number between 1 and 6.")
+            print(f"\n[ERROR] Invalid choice '{choice}'. Please enter a number between 1 and 7.")
+            input("\n[PAUSE] Press Enter to continue...")
 
 
 if __name__ == "__main__":
