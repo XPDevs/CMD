@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results Dashboard | Global Intelligence Quotient Test</title>
+    <style>
+        :root {
+            --bg-deep: #05070a;
+            --bg-card: #11141d;
+            --accent-blue: #2563eb;
+            --accent-glow: #3b82f6;
+            --text-primary: #ffffff;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --border: #1e293b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Nav Bar */
+        nav {
+            padding: 1rem 5%;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 7, 10, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 800;
+            letter-spacing: -1px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--accent-blue);
+            border-radius: 6px;
+        }
+
+        /* Main Container */
+        .dashboard {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .hero-result {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid var(--border);
+        }
+
+        .score-display {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .score-circle {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 10px solid var(--border);
+            border-top-color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 0 30px rgba(37, 99, 235, 0.2);
+        }
+
+        .score-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+        }
+
+        .status-pill {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Breakdown Progress Bars */
+        .breakdown-title {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metric { margin-bottom: 20px; }
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        .bar-bg {
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .bar-fill {
+            height: 100%;
+            background: var(--accent-blue);
+        }
+
+        /* Summary Paragraph */
+        .summary-box {
+            margin-top: 24px;
+            padding: 24px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            flex: 1;
+            transition: 0.2s;
+        }
+
+        .btn-primary { background: var(--accent-blue); color: white; }
+        .btn-secondary { background: var(--border); color: white; }
+        .btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        @media (max-width: 768px) {
+            .hero-result { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <div class="logo-icon"></div>
+            IQ-GLOBAL
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">Assessment ID: <span id="id-val"></span></div>
+    </nav>
+
+    <div class="dashboard">
+        <div class="hero-result">
+            <div class="card score-display">
+                <div class="status-pill">Assessment Complete</div>
+                <div class="score-circle">
+                    <div class="score-number">25</div>
+                </div>
+                <div style="font-size: 1.2rem; font-weight: 600;">Overall Score</div>
+                <div style="color: var(--text-muted); font-size: 0.9rem;">Maximum possible: 30</div>
+            </div>
+
+            <div class="card">
+                <div class="breakdown-title">Cognitive Strengths</div>
+                
+                <div class="metric">
+                    <div class="metric-header"><span>Logical Analysis</span><span>90%</span></div>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 90%;"></div></div>
+                </div>
+
+                <div class="metric">
+                    <div class="metric-header"><span>Spatial Intelligence</span><span>80%</span></div>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 80%;"></div></div>
+                </div>
+
+                <div class="metric">
+                    <div class="metric-header"><span>Pattern Synthesis</span><span>85%</span></div>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 85%;"></div></div>
+                </div>
+
+                <div class="summary-box">
+                    <strong>Performance Summary:</strong> Your score of 25 places you within the "Normal to High" classification. This indicates a robust capacity for abstract reasoning and problem-solving. You performed exceptionally well in Logical Analysis, suggesting a high aptitude for deductive sequences and complex mental structures.
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="text-align: center;">
+            <div class="breakdown-title">Global Standing</div>
+            <div style="font-size: 2rem; font-weight: 700; margin: 10px 0;">Top 46%</div>
+            <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 20px auto;">
+                Compared to 1.2 million test-takers globally, your results fall within the standard deviation of the global mean. This is considered a "Normal" profile for the 2026 demographic baseline.
+            </p>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary">Download Official Certificate (PDF)</button>
+                <button class="btn btn-secondary">Share Results</button>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; color: var(--text-muted); font-size: 0.75rem;">
+            &copy; 2026 IQ-Global Psychometric Research Institute. All rights reserved.<br>
+            <span id="date-footer"></span>
+        </div>
+    </div>
+
+    <script>
+        // Set dynamic ID and Date
+        document.getElementById('id-val').innerText = Math.random().toString(36).substring(2, 12).toUpperCase();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('date-footer').innerText = "Verified on " + new Date().toLocaleDateString('en-GB', options);
+    </script>
+</body>
+</html>
