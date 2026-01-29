@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Phone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+        
+        :root {
+            --samsung-blue: #3e82f1;
+            --oneui-bg: #000000;
+            --squircle-radius: 28px;
+            --danger-red: #f84b4b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--oneui-bg);
+            color: #fff;
+            margin: 0;
+            height: 100dvh;
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        .phone-container {
+            width: 100%;
+            max-width: 450px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: #000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Screen States */
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            padding-top: 60px;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        /* Setup Screen */
+        .setup-container {
+            padding: 40px 24px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .input-field {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 16px;
+            color: white;
+            width: 100%;
+            margin-bottom: 24px;
+            outline: none;
+        }
+
+        .input-field:focus {
+            border-color: var(--samsung-blue);
+        }
+
+        /* Home/Recents Screen */
+        .header-section {
+            padding: 20px 24px;
+        }
+
+        .recent-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 24px;
+            gap: 16px;
+            transition: background 0.2s;
+        }
+
+        .recent-item:active {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .recent-avatar {
+            width: 48px;
+            height: 48px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--samsung-blue);
+        }
+
+        /* Call Screen */
+        .caller-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .avatar-circle {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 2;
+        }
+
+        .avatar-glow {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            box-shadow: 0 0 30px var(--samsung-blue);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .avatar-glow.speaking {
+            opacity: 0.4;
+        }
+
+        .processing-spinner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--samsung-blue);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            animation: spin 1s linear infinite;
+            z-index: 3;
+        }
+
+        .processing-spinner.active {
+            opacity: 1;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .caller-name {
+            font-size: 28px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .call-duration {
+            font-size: 16px;
+            color: var(--samsung-blue);
+            font-weight: 400;
+        }
+
+        /* Buttons & Nav */
+        .squircle-btn {
+            width: 72px;
+            height: 72px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--squircle-radius);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        .squircle-btn:active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(0.92);
+        }
+
+        .squircle-btn.active {
+            background: #fff;
+            color: #000;
+        }
+
+        .btn-label {
+            font-size: 11px;
+            margin-top: 8px;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .end-call-btn {
+            width: 72px;
+            height: 72px;
+            background: var(--danger-red);
+            border-radius: var(--squircle-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(248, 75, 75, 0.3);
+        }
+
+        .call-fab {
+            width: 56px;
+            height: 56px;
+            background: #27ae60;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+            margin-left: auto;
+        }
+
+        .nav-pill {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 6px;
+            border-radius: 40px;
+            display: flex;
+            gap: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 100;
+        }
+
+        .nav-item {
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #999;
+        }
+
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .wave-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 200px;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        #proximityOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="proximityOverlay"></div>
+
+    <div class="phone-container" id="mainContainer">
+        
+        <!-- SETUP SCREEN -->
+        <div id="screenSetup" class="screen">
+            <div class="setup-container">
+                <h1 class="text-3xl font-semibold mb-2">Welcome</h1>
+                <p class="text-gray-400 mb-8">Please enter your API key to start using the phone.</p>
+                
+                <input type="password" id="apiKeyInput" class="input-field" placeholder="Enter API Key">
+                
+                <button class="bg-blue-500 text-white w-full py-4 rounded-2xl font-semibold active:scale-95 transition-transform" onclick="saveKey()">
+                    Get Started
+                </button>
+                
+                <p class="mt-auto text-xs text-gray-500 text-center">Your key is stored only on this device.</p>
+            </div>
+        </div>
+
+        <!-- START SCREEN: RECENTS -->
+        <div id="screenHome" class="screen">
+            <div class="header-section flex justify-between items-center">
+                <h1 class="text-3xl font-semibold">Recents</h1>
+                <button onclick="clearKey()" class="text-xs text-gray-500 uppercase tracking-widest font-bold">Logout</button>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto">
+                <div class="recent-item" onclick="startCall()">
+                    <div class="recent-avatar">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="font-medium text-lg">Gemini</div>
+                        <div class="text-sm text-gray-500">Mobile</div>
+                    </div>
+                    <div class="text-sm text-gray-500 mr-2">Just now</div>
+                    <div class="call-fab">
+                        <i class="fa-solid fa-phone text-white text-xl"></i>
+                    </div>
+                </div>
+
+                <div class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-widest mt-4">Yesterday</div>
+                
+                <div class="recent-item opacity-50">
+                    <div class="recent-avatar">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="font-medium text-lg">Work</div>
+                        <div class="text-sm text-gray-500">London</div>
+                    </div>
+                    <div class="text-sm text-gray-500">14:20</div>
+                </div>
+            </div>
+
+            <div class="nav-pill">
+                <div class="nav-item">Keypad</div>
+                <div class="nav-item active">Recents</div>
+                <div class="nav-item">Contacts</div>
+            </div>
+        </div>
+
+        <!-- ACTIVE CALL SCREEN -->
+        <div id="screenCall" class="screen">
+            <div class="caller-info">
+                <div class="avatar-container">
+                    <div class="processing-spinner" id="processingSpinner"></div>
+                    <div class="avatar-glow" id="speakingGlow"></div>
+                    <div class="avatar-circle">
+                        <i class="fa-solid fa-user text-gray-400"></i>
+                    </div>
+                </div>
+                <div class="caller-name">Gemini</div>
+                <div class="call-duration" id="timer">00:00</div>
+            </div>
+
+            <div class="wave-overlay">
+                <canvas id="visualiser"></canvas>
+            </div>
+
+            <div class="px-10 pb-32">
+                <div class="grid grid-cols-3 gap-y-8 gap-x-4">
+                    <button class="squircle-btn" id="muteBtn" onclick="toggleMute()">
+                        <i class="fa-solid fa-microphone-slash"></i>
+                        <span class="btn-label">Mute</span>
+                    </button>
+                    <button class="squircle-btn">
+                        <i class="fa-solid fa-grip"></i>
+                        <span class="btn-label">Keypad</span>
+                    </button>
+                    <button class="squircle-btn" id="speakerBtn" onclick="toggleSpeaker()">
+                        <i class="fa-solid fa-volume-high"></i>
+                        <span class="btn-label" id="speakerLabel">Speaker</span>
+                    </button>
+                    
+                    <button class="squircle-btn">
+                        <i class="fa-solid fa-plus"></i>
+                        <span class="btn-label">Add call</span>
+                    </button>
+                    <button class="squircle-btn">
+                        <i class="fa-solid fa-video"></i>
+                        <span class="btn-label">Video call</span>
+                    </button>
+                    <button class="squircle-btn">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                        <span class="btn-label">More</span>
+                    </button>
+
+                    <div class="col-start-2 flex justify-center mt-4">
+                        <button class="end-call-btn" onclick="endCall()">
+                            <i class="fa-solid fa-phone-slash text-2xl rotate-[135deg]"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- END SCREEN -->
+        <div id="screenEnd" class="screen">
+            <div class="caller-info">
+                <div class="avatar-circle opacity-50 mb-6 scale-75">
+                    <i class="fa-solid fa-user text-gray-400"></i>
+                </div>
+                <div class="caller-name">Gemini</div>
+                <div class="text-gray-400 mt-2">Call Ended</div>
+                <div class="text-xl mt-1" id="finalTime">00:00</div>
+                
+                <button class="mt-20 bg-white text-black px-12 py-4 rounded-full font-semibold active:scale-95 transition-transform" onclick="goHome()">
+                    Close
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let USER_API_KEY = localStorage.getItem('GEMINI_PHONE_KEY') || "";
+        
+        let audioCtx, analyser, dataArray, timerInterval, startTime;
+        let isMuted = false;
+        let isSpeaker = true; 
+        let isLive = false;
+        let canvas, ctx;
+
+        function initUI() {
+            canvas = document.getElementById('visualiser');
+            ctx = canvas.getContext('2d');
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            setupProximity();
+
+            if (!USER_API_KEY) {
+                switchScreen('screenSetup');
+            } else {
+                switchScreen('screenHome');
+            }
+        }
+
+        function saveKey() {
+            const input = document.getElementById('apiKeyInput').value.trim();
+            if (input) {
+                USER_API_KEY = input;
+                localStorage.setItem('GEMINI_PHONE_KEY', input);
+                switchScreen('screenHome');
+            }
+        }
+
+        function clearKey() {
+            localStorage.removeItem('GEMINI_PHONE_KEY');
+            USER_API_KEY = "";
+            switchScreen('screenSetup');
+        }
+
+        function switchScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        function setupProximity() {
+            const overlay = document.getElementById('proximityOverlay');
+            document.addEventListener('touchstart', (e) => {
+                if (isLive && !isSpeaker && e.touches[0].clientY < 150) { 
+                    overlay.style.display = 'block';
+                }
+            });
+            document.addEventListener('touchend', () => overlay.style.display = 'none');
+        }
+
+        function resizeCanvas() {
+            canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+            canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+        }
+
+        async function startCall() {
+            switchScreen('screenCall');
+            
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            analyser = audioCtx.createAnalyser();
+            analyser.fftSize = 256;
+            dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                const source = audioCtx.createMediaStreamSource(stream);
+                source.connect(analyser);
+
+                isLive = true;
+                startTime = Date.now();
+                timerInterval = setInterval(updateTimer, 1000);
+                
+                drawWave();
+                startRecognition();
+                
+                speak("Hello James. I'm connected. How can I help you today?");
+            } catch (err) {
+                console.error("Microphone access denied", err);
+                switchScreen('screenHome');
+            }
+        }
+
+        function updateTimer() {
+            const diff = Math.floor((Date.now() - startTime) / 1000);
+            const m = Math.floor(diff / 60).toString().padStart(2, '0');
+            const s = (diff % 60).toString().padStart(2, '0');
+            const timeStr = `${m}:${s}`;
+            document.getElementById('timer').innerText = timeStr;
+            document.getElementById('finalTime').innerText = timeStr;
+        }
+
+        function drawWave() {
+            if (!isLive) return;
+            requestAnimationFrame(drawWave);
+            
+            analyser.getByteFrequencyData(dataArray);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const barWidth = (canvas.width / dataArray.length) * 2.5;
+            let x = 0;
+
+            for(let i = 0; i < dataArray.length; i++) {
+                let barHeight = (dataArray[i] / 2) * (canvas.height / 255);
+                ctx.fillStyle = `rgba(62, 130, 241, ${dataArray[i]/255})`;
+                ctx.beginPath();
+                ctx.roundRect(x, (canvas.height - barHeight)/2, barWidth, barHeight, 5);
+                ctx.fill();
+                x += barWidth + 2;
+            }
+        }
+
+        async function speak(text) {
+            if (!text || !USER_API_KEY) return;
+            document.getElementById('speakingGlow').classList.add('speaking');
+            
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${USER_API_KEY}`;
+            const payload = {
+                contents: [{ parts: [{ text }] }],
+                generationConfig: {
+                    responseModalities: ["AUDIO"],
+                    speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Ursa" } } }
+                }
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                const audioData = result.candidates[0].content.parts[0].inlineData.data;
+                playAudio(audioData);
+            } catch (e) {
+                console.error(e);
+            } finally {
+                setTimeout(() => document.getElementById('speakingGlow').classList.remove('speaking'), 1000);
+            }
+        }
+
+        function playAudio(base64) {
+            const binary = atob(base64);
+            const len = binary.length;
+            const bytes = new Int16Array(len / 2);
+            for (let i = 0; i < len; i += 2) {
+                bytes[i / 2] = (binary.charCodeAt(i + 1) << 8) | binary.charCodeAt(i);
+            }
+            const float32 = new Float32Array(bytes.length);
+            for (let i = 0; i < bytes.length; i++) float32[i] = bytes[i] / 32768.0;
+
+            const ttsRate = 24000;
+            const targetRate = audioCtx.sampleRate;
+            
+            const buffer = audioCtx.createBuffer(1, float32.length, ttsRate);
+            buffer.copyToChannel(float32, 0);
+            
+            const source = audioCtx.createBufferSource();
+            source.buffer = buffer;
+            const gainNode = audioCtx.createGain();
+            gainNode.gain.value = isSpeaker ? 1.0 : 0.25;
+
+            source.connect(gainNode).connect(audioCtx.destination);
+            source.connect(analyser);
+            source.start();
+        }
+
+        function startRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) return;
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'en-GB';
+            recognition.onresult = (e) => {
+                const query = e.results[0][0].transcript;
+                if (!isMuted) fetchAIResponse(query);
+            };
+            recognition.onend = () => { if(isLive) recognition.start(); };
+            recognition.start();
+        }
+
+        async function fetchAIResponse(userQuery) {
+            if (!USER_API_KEY) return;
+            document.getElementById('processingSpinner').classList.add('active');
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${USER_API_KEY}`;
+            const payload = {
+                contents: [{ parts: [{ text: `User: ${userQuery}. Context: Talking to James Turner (XPDevs) on a phone call. Keep responses short. Speak only.` }] }]
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (text) speak(text);
+            } catch (e) {
+                console.error(e);
+            } finally {
+                document.getElementById('processingSpinner').classList.remove('active');
+            }
+        }
+
+        function toggleMute() {
+            isMuted = !isMuted;
+            document.getElementById('muteBtn').classList.toggle('active', isMuted);
+        }
+
+        function toggleSpeaker() {
+            isSpeaker = !isSpeaker;
+            const btn = document.getElementById('speakerBtn');
+            btn.classList.toggle('active', isSpeaker);
+            document.getElementById('speakerLabel').innerText = isSpeaker ? "Speaker" : "Earpiece";
+        }
+
+        function endCall() {
+            isLive = false;
+            clearInterval(timerInterval);
+            switchScreen('screenEnd');
+            if (audioCtx) audioCtx.close();
+        }
+
+        function goHome() {
+            switchScreen('screenHome');
+            document.getElementById('timer').innerText = "00:00";
+        }
+
+        window.onload = initUI;
+    </script>
+</body>
+</html>
