@@ -92,7 +92,7 @@
       canvas.emscripten {
         display: none;
         background-color: black;
-        position: flex;
+        position: relative;
         transition: opacity 5s ease-in;
         -webkit-transition: opacity 5s ease-in;
         opacity: 0;
@@ -360,11 +360,6 @@
       }
 
       body.mobile-controls-active #canvas {
-        height: 50vh !important;
-        width: 100vw !important;
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
       }
       
       .joystick-area {
@@ -758,8 +753,12 @@
         canvasElement.classList.add("active");
 
         const maxWidth = window.innerWidth;
-        const maxHeight = window.innerHeight;
+        let maxHeight = window.innerHeight;
         var newHeight, newWidth;
+        
+        if (document.body.classList.contains('mobile-controls-active')) {
+            maxHeight = window.innerHeight / 2;
+        }
 
         // Find the limiting dimension.
         var heightQuotient = startingHeight / maxHeight;
@@ -963,11 +962,24 @@
           }
       }
 
+      const keyMap = {
+          37: { code: 'ArrowLeft', key: 'ArrowLeft' },
+          38: { code: 'ArrowUp', key: 'ArrowUp' },
+          39: { code: 'ArrowRight', key: 'ArrowRight' },
+          40: { code: 'ArrowDown', key: 'ArrowDown' },
+          90: { code: 'KeyZ', key: 'z' },
+          88: { code: 'KeyX', key: 'x' },
+          67: { code: 'KeyC', key: 'c' }
+      };
+
       function simulateKey(keyCode, type) {
+        var keyInfo = keyMap[keyCode] || { code: '', key: '' };
         var evt = new KeyboardEvent(type, {
             bubbles: true,
             cancelable: true,
-            view: window
+            view: window,
+            key: keyInfo.key,
+            code: keyInfo.code
         });
         Object.defineProperty(evt, 'keyCode', {get : function() { return keyCode; }});
         Object.defineProperty(evt, 'which', {get : function() { return keyCode; }});
