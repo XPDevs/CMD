@@ -73,6 +73,13 @@
         overflow-x: hidden;
 		place-items: center;
       }
+      
+      body.mobile-controls-active {
+        justify-content: flex-start;
+        align-items: center;
+        touch-action: none;
+        -webkit-touch-callout: none;
+      }
 
       body.scrollingDisabled {
         overflow: hidden;
@@ -357,6 +364,7 @@
         user-select: none;
         -webkit-user-select: none;
         flex-direction: row;
+        justify-content: space-between;
       }
 
       body.mobile-controls-active #canvas {
@@ -391,30 +399,19 @@
         pointer-events: none;
       }
 
+      .center-controls {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
       .buttons-area {
         flex: 1;
-        display: grid;
-        grid-template-columns: auto auto;
-        grid-template-rows: auto auto;
+        display: flex;
         justify-content: center;
         align-items: center;
         gap: 20px;
-      }
-
-      .control-btn[data-key="90"] { /* Z */
-        grid-column: 1;
-        grid-row: 1;
-      }
-      
-      .control-btn[data-key="88"] { /* X */
-        grid-column: 2;
-        grid-row: 1;
-      }
-      
-      .control-btn[data-key="67"] { /* C */
-        grid-column: 1 / span 2;
-        grid-row: 2;
-        justify-self: center;
       }
 
       .control-btn {
@@ -463,10 +460,12 @@
                 <div class="joystick-stick" id="joystick-stick"></div>
             </div>
         </div>
+        <div class="center-controls">
+            <div class="control-btn" data-key="67">C</div>
+        </div>
         <div class="buttons-area">
             <div class="control-btn" data-key="90">Z</div>
             <div class="control-btn" data-key="88">X</div>
-            <div class="control-btn" data-key="67">C</div>
         </div>
     </div>
     <div class="loading" style="display: none;">
