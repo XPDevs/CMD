@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foresight</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&family=Montserrat:wght@200;400;700&family=Metal+Mania&display=swap');
+
+        :root {
+            --bg-color: #000000;
+            --text-primary: #ffffff;
+            --text-muted: #555555;
+            --accent: #811313; 
+        }
+
+        /* Base body styles from game.html */
+        body {
+            margin: 0; 
+            overflow: hidden; 
+            background-color: #020205; 
+            font-family: 'Courier New', Courier, monospace; 
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Loading Container */
+        #loading-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        /* Cinematic Overlays (scoped to loading) */
+        #loading-container .grain {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Static_Noise_Standard.png');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 100;
+            animation: grain-flicker 0.15s infinite steps(2);
+            will-change: transform;
+        }
+
+        @keyframes grain-flicker {
+            0% { transform: translate(0,0); }
+            50% { transform: translate(-0.5%, -0.5%); }
+            100% { transform: translate(0.5%, 0.5%); }
+        }
+
+        #loading-container .vignette {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 10%, rgba(0,0,0,0.98) 100%);
+            pointer-events: none;
+            z-index: 90;
+        }
+
+        .screen {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: scale(1.05);
+            will-change: opacity, transform;
+            transition: opacity 2s ease-in-out, transform 6s cubic-bezier(0.1, 0, 0.2, 1);
+            pointer-events: none;
+            visibility: hidden;
+        }
+
+        .screen.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+            visibility: visible;
+        }
+
+        .screen.fade-out {
+            opacity: 0 !important;
+            transform: scale(0.97);
+            transition: opacity 1.8s ease-in-out, transform 2s ease-in-out;
+        }
+
+        .horror-text {
+            font-family: 'Metal Mania', cursive;
+            font-size: 8rem; 
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+            margin: 0;
+            text-shadow: 0px 0px 20px rgba(255,0,0,0.2);
+        }
+
+        .brand-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: scale(1.5); 
+        }
+
+        .logo-img {
+            max-width: 150px; 
+            width: 10vw;
+            height: auto;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.1));
+        }
+
+        .logo-subtext {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.8rem;
+            font-size: 1.5rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            padding-left: 0.8rem;
+        }
+
+        .warning-box {
+            max-width: 800px;
+            padding: 2rem;
+            transform: scale(1.1);
+        }
+
+        .warning-text-block {
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+        }
+
+        .warning-heading {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: block; 
+        }
+
+        .warning-message {
+            font-size: 0.9rem;
+            line-height: 2;
+            color: #888;
+            font-weight: 200;
+        }
+
+        /* From game.html */
+        canvas { 
+            display: block; 
+            image-rendering: pixelated; 
+        }
+
+        /* The Aiming Pointer */
+        #crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 200;
+        }
+
+        #ui-container {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            color: #8899aa;
+            text-shadow: 2px 2px #000;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        #stamina-bar {
+            width: 150px;
+            height: 6px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-top: 8px;
+        }
+
+        #stamina-fill {
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            transition: width 0.1s linear;
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading-container">
+        <div class="grain"></div>
+        <div class="vignette"></div>
+
+        <!-- Screen 1: Title -->
+        <div id="screen-title" class="screen">
+            <h1 class="horror-text">Foresight</h1>
+        </div>
+
+        <!-- Screen 2: XPDevs Brand -->
+        <div id="screen-logo" class="screen">
+            <div class="brand-container">
+                <img src="https://xpdevs.github.io/logo/logo.png" alt="XPDevs Logo" class="logo-img" onerror="this.style.display='none';">
+                <div class="logo-subtext">Made by XPDevs</div>
+            </div>
+        </div>
+
+        <!-- Screen 3: Warning -->
+        <div id="screen-warning" class="screen">
+            <div class="warning-box">
+                <div class="warning-text-block">
+                    <span class="warning-heading">WARNING</span>
+                    <p class="warning-message">
+                        This experience contains flashing lights, sequences of intense psychological horror, and imagery that may be disturbing to some individuals. Viewer discretion is strongly advised.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-ui" style="display: none;">
+        <div id="crosshair"></div>
+        <div id="overlay"></div>
+        <div id="ui-container">
+            <div style="font-size: 0.8rem; letter-spacing: 2px;">STAMINA</div>
+            <div id="stamina-bar"><div id="stamina-fill"></div></div>
+        </div>
+    </div>
+
+    <script>
+            // Prevent context menu unless Shift is held
+    document.addEventListener('contextmenu', function(e) {
+        if (!e.shiftKey) {
+            e.preventDefault();
+        }
+    });
+
+    // Prevent text selection globally
+    document.addEventListener('selectstart', function(e) {
+        e.preventDefault();
+    });
+        // --- Game Logic (from game.html) ---
+        let camera, scene, renderer, clock;
+        let player;
+        let moveForward = false, moveBackward = false, moveLeft = false, moveRight = false;
+        let isSprinting = false;
+        let velocity;
+        let pitch = 0, yaw = 0;
+        let flashlight;
+        let bobTimer = 0;
+        let footstepSound;
+        let lastBob = 0;
+        let stamina = 100;
+        let exhausted = false;
+
+        const GRAVITY = 20.0;
+        const WALK_SPEED = 7.0; 
+        const RUN_SPEED = 14.0;
+        const RENDER_DIST = 100; 
+        
+        const tiles = new Map();
+        const tileSize = 60;
+        const treeColliders = [];
+
+        // Texture generation
+        function createNoiseTexture(color1, color2, size = 64) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            for (let x = 0; x < size; x++) {
+                for (let y = 0; y < size; y++) {
+                    ctx.fillStyle = Math.random() > 0.5 ? color1 : color2;
+                    ctx.fillRect(x, y, 1, 1);
+                }
+            }
+            const tex = new paral.CanvasTexture(canvas);
+            tex.magFilter = paral.NearestFilter;
+            tex.minFilter = paral.NearestFilter;
+            tex.wrapS = paral.RepeatWrapping;
+            tex.wrapT = paral.RepeatWrapping;
+            return tex;
+        }
+
+        let groundTex, barkTex, leafTex;
+
+        function handleKey(code, val) {
+            switch (code) {
+                case 'KeyW': moveForward = val; break;
+                case 'KeyA': moveLeft = val; break;
+                case 'KeyS': moveBackward = val; break;
+                case 'KeyD': moveRight = val; break;
+                case 'ShiftLeft': isSprinting = val; break;
+                case 'Space': if (val && player.position.y <= 0.1) velocity.y = 8; break;
+            }
+        }
+
+        function onMouseMove(e) {
+            if (document.pointerLockElement === document.body) {
+                yaw -= e.movementX * 0.002;
+                pitch -= e.movementY * 0.002;
+                pitch = Math.max(-Math.PI/2.2, Math.min(Math.PI/2.2, pitch));
+            }
+        }
+
+        function createTree(worldX, worldZ) {
+            const group = new paral.Group();
+            
+            const heightFactor = 0.8 + Math.random() * 0.7;
+            
+            // Trunk
+            const trunkGeo = new paral.CylinderGeometry(0.35, 0.55, 8 * heightFactor, 6);
+            const trunkMat = new paral.MeshStandardMaterial({ map: barkTex, color: 0x1a1510 });
+            const trunk = new paral.Mesh(trunkGeo, trunkMat);
+            trunk.castShadow = true;
+            trunk.receiveShadow = true;
+            trunk.position.y = 4 * heightFactor;
+            group.add(trunk);
+
+            // Foliage
+            const foliageMat = new paral.MeshStandardMaterial({ map: leafTex, color: 0x051a05 });
+            const segments = 5;
+            for(let i = 0; i < segments; i++) {
+                const leafGeo = new paral.ConeGeometry(2.5 - (i * 0.4), 6, 6);
+                const leaves = new paral.Mesh(leafGeo, foliageMat);
+                leaves.castShadow = true;
+                leaves.position.y = (6 + (i * 2.5)) * heightFactor;
+                group.add(leaves);
+            }
+
+            group.position.set(worldX, 0, worldZ);
+            scene.add(group);
+            
+            // Physical radius for collision
+            treeColliders.push({
+                x: worldX,
+                z: worldZ,
+                radius: 0.9 // Increased slightly to prevent phasing
+            });
+            
+            return group;
+        }
+
+        function createTile(tx, tz) {
+            const group = new paral.Group();
+            
+            // Ground
+            const geo = new paral.PlaneGeometry(tileSize, tileSize);
+            const mat = new paral.MeshStandardMaterial({ 
+                map: groundTex,
+                color: (Math.abs(tx) + Math.abs(tz)) % 2 === 0 ? 0x151d15 : 0x121812,
+            });
+            const mesh = new paral.Mesh(geo, mat);
+            mesh.receiveShadow = true;
+            mesh.rotation.x = -Math.PI / 2;
+            group.add(mesh);
+
+            group.position.set(tx * tileSize, 0, tz * tileSize);
+            scene.add(group);
+
+            const treeCount = 80;
+            const treeObjects = [];
+            const placedPositions = [];
+
+            for(let i = 0; i < treeCount; i++) {
+                let wx, wz;
+                let attempts = 0;
+                let valid = false;
+
+                while (attempts < 10 && !valid) {
+                    wx = (tx * tileSize) + (Math.random() - 0.5) * tileSize;
+                    wz = (tz * tileSize) + (Math.random() - 0.5) * tileSize;
+                    
+                    const distToCenter = Math.sqrt(wx*wx + wz*wz);
+                    if (distToCenter > 5) { 
+                        const overlap = placedPositions.some(p => {
+                            return ((wx - p.x) ** 2 + (wz - p.z) ** 2) < 9;
+                        });
+                        if (!overlap) valid = true;
+                    }
+                    attempts++;
+                }
+
+                if (valid) {
+                    placedPositions.push({x: wx, z: wz});
+                    treeObjects.push(createTree(wx, wz));
+                }
+            }
+
+            return { group, trees: treeObjects };
+        }
+
+        function updateWorld() {
+            const pX = Math.round(player.position.x / tileSize);
+            const pZ = Math.round(player.position.z / tileSize);
+            const range = 2; 
+
+            for (let x = pX - range; x <= pX + range; x++) {
+                for (let z = pZ - range; z <= pZ + range; z++) {
+                    const key = `${x},${z}`;
+                    if (!tiles.has(key)) {
+                        tiles.set(key, createTile(x, z));
+                    }
+                }
+            }
+
+            for (const [key, tileData] of tiles) {
+                const [tx, tz] = key.split(',').map(Number);
+                if (Math.abs(tx - pX) > range || Math.abs(tz - pZ) > range) {
+                    // Remove trees from scene and colliders list
+                    tileData.trees.forEach(tree => {
+                        scene.remove(tree);
+                        const idx = treeColliders.findIndex(c => c.x === tree.position.x && c.z === tree.position.z);
+                        if (idx !== -1) treeColliders.splice(idx, 1);
+                    });
+                    scene.remove(tileData.group);
+                    tiles.delete(key);
+                }
+            }
+        }
+
+        function resolveCollisions(nextX, nextZ) {
+            const playerRadius = 0.55;
+            let currentX = nextX;
+            let currentZ = nextZ;
+
+            // Simple distance check and push out
+            for (const tree of treeColliders) {
+                const dx = currentX - tree.x;
+                const dz = currentZ - tree.z;
+                const distance = Math.sqrt(dx * dx + dz * dz);
+                const minDist = playerRadius + tree.radius;
+                
+                if (distance < minDist) {
+                    const angle = Math.atan2(dz, dx);
+                    currentX = tree.x + Math.cos(angle) * minDist;
+                    currentZ = tree.z + Math.sin(angle) * minDist;
+                }
+            }
+            return { x: currentX, z: currentZ };
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const delta = Math.min(clock.getDelta(), 0.1);
+
+            velocity.y -= GRAVITY * delta;
+
+            // --- Input Handling (Keyboard + Gamepad) ---
+            let inputX = Number(moveLeft) - Number(moveRight);
+            let inputZ = Number(moveForward) - Number(moveBackward);
+            let gamepadSprint = false;
+
+            const gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
+            if (gamepads[0]) {
+                const gp = gamepads[0];
+                const deadzone = 0.15;
+
+                // Left Stick: Move
+                if (Math.abs(gp.axes[0]) > deadzone) inputX -= gp.axes[0];
+                if (Math.abs(gp.axes[1]) > deadzone) inputZ -= gp.axes[1];
+
+                // Right Stick: Look
+                const lookSensitivity = 2.0;
+                if (Math.abs(gp.axes[2]) > deadzone) yaw -= gp.axes[2] * lookSensitivity * delta;
+                if (Math.abs(gp.axes[3]) > deadzone) pitch -= gp.axes[3] * lookSensitivity * delta;
+                pitch = Math.max(-Math.PI/2.2, Math.min(Math.PI/2.2, pitch));
+
+                // Button 0 (A/Cross): Jump
+                if (gp.buttons[0].pressed && player.position.y <= 0.1) {
+                    velocity.y = 8;
+                }
+
+                // Button 11 (R3): Sprint
+                if (gp.buttons[11].pressed) {
+                    gamepadSprint = true;
+                }
+            }
+
+            const isMoving = Math.abs(inputX) > 0.1 || Math.abs(inputZ) > 0.1;
+            const effectiveSprint = isSprinting || gamepadSprint;
+
+            // Stamina Logic
+            let currentSpeed = WALK_SPEED;
+            
+            if (effectiveSprint && isMoving && !exhausted) {
+                currentSpeed = RUN_SPEED;
+                stamina = Math.max(0, stamina - delta * 30);
+                if (stamina <= 0) exhausted = true;
+            } else {
+                stamina = Math.min(100, stamina + delta * 15);
+                if (stamina >= 100) exhausted = false;
+            }
+            const sBar = document.getElementById('stamina-fill');
+            sBar.style.width = stamina + '%';
+            sBar.style.backgroundColor = exhausted ? '#ff5555' : '#fff';
+            
+            const targetV = new paral.Vector3(inputX, 0, inputZ);
+            
+            // Normalize and apply orientation
+            if (targetV.length() > 1) targetV.normalize();
+            targetV.multiplyScalar(currentSpeed);
+            
+            const moveVec = new paral.Vector3(targetV.x, 0, targetV.z);
+            moveVec.applyAxisAngle(new paral.Vector3(0, 1, 0), yaw);
+
+            velocity.x = paral.MathUtils.lerp(velocity.x, moveVec.x, 10 * delta);
+            velocity.z = paral.MathUtils.lerp(velocity.z, moveVec.z, 10 * delta);
+
+            let nextX = player.position.x - velocity.x * delta;
+            let nextZ = player.position.z - velocity.z * delta;
+            
+            // Collision resolution
+            const resolved = resolveCollisions(nextX, nextZ);
+            player.position.x = resolved.x;
+            player.position.z = resolved.z;
+            
+            player.position.y += velocity.y * delta;
+
+            let groundHeight = 0;
+            if (Math.abs(player.position.x) < 1.5 && Math.abs(player.position.z) < 1.5) {
+                groundHeight = 0.5;
+            }
+
+            if (player.position.y < groundHeight) {
+                player.position.y = groundHeight;
+                velocity.y = 0;
+            }
+
+            updateWorld();
+
+            // Head bobbing
+            if (isMoving) {
+                bobTimer += delta * 10;
+                // A step happens twice per sine-wave cycle. We trigger every PI.
+                if (Math.floor(bobTimer / Math.PI) > Math.floor(lastBob / Math.PI)) {
+                    if (footstepSound) {
+                        footstepSound.currentTime = 0;
+                        footstepSound.play().catch(e => {}); // Catch autoplay errors
+                    }
+                }
+                lastBob = bobTimer;
+            } else {
+                bobTimer = 0;
+                lastBob = 0;
+            }
+
+            // Flashlight flicker
+            if (Math.random() < 0.08) {
+                flashlight.intensity = Math.random() * 0.2;
+            } else {
+                flashlight.intensity = 1.8 + (Math.random() * 0.2);
+            }
+
+            camera.position.set(player.position.x, player.position.y + 1.7 + Math.sin(bobTimer) * 0.05, player.position.z);
+            camera.rotation.set(pitch, yaw, 0, 'YXZ');
+            
+            // Update flashlight to point where camera is looking
+            flashlight.position.copy(camera.position);
+            const targetVec = new paral.Vector3();
+            camera.getWorldDirection(targetVec);
+            flashlight.target.position.copy(camera.position).add(targetVec);
+
+            renderer.render(scene, camera);
+        }
+
+        function start() {
+            velocity = new paral.Vector3();
+            scene = new paral.Scene();
+            
+            groundTex = createNoiseTexture('#111111', '#222222');
+            barkTex = createNoiseTexture('#221100', '#110800');
+            leafTex = createNoiseTexture('#002200', '#001100');
+
+            const skyColor = 0x05070a;
+            scene.background = new paral.Color(skyColor);
+            scene.fog = new paral.FogExp2(skyColor, 0.025);
+
+            camera = new paral.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+            const moonLight = new paral.DirectionalLight(0xaaccff, 0.15);
+            moonLight.position.set(-50, 100, -100);
+            scene.add(moonLight);
+
+            const moonGeo = new paral.SphereGeometry(12, 32, 32);
+            const moonMat = new paral.MeshBasicMaterial({ color: 0xe0e0ff });
+            const moon = new paral.Mesh(moonGeo, moonMat);
+            moon.position.set(-150, 180, -350); 
+            scene.add(moon);
+
+            const ambient = new paral.AmbientLight(0x1a2a3a, 0.1);
+            scene.add(ambient);
+
+            flashlight = new paral.SpotLight(0xffffee, 1.8, 25, Math.PI / 8, 0.4, 2);
+            flashlight.castShadow = true;
+            flashlight.shadow.mapSize.width = 1024;
+            flashlight.shadow.mapSize.height = 1024;
+            flashlight.shadow.camera.near = 0.5;
+            flashlight.shadow.camera.far = 25;
+            flashlight.shadow.focus = 1;
+            scene.add(flashlight);
+            scene.add(flashlight.target);
+            
+            player = new paral.Group();
+            scene.add(player);
+            player.position.set(0, 0, 0);
+
+            renderer = new paral.WebGLRenderer({ antialias: false });
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = paral.PCFSoftShadowMap;
+            renderer.setPixelRatio(window.devicePixelRatio * 0.5); 
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            clock = new paral.Clock();
+
+            footstepSound = new Audio('https://cdn.freesound.org/previews/263/263123_4734201-lq.mp3');
+            footstepSound.volume = 0.4;
+
+            document.addEventListener('keydown', e => handleKey(e.code, true));
+            document.addEventListener('keyup', e => handleKey(e.code, false));
+            document.addEventListener('mousemove', onMouseMove);
+            document.body.addEventListener('mousedown', () => document.body.requestPointerLock());
+            
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            animate();
+        }
+
+        function initSystem() {
+            const script = document.createElement('script');
+            script.src = "https://xpdevs.github.io/Paral/3d_engine.js";
+            script.onload = start;
+            document.head.appendChild(script);
+        }
+
+        // --- Loading Sequence Logic (from loading.html, modified) ---
+        const screens = [
+            document.getElementById('screen-title'),
+            document.getElementById('screen-logo'),
+            document.getElementById('screen-warning')
+        ];
+        
+        let currentIdx = 0;
+
+        function runSequence() {
+            if (currentIdx >= screens.length) {
+                const loadingContainer = document.getElementById('loading-container');
+                const gameUi = document.getElementById('game-ui');
+
+                if (loadingContainer) {
+                    loadingContainer.style.opacity = '0';
+                    loadingContainer.addEventListener('transitionend', () => loadingContainer.remove());
+                }
+                if (gameUi) {
+                    gameUi.style.display = 'block';
+                }
+                
+                initSystem(); // Start the game
+                return;
+            }
+
+            const currentScreen = screens[currentIdx];
+
+            currentScreen.classList.remove('fade-out');
+            currentScreen.classList.add('active');
+
+            setTimeout(() => {
+                currentScreen.classList.add('fade-out');
+                setTimeout(() => {
+                    currentScreen.classList.remove('active');
+                    currentIdx++;
+                    setTimeout(runSequence, 800);
+                }, 1850); 
+            }, 3000); 
+        }
+
+        window.onload = () => {
+            setTimeout(runSequence, 1000);
+        };
+    </script>
+</body>
+</html>
