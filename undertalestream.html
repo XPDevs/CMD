@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>UNDERTALE Concert Monitor</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #131314;
+  --text: #e3e3e3;
+  --surface: #1e1f20;
+  --border: #444746;
+  --primary: #1a73e8;
+  --active: #333537;
+}
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: Inter, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  -webkit-text-size-adjust: 100%;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  flex-shrink: 0;
+}
+header h1 {
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+header h1 span { color: var(--primary); }
+.load-btn {
+  flex-shrink: 0;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+#videoWrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  min-height: 0;
+  position: relative;
+}
+#mainVideo {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  background: #000;
+  display: block;
+}
+#mainVideo.hidden { display: none; }
+#placeholder {
+  color: var(--border);
+  font-size: 13px;
+  text-align: center;
+  padding: 20px;
+  line-height: 1.6;
+}
+#placeholder strong { display: block; font-size: 15px; color: #888; }
+.controls {
+  flex-shrink: 0;
+  padding: 8px 12px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+}
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 11px;
+  color: #a0a0a0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+.toggle input { display: none; }
+.toggle-knob {
+  width: 32px;
+  height: 18px;
+  background: #333537;
+  border-radius: 10px;
+  position: relative;
+  transition: .2s;
+  flex-shrink: 0;
+}
+.toggle-knob::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #71717a;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  transition: .2s;
+}
+.toggle input:checked + .toggle-knob { background: var(--primary); }
+.toggle input:checked + .toggle-knob::after { background: #fff; transform: translateX(14px); }
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  flex-shrink: 0;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #888;
+  font-weight: 700;
+}
+.timeline-header span:last-child {
+  font-size: 9px;
+  background: var(--active);
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: #aaa;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+#timestampList {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--bg);
+  min-height: 0;
+}
+.track-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  font-size: 13px;
+  color: #a0a0a0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background .15s;
+  min-height: 40px;
+}
+.track-item:active { background: var(--active); }
+.track-item.active {
+  background: rgba(26,115,232,.12) !important;
+  border-left: 3px solid var(--primary);
+  color: #fff;
+}
+.track-item.active .track-time {
+  background: var(--primary);
+  color: #fff;
+}
+.track-item .track-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+.track-item .track-time {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-family: monospace;
+  background: rgba(0,0,0,.3);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: #666;
+}
+.track-header-item {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--primary);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 12px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  cursor: default;
+  min-height: 34px;
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>UNDERTALE <span>Concert</span></h1>
+  <label class="load-btn">
+    Load Video
+    <input type="file" id="videoInput" class="hidden" accept="video/mp4" style="display:none">
+  </label>
+</header>
+
+<div id="videoWrap">
+  <video id="mainVideo" class="hidden" controls preload="metadata"></video>
+  <div id="placeholder">
+    <strong>No video loaded</strong>
+    Tap "Load Video" to open a concert file
+  </div>
+</div>
+
+<div class="controls">
+  <div class="toggle-row">
+    <label class="toggle">
+      <input type="checkbox" id="autoSkip" checked>
+      <span class="toggle-knob"></span>
+      Skip Intermission
+    </label>
+    <label class="toggle">
+      <input type="checkbox" id="autoStart" checked>
+      <span class="toggle-knob"></span>
+      Auto-Start
+    </label>
+  </div>
+</div>
+
+<div class="timeline-header">
+  <span>Timeline</span>
+  <span id="trackCount">0</span>
+</div>
+
+<div id="timestampList"></div>
+
+<script>
+const rawTimestamps = `0:00 - Start menu
+0:31 - Ruins
+2:04 - Home
+3:59 - Flowey leaves
+4:07 - Home (Music Box)
+4:59 - Papyrus arrives
+6:09 - Nyeh Heh Heh!
+6:21 - Papyrus liking his own theme song
+6:44 - Papyrus leaves
+6:47 - sans.
+7:38 - Snowy
+8:12 - Flowey arrived back
+9:10 - Toby arrives
+9:22 - Snowdin Town
+10:09 - Flowey leaves #2
+10:38 - Shop
+11:14 - Toriel and Frisk arrives
+11:29 - Quiet Water
+12:01 - Temmie Village
+12:09 - Toriel leaves because she receives a phone call
+12:59 - Hotel
+13:14 - Flowey arrived back #2
+14:25 - Toby decided to sit next to Frisk
+14:27 - It's Raining Somewhere Else
+15:10 - Toriel arrived back and moved to sit on the other side because Toby's sitting on her seat + Flowey leaves #3
+16:19 - Toby leaves
+17:17 - CORE
+17:32 - Papyrus arrived back and chat with Toriel for some time
+19:38 - Papyrus leaves #2
+20:03 - Uwa!! So HEATS!!?
+20:05 - Toby arrived back and sits on Papyrus' seat
+20:37 - Uwa!! So Temperate
+21:13 - Toby leaves #2
+21:32 - Uwa!! So Holiday
+21:46 - Start Menu
+22:18 - Ruins
+22:43 - Papyrus arrived back #2
+23:40 - Papyrus complains about his seat
+23:50 - Home
+24:22 - Toby arrived back (#2) and sits on Papyrus' head
+25:40 - Papyrus notices something
+25:54 - Home (Music Box)
+26:46 - Toby leaves #3 + Papyrus realizes that it's nothing
+27:27 - Asgore arrives
+27:56 - sans.
+28:39 - Asgore talks about a concert he attended.
+28:47 - Nyeh Heh Heh!
+29:19 - Snowy
+30:17 - Papyrus leaves #3
+30:26 - Toby arrived back #3
+31:04 - Snowdin Town
+31:14 - Alphys and Undyne arrives and chat for some time
+32:20 - Shop
+33:10 - Quiet Water
+33:17 - Alphys and Undyne having a quick chat
+33:42 - Temmie Village
+34:14 - Alphys and Undyne having a quick chat #2
+34:40 - Hotel
+35:25 - Alphys and Undyne having a quick chat #3
+36:08 - It's Raining Somewhere Else
+36:24 - Toby leaves #4 + Papyrus arrived back #3
+36:26 - Papyrus and Undyne saying hi each other.. two times
+37:27 - Monster Kid arrives
+38:53 - Mettaton and his gang arrives
+38:57 - Uwa!! So HEATS!!?
+39:31 - Spooktune
+39:35 - When the tune plays.. Napstablook felt that
+39:55 - Uwa!! So Temperate
+40:22 - Lesser Dog arrives?
+40:51 - Uwa!! So Holiday
+41:25 - Temmie arrives (h0i tem!!)
+41:29 - Fallen Down (Reprise)
+41:49 - The rest of the gang (except Sans) arrives
+42:44 - Papyrus notices that everybody's arrived
+43:06 - (With the Papyrus font) "WAIT A SECOND!!! WHERE'S SANS!!!"
+43:59 - Menu (Full)
+44:06 - "SANS!!! YOU'RE GOING TO MISS IT!!!"
+44:45 - Sans teleports in and chats with Papyrus real quick
+45:00 - The concert will start in -1 seconds
+45:03 - -- FIRST HALF OF THE CONCERT --
+45:03 - EPIC INTRO
+45:43 - Start of the concert
+46:56 - Tuning the instruments
+47:55 - Once Upon A Time
+50:12 - Ruins
+51:46 - Anticipation
+52:07 - Enemy Approaching!
+54:43 - Home
+56:57 - Determination
+58:36 - Heartache
+1:00:40 - Fallen Down
+1:02:05 - sans.
+1:02:55 - Nyeh Heh Heh!
+1:03:30 - Snowy
+1:05:10 - Nyeh Heh Heh! (Reprise)
+1:05:44 - Snowdin Town
+1:07:03 - Shop
+1:07:51 - Bonetrousle
+1:09:20 - Waterfall
+1:11:45 - Quiet Water
+1:13:31 - Undyne
+1:14:34 - RUN!
+1:15:31 - Memory
+1:16:21 - NGAAAHHHHH
+1:17:42 - Spear Of Justice
+1:19:41 - She's Playing Piano
+1:20:34 - End of the first half
+1:21:48 - -- INTERMISSION --
+1:21:48 - Epic advertisement #1
+1:23:23 - Nothing
+1:31:14 - Epic advertisement #2
+1:32:50 - Another nothing
+1:41:16 - -- SECOND HALF OF THE CONCERT --
+1:41:16 - Continuation of the concert
+1:41:26 - Mysterious Shrine
+1:42:20 - Absolutely Overfamiliar Shrine
+1:45:08 - Alphys
+1:46:57 - It's Showtime!
+1:47:29 - Metal Crusher
+1:48:23 - Spider Dance
+1:50:44 - Core
+1:52:25 - Death By Glamour
+1:54:38 - For The Fans
+1:57:22 - Undertale
+2:04:34 - Bergentruckung
+2:04:53 - ASGORE
+2:07:28 - YOUR BEST NIGHTMARE
+2:11:16 - Finale
+2:13:02 - An Ending
+2:16:32 - Here We Are
+2:18:38 - Amalgam
+2:20:27 - Small Shock
+2:22:52 - Fallen Down (Reprise)
+2:25:23 - Don't Give Up!
+2:27:00 - Hopes And Dreams
+2:30:00 - Save The World
+2:32:30 - His Theme
+2:35:09 - Reunited
+2:39:50 - Respite
+2:42:17 - Bring It In Guys!
+2:46:31 - Last Goodbye
+2:49:40 - Menu (Full)
+2:50:38 - Prelude to Genocide
+2:51:22 - Battle Against A True Hero
+2:54:09 - Power of NEO
+2:54:31 - Megalovania
+2:57:45 - Void
+2:59:30 - Menu
+3:00:06 - End of the concert
+3:03:01 - -- ENCORE --
+3:03:01 - Start of the encore
+3:03:14 - The Legend
+3:05:12 - A Place Called Hometown
+3:07:36 - Home
+3:11:16 - End?
+3:11:26 - Outro`;
+
+const video = document.getElementById('mainVideo');
+const videoInput = document.getElementById('videoInput');
+const list = document.getElementById('timestampList');
+const placeholder = document.getElementById('placeholder');
+const autoSkip = document.getElementById('autoSkip');
+const autoStart = document.getElementById('autoStart');
+
+const CONCERT_START = 2875;
+const INTER_START = 4834;
+const INTER_END = 6076;
+
+const KEY = 'undertale_concert';
+
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify({ autoSkip: autoSkip.checked, autoStart: autoStart.checked })); } catch {}
+}
+
+function load() {
+  try {
+    const d = JSON.parse(localStorage.getItem(KEY));
+    if (d) {
+      if (d.autoSkip !== undefined) autoSkip.checked = d.autoSkip;
+      if (d.autoStart !== undefined) autoStart.checked = d.autoStart;
+    }
+  } catch {}
+}
+
+function hms(s) {
+  const p = s.split(':').map(Number);
+  let r = 0, m = 1;
+  while (p.length) { r += m * p.pop(); m *= 60; }
+  return r;
+}
+
+function init() {
+  const lines = rawTimestamps.split('\n');
+  let count = 0;
+  for (const line of lines) {
+    const m = line.match(/^(\d+:\d+(?::\d+)?)\s*-\s*(.*)/);
+    if (!m) continue;
+    const time = hms(m[1]);
+    const label = m[2];
+    const isHeader = label.includes('--');
+    const div = document.createElement('div');
+    div.className = isHeader ? 'track-header-item' : 'track-item';
+    if (!isHeader) {
+      div.innerHTML = '<span class="track-label">' + label + '</span><span class="track-time">' + m[1] + '</span>';
+      div.dataset.time = time;
+      div.onclick = () => { video.currentTime = time; video.play(); };
+    } else {
+      div.textContent = label.replace(/--/g, '').trim();
+    }
+    list.appendChild(div);
+    count++;
+  }
+  document.getElementById('trackCount').textContent = count;
+}
+
+videoInput.onchange = e => {
+  const f = e.target.files[0];
+  if (!f) return;
+  video.src = URL.createObjectURL(f);
+  video.classList.remove('hidden');
+  placeholder.style.display = 'none';
+  video.onloadedmetadata = () => {
+    if (autoStart.checked) { video.currentTime = CONCERT_START; video.play(); }
+  };
+};
+
+video.ontimeupdate = () => {
+  const ct = video.currentTime;
+  if (autoSkip.checked && ct >= INTER_START && ct < INTER_END) { video.currentTime = INTER_END; }
+  const items = list.querySelectorAll('.track-item[data-time]');
+  let found = false;
+  for (let i = items.length - 1; i >= 0; i--) {
+    const t = parseFloat(items[i].dataset.time);
+    if (!found && ct >= t) {
+      if (!items[i].classList.contains('active')) {
+        items[i].classList.add('active');
+        items[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      found = true;
+    } else {
+      items[i].classList.remove('active');
+    }
+  }
+};
+
+autoSkip.onchange = save;
+autoStart.onchange = save;
+
+window.onload = () => { load(); init(); };
+</script>
+</body>
+</html>
