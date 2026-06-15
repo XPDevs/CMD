@@ -63,6 +63,11 @@ body {
 .splash img {
   width: 140px;
   height: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.splash img.visible {
   opacity: 0.9;
 }
 
@@ -131,6 +136,46 @@ body {
 .icon-btn svg {
   width: 22px;
   height: 22px;
+}
+
+/* ─── Network Banner ─── */
+.network-banner {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #ff4d4d;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.network-banner.show {
+  display: flex;
+}
+
+.network-banner span {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.network-banner button {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+
+.network-banner button:hover {
+  background: rgba(255,255,255,0.35);
 }
 
 .content-main {
@@ -233,6 +278,11 @@ body {
     </button>
   </header>
 
+  <div class="network-banner" id="networkBanner">
+    <span>A network connection is required for GoVPN to work.</span>
+    <button id="networkOkBtn">Ok</button>
+  </div>
+
   <main class="content-main"></main>
 
   <nav class="bottom-nav">
@@ -256,9 +306,39 @@ body {
 <script>
 (function() {
   // Splash screen
+  var splash = document.getElementById('splash');
+  var splashImg = splash.querySelector('img');
+
   setTimeout(function() {
-    document.getElementById('splash').classList.add('hidden');
-  }, 2500);
+    splashImg.classList.add('visible');
+  }, 300);
+
+  setTimeout(function() {
+    splash.classList.add('hidden');
+  }, 2800);
+
+  // Network check
+  var netBanner = document.getElementById('networkBanner');
+  var netOk = document.getElementById('networkOkBtn');
+
+  function checkNetwork() {
+    if (navigator.onLine) {
+      netBanner.classList.remove('show');
+    } else {
+      netBanner.classList.add('show');
+    }
+  }
+
+  netOk.addEventListener('click', function() {
+    netBanner.classList.remove('show');
+  });
+
+  window.addEventListener('online', function() {
+    netBanner.classList.remove('show');
+  });
+
+  checkNetwork();
+  setInterval(checkNetwork, 60000);
 
   const navItems = document.querySelectorAll('.nav-item');
   const topbarItems = document.querySelectorAll('.lock-icon, .topbar-title, .icon-btn');
