@@ -419,14 +419,10 @@ body {
           try {
             var d = JSON.parse(xhr.responseText);
             var ip = d.ip || d.query || null;
-            var city = d.city || d.regionName || d.region || '';
             var country = d.country_name || d.country || '';
             if (ip) {
-              var loc = '';
-              if (city && country) loc = city + ', ' + country;
-              else if (country) loc = country;
-              else if (city) loc = city;
-              updatePill(ip, loc || 'N/A');
+              var country = d.country_name || d.country || '';
+              updatePill(ip, country || 'N/A');
               return;
             }
           } catch(e) {}
