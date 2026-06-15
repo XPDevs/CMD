@@ -81,10 +81,8 @@ body {
 
 .topbar {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
-  height: 56px;
+  flex-direction: column;
+  padding: 12px 16px 0;
   flex-shrink: 0;
   z-index: 10;
 }
@@ -112,6 +110,44 @@ body {
   font-weight: 600;
   color: #ff4d4d;
   letter-spacing: 0.3px;
+}
+
+.topbar-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--sidebar);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  margin: 0 auto;
+}
+
+.topbar-pill .pill-divider {
+  color: var(--border);
+  font-weight: 300;
+}
+
+.topbar-pill.na {
+  color: var(--warning-gray);
+}
+
+.topbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.topbar-bottom {
+  display: flex;
+  justify-content: center;
+  padding: 0 16px 8px;
+  width: 100%;
 }
 
 .icon-btn {
@@ -144,8 +180,9 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
-  background: #ff4d4d;
-  color: #fff;
+  background: var(--sidebar);
+  border: 1px solid var(--border);
+  color: var(--text);
   font-size: 14px;
   font-weight: 500;
   gap: 12px;
@@ -162,20 +199,20 @@ body {
 }
 
 .network-banner button {
-  background: rgba(255,255,255,0.2);
+  background: var(--primary);
   border: none;
   color: #fff;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 13px;
   padding: 6px 16px;
   border-radius: 20px;
   cursor: pointer;
   flex-shrink: 0;
-  transition: background 0.2s ease;
+  transition: filter 0.2s ease;
 }
 
 .network-banner button:hover {
-  background: rgba(255,255,255,0.35);
+  filter: brightness(0.9);
 }
 
 .content-main {
@@ -262,20 +299,29 @@ body {
 
 <div class="app-container">
   <header class="topbar">
-    <div class="lock-icon">
-      <svg viewBox="0 0 24 24">
-        <rect x="5" y="11" width="14" height="10" rx="2"/>
-        <path d="M8 11V7a4 4 0 0 1 7.5-2"/>
-        <circle cx="12" cy="16" r="1" fill="#ff4d4d" stroke="none"/>
-      </svg>
+    <div class="topbar-row">
+      <div class="lock-icon">
+        <svg viewBox="0 0 24 24">
+          <rect x="5" y="11" width="14" height="10" rx="2"/>
+          <path d="M8 11V7a4 4 0 0 1 7.5-2"/>
+          <circle cx="12" cy="16" r="1" fill="#ff4d4d" stroke="none"/>
+        </svg>
+      </div>
+      <span class="topbar-title">Unprotected</span>
+      <button class="icon-btn" aria-label="Settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </button>
     </div>
-    <span class="topbar-title">Unprotected</span>
-    <button class="icon-btn" aria-label="Settings">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="3"/>
-        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-      </svg>
-    </button>
+    <div class="topbar-bottom">
+      <div class="topbar-pill na" id="locationPill">
+        <span id="pillLocation">N/A</span>
+        <span class="pill-divider">|</span>
+        <span id="pillIp">N/A</span>
+      </div>
+    </div>
   </header>
 
   <div class="network-banner" id="networkBanner">
@@ -321,27 +367,89 @@ body {
   var netBanner = document.getElementById('networkBanner');
   var netOk = document.getElementById('networkOkBtn');
 
-  function checkNetwork() {
-    if (navigator.onLine) {
-      netBanner.classList.remove('show');
-    } else {
+  function showNetBanner() {
+    if (!navigator.onLine) {
       netBanner.classList.add('show');
     }
   }
 
-  netOk.addEventListener('click', function() {
+  function hideNetBanner() {
     netBanner.classList.remove('show');
-  });
+  }
 
-  window.addEventListener('online', function() {
-    netBanner.classList.remove('show');
-  });
+  netOk.addEventListener('click', hideNetBanner);
 
-  checkNetwork();
-  setInterval(checkNetwork, 60000);
+  window.addEventListener('online', hideNetBanner);
+
+  setInterval(showNetBanner, 60000);
+
+  // IP & Location pill
+  var pillLocation = document.getElementById('pillLocation');
+  var pillIp = document.getElementById('pillIp');
+  var locationPill = document.getElementById('locationPill');
+
+  function updatePill(ip, loc) {
+    pillIp.textContent = ip;
+    pillLocation.textContent = loc;
+    if (ip === 'N/A' || loc === 'N/A') {
+      locationPill.classList.add('na');
+    } else {
+      locationPill.classList.remove('na');
+    }
+  }
+
+  // Fallback chain: try multiple APIs
+  var fallbacks = [
+    'https://ip-api.com/json/',
+    'https://ipapi.co/json/',
+    'https://api.ipify.org?format=json'
+  ];
+
+  function tryFetch(idx) {
+    if (idx >= fallbacks.length) {
+      updatePill('N/A', 'N/A');
+      return;
+    }
+    var url = fallbacks[idx];
+    var xhr = new XMLHttpRequest();
+    xhr.timeout = 5000;
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          try {
+            var d = JSON.parse(xhr.responseText);
+            var ip = d.ip || d.query || null;
+            var city = d.city || d.regionName || d.region || '';
+            var country = d.country_name || d.country || '';
+            if (ip) {
+              var loc = '';
+              if (city && country) loc = city + ', ' + country;
+              else if (country) loc = country;
+              else if (city) loc = city;
+              updatePill(ip, loc || 'N/A');
+              return;
+            }
+          } catch(e) {}
+        }
+        tryFetch(idx + 1);
+      }
+    };
+    xhr.onerror = function() { tryFetch(idx + 1); };
+    xhr.ontimeout = function() { tryFetch(idx + 1); };
+    xhr.open('GET', url, true);
+    xhr.send();
+  }
+
+  tryFetch(0);
+
+  window.addEventListener('online', function() { tryFetch(0); });
+
+  window.addEventListener('offline', function() {
+    updatePill('N/A', 'N/A');
+  });
 
   const navItems = document.querySelectorAll('.nav-item');
-  const topbarItems = document.querySelectorAll('.lock-icon, .topbar-title, .icon-btn');
+  const topbarItems = document.querySelectorAll('.lock-icon, .topbar-title, .icon-btn, .topbar-bottom');
 
   navItems.forEach(item => {
     item.addEventListener('click', function() {
