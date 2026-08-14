@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html class="js no-touch progressive-image enhance-base-xp no-quicklook no-reduced-motion no-safari webgl no-retina" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB" lang="en-GB" dir="ltr" prefix="og: http://ogp.me/ns#" style="--r-localnav-text-zoom-factor: 1;"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta charset="utf-8">
+<link rel="canonical" href="https://streambox.example/streambox-4k/">
+
+
+	
+	
+
+
+
+
+	
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+	
+	
+	<link rel="stylesheet" type="text/css" href="StreamBox_files/ac-localnav.built_PAEI.css">
+	
+
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+    
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<title>StreamBox — Raspberry Pi 5 Media Centre with Kodi (4K)</title>
+	<meta name="Description" content="StreamBox is a pre-built media centre powered by a Raspberry Pi 5 with 4GB RAM. Fan-cooled case, LibreELEC and Kodi pre-installed, 4K H.265 playback on any HDMI TV.">
+	<meta property="og:image" content="StreamBox_files/hero_tv_hw__e1vadywlvcmu_large_PAEI.jpg">
+	<meta property="og:title" content="StreamBox — Raspberry Pi 5 Media Centre">
+	<meta property="og:description" content="StreamBox is a pre-built media centre powered by a Raspberry Pi 5 with 4GB RAM. Fan-cooled case, LibreELEC and Kodi pre-installed, 4K H.265 playback on any HDMI TV.">
+	<meta property="og:url" content="https://streambox.example/streambox-4k/">
+	<meta property="og:locale" content="en_GB">
+	<meta property="og:site_name" content="StreamBox (United Kingdom)">
+	<meta property="og:type" content="website">
+	<meta name="twitter:site" content="@StreamBoxTV">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta property="analytics-track" content="streambox 4k - overview">
+	<meta property="analytics-s-channel" content="streambox">
+
+	<meta property="analytics-s-bucket-0" content="streamboxww">
+	<meta property="analytics-s-bucket-1" content="streamboxww">
+	<meta property="analytics-s-bucket-2" content="streamboxww">
+
+
+	<link rel="stylesheet" href="StreamBox_files/fonts_PAEI.css">
+	<link rel="stylesheet" href="StreamBox_files/main.built_PAEI.css" type="text/css">
+	<link rel="stylesheet" href="StreamBox_files/overview.built_PAEI.css" type="text/css">
+	<link rel="stylesheet" href="StreamBox_files/overview_PAEI.css" type="text/css">
+	<script src="StreamBox_files/head.built_PAEI.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body id="top" class="page-overview ac-gn-current-tv" data-component-list=" ReBase FocusManager" data-anim-scroll-group="body">
+<style>
+@media (max-width: 734px){ #sb-globalnav ul{ display: none !important; } }
+@media (max-width: 734px){ #sb-globalnav a[href="#compare"]{ margin-left: auto; } }
+</style>
+			
+
+    <nav id="sb-globalnav" aria-label="Global" role="navigation" style="position: relative; z-index: 9999; background: rgba(0,0,0,0.92); backdrop-filter: saturate(180%) blur(20px);">
+      <div style="max-width: 1024px; margin: 0 auto; padding: 0 22px; display: flex; align-items: center; justify-content: space-between; height: 48px;">
+        <a href="#top" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: #f5f5f7; font-size: 17px; font-weight: 600; letter-spacing: -0.02em;">
+          <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+            <path d="M8 6h16a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V10a4 4 0 0 1 4-4z" fill="none" stroke="#f5f5f7" stroke-width="2" rx="3"/>
+            <polygon points="13,11 21,16 13,21" fill="#2997ff"/>
+          </svg>
+          <span>StreamBox</span>
+        </a>
+        <ul style="display: flex; align-items: center; gap: 34px; margin: 0; padding: 0; list-style: none; font-size: 12px; letter-spacing: 0.01em;">
+          <li><a href="#overview" style="color: #f5f5f7; text-decoration: none; opacity: 0.9;">Overview</a></li>
+          <li><a href="#compare" style="color: #f5f5f7; text-decoration: none; opacity: 0.9;">Tech Specs</a></li>
+          <li><a href="#entertainment" style="color: #f5f5f7; text-decoration: none; opacity: 0.9;">Entertainment</a></li>
+          <li><a href="#compare" style="color: #f5f5f7; text-decoration: none; opacity: 0.9;">Compare</a></li>
+          <li><a href="#support" style="color: #f5f5f7; text-decoration: none; opacity: 0.9;">Support</a></li>
+        </ul>
+        <a href="#compare" style="display: inline-block; color: #fff; background: #2997ff; border-radius: 980px; padding: 5px 16px; font-size: 12px; font-weight: 600; text-decoration: none;">Buy</a>
+      </div>
+    </nav>
+
+			
+
+    
+    
+
+
+    
+
+<script>
+!function(){"use strict";var e,r,n,t,o,a,i,s,c,d,u,p,f,l,m,g,h,S,v,y,b,w,E,k,z,x,T,D,P,R,B,M,q,F,I,N,O,j,A,C,_,G;function H(){if(r)return e;r=1;var n=!1,t={};"undefined"!=typeof window&&(t=window||self);try{n=!!t.localStorage.getItem("f7c9180f-5c45-47b4-8de4-428015f096c0")}catch(e){}return e=n}function J(){if(t)return n;t=1;var e=H();return n=function(r){return function(){if(e&&"object"==typeof window.console&&"function"==typeof console[r])return console[r].apply(console,Array.prototype.slice.call(arguments,0))}},n}var K,L,Q,U,V=G?_:(G=1,_={assert:a?o:(a=1,o=J()("assert")),count:s?i:(s=1,i=J()("count")),countReset:d?c:(d=1,c=J()("countReset")),dir:p?u:(p=1,u=J()("dir")),dirxml:l?f:(l=1,f=J()("dirxml")),enabled:H(),error:g?m:(g=1,m=J()("error")),group:S?h:(S=1,h=J()("group")),groupCollapsed:y?v:(y=1,v=J()("groupCollapsed")),groupEnd:w?b:(w=1,b=J()("groupEnd")),info:k?E:(k=1,E=J()("info")),log:x?z:(x=1,z=J()("log")),profile:D?T:(D=1,T=J()("profile")),profileEnd:R?P:(R=1,P=J()("profileEnd")),table:M?B:(M=1,B=J()("table")),time:F?q:(F=1,q=J()("time")),timeEnd:N?I:(N=1,I=J()("timeEnd")),trace:j?O:(j=1,O=J()("trace")),warn:C?A:(C=1,A=J()("warn"))}),W={cookieName:"ac_bnd",minSamples:1,idealSamples:5,minTransferSize:1e4,minDuration:5,thresholds:[.5,1.5,3,5,10,18,30,45,60],cookieDomain:"",timeout:4e3};function X(e,r){var n=e.cookieName+"="+r+"; path=/; Secure";e.cookieDomain&&(n+="; domain="+e.cookieDomain),document.cookie=n}(K=W.idealSamples,L=W.minTransferSize,Q=W.minDuration,U=W.timeout,new Promise(function(e){var r=0,n=!1;function t(){n||(n=!0,V.log("[ac-bandwidth] waitForResources resolved — seen: "+r+", needed: "+K),e())}try{if("undefined"!=typeof performance&&performance.getEntriesByType){for(var o=performance.getEntriesByType("resource"),a=0;a<o.length;a++){var i=o[a].responseEnd-o[a].responseStart;o[a].transferSize>=L&&o[a].responseStart>0&&o[a].responseEnd>o[a].responseStart&&i>=Q&&r++}if(r>=K)return void t()}if("undefined"!=typeof PerformanceObserver){var s=new PerformanceObserver(function(e){try{for(var n=e.getEntries(),o=0;o<n.length;o++){var a=n[o].responseEnd-n[o].responseStart;n[o].transferSize>=L&&n[o].responseStart>0&&n[o].responseEnd>n[o].responseStart&&a>=Q&&r++}r>=K&&(s.disconnect(),t())}catch(e){t()}});s.observe({type:"resource",buffered:!1})}}catch(e){t()}setTimeout(t,U||15e3)})).then(function(e){try{var r=Object.assign({},W,e);if(document.querySelector('meta[property="analytics-track"][content*="404"]'))return void V.log("[ac-bandwidth] skipping — 404 page detected");if("undefined"==typeof performance||"function"!=typeof performance.getEntriesByType)return void V.log("[ac-bandwidth] skipping — Performance API unavailable");var n=performance.getEntriesByType("resource");if(!n.some(function(e){return e.transferSize>0}))return void V.log("[ac-bandwidth] skipping — transferSize not supported");V.log("[ac-bandwidth] total resources found: "+n.length);var t=n.filter(function(e){var n=e.responseEnd-e.responseStart;return e.transferSize>=r.minTransferSize&&e.responseStart>0&&e.responseEnd>e.responseStart&&n>=r.minDuration});if(V.log("[ac-bandwidth] qualifying resources: "+t.length+" (need "+r.minSamples+")"),t.forEach(function(e){var r=e.responseEnd-e.responseStart,n=8*e.transferSize/(r/1e3)/1e6;V.log("[ac-bandwidth]   "+e.name.split("/").pop()+" — transferSize: "+e.transferSize+", duration: "+Math.round(r)+"ms, throughput: "+n.toFixed(2)+" Mbps")}),t.length<r.minSamples){var o=n.filter(function(e){return 0===e.transferSize&&e.duration<r.minDuration});if(V.log("[ac-bandwidth] not enough qualifying resources — cachedResources: "+o.length),o.length>=r.minSamples){var a=(u=r.cookieName,(p=document.cookie.match(new RegExp("(?:^|; )"+u+"=(\\d+)")))?parseInt(p[1],10):null);return V.log("[ac-bandwidth] cache-load detected, existing cookie score: "+a),null!==a?a:void V.log("[ac-bandwidth] skipping — cache load with no prior cookie")}return V.log("[ac-bandwidth] defaulting to score 1 (not enough samples, not a cache load)"),X(r,1),1}for(var i=t.map(function(e){var r=(e.responseEnd-e.responseStart)/1e3;return 8*e.transferSize/r/1e6}),s=Math.max.apply(null,i),c=r.thresholds.length+1,d=0;d<r.thresholds.length;d++)if(s<r.thresholds[d]){c=d+1;break}return V.log("[ac-bandwidth] maxMbps: "+s.toFixed(2)+", score: "+c),X(r,c),c}catch(e){V.log("[ac-bandwidth] error: "+e.message)}var u,p}).catch(function(){})}();
+
+</script>
+
+
+<script src="StreamBox_files/ac-analytics_PAEI.js" type="text/javascript" charset="utf-8"></script>
+<script src="StreamBox_files/auto-init_PAEI.js" type="text/javascript" charset="utf-8"></script>
+
+
+
+
+
+
+
+
+
+
+
+			<input type="checkbox" id="ac-ln-menustate" class="ac-ln-menustate" aria-controls="ac-ln-menustate-tray" aria-expanded="false">
+			<div id="ac-ln-sticky-placeholder" class="css-sticky"></div><nav id="ac-localnav" class="ac-localnav-scrim js no-touch css-sticky ac-ln-allow-transitions" lang="en-GB" dir="ltr" data-sticky="" data-analytics-region="local nav" role="navigation" aria-label="Local">
+				<div class="ac-ln-wrapper">
+					<div class="ac-ln-background"></div>
+					<div class="ac-ln-content">
+						<div class="ac-ln-title">
+							<a href="#overview" data-analytics-title="product index">StreamBox&nbsp;4K</a>
+						</div>
+						<div class="ac-ln-menu">
+							<a href="#ac-ln-menustate" class="ac-ln-menucta-anchor ac-ln-menucta-anchor-open" id="ac-ln-menustate-open" role="button" aria-controls="ac-ln-menustate-tray" aria-expanded="false"> <span class="ac-ln-menucta-anchor-label">Local Nav Open Menu</span> </a> <a href="#" class="ac-ln-menucta-anchor ac-ln-menucta-anchor-close" id="ac-ln-menustate-close" role="button" aria-controls="ac-ln-menustate-tray" aria-expanded="true"> <span class="ac-ln-menucta-anchor-label">Local Nav Close Menu</span> </a>
+							<div class="ac-ln-menu-tray" id="ac-ln-menustate-tray" style="--r-localnav-menu-tray-natural-height: 55px;">
+								<ul class="ac-ln-menu-items">
+									<li class="ac-ln-menu-item">
+										<span class="ac-ln-menu-link current" role="link" aria-disabled="true" aria-current="page">Overview</span>
+									</li>
+									<li class="ac-ln-menu-item">
+										<a href="#compare" class="ac-ln-menu-link" data-analytics-title="tech specs">Tech Specs</a>
+									</li>
+								</ul>
+							</div>
+							<div class="ac-ln-actions">
+								<div class="ac-ln-action ac-ln-action-menucta" aria-hidden="true">
+									<label for="ac-ln-menustate" class="ac-ln-menucta">
+													<span class="ac-ln-menucta-chevron">
+<svg viewBox="0 0 16 9" data-chevron-icon="" xmlns="http://www.w3.org/2000/svg">
+	<polyline shape-rendering="geometricPrecision" data-chevron-icon-shape="" stroke="currentColor" stroke-linecap="round" vector-effect="non-scaling-stroke" stroke-linejoin="round" fill="none" fill-rule="evenodd" points="15.265 .835 8 8.167 .735 .835">
+		<animate data-chevron-animate="expand" attributeName="points" values="15.265 .835 8 8.167 .735 .835;
+					15.25 4.5 8 4.5 .75 4.5;
+					15.265 8.165 8 .835 .735 8.165" dur="320ms" begin="indefinite" fill="freeze" keyTimes="0;
+					0.5;
+					1" calcMode="spline" keySplines="0.12, 0, 0.38, 0;
+						0.2, 1, 0.68, 1"></animate>
+		<animate data-chevron-animate="collapse" attributeName="points" values="15.265 8.165 8 .835 .735 8.165;
+					15.25 4.5 8 4.5 .75 4.5;
+					15.265 .835 8 8.167 .735 .835" dur="320ms" begin="indefinite" fill="freeze" keyTimes="0;
+					0.5;
+					1" calcMode="spline" keySplines="0.2, 0, 0.68, 0;
+						0.2, 1, 0.68, 1"></animate>
+	</polyline>
+</svg></span>
+												</label>
+								</div>
+								<div class="ac-ln-action ac-ln-action-button">
+									<a class="ac-ln-button" href="#compare" data-analytics-title="buy - streambox 4k">Buy <span class="ac-ln-action-product">StreamBox&nbsp;4K</span></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</nav>
+			<label id="ac-ln-curtain" for="ac-ln-menustate"></label>
+			
+<script type="text/javascript" src="StreamBox_files/ac-localnav.built_PAEI.js"></script><span style="visibility: hidden; position: absolute; top: 0px; z-index: -1;">&nbsp;</span>
+
+
+			<main id="main" class="main" role="main" data-page-type="overview" data-anim-scroll-group="bubble-gum-group">
+		
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+
+
+
+
+
+ 
+
+
+				
+				<section id="overview" class="section section-hero" data-anim-scroll-group="Hero" data-analytics-section-engagement="name:hero">
+			<div class="scroll-container">
+				<div class="sticky-item">
+					
+
+					<div class="scaling-container startframe-loaded">
+						<div class="hardware-container">
+							<picture id="overview-hero-hero-tv-hw-1" class="overview-hero-hero-tv-hw image-hardware loaded" data-picture-loaded="">
+								<source srcset="StreamBox_files/hero_tv_hw__e1vadywlvcmu_small_PAEI.jpg 1x, StreamBox_files/hero_tv_hw__e1vadywlvcmu_small_2x_PAEI.jpg 2x" media="(max-width:734px)">
+								<source srcset="StreamBox_files/hero_tv_hw__e1vadywlvcmu_medium_PAEI.jpg 1x, StreamBox_files/hero_tv_hw__e1vadywlvcmu_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)">
+								<source srcset="StreamBox_files/hero_tv_hw__e1vadywlvcmu_large_PAEI.jpg 1x, StreamBox_files/hero_tv_hw__e1vadywlvcmu_large_2x_PAEI.jpg 2x" media="(min-width:0px)">
+								<img src="StreamBox_files/hero_tv_hw__e1vadywlvcmu_large_PAEI.jpg" onload="__lp(event)" alt="">
+							</picture>
+							
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			
+			<div class="section-lockup update">
+				<div class="headline-hero fade-in">
+					<h1 class="visuallyhidden" data-focus-expression="{&quot;expression&quot;: &quot;t - 100vh&quot;}" tabindex="-1">StreamBox&nbsp;4K</h1>
+							<figure class="logo"></figure>
+							<h2 class="section-headline typography-hero-headline">Your media centre.<br>Every film, show and song you own.</h2>
+					</div>
+				</div>
+			<div class="intro-copy">
+				<div class="section-content">
+					<div class="typography-hero-intro">
+						<p>StreamBox is a pre&#8209;built media centre. Inside the fan&#8209;cooled case is a Raspberry&nbsp;Pi&nbsp;5 with 4GB of RAM, pre&#8209;loaded with LibreELEC and Kodi &mdash; ready to play your own movies, TV shows, music and photos in up to 4K, straight from a USB drive or your home network. No subscriptions. No ads. Just your media, on any HDMI TV.</p>
+						<p><span class="price">£120</span> <span class="price-caption">includes everything you need to get started</span></p>
+					</div>
+				</div>
+			</div>
+		</section>
+				<section id="entertainment" class="section section-entertainment" data-anim-scroll-group="Entertainment" data-component-list="RiverRow" data-analytics-section-engagement="name:experience">
+					<div class="section-content">
+						<div class="section-header section-header-entertainment large-12">
+							<h2 class="section-eyebrow typography-section-eyebrow">Entertainment</h2>
+							<h3 class="section-headline typography-section-headline ">
+								Everything you watch.<br>One clean interface.
+							</h3>
+							<p class="section-intro typography-section-intro copy large-9 large-centered small-12">Kodi is the world’s most popular media centre software, and it’s already installed. Play your own film, TV, music and photo library in 4K; watch catch‑up TV from the BBC, ITVX and more; add YouTube, live TV with a USB tuner, internet radio and thousands of other add‑ons. If it plays, StreamBox plays it.</p>
+						</div>
+					</div>
+					<div class="river-gallery" data-river-gallery="" role="img" alt="Rows of film and music artwork from a media library">
+				<div class="overflow-container">
+					<div class="row-gallery" data-row-1="" style="transform: matrix(1, 0, 0, 1, 0, 0);">
+						<picture id="overview-entertainment-river-dragon-1" class="overview-entertainment-river-dragon" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_dragon__fit8bssfu4y2_small_PAEI.jpg 1x, StreamBox_files/river_dragon__fit8bssfu4y2_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_dragon__fit8bssfu4y2_medium_PAEI.jpg 1x, StreamBox_files/river_dragon__fit8bssfu4y2_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_dragon__fit8bssfu4y2_large_PAEI.jpg 1x, StreamBox_files/river_dragon__fit8bssfu4y2_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_dragon__fit8bssfu4y2_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-dragon">
+						<source srcset="StreamBox_files/river_dragon__fit8bssfu4y2_small_PAEI.jpg, StreamBox_files/river_dragon__fit8bssfu4y2_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_dragon__fit8bssfu4y2_medium_PAEI.jpg, StreamBox_files/river_dragon__fit8bssfu4y2_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_dragon__fit8bssfu4y2_large_PAEI.jpg, StreamBox_files/river_dragon__fit8bssfu4y2_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_dragon__fit8bssfu4y2_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-lasso-1" class="overview-entertainment-river-lasso" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_lasso__dectx3ui90ae_small_PAEI.jpg 1x, StreamBox_files/river_lasso__dectx3ui90ae_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_lasso__dectx3ui90ae_medium_PAEI.jpg 1x, StreamBox_files/river_lasso__dectx3ui90ae_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_lasso__dectx3ui90ae_large_PAEI.jpg 1x, StreamBox_files/river_lasso__dectx3ui90ae_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_lasso__dectx3ui90ae_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-lasso">
+						<source srcset="StreamBox_files/river_lasso__dectx3ui90ae_small_PAEI.jpg, StreamBox_files/river_lasso__dectx3ui90ae_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_lasso__dectx3ui90ae_medium_PAEI.jpg, StreamBox_files/river_lasso__dectx3ui90ae_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_lasso__dectx3ui90ae_large_PAEI.jpg, StreamBox_files/river_lasso__dectx3ui90ae_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_lasso__dectx3ui90ae_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-bjork-1" class="overview-entertainment-river-bjork" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_bjork__ennyh4r9w0qe_small_PAEI.jpg 1x, StreamBox_files/river_bjork__ennyh4r9w0qe_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_bjork__ennyh4r9w0qe_medium_PAEI.jpg 1x, StreamBox_files/river_bjork__ennyh4r9w0qe_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_bjork__ennyh4r9w0qe_large_PAEI.jpg 1x, StreamBox_files/river_bjork__ennyh4r9w0qe_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_bjork__ennyh4r9w0qe_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-bjork">
+						<source srcset="StreamBox_files/river_bjork__ennyh4r9w0qe_small_PAEI.jpg, StreamBox_files/river_bjork__ennyh4r9w0qe_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_bjork__ennyh4r9w0qe_medium_PAEI.jpg, StreamBox_files/river_bjork__ennyh4r9w0qe_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_bjork__ennyh4r9w0qe_large_PAEI.jpg, StreamBox_files/river_bjork__ennyh4r9w0qe_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_bjork__ennyh4r9w0qe_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-fitness-01-1" class="overview-entertainment-river-fitness-01" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_fitness-01__euu0pdyutgae_small_PAEI.jpg 1x, StreamBox_files/river_fitness-01__euu0pdyutgae_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_fitness-01__euu0pdyutgae_medium_PAEI.jpg 1x, StreamBox_files/river_fitness-01__euu0pdyutgae_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_fitness-01__euu0pdyutgae_large_PAEI.jpg 1x, StreamBox_files/river_fitness-01__euu0pdyutgae_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_fitness-01__euu0pdyutgae_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-fitness-01">
+						<source srcset="StreamBox_files/river_fitness-01__euu0pdyutgae_small_PAEI.jpg, StreamBox_files/river_fitness-01__euu0pdyutgae_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_fitness-01__euu0pdyutgae_medium_PAEI.jpg, StreamBox_files/river_fitness-01__euu0pdyutgae_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_fitness-01__euu0pdyutgae_large_PAEI.jpg, StreamBox_files/river_fitness-01__euu0pdyutgae_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_fitness-01__euu0pdyutgae_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-silo-1" class="overview-entertainment-river-silo" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_silo__c4flnjcqpgcy_small_PAEI.jpg 1x, StreamBox_files/river_silo__c4flnjcqpgcy_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_silo__c4flnjcqpgcy_medium_PAEI.jpg 1x, StreamBox_files/river_silo__c4flnjcqpgcy_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_silo__c4flnjcqpgcy_large_PAEI.jpg 1x, StreamBox_files/river_silo__c4flnjcqpgcy_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_silo__c4flnjcqpgcy_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-silo">
+						<source srcset="StreamBox_files/river_silo__c4flnjcqpgcy_small_PAEI.jpg, StreamBox_files/river_silo__c4flnjcqpgcy_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_silo__c4flnjcqpgcy_medium_PAEI.jpg, StreamBox_files/river_silo__c4flnjcqpgcy_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_silo__c4flnjcqpgcy_large_PAEI.jpg, StreamBox_files/river_silo__c4flnjcqpgcy_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_silo__c4flnjcqpgcy_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-hijack-1" class="overview-entertainment-river-hijack" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_hijack__bljlnk9xkynm_small_PAEI.jpg 1x, StreamBox_files/river_hijack__bljlnk9xkynm_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_hijack__bljlnk9xkynm_medium_PAEI.jpg 1x, StreamBox_files/river_hijack__bljlnk9xkynm_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_hijack__bljlnk9xkynm_large_PAEI.jpg 1x, StreamBox_files/river_hijack__bljlnk9xkynm_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_hijack__bljlnk9xkynm_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-hijack">
+						<source srcset="StreamBox_files/river_hijack__bljlnk9xkynm_small_PAEI.jpg, StreamBox_files/river_hijack__bljlnk9xkynm_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_hijack__bljlnk9xkynm_medium_PAEI.jpg, StreamBox_files/river_hijack__bljlnk9xkynm_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_hijack__bljlnk9xkynm_large_PAEI.jpg, StreamBox_files/river_hijack__bljlnk9xkynm_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_hijack__bljlnk9xkynm_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-mickey17-1" class="overview-entertainment-river-mickey17" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_mickey17__d76texr1is6e_small_PAEI.jpg 1x, StreamBox_files/river_mickey17__d76texr1is6e_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_mickey17__d76texr1is6e_medium_PAEI.jpg 1x, StreamBox_files/river_mickey17__d76texr1is6e_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_mickey17__d76texr1is6e_large_PAEI.jpg 1x, StreamBox_files/river_mickey17__d76texr1is6e_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_mickey17__d76texr1is6e_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-mickey17">
+						<source srcset="StreamBox_files/river_mickey17__d76texr1is6e_small_PAEI.jpg, StreamBox_files/river_mickey17__d76texr1is6e_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_mickey17__d76texr1is6e_medium_PAEI.jpg, StreamBox_files/river_mickey17__d76texr1is6e_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_mickey17__d76texr1is6e_large_PAEI.jpg, StreamBox_files/river_mickey17__d76texr1is6e_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_mickey17__d76texr1is6e_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-jurassic-1" class="overview-entertainment-river-jurassic" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_jurassic__c4113q824ck2_small_PAEI.jpg 1x, StreamBox_files/river_jurassic__c4113q824ck2_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_jurassic__c4113q824ck2_medium_PAEI.jpg 1x, StreamBox_files/river_jurassic__c4113q824ck2_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_jurassic__c4113q824ck2_large_PAEI.jpg 1x, StreamBox_files/river_jurassic__c4113q824ck2_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_jurassic__c4113q824ck2_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-jurassic">
+						<source srcset="StreamBox_files/river_jurassic__c4113q824ck2_small_PAEI.jpg, StreamBox_files/river_jurassic__c4113q824ck2_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_jurassic__c4113q824ck2_medium_PAEI.jpg, StreamBox_files/river_jurassic__c4113q824ck2_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_jurassic__c4113q824ck2_large_PAEI.jpg, StreamBox_files/river_jurassic__c4113q824ck2_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_jurassic__c4113q824ck2_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-pitt-1" class="overview-entertainment-river-pitt" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_pitt__bs7vfnnz2vxy_small_PAEI.jpg 1x, StreamBox_files/river_pitt__bs7vfnnz2vxy_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_pitt__bs7vfnnz2vxy_medium_PAEI.jpg 1x, StreamBox_files/river_pitt__bs7vfnnz2vxy_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_pitt__bs7vfnnz2vxy_large_PAEI.jpg 1x, StreamBox_files/river_pitt__bs7vfnnz2vxy_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_pitt__bs7vfnnz2vxy_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-pitt">
+						<source srcset="StreamBox_files/river_pitt__bs7vfnnz2vxy_small_PAEI.jpg, StreamBox_files/river_pitt__bs7vfnnz2vxy_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_pitt__bs7vfnnz2vxy_medium_PAEI.jpg, StreamBox_files/river_pitt__bs7vfnnz2vxy_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_pitt__bs7vfnnz2vxy_large_PAEI.jpg, StreamBox_files/river_pitt__bs7vfnnz2vxy_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_pitt__bs7vfnnz2vxy_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+					</div>
+					<div class="row-gallery" data-row-2="" style="transform: matrix(1, 0, 0, 1, -484.65, 0);">
+						<picture id="overview-entertainment-river-central-cee-1" class="overview-entertainment-river-central-cee" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_central_cee__d3drjcp044mu_small_PAEI.jpg 1x, StreamBox_files/river_central_cee__d3drjcp044mu_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_central_cee__d3drjcp044mu_medium_PAEI.jpg 1x, StreamBox_files/river_central_cee__d3drjcp044mu_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_central_cee__d3drjcp044mu_large_PAEI.jpg 1x, StreamBox_files/river_central_cee__d3drjcp044mu_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_central_cee__d3drjcp044mu_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-central-cee">
+						<source srcset="StreamBox_files/river_central_cee__d3drjcp044mu_small_PAEI.jpg, StreamBox_files/river_central_cee__d3drjcp044mu_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_central_cee__d3drjcp044mu_medium_PAEI.jpg, StreamBox_files/river_central_cee__d3drjcp044mu_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_central_cee__d3drjcp044mu_large_PAEI.jpg, StreamBox_files/river_central_cee__d3drjcp044mu_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_central_cee__d3drjcp044mu_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-hello-kitty-1" class="overview-entertainment-river-hello-kitty" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_hello_kitty__dyzvkpd4jiqa_small_PAEI.jpg 1x, StreamBox_files/river_hello_kitty__dyzvkpd4jiqa_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_hello_kitty__dyzvkpd4jiqa_medium_PAEI.jpg 1x, StreamBox_files/river_hello_kitty__dyzvkpd4jiqa_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_hello_kitty__dyzvkpd4jiqa_large_PAEI.jpg 1x, StreamBox_files/river_hello_kitty__dyzvkpd4jiqa_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_hello_kitty__dyzvkpd4jiqa_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-hello-kitty">
+						<source srcset="StreamBox_files/river_hello_kitty__dyzvkpd4jiqa_small_PAEI.jpg, StreamBox_files/river_hello_kitty__dyzvkpd4jiqa_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_hello_kitty__dyzvkpd4jiqa_medium_PAEI.jpg, StreamBox_files/river_hello_kitty__dyzvkpd4jiqa_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_hello_kitty__dyzvkpd4jiqa_large_PAEI.jpg, StreamBox_files/river_hello_kitty__dyzvkpd4jiqa_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_hello_kitty__dyzvkpd4jiqa_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-superman-1" class="overview-entertainment-river-superman" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_superman__ekpjpe3zh26a_small_PAEI.jpg 1x, StreamBox_files/river_superman__ekpjpe3zh26a_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_superman__ekpjpe3zh26a_medium_PAEI.jpg 1x, StreamBox_files/river_superman__ekpjpe3zh26a_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_superman__ekpjpe3zh26a_large_PAEI.jpg 1x, StreamBox_files/river_superman__ekpjpe3zh26a_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_superman__ekpjpe3zh26a_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-superman">
+						<source srcset="StreamBox_files/river_superman__ekpjpe3zh26a_small_PAEI.jpg, StreamBox_files/river_superman__ekpjpe3zh26a_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_superman__ekpjpe3zh26a_medium_PAEI.jpg, StreamBox_files/river_superman__ekpjpe3zh26a_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_superman__ekpjpe3zh26a_large_PAEI.jpg, StreamBox_files/river_superman__ekpjpe3zh26a_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_superman__ekpjpe3zh26a_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-camilla-cabello-1" class="overview-entertainment-river-camilla-cabello" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_camilla_cabello__bkfmoe3mrd42_small_PAEI.jpg 1x, StreamBox_files/river_camilla_cabello__bkfmoe3mrd42_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_camilla_cabello__bkfmoe3mrd42_medium_PAEI.jpg 1x, StreamBox_files/river_camilla_cabello__bkfmoe3mrd42_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_camilla_cabello__bkfmoe3mrd42_large_PAEI.jpg 1x, StreamBox_files/river_camilla_cabello__bkfmoe3mrd42_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_camilla_cabello__bkfmoe3mrd42_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-camilla-cabello">
+						<source srcset="StreamBox_files/river_camilla_cabello__bkfmoe3mrd42_small_PAEI.jpg, StreamBox_files/river_camilla_cabello__bkfmoe3mrd42_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_camilla_cabello__bkfmoe3mrd42_medium_PAEI.jpg, StreamBox_files/river_camilla_cabello__bkfmoe3mrd42_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_camilla_cabello__bkfmoe3mrd42_large_PAEI.jpg, StreamBox_files/river_camilla_cabello__bkfmoe3mrd42_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_camilla_cabello__bkfmoe3mrd42_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-spongebob-1" class="overview-entertainment-river-spongebob" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_spongebob__gjhzrhzzpqem_small_PAEI.jpg 1x, StreamBox_files/river_spongebob__gjhzrhzzpqem_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_spongebob__gjhzrhzzpqem_medium_PAEI.jpg 1x, StreamBox_files/river_spongebob__gjhzrhzzpqem_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_spongebob__gjhzrhzzpqem_large_PAEI.jpg 1x, StreamBox_files/river_spongebob__gjhzrhzzpqem_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_spongebob__gjhzrhzzpqem_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-spongebob">
+						<source srcset="StreamBox_files/river_spongebob__gjhzrhzzpqem_small_PAEI.jpg, StreamBox_files/river_spongebob__gjhzrhzzpqem_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_spongebob__gjhzrhzzpqem_medium_PAEI.jpg, StreamBox_files/river_spongebob__gjhzrhzzpqem_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_spongebob__gjhzrhzzpqem_large_PAEI.jpg, StreamBox_files/river_spongebob__gjhzrhzzpqem_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_spongebob__gjhzrhzzpqem_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-fitness-02-1" class="overview-entertainment-river-fitness-02" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_fitness-02__bsnju4h2ykk2_small_PAEI.jpg 1x, StreamBox_files/river_fitness-02__bsnju4h2ykk2_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_fitness-02__bsnju4h2ykk2_medium_PAEI.jpg 1x, StreamBox_files/river_fitness-02__bsnju4h2ykk2_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_fitness-02__bsnju4h2ykk2_large_PAEI.jpg 1x, StreamBox_files/river_fitness-02__bsnju4h2ykk2_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_fitness-02__bsnju4h2ykk2_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-fitness-02">
+						<source srcset="StreamBox_files/river_fitness-02__bsnju4h2ykk2_small_PAEI.jpg, StreamBox_files/river_fitness-02__bsnju4h2ykk2_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_fitness-02__bsnju4h2ykk2_medium_PAEI.jpg, StreamBox_files/river_fitness-02__bsnju4h2ykk2_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_fitness-02__bsnju4h2ykk2_large_PAEI.jpg, StreamBox_files/river_fitness-02__bsnju4h2ykk2_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_fitness-02__bsnju4h2ykk2_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-jennifer-lopez-1" class="overview-entertainment-river-jennifer-lopez" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_jennifer_lopez__fh4ox66uvfmi_small_PAEI.jpg 1x, StreamBox_files/river_jennifer_lopez__fh4ox66uvfmi_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_jennifer_lopez__fh4ox66uvfmi_medium_PAEI.jpg 1x, StreamBox_files/river_jennifer_lopez__fh4ox66uvfmi_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_jennifer_lopez__fh4ox66uvfmi_large_PAEI.jpg 1x, StreamBox_files/river_jennifer_lopez__fh4ox66uvfmi_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_jennifer_lopez__fh4ox66uvfmi_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-jennifer-lopez">
+						<source srcset="StreamBox_files/river_jennifer_lopez__fh4ox66uvfmi_small_PAEI.jpg, StreamBox_files/river_jennifer_lopez__fh4ox66uvfmi_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_jennifer_lopez__fh4ox66uvfmi_medium_PAEI.jpg, StreamBox_files/river_jennifer_lopez__fh4ox66uvfmi_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_jennifer_lopez__fh4ox66uvfmi_large_PAEI.jpg, StreamBox_files/river_jennifer_lopez__fh4ox66uvfmi_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_jennifer_lopez__fh4ox66uvfmi_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-friends-neighbors-1" class="overview-entertainment-river-friends-neighbors" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_friends_neighbors__ftftcs4t9tea_small_PAEI.jpg 1x, StreamBox_files/river_friends_neighbors__ftftcs4t9tea_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_friends_neighbors__ftftcs4t9tea_medium_PAEI.jpg 1x, StreamBox_files/river_friends_neighbors__ftftcs4t9tea_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_friends_neighbors__ftftcs4t9tea_large_PAEI.jpg 1x, StreamBox_files/river_friends_neighbors__ftftcs4t9tea_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_friends_neighbors__ftftcs4t9tea_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-friends-neighbors">
+						<source srcset="StreamBox_files/river_friends_neighbors__ftftcs4t9tea_small_PAEI.jpg, StreamBox_files/river_friends_neighbors__ftftcs4t9tea_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_friends_neighbors__ftftcs4t9tea_medium_PAEI.jpg, StreamBox_files/river_friends_neighbors__ftftcs4t9tea_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_friends_neighbors__ftftcs4t9tea_large_PAEI.jpg, StreamBox_files/river_friends_neighbors__ftftcs4t9tea_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_friends_neighbors__ftftcs4t9tea_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-fitness-03-1" class="overview-entertainment-river-fitness-03" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_fitness-03__dspjxbz3b02u_small_PAEI.jpg 1x, StreamBox_files/river_fitness-03__dspjxbz3b02u_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_fitness-03__dspjxbz3b02u_medium_PAEI.jpg 1x, StreamBox_files/river_fitness-03__dspjxbz3b02u_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_fitness-03__dspjxbz3b02u_large_PAEI.jpg 1x, StreamBox_files/river_fitness-03__dspjxbz3b02u_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_fitness-03__dspjxbz3b02u_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-fitness-03">
+						<source srcset="StreamBox_files/river_fitness-03__dspjxbz3b02u_small_PAEI.jpg, StreamBox_files/river_fitness-03__dspjxbz3b02u_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_fitness-03__dspjxbz3b02u_medium_PAEI.jpg, StreamBox_files/river_fitness-03__dspjxbz3b02u_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_fitness-03__dspjxbz3b02u_large_PAEI.jpg, StreamBox_files/river_fitness-03__dspjxbz3b02u_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_fitness-03__dspjxbz3b02u_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+					</div>
+					<div class="row-gallery" data-row-3="" style="transform: matrix(1, 0, 0, 1, 0, 0);">
+						<picture id="overview-entertainment-river-fitness-04-1" class="overview-entertainment-river-fitness-04" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_fitness-04__e2kqqjvucbee_small_PAEI.jpg 1x, StreamBox_files/river_fitness-04__e2kqqjvucbee_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_fitness-04__e2kqqjvucbee_medium_PAEI.jpg 1x, StreamBox_files/river_fitness-04__e2kqqjvucbee_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_fitness-04__e2kqqjvucbee_large_PAEI.jpg 1x, StreamBox_files/river_fitness-04__e2kqqjvucbee_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_fitness-04__e2kqqjvucbee_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-fitness-04">
+						<source srcset="StreamBox_files/river_fitness-04__e2kqqjvucbee_small_PAEI.jpg, StreamBox_files/river_fitness-04__e2kqqjvucbee_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_fitness-04__e2kqqjvucbee_medium_PAEI.jpg, StreamBox_files/river_fitness-04__e2kqqjvucbee_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_fitness-04__e2kqqjvucbee_large_PAEI.jpg, StreamBox_files/river_fitness-04__e2kqqjvucbee_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_fitness-04__e2kqqjvucbee_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-wild-robot-1" class="overview-entertainment-river-wild-robot" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_wild_robot__cdkobmhz4liq_small_PAEI.jpg 1x, StreamBox_files/river_wild_robot__cdkobmhz4liq_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_wild_robot__cdkobmhz4liq_medium_PAEI.jpg 1x, StreamBox_files/river_wild_robot__cdkobmhz4liq_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_wild_robot__cdkobmhz4liq_large_PAEI.jpg 1x, StreamBox_files/river_wild_robot__cdkobmhz4liq_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_wild_robot__cdkobmhz4liq_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-wild-robot">
+						<source srcset="StreamBox_files/river_wild_robot__cdkobmhz4liq_small_PAEI.jpg, StreamBox_files/river_wild_robot__cdkobmhz4liq_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_wild_robot__cdkobmhz4liq_medium_PAEI.jpg, StreamBox_files/river_wild_robot__cdkobmhz4liq_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_wild_robot__cdkobmhz4liq_large_PAEI.jpg, StreamBox_files/river_wild_robot__cdkobmhz4liq_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_wild_robot__cdkobmhz4liq_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-minecraft-1" class="overview-entertainment-river-minecraft" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_minecraft__glopxniar5yu_small_PAEI.jpg 1x, StreamBox_files/river_minecraft__glopxniar5yu_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_minecraft__glopxniar5yu_medium_PAEI.jpg 1x, StreamBox_files/river_minecraft__glopxniar5yu_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_minecraft__glopxniar5yu_large_PAEI.jpg 1x, StreamBox_files/river_minecraft__glopxniar5yu_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_minecraft__glopxniar5yu_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-minecraft">
+						<source srcset="StreamBox_files/river_minecraft__glopxniar5yu_small_PAEI.jpg, StreamBox_files/river_minecraft__glopxniar5yu_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_minecraft__glopxniar5yu_medium_PAEI.jpg, StreamBox_files/river_minecraft__glopxniar5yu_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_minecraft__glopxniar5yu_large_PAEI.jpg, StreamBox_files/river_minecraft__glopxniar5yu_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_minecraft__glopxniar5yu_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-what-the-car-1" class="overview-entertainment-river-what-the-car" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_what_the_car__keqacd9zsh26_small_PAEI.jpg 1x, StreamBox_files/river_what_the_car__keqacd9zsh26_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_what_the_car__keqacd9zsh26_medium_PAEI.jpg 1x, StreamBox_files/river_what_the_car__keqacd9zsh26_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_what_the_car__keqacd9zsh26_large_PAEI.jpg 1x, StreamBox_files/river_what_the_car__keqacd9zsh26_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_what_the_car__keqacd9zsh26_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-what-the-car">
+						<source srcset="StreamBox_files/river_what_the_car__keqacd9zsh26_small_PAEI.jpg, StreamBox_files/river_what_the_car__keqacd9zsh26_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_what_the_car__keqacd9zsh26_medium_PAEI.jpg, StreamBox_files/river_what_the_car__keqacd9zsh26_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_what_the_car__keqacd9zsh26_large_PAEI.jpg, StreamBox_files/river_what_the_car__keqacd9zsh26_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_what_the_car__keqacd9zsh26_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-severance-1" class="overview-entertainment-river-severance" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_severance__ft50fk44erqm_small_PAEI.jpg 1x, StreamBox_files/river_severance__ft50fk44erqm_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_severance__ft50fk44erqm_medium_PAEI.jpg 1x, StreamBox_files/river_severance__ft50fk44erqm_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_severance__ft50fk44erqm_large_PAEI.jpg 1x, StreamBox_files/river_severance__ft50fk44erqm_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_severance__ft50fk44erqm_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-severance">
+						<source srcset="StreamBox_files/river_severance__ft50fk44erqm_small_PAEI.jpg, StreamBox_files/river_severance__ft50fk44erqm_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_severance__ft50fk44erqm_medium_PAEI.jpg, StreamBox_files/river_severance__ft50fk44erqm_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_severance__ft50fk44erqm_large_PAEI.jpg, StreamBox_files/river_severance__ft50fk44erqm_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_severance__ft50fk44erqm_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-kacey-musgraves-1" class="overview-entertainment-river-kacey-musgraves" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_kacey_musgraves__czfo4t9eqa82_small_PAEI.jpg 1x, StreamBox_files/river_kacey_musgraves__czfo4t9eqa82_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_kacey_musgraves__czfo4t9eqa82_medium_PAEI.jpg 1x, StreamBox_files/river_kacey_musgraves__czfo4t9eqa82_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_kacey_musgraves__czfo4t9eqa82_large_PAEI.jpg 1x, StreamBox_files/river_kacey_musgraves__czfo4t9eqa82_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_kacey_musgraves__czfo4t9eqa82_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-kacey-musgraves">
+						<source srcset="StreamBox_files/river_kacey_musgraves__czfo4t9eqa82_small_PAEI.jpg, StreamBox_files/river_kacey_musgraves__czfo4t9eqa82_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_kacey_musgraves__czfo4t9eqa82_medium_PAEI.jpg, StreamBox_files/river_kacey_musgraves__czfo4t9eqa82_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_kacey_musgraves__czfo4t9eqa82_large_PAEI.jpg, StreamBox_files/river_kacey_musgraves__czfo4t9eqa82_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_kacey_musgraves__czfo4t9eqa82_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-fountain-of-youth-1" class="overview-entertainment-river-fountain-of-youth" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_fountain_of_youth__blq6ig7mjwgi_small_PAEI.jpg 1x, StreamBox_files/river_fountain_of_youth__blq6ig7mjwgi_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_fountain_of_youth__blq6ig7mjwgi_medium_PAEI.jpg 1x, StreamBox_files/river_fountain_of_youth__blq6ig7mjwgi_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_fountain_of_youth__blq6ig7mjwgi_large_PAEI.jpg 1x, StreamBox_files/river_fountain_of_youth__blq6ig7mjwgi_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_fountain_of_youth__blq6ig7mjwgi_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-fountain-of-youth">
+						<source srcset="StreamBox_files/river_fountain_of_youth__blq6ig7mjwgi_small_PAEI.jpg, StreamBox_files/river_fountain_of_youth__blq6ig7mjwgi_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_fountain_of_youth__blq6ig7mjwgi_medium_PAEI.jpg, StreamBox_files/river_fountain_of_youth__blq6ig7mjwgi_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_fountain_of_youth__blq6ig7mjwgi_large_PAEI.jpg, StreamBox_files/river_fountain_of_youth__blq6ig7mjwgi_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_fountain_of_youth__blq6ig7mjwgi_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-crossy-road-1" class="overview-entertainment-river-crossy-road" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_crossy_road__f46jdr1gvliu_small_PAEI.jpg 1x, StreamBox_files/river_crossy_road__f46jdr1gvliu_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_crossy_road__f46jdr1gvliu_medium_PAEI.jpg 1x, StreamBox_files/river_crossy_road__f46jdr1gvliu_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_crossy_road__f46jdr1gvliu_large_PAEI.jpg 1x, StreamBox_files/river_crossy_road__f46jdr1gvliu_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_crossy_road__f46jdr1gvliu_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-crossy-road">
+						<source srcset="StreamBox_files/river_crossy_road__f46jdr1gvliu_small_PAEI.jpg, StreamBox_files/river_crossy_road__f46jdr1gvliu_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_crossy_road__f46jdr1gvliu_medium_PAEI.jpg, StreamBox_files/river_crossy_road__f46jdr1gvliu_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_crossy_road__f46jdr1gvliu_large_PAEI.jpg, StreamBox_files/river_crossy_road__f46jdr1gvliu_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_crossy_road__f46jdr1gvliu_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						<picture id="overview-entertainment-river-stick-1" class="overview-entertainment-river-stick" data-lazy="">
+							<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+							<source srcset="StreamBox_files/river_stick__otro4cdgh2y6_small_PAEI.jpg 1x, StreamBox_files/river_stick__otro4cdgh2y6_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/river_stick__otro4cdgh2y6_medium_PAEI.jpg 1x, StreamBox_files/river_stick__otro4cdgh2y6_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/river_stick__otro4cdgh2y6_large_PAEI.jpg 1x, StreamBox_files/river_stick__otro4cdgh2y6_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/river_stick__otro4cdgh2y6_large_PAEI.jpg" onload="__lp(event)" alt="">
+						</picture>
+						<noscript>
+					<picture class="overview-entertainment-river-stick">
+						<source srcset="StreamBox_files/river_stick__otro4cdgh2y6_small_PAEI.jpg, StreamBox_files/river_stick__otro4cdgh2y6_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/river_stick__otro4cdgh2y6_medium_PAEI.jpg, StreamBox_files/river_stick__otro4cdgh2y6_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/river_stick__otro4cdgh2y6_large_PAEI.jpg, StreamBox_files/river_stick__otro4cdgh2y6_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/river_stick__otro4cdgh2y6_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+					</div>
+				</div>
+			</div>
+		</section>
+				<section class="section section-rooms all-controls tv-app-static" data-anim-scroll-group="Rooms" data-component-list="Rooms">
+					<div class="room-gallery" aria-label="A television showing Kodi screens: your media library, live TV, music, games and photo collections.">
+						<div class="device-container">
+							<div class="device video-wrapper idle loading-empty">
+								<div class="room-screen room-screen-tv-app wipe-item-container room-screen-content screen-tab-home-new">
+									<picture id="overview-rooms-screen-tv-app-1" class="overview-rooms-screen-tv-app room-screen room-screen-content wipe-item" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+								<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+										<source srcset="StreamBox_files/screen_tv_app__dm7wdenhzb0i_small_PAEI.jpg 1x, StreamBox_files/screen_tv_app__dm7wdenhzb0i_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/screen_tv_app__dm7wdenhzb0i_medium_PAEI.jpg 1x, StreamBox_files/screen_tv_app__dm7wdenhzb0i_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/screen_tv_app__dm7wdenhzb0i_large_PAEI.jpg 1x, StreamBox_files/screen_tv_app__dm7wdenhzb0i_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/screen_tv_app__dm7wdenhzb0i_large_PAEI.jpg" onload="__lp(event)" alt="">
+									</picture>
+									<noscript>
+					<picture class="overview-rooms-screen-tv-app-startframe room-screen room-screen-content wipe-item">
+						<source srcset="StreamBox_files/screen_tv_app__dm7wdenhzb0i_small_PAEI.jpg, StreamBox_files/screen_tv_app__dm7wdenhzb0i_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/screen_tv_app__dm7wdenhzb0i_medium_PAEI.jpg, StreamBox_files/screen_tv_app__dm7wdenhzb0i_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/screen_tv_app__dm7wdenhzb0i_large_PAEI.jpg, StreamBox_files/screen_tv_app__dm7wdenhzb0i_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/screen_tv_app__dm7wdenhzb0i_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+								</div>
+								<div class="room-screen room-screen-tv-plus wipe-item-container room-screen-content idle loading-empty" data-analytics-activitymap-region-id="streambox player">
+							
+							
+						</div>
+								<div class="room-screen room-screen-insight wipe-item-container room-screen-content">
+									<picture id="overview-rooms-screen-insight-1" class="overview-rooms-screen-insight room-screen room-screen-content wipe-item" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+										<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+										<source srcset="StreamBox_files/screen_insight__gltkr8q637iq_small_PAEI.jpg 1x, StreamBox_files/screen_insight__gltkr8q637iq_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/screen_insight__gltkr8q637iq_medium_PAEI.jpg 1x, StreamBox_files/screen_insight__gltkr8q637iq_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/screen_insight__gltkr8q637iq_large_PAEI.jpg 1x, StreamBox_files/screen_insight__gltkr8q637iq_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/screen_insight__gltkr8q637iq_large_PAEI.jpg" onload="__lp(event)" alt="">
+									</picture>
+									<noscript>
+					<picture class="overview-rooms-screen-insight room-screen room-screen-content wipe-item">
+						<source srcset="StreamBox_files/screen_insight__gltkr8q637iq_small_PAEI.jpg, StreamBox_files/screen_insight__gltkr8q637iq_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/screen_insight__gltkr8q637iq_medium_PAEI.jpg, StreamBox_files/screen_insight__gltkr8q637iq_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/screen_insight__gltkr8q637iq_large_PAEI.jpg, StreamBox_files/screen_insight__gltkr8q637iq_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/screen_insight__gltkr8q637iq_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+						</div>
+						<div class="room-screen room-screen-fitness-plus wipe-item-container room-screen-content idle loading-empty" style="transform: matrix(1, 0, 0, 0, 0, 0);">
+									
+								</div>
+								<div class="room-screen room-screen-apple-music wipe-item-container room-screen-content idle loading-empty" style="transform: matrix(1, 0, 0, 0, 0, 0);">
+									
+						</div>
+						<div class="room-screen room-screen-apple-arcade wipe-item-container room-screen-content idle loading-empty" style="transform: matrix(1, 0, 0, 0, 0, 0);">
+									
+						</div>
+						<div class="room-screen room-screen-photos wipe-item-container room-screen-content" style="transform: matrix(1, 0, 0, 0, 0, 0);">
+									<picture id="overview-rooms-screen-photos-1" class="overview-rooms-screen-photos room-screen room-screen-content wipe-item" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+										<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+										<source srcset="StreamBox_files/screen_photos__e7t2xddk2dei_small_PAEI.jpg 1x, StreamBox_files/screen_photos__e7t2xddk2dei_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/screen_photos__e7t2xddk2dei_medium_PAEI.jpg 1x, StreamBox_files/screen_photos__e7t2xddk2dei_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/screen_photos__e7t2xddk2dei_large_PAEI.jpg 1x, StreamBox_files/screen_photos__e7t2xddk2dei_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/screen_photos__e7t2xddk2dei_large_PAEI.jpg" onload="__lp(event)" alt="">
+									</picture>
+									<noscript>
+					<picture class="overview-rooms-screen-photos room-screen room-screen-content wipe-item">
+						<source srcset="StreamBox_files/screen_photos__e7t2xddk2dei_small_PAEI.jpg, StreamBox_files/screen_photos__e7t2xddk2dei_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/screen_photos__e7t2xddk2dei_medium_PAEI.jpg, StreamBox_files/screen_photos__e7t2xddk2dei_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/screen_photos__e7t2xddk2dei_large_PAEI.jpg, StreamBox_files/screen_photos__e7t2xddk2dei_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/screen_photos__e7t2xddk2dei_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+								</div>
+								<div class="room-screen room-screen-screen-savers wipe-item-container room-screen-content idle loading-empty" style="transform: matrix(1, 0, 0, 0, 0, 0);">
+									
+									
+								</div>
+								<picture id="overview-shared-tv-hardware-1" class="overview-shared-tv-hardware room-screen room-screen-hardware" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;10px&quot;}">
+									<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+									<source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_small_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_small_2x_PAEI.png 2x" media="(max-width:734px)"><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_medium_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_large_2x_PAEI.png 2x" media="(min-width:0px)"><img src="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png" onload="__lp(event)" alt="">
+								</picture>
+								<noscript>
+					<picture class="overview-shared-tv-hardware room-screen room-screen-hardware">
+						<source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_small_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_small_2x_PAEI.png 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_medium_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_large_2x_PAEI.png 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png" alt>
+					</picture>
+				</noscript>
+								
+							</div>
+						</div>
+						<div class="rooms">
+							<div class="room room-tv-app" data-analytics-section-engagement="name:streambox app">
+								<div class="section-content">
+									<div class="icon-text-wrapper" data-focus-expression="{&quot;expression&quot;: &quot;css(--vo-scroll)&quot;}" tabindex="-1">
+										<picture id="overview-entertainment-apple-tv-app-1" class="overview-entertainment-apple-tv-app icon-eyebrow" data-lazy="">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/apple_tv_app__d6nd1841aiie_small_PAEI.png 1x, StreamBox_files/apple_tv_app__d6nd1841aiie_small_2x_PAEI.png 2x" media="(max-width:734px)"><source srcset="StreamBox_files/apple_tv_app__d6nd1841aiie_medium_PAEI.png 1x, StreamBox_files/apple_tv_app__d6nd1841aiie_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/apple_tv_app__d6nd1841aiie_large_PAEI.png 1x, StreamBox_files/apple_tv_app__d6nd1841aiie_large_2x_PAEI.png 2x" media="(min-width:0px)"><img src="StreamBox_files/apple_tv_app__d6nd1841aiie_large_PAEI.png" onload="__lp(event)" alt="Kodi logo">
+										</picture>
+										<noscript>
+					<picture class="overview-entertainment-apple-tv-app icon-eyebrow">
+						<source srcset="StreamBox_files/apple_tv_app__d6nd1841aiie_small_PAEI.png, StreamBox_files/apple_tv_app__d6nd1841aiie_small_2x_PAEI.png 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/apple_tv_app__d6nd1841aiie_medium_PAEI.png, StreamBox_files/apple_tv_app__d6nd1841aiie_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/apple_tv_app__d6nd1841aiie_large_PAEI.png, StreamBox_files/apple_tv_app__d6nd1841aiie_large_2x_PAEI.png 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/apple_tv_app__d6nd1841aiie_large_PAEI.png" alt="Kodi logo">
+					</picture>
+				</noscript>
+										<p class="typography-rooms-copy room-copy">
+											<strong>Kodi.</strong> One app for your whole media life. Play films, TV shows, music and photos from a USB drive or your home network, with rich artwork, trailers and ratings fetched automatically. Stream catch&#8209;up TV from the BBC, ITVX and more, and install add&#8209;ons for YouTube, internet radio and podcasts.</p>
+									</div>
+									<div class="room-screen-wrapper">
+										<picture id="overview-rooms-screen-tv-app-startframe-2" class="overview-rooms-screen-tv-app-startframe room-screen room-screen-content" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/screen_tv_app__dm7wdenhzb0i_small_PAEI.jpg 1x, StreamBox_files/screen_tv_app__dm7wdenhzb0i_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/screen_tv_app__dm7wdenhzb0i_medium_PAEI.jpg 1x, StreamBox_files/screen_tv_app__dm7wdenhzb0i_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/screen_tv_app__dm7wdenhzb0i_large_PAEI.jpg 1x, StreamBox_files/screen_tv_app__dm7wdenhzb0i_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/screen_tv_app__dm7wdenhzb0i_large_PAEI.jpg" onload="__lp(event)" alt="">
+										</picture>
+										<noscript>
+					<picture class="overview-rooms-screen-tv-app room-screen room-screen-content">
+						<source srcset="StreamBox_files/screen_tv_app__dm7wdenhzb0i_small_PAEI.jpg, StreamBox_files/screen_tv_app__dm7wdenhzb0i_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/screen_tv_app__dm7wdenhzb0i_medium_PAEI.jpg, StreamBox_files/screen_tv_app__dm7wdenhzb0i_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/screen_tv_app__dm7wdenhzb0i_large_PAEI.jpg, StreamBox_files/screen_tv_app__dm7wdenhzb0i_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/screen_tv_app__dm7wdenhzb0i_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+										<picture id="overview-shared-tv-hardware-2" class="overview-shared-tv-hardware room-screen room-screen-hardware" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_small_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_small_2x_PAEI.png 2x" media="(max-width:734px)"><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_medium_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_large_2x_PAEI.png 2x" media="(min-width:0px)"><img src="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png" onload="__lp(event)" alt="TV frame">
+										</picture>
+										<noscript>
+					<picture class="overview-shared-tv-hardware room-screen room-screen-hardware">
+						<source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_small_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_small_2x_PAEI.png 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_medium_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_large_2x_PAEI.png 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png" alt="TV frame">
+					</picture>
+				</noscript>
+									</div>
+								</div>
+							</div>
+							<div class="room room-tv-plus" data-analytics-section-engagement="name:streambox">
+								<div class="section-content">
+									<div class="icon-text-wrapper" data-focus-expression="{&quot;expression&quot;: &quot;css(--vo-scroll)&quot;}" tabindex="-1">
+										<picture id="overview-rooms-app-apple-tv-1" class="overview-rooms-app-apple-tv icon-eyebrow" data-lazy="">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/app_apple_tv__e8oa2gt87my6_small_PAEI.png 1x, StreamBox_files/app_apple_tv__e8oa2gt87my6_small_2x_PAEI.png 2x" media="(max-width:734px)"><source srcset="StreamBox_files/app_apple_tv__e8oa2gt87my6_medium_PAEI.png 1x, StreamBox_files/app_apple_tv__e8oa2gt87my6_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/app_apple_tv__e8oa2gt87my6_large_PAEI.png 1x, StreamBox_files/app_apple_tv__e8oa2gt87my6_large_2x_PAEI.png 2x" media="(min-width:0px)"><img src="StreamBox_files/app_apple_tv__e8oa2gt87my6_large_PAEI.png" onload="__lp(event)" alt="StreamBox logo">
+										</picture>
+										<noscript>
+					<picture class="overview-rooms-app-apple-tv icon-eyebrow">
+						<source srcset="StreamBox_files/app_apple_tv__e8oa2gt87my6_small_PAEI.png, StreamBox_files/app_apple_tv__e8oa2gt87my6_small_2x_PAEI.png 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/app_apple_tv__e8oa2gt87my6_medium_PAEI.png, StreamBox_files/app_apple_tv__e8oa2gt87my6_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/app_apple_tv__e8oa2gt87my6_large_PAEI.png, StreamBox_files/app_apple_tv__e8oa2gt87my6_large_2x_PAEI.png 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/app_apple_tv__e8oa2gt87my6_large_PAEI.png" alt="StreamBox logo">
+					</picture>
+				</noscript>
+										<p class="typography-rooms-copy room-copy">
+											<strong>Your library.</strong> Kodi organises your own movies and shows with posters, fanart, cast lists and ratings scraped automatically &mdash; so your collection looks like a proper streaming service.</p>
+										<a href="#overview" data-analytics-title="learn more about streambox" aria-label="Learn more about StreamBox" class="icon-wrapper typography-rooms-copy"><span class="icon-copy">Learn more</span><span class="icon icon-after more"></span></a>
+									</div>
+									<div class="room-screen-wrapper">
+										<picture id="overview-rooms-tv-plus-startframe-1" class="overview-rooms-tv-plus-startframe room-screen room-screen-content" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/tv-plus_startframe__bl4d4kyyf4nm_small_PAEI.jpg 1x, StreamBox_files/tv-plus_startframe__bl4d4kyyf4nm_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/tv-plus_startframe__bl4d4kyyf4nm_medium_PAEI.jpg 1x, StreamBox_files/tv-plus_startframe__bl4d4kyyf4nm_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/tv-plus_startframe__bl4d4kyyf4nm_large_PAEI.jpg 1x, StreamBox_files/tv-plus_startframe__bl4d4kyyf4nm_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/tv-plus_startframe__bl4d4kyyf4nm_large_PAEI.jpg" onload="__lp(event)" alt="A TV series in the media library">
+										</picture>
+										<noscript>
+					<picture class="overview-rooms-tv-plus-startframe room-screen room-screen-content">
+						<source srcset="StreamBox_files/tv-plus_startframe__bl4d4kyyf4nm_small_PAEI.jpg, StreamBox_files/tv-plus_startframe__bl4d4kyyf4nm_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/tv-plus_startframe__bl4d4kyyf4nm_medium_PAEI.jpg, StreamBox_files/tv-plus_startframe__bl4d4kyyf4nm_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/tv-plus_startframe__bl4d4kyyf4nm_large_PAEI.jpg, StreamBox_files/tv-plus_startframe__bl4d4kyyf4nm_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/tv-plus_startframe__bl4d4kyyf4nm_large_PAEI.jpg" alt="A TV series in the media library">
+					</picture>
+				</noscript>
+										<picture id="overview-shared-tv-hardware-3" class="overview-shared-tv-hardware room-screen room-screen-hardware" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_small_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_small_2x_PAEI.png 2x" media="(max-width:734px)"><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_medium_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_large_2x_PAEI.png 2x" media="(min-width:0px)"><img src="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png" onload="__lp(event)" alt="TV frame">
+										</picture>
+										<noscript>
+					<picture class="overview-shared-tv-hardware room-screen room-screen-hardware">
+						<source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_small_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_small_2x_PAEI.png 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_medium_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_large_2x_PAEI.png 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png" alt="TV frame">
+					</picture>
+				</noscript>
+								
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="room room-insight" data-analytics-section-engagement="name:insight">
+								<div class="section-content">
+									<div class="icon-text-wrapper" data-focus-expression="{&quot;expression&quot;: &quot;css(--vo-scroll)&quot;}" tabindex="-1">
+										<p class="typography-rooms-copy room-copy">
+											<strong>Details while you watch.</strong> Pause a film to see the full cast list, the scene, the soundtrack and a plot summary &mdash; everything Kodi knows about your titles, one click away.</p>
+										
+									</div>
+									<div class="room-screen-wrapper">
+										<picture id="overview-rooms-screen-insight-2" class="overview-rooms-screen-insight room-screen room-screen-content" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/screen_insight__gltkr8q637iq_small_PAEI.jpg 1x, StreamBox_files/screen_insight__gltkr8q637iq_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/screen_insight__gltkr8q637iq_medium_PAEI.jpg 1x, StreamBox_files/screen_insight__gltkr8q637iq_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/screen_insight__gltkr8q637iq_large_PAEI.jpg 1x, StreamBox_files/screen_insight__gltkr8q637iq_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/screen_insight__gltkr8q637iq_large_PAEI.jpg" onload="__lp(event)" alt="">
+										</picture>
+										<noscript>
+					<picture class="overview-rooms-screen-insight room-screen room-screen-content">
+						<source srcset="StreamBox_files/screen_insight__gltkr8q637iq_small_PAEI.jpg, StreamBox_files/screen_insight__gltkr8q637iq_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/screen_insight__gltkr8q637iq_medium_PAEI.jpg, StreamBox_files/screen_insight__gltkr8q637iq_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/screen_insight__gltkr8q637iq_large_PAEI.jpg, StreamBox_files/screen_insight__gltkr8q637iq_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/screen_insight__gltkr8q637iq_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+										<picture id="overview-shared-tv-hardware-4" class="overview-shared-tv-hardware room-screen room-screen-hardware" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_small_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_small_2x_PAEI.png 2x" media="(max-width:734px)"><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_medium_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_large_2x_PAEI.png 2x" media="(min-width:0px)"><img src="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png" onload="__lp(event)" alt="TV frame">
+										</picture>
+										<noscript>
+					<picture class="overview-shared-tv-hardware room-screen room-screen-hardware">
+						<source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_small_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_small_2x_PAEI.png 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_medium_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_large_2x_PAEI.png 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png" alt="TV frame">
+					</picture>
+				</noscript>
+									</div>
+								</div>
+							</div>
+							<div id="fitness" class="room room-fitness-plus" data-analytics-section-engagement="name:fitness+ rooms">
+								<div class="section-content">
+									<div class="icon-text-wrapper" data-focus-expression="{&quot;expression&quot;: &quot;css(--vo-scroll)&quot;}" tabindex="-1">
+										<picture id="overview-rooms-apple-fitness-app-1" class="overview-rooms-apple-fitness-app icon-eyebrow" data-lazy="">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/apple_fitness_app__f9n54te6kw2m_small_PAEI.png 1x, StreamBox_files/apple_fitness_app__f9n54te6kw2m_small_2x_PAEI.png 2x" media="(max-width:734px)"><source srcset="StreamBox_files/apple_fitness_app__f9n54te6kw2m_medium_PAEI.png 1x, StreamBox_files/apple_fitness_app__f9n54te6kw2m_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/apple_fitness_app__f9n54te6kw2m_large_PAEI.png 1x, StreamBox_files/apple_fitness_app__f9n54te6kw2m_large_2x_PAEI.png 2x" media="(min-width:0px)"><img src="StreamBox_files/apple_fitness_app__f9n54te6kw2m_large_PAEI.png" onload="__lp(event)" alt="Live TV">
+										</picture>
+										<noscript>
+					<picture class="overview-rooms-apple-fitness-app icon-eyebrow">
+						<source srcset="StreamBox_files/apple_fitness_app__f9n54te6kw2m_small_PAEI.png, StreamBox_files/apple_fitness_app__f9n54te6kw2m_small_2x_PAEI.png 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/apple_fitness_app__f9n54te6kw2m_medium_PAEI.png, StreamBox_files/apple_fitness_app__f9n54te6kw2m_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/apple_fitness_app__f9n54te6kw2m_large_PAEI.png, StreamBox_files/apple_fitness_app__f9n54te6kw2m_large_2x_PAEI.png 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/apple_fitness_app__f9n54te6kw2m_large_PAEI.png" alt="Live TV">
+					</picture>
+				</noscript>
+										<p class="typography-rooms-copy room-copy">
+											<strong>Live TV.</strong> Plug a USB TV tuner into the USB&nbsp;3.0 port and watch free&#8209;to&#8209;air channels with an electronic programme guide. Or add IPTV and internet radio playlists from the add&#8209;on store.</p>
+										<a href="#fitness" data-analytics-title="learn more about apple fitness+" aria-label="Learn more about StreamBox Fitness Plus" class="icon-wrapper typography-rooms-copy"><span class="icon-copy">Learn more</span><span class="icon icon-after more"></span></a>
+										
+									</div>
+									<div class="room-screen-wrapper">
+										<picture id="overview-rooms-screen-fitness-startframe-1" class="overview-rooms-screen-fitness-startframe room-screen room-screen-content" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/screen_fitness__ca871c3jbsya_small_PAEI.jpg 1x, StreamBox_files/screen_fitness__ca871c3jbsya_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/screen_fitness__ca871c3jbsya_medium_PAEI.jpg 1x, StreamBox_files/screen_fitness__ca871c3jbsya_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/screen_fitness__ca871c3jbsya_large_PAEI.jpg 1x, StreamBox_files/screen_fitness__ca871c3jbsya_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/screen_fitness__ca871c3jbsya_large_PAEI.jpg" onload="__lp(event)" alt="">
+										</picture>
+										<noscript>
+					<picture class="overview-rooms-screen-fitness room-screen room-screen-content">
+						<source srcset="StreamBox_files/screen_fitness__ca871c3jbsya_small_PAEI.jpg, StreamBox_files/screen_fitness__ca871c3jbsya_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/screen_fitness__ca871c3jbsya_medium_PAEI.jpg, StreamBox_files/screen_fitness__ca871c3jbsya_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/screen_fitness__ca871c3jbsya_large_PAEI.jpg, StreamBox_files/screen_fitness__ca871c3jbsya_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/screen_fitness__ca871c3jbsya_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+										<picture id="overview-shared-tv-hardware-5" class="overview-shared-tv-hardware room-screen room-screen-hardware" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_small_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_small_2x_PAEI.png 2x" media="(max-width:734px)"><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_medium_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_large_2x_PAEI.png 2x" media="(min-width:0px)"><img src="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png" onload="__lp(event)" alt="TV frame">
+										</picture>
+										<noscript>
+					<picture class="overview-shared-tv-hardware room-screen room-screen-hardware">
+						<source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_small_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_small_2x_PAEI.png 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_medium_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_large_2x_PAEI.png 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png" alt="TV frame">
+					</picture>
+				</noscript>
+									</div>
+								</div>
+							</div>
+							<div id="music" class="room room-apple-music" data-analytics-section-engagement="name:apple music rooms">
+								<div class="section-content">
+									<div class="icon-text-wrapper" data-focus-expression="{&quot;expression&quot;: &quot;css(--vo-scroll)&quot;}" tabindex="-1">
+										<picture id="overview-rooms-apple-music-app-1" class="overview-rooms-apple-music-app icon-eyebrow" data-lazy="">
+									<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+									<source srcset="StreamBox_files/apple_music_app__dq9y5etz3zcm_small_PAEI.png 1x, StreamBox_files/apple_music_app__dq9y5etz3zcm_small_2x_PAEI.png 2x" media="(max-width:734px)"><source srcset="StreamBox_files/apple_music_app__dq9y5etz3zcm_medium_PAEI.png 1x, StreamBox_files/apple_music_app__dq9y5etz3zcm_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/apple_music_app__dq9y5etz3zcm_large_PAEI.png 1x, StreamBox_files/apple_music_app__dq9y5etz3zcm_large_2x_PAEI.png 2x" media="(min-width:0px)"><img src="StreamBox_files/apple_music_app__dq9y5etz3zcm_large_PAEI.png" onload="__lp(event)">
+								</picture>
+								<noscript>
+					<picture class="overview-rooms-apple-music-app icon-eyebrow">
+						<source srcset="StreamBox_files/apple_music_app__dq9y5etz3zcm_small_PAEI.png, StreamBox_files/apple_music_app__dq9y5etz3zcm_small_2x_PAEI.png 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/apple_music_app__dq9y5etz3zcm_medium_PAEI.png, StreamBox_files/apple_music_app__dq9y5etz3zcm_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/apple_music_app__dq9y5etz3zcm_large_PAEI.png, StreamBox_files/apple_music_app__dq9y5etz3zcm_large_2x_PAEI.png 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/apple_music_app__dq9y5etz3zcm_large_PAEI.png">
+					</picture>
+				</noscript>
+								<p class="typography-rooms-copy room-copy">
+									<strong>Music.</strong> Play your own collection &mdash; MP3, FLAC, ALAC and more &mdash; with full album artwork and gapless playback, or stream internet radio stations and podcasts from the add&#8209;on store.</p>
+										<a href="#music" data-analytics-title="learn more about apple music" aria-label="Learn more about StreamBox Music" class="icon-wrapper typography-rooms-copy"><span class="icon-copy">Learn more</span><span class="icon icon-after more"></span></a>
+									</div>
+									<div class="room-screen-wrapper">
+								<picture id="overview-rooms-screen-music-1" class="overview-rooms-screen-music room-screen room-screen-content" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+									<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+									<source srcset="StreamBox_files/screen_music__ggo4ihn7xka6_small_PAEI.jpg 1x, StreamBox_files/screen_music__ggo4ihn7xka6_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/screen_music__ggo4ihn7xka6_medium_PAEI.jpg 1x, StreamBox_files/screen_music__ggo4ihn7xka6_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/screen_music__ggo4ihn7xka6_large_PAEI.jpg 1x, StreamBox_files/screen_music__ggo4ihn7xka6_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/screen_music__ggo4ihn7xka6_large_PAEI.jpg" onload="__lp(event)" alt="Music library with album artwork">
+								</picture>
+								<noscript>
+					<picture class="overview-rooms-screen-music room-screen room-screen-content">
+						<source srcset="StreamBox_files/screen_music__ggo4ihn7xka6_small_PAEI.jpg, StreamBox_files/screen_music__ggo4ihn7xka6_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/screen_music__ggo4ihn7xka6_medium_PAEI.jpg, StreamBox_files/screen_music__ggo4ihn7xka6_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/screen_music__ggo4ihn7xka6_large_PAEI.jpg, StreamBox_files/screen_music__ggo4ihn7xka6_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/screen_music__ggo4ihn7xka6_large_PAEI.jpg" alt="Music library with album artwork">
+					</picture>
+				</noscript>
+								<picture id="overview-shared-tv-hardware-6" class="overview-shared-tv-hardware room-screen room-screen-hardware" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+									<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+									<source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_small_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_small_2x_PAEI.png 2x" media="(max-width:734px)"><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_medium_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_large_2x_PAEI.png 2x" media="(min-width:0px)"><img src="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png" onload="__lp(event)">
+								</picture>
+								<noscript>
+					<picture class="overview-shared-tv-hardware room-screen room-screen-hardware">
+						<source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_small_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_small_2x_PAEI.png 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_medium_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_large_2x_PAEI.png 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png">
+					</picture>
+				</noscript>
+							</div>
+								</div>
+							</div>
+							<div id="arcade" class="room room-apple-arcade" data-analytics-section-engagement="name:apple arcade rooms">
+								<div class="section-content">
+									<div class="icon-text-wrapper" data-focus-expression="{&quot;expression&quot;: &quot;css(--vo-scroll)&quot;}" tabindex="-1">
+										<picture id="overview-rooms-apple-arcade-app-1" class="overview-rooms-apple-arcade-app icon-eyebrow" data-lazy="">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/apple_arcade_app__bpy1osgcepv6_small_PAEI.png 1x, StreamBox_files/apple_arcade_app__bpy1osgcepv6_small_2x_PAEI.png 2x" media="(max-width:734px)"><source srcset="StreamBox_files/apple_arcade_app__bpy1osgcepv6_medium_PAEI.png 1x, StreamBox_files/apple_arcade_app__bpy1osgcepv6_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/apple_arcade_app__bpy1osgcepv6_large_PAEI.png 1x, StreamBox_files/apple_arcade_app__bpy1osgcepv6_large_2x_PAEI.png 2x" media="(min-width:0px)"><img src="StreamBox_files/apple_arcade_app__bpy1osgcepv6_large_PAEI.png" onload="__lp(event)" alt="Games">
+										</picture>
+										<noscript>
+					<picture class="overview-rooms-apple-arcade-app icon-eyebrow">
+						<source srcset="StreamBox_files/apple_arcade_app__bpy1osgcepv6_small_PAEI.png, StreamBox_files/apple_arcade_app__bpy1osgcepv6_small_2x_PAEI.png 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/apple_arcade_app__bpy1osgcepv6_medium_PAEI.png, StreamBox_files/apple_arcade_app__bpy1osgcepv6_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/apple_arcade_app__bpy1osgcepv6_large_PAEI.png, StreamBox_files/apple_arcade_app__bpy1osgcepv6_large_2x_PAEI.png 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/apple_arcade_app__bpy1osgcepv6_large_PAEI.png" alt="Games">
+					</picture>
+				</noscript>
+										<p class="typography-rooms-copy room-copy">
+											<strong>Games.</strong> The Pi&nbsp;5 is no slouch &mdash; pair a Bluetooth controller and play retro classics through emulation, or stream games from your PC to the big screen.</p>
+										<a href="#arcade" data-analytics-title="learn more about apple arcade" aria-label="Learn more about StreamBox Arcade" class="icon-wrapper typography-rooms-copy"><span class="icon-copy">Learn more</span><span class="icon icon-after more"></span></a>
+									</div>
+									<div class="room-screen-wrapper">
+										<picture id="overview-rooms-screen-arcade-startframe-1" class="overview-rooms-screen-arcade-startframe room-screen room-screen-content" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/screen_arcade__ep47apforssy_small_PAEI.jpg 1x, StreamBox_files/screen_arcade__ep47apforssy_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/screen_arcade__ep47apforssy_medium_PAEI.jpg 1x, StreamBox_files/screen_arcade__ep47apforssy_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/screen_arcade__ep47apforssy_large_PAEI.jpg 1x, StreamBox_files/screen_arcade__ep47apforssy_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/screen_arcade__ep47apforssy_large_PAEI.jpg" onload="__lp(event)" alt="">
+										</picture>
+										<noscript>
+					<picture class="overview-rooms-screen-arcade room-screen room-screen-content">
+						<source srcset="StreamBox_files/screen_arcade__ep47apforssy_small_PAEI.jpg, StreamBox_files/screen_arcade__ep47apforssy_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/screen_arcade__ep47apforssy_medium_PAEI.jpg, StreamBox_files/screen_arcade__ep47apforssy_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/screen_arcade__ep47apforssy_large_PAEI.jpg, StreamBox_files/screen_arcade__ep47apforssy_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/screen_arcade__ep47apforssy_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+										<picture id="overview-shared-tv-hardware-8" class="overview-shared-tv-hardware room-screen room-screen-hardware" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_small_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_small_2x_PAEI.png 2x" media="(max-width:734px)"><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_medium_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_large_2x_PAEI.png 2x" media="(min-width:0px)"><img src="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png" onload="__lp(event)" alt="TV frame">
+										</picture>
+										<noscript>
+					<picture class="overview-shared-tv-hardware room-screen room-screen-hardware">
+						<source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_small_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_small_2x_PAEI.png 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_medium_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_large_2x_PAEI.png 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png" alt="TV frame">
+					</picture>
+				</noscript>
+									</div>
+								</div>
+							</div>
+							<div id="cloud" class="room room-photos" data-analytics-section-engagement="name:photos rooms">
+								<div class="section-content">
+									<div class="icon-text-wrapper" data-focus-expression="{&quot;expression&quot;: &quot;css(--vo-scroll)&quot;}" tabindex="-1">
+										<picture id="overview-rooms-photos-app-1" class="overview-rooms-photos-app icon-eyebrow" data-lazy="">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/photos_app__b3olup33x76u_small_PAEI.png 1x, StreamBox_files/photos_app__b3olup33x76u_small_2x_PAEI.png 2x" media="(max-width:734px)"><source srcset="StreamBox_files/photos_app__b3olup33x76u_medium_PAEI.png 1x, StreamBox_files/photos_app__b3olup33x76u_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/photos_app__b3olup33x76u_large_PAEI.png 1x, StreamBox_files/photos_app__b3olup33x76u_large_2x_PAEI.png 2x" media="(min-width:0px)"><img src="StreamBox_files/photos_app__b3olup33x76u_large_PAEI.png" onload="__lp(event)" alt="Photos">
+										</picture>
+										<noscript>
+					<picture class="overview-rooms-photos-app icon-eyebrow">
+						<source srcset="StreamBox_files/photos_app__b3olup33x76u_small_PAEI.png, StreamBox_files/photos_app__b3olup33x76u_small_2x_PAEI.png 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/photos_app__b3olup33x76u_medium_PAEI.png, StreamBox_files/photos_app__b3olup33x76u_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/photos_app__b3olup33x76u_large_PAEI.png, StreamBox_files/photos_app__b3olup33x76u_large_2x_PAEI.png 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/photos_app__b3olup33x76u_large_PAEI.png" alt="Photos">
+					</picture>
+				</noscript>
+										<p class="typography-rooms-copy room-copy">
+											<strong>Photos &amp; videos.</strong> Your holiday photos, home movies and wedding videos from a USB drive or network share, on the biggest screen in the house.</p>
+										<a href="#cloud" data-analytics-title="learn more about photos" aria-label="Learn more about your photo library" class="icon-wrapper typography-rooms-copy"><span class="icon-copy">Learn more about your photo&nbsp;library</span><span class="icon icon-after more"></span></a>
+									</div>
+									<div class="room-screen-wrapper">
+										<picture id="overview-rooms-screen-photos-2" class="overview-rooms-screen-photos room-screen room-screen-content" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/screen_photos__e7t2xddk2dei_small_PAEI.jpg 1x, StreamBox_files/screen_photos__e7t2xddk2dei_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/screen_photos__e7t2xddk2dei_medium_PAEI.jpg 1x, StreamBox_files/screen_photos__e7t2xddk2dei_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/screen_photos__e7t2xddk2dei_large_PAEI.jpg 1x, StreamBox_files/screen_photos__e7t2xddk2dei_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/screen_photos__e7t2xddk2dei_large_PAEI.jpg" onload="__lp(event)" alt="">
+										</picture>
+										<noscript>
+					<picture class="overview-rooms-screen-photos room-screen room-screen-content">
+						<source srcset="StreamBox_files/screen_photos__e7t2xddk2dei_small_PAEI.jpg, StreamBox_files/screen_photos__e7t2xddk2dei_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/screen_photos__e7t2xddk2dei_medium_PAEI.jpg, StreamBox_files/screen_photos__e7t2xddk2dei_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/screen_photos__e7t2xddk2dei_large_PAEI.jpg, StreamBox_files/screen_photos__e7t2xddk2dei_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/screen_photos__e7t2xddk2dei_large_PAEI.jpg" alt>
+					</picture>
+				</noscript>
+										<picture id="overview-shared-tv-hardware-8" class="overview-shared-tv-hardware room-screen room-screen-hardware" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_small_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_small_2x_PAEI.png 2x" media="(max-width:734px)"><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_medium_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_large_2x_PAEI.png 2x" media="(min-width:0px)"><img src="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png" onload="__lp(event)" alt="TV frame">
+										</picture>
+										<noscript>
+					<picture class="overview-shared-tv-hardware room-screen room-screen-hardware">
+						<source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_small_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_small_2x_PAEI.png 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_medium_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_large_2x_PAEI.png 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png" alt="TV frame">
+					</picture>
+				</noscript>
+									</div>
+								</div>
+							</div>
+							<div class="room room-screen-savers" data-analytics-section-engagement="name:screen savers">
+								<div class="section-content">
+									<div class="icon-text-wrapper" data-focus-expression="{&quot;expression&quot;: &quot;css(--vo-scroll)&quot;}" tabindex="-1">
+										<p class="typography-rooms-copy room-copy">
+									<strong>Screen savers.</strong> Kodi ships with a collection of ambient screen savers &mdash; or show your own photos as a slow, elegant slideshow when nothing’s playing.</p>
+									</div>
+									<div class="room-screen-wrapper">
+								<picture id="overview-rooms-screensavers-startframe-1" class="overview-rooms-screensavers-startframe room-screen room-screen-content" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+									<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+									<source srcset="StreamBox_files/screensavers_startframe__srfjat2a5fu6_small_PAEI.jpg 1x, StreamBox_files/screensavers_startframe__srfjat2a5fu6_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/screensavers_startframe__srfjat2a5fu6_medium_PAEI.jpg 1x, StreamBox_files/screensavers_startframe__srfjat2a5fu6_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/screensavers_startframe__srfjat2a5fu6_large_PAEI.jpg 1x, StreamBox_files/screensavers_startframe__srfjat2a5fu6_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/screensavers_startframe__srfjat2a5fu6_large_PAEI.jpg" onload="__lp(event)" alt="Screen Savers">
+								</picture>
+								<noscript>
+					<picture class="overview-rooms-screensavers-startframe room-screen room-screen-content">
+						<source srcset="StreamBox_files/screensavers_startframe__srfjat2a5fu6_small_PAEI.jpg, StreamBox_files/screensavers_startframe__srfjat2a5fu6_small_2x_PAEI.jpg 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/screensavers_startframe__srfjat2a5fu6_medium_PAEI.jpg, StreamBox_files/screensavers_startframe__srfjat2a5fu6_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/screensavers_startframe__srfjat2a5fu6_large_PAEI.jpg, StreamBox_files/screensavers_startframe__srfjat2a5fu6_large_2x_PAEI.jpg 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/screensavers_startframe__srfjat2a5fu6_large_PAEI.jpg" alt="Screen Savers">
+					</picture>
+				</noscript>
+								<picture id="overview-shared-tv-hardware-9" class="overview-shared-tv-hardware room-screen room-screen-hardware" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 200vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-rooms&quot;]}">
+									<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+									<source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_small_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_small_2x_PAEI.png 2x" media="(max-width:734px)"><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_medium_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png 1x, StreamBox_files/tv_hardware__fblhzdebxg6e_large_2x_PAEI.png 2x" media="(min-width:0px)"><img src="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png" onload="__lp(event)" alt="TV frame">
+								</picture>
+								<noscript>
+					<picture class="overview-shared-tv-hardware room-screen room-screen-hardware">
+						<source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_small_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_small_2x_PAEI.png 2x" media="(max-width:734px)" /><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_medium_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)" /><source srcset="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png, StreamBox_files/tv_hardware__fblhzdebxg6e_large_2x_PAEI.png 2x" media="(min-width:0px)" />
+						<img src="StreamBox_files/tv_hardware__fblhzdebxg6e_large_PAEI.png" alt="TV frame">
+					</picture>
+				</noscript>
+							</div>
+								</div>
+							</div>
+				</section>
+				<section class="section section-facetime" data-anim-scroll-group="Phone Remote" data-analytics-section-engagement="name:phone remote">
+					<div class="facetime-treatment">
+						<div class="section-content">
+							<h3 class="section-headline typography-section-headline large-centered">
+								Your phone is <br>the remote.
+							</h3>
+							<picture id="overview-facetime-facetime-1" class="overview-facetime-facetime image-facetime" data-lazy="">
+								<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+								<source srcset="StreamBox_files/facetime__exrio2z3zuie_small_PAEI.jpg 1x, StreamBox_files/facetime__exrio2z3zuie_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/facetime__exrio2z3zuie_medium_PAEI.jpg 1x, StreamBox_files/facetime__exrio2z3zuie_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/facetime__exrio2z3zuie_large_PAEI.jpg 1x, StreamBox_files/facetime__exrio2z3zuie_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/facetime__exrio2z3zuie_large_PAEI.jpg" onload="__lp(event)" alt="A phone showing the remote control app next to a television">
+							</picture>
+							<p class="section-intro typography-section-intro large-7 medium-10 small-12 large-centered"><strong>Free Kodi remote apps</strong>
+							 for iOS and Android control StreamBox over your own Wi&#8209;Fi network &mdash; touchpad navigation, a full keyboard for search, volume and playlists, and casting from your phone to the TV.</p>
+						</div>
+					</div>
+				</section>
+				<section class="section section-performance" data-anim-scroll-group="Performance" data-analytics-section-engagement="name:performance">
+			<div class="section-content">
+				<div class="section-header section-header-performance large-centered large-10 small-12 small-uncentered">
+					<h2 class="section-eyebrow typography-section-eyebrow">Performance</h2>
+					<h3 class="section-headline typography-section-headline ">
+						4K media, decoded in hardware.
+					</h3>
+					<div class="section-intro-copy large-centered large-8 small-uncentered small-12 typography-section-intro">
+						<p class="performance-copy"><strong class="performance-subhead">Raspberry Pi&nbsp;5.</strong>
+						The quad&#8209;core Arm Cortex&#8209;A76 processor at 2.4&nbsp;GHz and VideoCore&nbsp;VII GPU decode 4K video in hardware &mdash; H.265&nbsp;(HEVC), VP9, H.264 and AV1 &mdash; so playback is smooth, silent and effortless, and the whole box sips a few watts of power.</p>
+					</div>
+				</div>
+			</div>
+			<div class="credenza-copy typography-section-intro">
+				<div class="section-content">
+					<div class="credenza-copy-inner">
+						<div class="row justify-content-center">
+							<div class="column large-6 small-12">
+								<p class="performance-copy"><strong class="performance-subhead">Two 4K displays.</strong> Dual micro&#8209;HDMI ports drive two screens at up to 4K&nbsp;p60 each &mdash; perfect for a living&#8209;room TV and a second screen or projector.</p>
+							</div>
+							<div class="column large-6 small-12">
+								<p class="performance-copy"><strong class="performance-subhead">Sound your way.</strong> Bit&#8209;perfect audio passthrough over HDMI to your soundbar or AV receiver &mdash; including Dolby&nbsp;Digital, DTS and lossless TrueHD when your files carry them &mdash; or wireless audio over Bluetooth&nbsp;5.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+				<section id="voice-remote" class="section section-siri-remote" data-anim-scroll-group="Control" data-analytics-section-engagement="name:control">
+					<div class="section-content">
+						<div class="section-header section-header-siri-remote large-10 large-centered medium-12 small-12">
+							<h2 class="section-eyebrow typography-section-eyebrow">Control</h2>
+							<h3 class="section-headline typography-section-headline ">
+								Control it all from <br class="small">your phone.
+							</h3>
+						</div>
+					</div>
+					<div class="section-content">
+						<div class="siri-remote" data-analytics-section-engagement="name:phone remote">
+							<div class="right-column large-centered small-12 full-calculated-height-small">
+								<div class="remotes-container">
+									<picture id="overview-siri-remote-remote-startframe-1" class="overview-siri-remote-remote-startframe" data-lazy="" data-download-area-keyframe="{&quot;start&quot;:&quot;a0t - 100vh&quot;, &quot;end&quot;:&quot;a0b&quot;, &quot;anchors&quot;:[&quot;.section-siri-remote&quot;]}">
+										<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+										<source srcset="StreamBox_files/remote_startframe__b4o9j8iha5yq_small_PAEI.jpg 1x, StreamBox_files/remote_startframe__b4o9j8iha5yq_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/remote_startframe__b4o9j8iha5yq_medium_PAEI.jpg 1x, StreamBox_files/remote_startframe__b4o9j8iha5yq_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/remote_startframe__b4o9j8iha5yq_large_PAEI.jpg 1x, StreamBox_files/remote_startframe__b4o9j8iha5yq_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/remote_startframe__b4o9j8iha5yq_large_PAEI.jpg" onload="__lp(event)" alt="">
+									</picture>
+								</div>
+							</div>
+							<div class="gestures">
+								<div class="left-column large-4 small-12 text-zoom-fix">
+									<div class="gestures-wrapper">
+										<p class="copy typography-siri-remote-copy" role="text" tabindex="-1"><span>Play, pause, browse, type.</span>
+										Free Kodi remote apps give you a touchpad for navigation, a full on&#8209;screen keyboard for search, and one&#8209;tap access to subtitles, settings and your media library &mdash; all over your own Wi&#8209;Fi network.</p>
+										<p class="copy typography-siri-remote-copy" role="text" tabindex="-1"><span>Works with any TV.</span>
+										StreamBox connects to any HDMI TV. Turn your TV on and off with CEC, and control volume from the app &mdash; or teach the box’s IR receiver to respond to the remote you already own.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="section section-better-together background-alt" data-anim-scroll-group="Control">
+					<div class="section-content">
+						<div class="section-header section-header-better-together ">
+							<h2 class="section-eyebrow typography-section-eyebrow">Control</h2>
+							<h3 class="section-headline typography-section-headline ">
+								Made to fit in <br class="small">your home.
+							</h3>
+						</div>
+						<div class="grid better-together-grid">
+							<div class="grid-item large-span-6 small-span-12">
+								<div class="tile tile-rounded tile-iphone-control" data-analytics-section-engagement="name:phone remote">
+									<div class="tile-content">
+										<div class="tile-copy typography-tile-copy">
+											<p><span class="blue-text">Your phone</span><br> <strong>A remote that’s always with you,</strong>
+											for control that goes beyond the sofa. The free Kodi remote app adds touchpad navigation, playlists and a full keyboard for search &mdash; no line of sight required.</p>
+										</div>
+										<picture id="overview-better-together-iphone-control-1" class="overview-better-together-iphone-control" data-lazy="">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/iphone_control__gneibommwl2e_small_PAEI.jpg 1x, StreamBox_files/iphone_control__gneibommwl2e_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/iphone_control__gneibommwl2e_medium_PAEI.jpg 1x, StreamBox_files/iphone_control__gneibommwl2e_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/iphone_control__gneibommwl2e_large_PAEI.jpg 1x, StreamBox_files/iphone_control__gneibommwl2e_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/iphone_control__gneibommwl2e_large_PAEI.jpg" onload="__lp(event)" alt="A phone showing the remote control app">
+										</picture>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item large-span-6 small-span-12">
+								<div class="tile tile-rounded tile-calibration" data-analytics-section-engagement="name:display settings">
+									<div class="tile-content">
+										<div class="tile-copy typography-tile-copy">
+											<p><span class="blue-text">Display settings</span><br> <strong>Picture your way.</strong>
+											LibreELEC lets you set resolution, refresh rate and colour depth to match your TV &mdash; including 4K at 50/60&nbsp;Hz &mdash; with HDMI audio passthrough switched on in a couple of taps.</p>
+										</div>
+										<picture id="overview-better-together-calibration-apple-tv-1" class="overview-better-together-calibration-apple-tv" data-lazy="">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/calibration_apple_tv__bw6f32t8opma_small_PAEI.jpg 1x, StreamBox_files/calibration_apple_tv__bw6f32t8opma_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/calibration_apple_tv__bw6f32t8opma_medium_PAEI.jpg 1x, StreamBox_files/calibration_apple_tv__bw6f32t8opma_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/calibration_apple_tv__bw6f32t8opma_large_PAEI.jpg 1x, StreamBox_files/calibration_apple_tv__bw6f32t8opma_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/calibration_apple_tv__bw6f32t8opma_large_PAEI.jpg" onload="__lp(event)" alt="A television showing colour bars during calibration">
+										</picture>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item large-span-6 small-span-12">
+								<div class="tile tile-rounded tile-audio-sharing" data-analytics-section-engagement="name:bluetooth audio">
+									<div class="tile-content">
+										<div class="tile-copy typography-tile-copy">
+											<p><span class="blue-text">Bluetooth audio</span><br> <strong>Listen without waking anyone.</strong>
+											Pair your own wireless headphones or a speaker over Bluetooth&nbsp;5 and watch well past someone’s bedtime &mdash; or send the sound to another room.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item large-span-6 small-span-12">
+								<div class="tile tile-rounded tile-siri-airpods" data-analytics-section-engagement="name:open platform">
+									<div class="tile-content">
+										<div class="tile-copy typography-tile-copy">
+											<p><span class="blue-text">Open platform</span><br> <strong>Grow with add-ons,</strong>
+											thousands of Kodi add&#8209;ons add internet video and music, weather, utilities and more &mdash; installed in a few clicks, no account needed.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item large-span-12 small-span-12">
+								<div class="tile tile-rounded tile-shareplay" data-analytics-section-engagement="name:live tv">
+									<div class="tile-content">
+										<div class="tile-copy typography-tile-copy">
+											<p><span class="blue-text">Live TV</span><br> <strong>Watch the world in real time.</strong>
+											Plug a USB TV tuner into the Pi’s USB&nbsp;3.0 port and watch live free&#8209;to&#8209;air channels with a full electronic programme guide &mdash; or add internet TV and radio playlists.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section id="home" class="section section-home-control background-alt" data-anim-scroll-group="Hardware">
+					<div class="section-content">
+						<div class="section-header section-header-home-control ">
+							<h2 class="section-eyebrow typography-section-eyebrow">Hardware</h2>
+							<h3 class="section-headline typography-section-headline ">
+								Powerful inside.<br>Quiet by design.
+							</h3>
+							<p class="section-intro typography-section-intro large-9 large-centered medium-10 small-12">Under the hood is a Raspberry&nbsp;Pi&nbsp;5 with 4GB of RAM, inside a custom&#8209;built case with two whisper&#8209;quiet fans &mdash; running LibreELEC, a purpose&#8209;built operating system tuned for media playback.</p>
+						</div>
+						<div class="grid home-control-grid">
+							<div class="grid-item large-span-12 small-span-12">
+								<div class="tile tile-rounded tile-smart-home-hub" data-analytics-section-engagement="name:raspberry pi 5">
+									<div class="tile-content">
+										<div class="tile-copy typography-tile-copy">
+											<p><span class="blue-text">Raspberry&nbsp;Pi&nbsp;5</span><br> <span class="gray-text">The heart of the box.</span>
+											Everything a media centre needs &mdash; a quad&#8209;core Arm Cortex&#8209;A76 processor at 2.4&nbsp;GHz, 4GB of RAM, dual 4K HDMI output, Gigabit Ethernet, Wi&#8209;Fi&nbsp;5 and Bluetooth&nbsp;5. Plays 4K video from USB drives, a NAS or your home network without breaking a sweat.</p>
+										</div>
+										<picture id="overview-home-control-smart-home-hub-1" class="overview-home-control-smart-home-hub" data-lazy="">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/smart_home_hub__cz2n3396ujsm_small_PAEI.jpg 1x, StreamBox_files/smart_home_hub__cz2n3396ujsm_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/smart_home_hub__cz2n3396ujsm_medium_PAEI.jpg 1x, StreamBox_files/smart_home_hub__cz2n3396ujsm_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/smart_home_hub__cz2n3396ujsm_large_PAEI.jpg 1x, StreamBox_files/smart_home_hub__cz2n3396ujsm_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/smart_home_hub__cz2n3396ujsm_large_PAEI.jpg" onload="__lp(event)" alt="StreamBox 4K control centre UI on a flat screen television">
+										</picture>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item large-span-6 small-span-12">
+								<div class="tile tile-rounded tile-automation" data-analytics-section-engagement="name:fan cooled case">
+									<div class="tile-content">
+										<div class="tile-copy typography-tile-copy">
+											<p><span class="blue-text">Fan&#8209;cooled case</span><br> <span class="gray-text">Cool and quiet.</span>
+											Two quiet fans keep the Pi at a healthy temperature through the longest film marathons &mdash; no thermal throttling, no distracting noise.</p>
+										</div>
+										<picture id="overview-home-control-icon-automation-1" class="overview-home-control-icon-automation" data-lazy="">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/icon_automation__epa2sjeuwugm_small_PAEI.png 1x, StreamBox_files/icon_automation__epa2sjeuwugm_small_2x_PAEI.png 2x" media="(max-width:734px)"><source srcset="StreamBox_files/icon_automation__epa2sjeuwugm_medium_PAEI.png 1x, StreamBox_files/icon_automation__epa2sjeuwugm_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/icon_automation__epa2sjeuwugm_large_PAEI.png 1x, StreamBox_files/icon_automation__epa2sjeuwugm_large_2x_PAEI.png 2x" media="(min-width:0px)"><img src="StreamBox_files/icon_automation__epa2sjeuwugm_large_PAEI.png" onload="__lp(event)" alt="">
+										</picture>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item large-span-6 small-span-12">
+								<div class="tile tile-rounded tile-privacy-security" data-analytics-section-engagement="name:open source">
+									<div class="tile-content">
+										<div class="tile-copy typography-tile-copy">
+											<p><span class="blue-text">Open source</span><br> <span class="gray-text">Your media stays yours.</span>
+											LibreELEC is built on open&#8209;source software &mdash; no accounts, no ads, no data collection. Your library lives on your own drives, not in the cloud.</p>
+										</div>
+										<picture id="overview-home-control-icon-security-and-privacy-1" class="overview-home-control-icon-security-and-privacy" data-lazy="">
+											<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+											<source srcset="StreamBox_files/icon_security_and_privacy__b0aatjj7xape_small_PAEI.png 1x, StreamBox_files/icon_security_and_privacy__b0aatjj7xape_small_2x_PAEI.png 2x" media="(max-width:734px)"><source srcset="StreamBox_files/icon_security_and_privacy__b0aatjj7xape_medium_PAEI.png 1x, StreamBox_files/icon_security_and_privacy__b0aatjj7xape_medium_2x_PAEI.png 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/icon_security_and_privacy__b0aatjj7xape_large_PAEI.png 1x, StreamBox_files/icon_security_and_privacy__b0aatjj7xape_large_2x_PAEI.png 2x" media="(min-width:0px)"><img src="StreamBox_files/icon_security_and_privacy__b0aatjj7xape_large_PAEI.png" onload="__lp(event)" alt="">
+										</picture>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section id="compare" class="section section-compare background-alt" data-anim-scroll-group="Buy" data-analytics-section-engagement="name:compare">
+					<div class="section-content row">
+						<h3 class="section-headline typography-compare-headline large-12">One box.<br>Everything you need.</h3>
+						<div class="row justify-content-center">
+							<div class="column large-4 medium-5 small-6 has-dynamic-content">
+								<picture id="overview-compare-apple-4k-wifi-1" class="overview-compare-apple-4k-wifi wifi-hardware" data-lazy="">
+									<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+									<source srcset="StreamBox_files/apple_4k_wifi__fpjm9mmlrzyy_small_PAEI.jpg 1x, StreamBox_files/apple_4k_wifi__fpjm9mmlrzyy_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/apple_4k_wifi__fpjm9mmlrzyy_medium_PAEI.jpg 1x, StreamBox_files/apple_4k_wifi__fpjm9mmlrzyy_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/apple_4k_wifi__fpjm9mmlrzyy_large_PAEI.jpg 1x, StreamBox_files/apple_4k_wifi__fpjm9mmlrzyy_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/apple_4k_wifi__fpjm9mmlrzyy_large_PAEI.jpg" onload="__lp(event)" alt="">
+								</picture>
+								<h4 class="subhead typography-compare-subhead">StreamBox</h4>
+								<p class="price typography-body-tight">£120</p>
+								<ul class="row links-stacked typography-body-reduced">
+									<li class="definition feature">
+										<div class="feature-content ">
+											<span class="typography-compare-feature-bold">Raspberry&nbsp;Pi&nbsp;5</span> &mdash; 4GB RAM, quad&#8209;core Cortex&#8209;A76
+										</div>
+									</li>
+									<li class="support feature">
+										<div class="feature-content ">
+											<span class="typography-compare-feature-bold">4K</span> playback with H.265/HEVC hardware decode
+										</div>
+									</li>
+									<li class="port feature">
+										<div class="feature-content ">
+											Gigabit Ethernet &amp; dual&#8209;band Wi&#8209;Fi&nbsp;5
+										</div>
+									</li>
+									<li class="storage feature">
+										<div class="feature-content ">
+											<span class="typography-compare-feature-bold">LibreELEC</span> + Kodi, pre&#8209;installed on 32GB microSD
+										</div>
+									</li>
+									<li class="chip feature">
+										<div class="feature-content ">
+											Fan&#8209;cooled <span class="typography-compare-feature-bold">custom case</span> &mdash; two quiet fans
+										</div>
+									</li>
+									<li class="remote feature">
+										<div class="feature-content ">
+											Control from the <span class="typography-compare-feature-bold">Kodi remote app</span> on your phone
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="row justify-content-center">
+							<div class="column large-12">
+								<a href="#compare" data-analytics-title="buy - streambox" aria-label="Buy StreamBox" class="button button-super">Buy</a>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="section section-ar background-alt" data-anim-scroll-group="In the box" data-analytics-section-engagement="name:in the box">
+					<div class="section-content">
+						<div class="ar-wrapper row">
+							<div class="column column-copy large-4 large-offset-1 medium-5 small-offset-0 small-12">
+								<div class="content-wrapper">
+									<h2 class="visuallyhidden">In the box</h2>
+									<h3 class="section-headline typography-ar-headline large-12">Everything you need <br>to get started.</h3>
+									<p class="section-intro typography-ar-body quicklook-hide large-12">Open the box, plug in three cables and <br class="large">you’re watching in minutes.</p>
+									<p class="section-intro typography-ar-body large-12"><strong>Includes:</strong> the StreamBox unit with fan&#8209;cooled case, a 32GB microSD card with LibreELEC pre&#8209;loaded, a 5V&nbsp;5A USB&#8209;C power supply, an HDMI cable and a quick start guide.</p>
+								</div>
+							</div>
+							<div class="column column-image large-5 large-offset-1 medium-6 medium-offset-0 small-12">
+								<picture id="overview-ar-phone-1" class="overview-ar-phone" data-lazy="">
+									<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+									<source srcset="StreamBox_files/phone__fgbajnptevqu_small_PAEI.jpg 1x, StreamBox_files/phone__fgbajnptevqu_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/phone__fgbajnptevqu_medium_PAEI.jpg 1x, StreamBox_files/phone__fgbajnptevqu_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/phone__fgbajnptevqu_large_PAEI.jpg 1x, StreamBox_files/phone__fgbajnptevqu_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/phone__fgbajnptevqu_large_PAEI.jpg" onload="__lp(event)" alt="Image shows StreamBox 4k in Augmented Reality screen on your phone.">
+								</picture>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="section section-router" data-anim-scroll-group="Compatibility" tabindex="-1">
+					<div class="section-content">
+						<div class="tv-plus-router theme-dark" data-analytics-section-engagement="name:compatibility">
+							<div class="content-wrapper">
+								<div>
+									<h3 class="tv-plus-icon"><span class="visuallyhidden">StreamBox</span></h3>
+									<p class="typography-router-tv-plus-headline router-headline large-centered medium-6 small-9">Plays nicely <br class="small">with everything.</p>
+									<p class="typography-router-body large-centered medium-8 small-11">Connect StreamBox to any HDMI TV, soundbar or AV receiver. Copy films across from a USB drive or NAS, and stream add&#8209;ons over your home network. Set&#8209;up takes minutes, and the fan&#8209;cooled case runs all day without a whisper.</p>
+								</div>
+								<ul class="router-ctas links-inline">
+									<li>
+										<a href="#compare" data-analytics-title="buy streambox" aria-label="Buy StreamBox" class="icon-wrapper typography-router-cta"><span class="icon-copy">Buy StreamBox</span><span class="icon icon-after more"></span></a>
+									</li>
+									<li>
+										<a href="#overview" data-analytics-title="learn more about streambox" aria-label="Learn more, StreamBox" class="icon-wrapper typography-router-cta"><span class="icon-copy">Learn more</span><span class="icon icon-after more"></span></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="lower-container">
+							<div class="tv-app-router theme-light" data-analytics-section-engagement="name:libreelec">
+								<div class="content-wrapper">
+									<div class="column copy-container large-4 large-offset-1 small-12 small-offset-0 small-centered">
+										<h3 class="callout-icon"><span class="visuallyhidden">LibreELEC</span></h3>
+										<h3 class="typography-router-eyebrow">LibreELEC</h3>
+										<h3 class="typography-router-atv-app-headline">Open source.<br>Always current.</h3>
+										<p class="app-router-cta">
+											<a href="#overview" data-analytics-title="learn more about libreelec" aria-label="Learn more, LibreELEC" class="icon-wrapper typography-router-atv-app-cta"><span class="icon-copy">Learn more</span><span class="icon icon-after more"></span></a> </p>
+									</div>
+									<div class="column large-7 small-12 small-offset-0">
+										<div class="image-tv-app-container">
+											<picture id="overview-router-apple-tv-app-new-1" class="overview-router-apple-tv-app-new image-router-tv-app" data-lazy="">
+												<source data-empty="" srcset="data:image/gif;base64,R0lGODlhAQABAHAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw== 1x" media="(min-width:0px)">
+												<source srcset="StreamBox_files/apple_tv_app_new__d96grv6awv8m_small_PAEI.jpg 1x, StreamBox_files/apple_tv_app_new__d96grv6awv8m_small_2x_PAEI.jpg 2x" media="(max-width:734px)"><source srcset="StreamBox_files/apple_tv_app_new__d96grv6awv8m_medium_PAEI.jpg 1x, StreamBox_files/apple_tv_app_new__d96grv6awv8m_medium_2x_PAEI.jpg 2x" media="(min-width:735px) and (max-width:1068px)"><source srcset="StreamBox_files/apple_tv_app_new__d96grv6awv8m_large_PAEI.jpg 1x, StreamBox_files/apple_tv_app_new__d96grv6awv8m_large_2x_PAEI.jpg 2x" media="(min-width:0px)"><img src="StreamBox_files/apple_tv_app_new__d96grv6awv8m_large_PAEI.jpg" onload="__lp(event)" alt="A flatscreen television showing the StreamBox app's homescreen UI">
+											</picture>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</main>
+			<!--/main-->
+			<footer id="support" role="contentinfo" style="background: #f5f5f7; color: #6e6e73; font-size: 12px; line-height: 1.5; padding: 20px 0 40px;">
+				<div style="max-width: 1024px; margin: 0 auto; padding: 0 22px;">
+					<div style="padding: 16px 0 12px; border-bottom: 1px solid #d2d2d7;">
+						<a href="#overview" style="color: #424245; text-decoration: none;">StreamBox</a>
+						<span style="color: #424245; margin: 0 8px;">›</span>
+						<a href="#overview" style="color: #6e6e73; text-decoration: none;">StreamBox 4K</a>
+					</div>
+
+					<div style="display: flex; flex-wrap: wrap; justify-content: space-between; padding: 24px 0;">
+						<div style="flex: 1 1 180px; margin-bottom: 20px;">
+							<h3 style="font-size: 12px; color: #424245; margin: 0 0 10px;">Shop and Learn</h3>
+							<ul style="list-style: none; margin: 0; padding: 0;">
+								<li style="margin-bottom: 8px;"><a href="#overview" style="color: #424245; text-decoration: none;">StreamBox</a></li>
+								<li style="margin-bottom: 8px;"><a href="#compare" style="color: #424245; text-decoration: none;">Buy</a></li>
+								<li style="margin-bottom: 8px;"><a href="#overview" style="color: #424245; text-decoration: none;">In the Box</a></li>
+								<li style="margin-bottom: 8px;"><a href="#support" style="color: #424245; text-decoration: none;">Warranty</a></li>
+							</ul>
+						</div>
+						<div style="flex: 1 1 180px; margin-bottom: 20px;">
+							<h3 style="font-size: 12px; color: #424245; margin: 0 0 10px;">Entertainment</h3>
+							<ul style="list-style: none; margin: 0; padding: 0;">
+								<li style="margin-bottom: 8px;"><a href="#entertainment" style="color: #424245; text-decoration: none;">Kodi</a></li>
+								<li style="margin-bottom: 8px;"><a href="#entertainment" style="color: #424245; text-decoration: none;">Media Library</a></li>
+								<li style="margin-bottom: 8px;"><a href="#entertainment" style="color: #424245; text-decoration: none;">Live TV</a></li>
+								<li style="margin-bottom: 8px;"><a href="#entertainment" style="color: #424245; text-decoration: none;">Add-ons</a></li>
+							</ul>
+						</div>
+						<div style="flex: 1 1 180px; margin-bottom: 20px;">
+							<h3 style="font-size: 12px; color: #424245; margin: 0 0 10px;">Hardware</h3>
+							<ul style="list-style: none; margin: 0; padding: 0;">
+								<li style="margin-bottom: 8px;"><a href="#home" style="color: #424245; text-decoration: none;">Raspberry Pi 5</a></li>
+								<li style="margin-bottom: 8px;"><a href="#home" style="color: #424245; text-decoration: none;">Fan-Cooled Case</a></li>
+								<li style="margin-bottom: 8px;"><a href="#home" style="color: #424245; text-decoration: none;">LibreELEC</a></li>
+							</ul>
+						</div>
+						<div style="flex: 1 1 180px; margin-bottom: 20px;">
+							<h3 style="font-size: 12px; color: #424245; margin: 0 0 10px;">Company</h3>
+							<ul style="list-style: none; margin: 0; padding: 0;">
+								<li style="margin-bottom: 8px;"><a href="#overview" style="color: #424245; text-decoration: none;">About StreamBox</a></li>
+								<li style="margin-bottom: 8px;"><a href="#overview" style="color: #424245; text-decoration: none;">Newsroom</a></li>
+								<li style="margin-bottom: 8px;"><a href="#overview" style="color: #424245; text-decoration: none;">Careers</a></li>
+							</ul>
+						</div>
+						<div style="flex: 1 1 180px; margin-bottom: 20px;">
+							<h3 style="font-size: 12px; color: #424245; margin: 0 0 10px;">Support</h3>
+							<ul style="list-style: none; margin: 0; padding: 0;">
+								<li style="margin-bottom: 8px;"><a href="#support" style="color: #424245; text-decoration: none;">Contact Us</a></li>
+								<li style="margin-bottom: 8px;"><a href="#support" style="color: #424245; text-decoration: none;">Product Help</a></li>
+								<li style="margin-bottom: 8px;"><a href="#support" style="color: #424245; text-decoration: none;">Warranty</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div style="padding: 16px 0 10px; border-top: 1px solid #d2d2d7; color: #6e6e73;">
+						<p style="margin: 0 0 10px;">StreamBox is a pre-built media centre powered by a Raspberry Pi 5. Raspberry Pi is a trademark of Raspberry Pi Ltd. Kodi is a registered trademark of the XBMC Foundation. LibreELEC is a registered trademark of the LibreELEC Foundation. All other company and product names may be trademarks of their respective owners.</p>
+					</div>
+
+					<div style="display: flex; flex-wrap: wrap; justify-content: space-between; padding: 10px 0 0; border-top: 1px solid #d2d2d7;">
+						<p style="margin: 0;">Copyright © 2026 StreamBox Inc. All rights reserved.</p>
+						<ul style="list-style: none; display: flex; gap: 18px; margin: 0; padding: 0;">
+							<li><a href="#support" style="color: #424245; text-decoration: none;">Privacy Policy</a></li>
+							<li><a href="#support" style="color: #424245; text-decoration: none;">Terms of Use</a></li>
+							<li><a href="#support" style="color: #424245; text-decoration: none;">Sales and Refunds</a></li>
+							<li><a href="#support" style="color: #424245; text-decoration: none;">Legal</a></li>
+							<li><a href="#support" style="color: #424245; text-decoration: none;">Site Map</a></li>
+							<li><a href="#overview" style="color: #424245; text-decoration: none;">United Kingdom</a></li>
+						</ul>
+					</div>
+				</div>
+			</footer>
+			<script type="application/ld+json">
+				{
+					"@context": "http://schema.org",
+					"@type": "Product",
+					"@id": "https://streambox.example/streambox/#product",
+					"manufacturer": {
+						"@type": "Organization",
+						"name": "StreamBox",
+						"url": "https://streambox.example/"
+					},
+					"brand": {
+						"@type": "Brand",
+						"name": "StreamBox"
+					},
+					"name": "StreamBox — Raspberry Pi 5 Media Centre",
+					"description": "A pre-built media centre powered by a Raspberry Pi 5 with 4GB RAM in a fan-cooled case, pre-loaded with LibreELEC and Kodi. Plays your own 4K movies, TV shows, music and photos on any HDMI TV.",
+					"url": "https://streambox.example/streambox/",
+					"mainEntityOfPage": "https://streambox.example/streambox/",
+					"image": "StreamBox_files/hero_tv_hw__e1vadywlvcmu_large_PAEI.jpg",
+					"offers": {
+						"@type": "Offer",
+						"price": "120",
+						"priceCurrency": "GBP",
+						"availability": "https://schema.org/InStock"
+					}
+				}
+			</script>
+			<script src="StreamBox_files/main.built_PAEI.js" type="text/javascript" charset="utf-8"></script><span style="visibility: hidden; position: absolute; top: 0px; bottom: 0px; z-index: -1;">&nbsp;</span><div id="viewport-emitter" data-viewport-emitter-dispatch="" data-viewport-emitter-state="{&quot;viewport&quot;:&quot;xlarge&quot;,&quot;orientation&quot;:&quot;landscape&quot;,&quot;retina&quot;:false}"></div>
+			
+
+<script src="StreamBox_files/data-relay_PAEI.js" type="text/javascript" charset="utf-8"></script>
+
+
+			
+	
+
+
+
+
+
+<protonpass-root-ade0 data-protonpass-role="root" data-protonpass-theme="os"></protonpass-root-ade0></body><div cssdimensionstracker="true" style="position: fixed; top: 0px; width: 100%; height: 100vh; pointer-events: none; visibility: hidden; z-index: -1;"></div></html>
