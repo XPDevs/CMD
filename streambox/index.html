@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7">
+<meta name="description" content="Streambox — a premium Raspberry Pi 3 Model B+ media centre with Kodi.">
+<title>Streambox — TV streaming, refined.</title>
+<style>
+:root{
+  --bg:#f5f5f7;
+  --surface:#fff;
+  --ink:#1d1d1f;
+  --muted:#6e6e73;
+  --muted2:#86868b;
+  --blue:#0071e3;
+  --line:#d2d2d7;
+  --nav:44px;
+  --max:1280px;
+  --radius:24px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);line-height:1.45;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit}
+.container{width:min(var(--max),calc(100% - 48px));margin:auto}
+
+/* NAVIGATION */
+.global-nav{position:fixed;top:0;left:0;right:0;height:var(--nav);z-index:1000;background:rgba(250,250,252,.82);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,.08)}
+.nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.brand{font-size:17px;font-weight:600;letter-spacing:-.01em;white-space:nowrap}
+.nav-links{display:flex;align-items:center;gap:27px;font-size:12px;color:#333;list-style:none}
+.nav-links a{opacity:.9;transition:opacity .2s}.nav-links a:hover{opacity:.55}
+.nav-actions{display:flex;gap:18px;align-items:center;font-size:16px;color:#292929}
+.nav-icon{border:0;background:none;cursor:pointer;color:inherit;width:18px;height:20px;display:grid;place-items:center}
+.menu-btn{display:none}
+
+/* SMALL PRODUCT NAV */
+.product-nav{position:relative;margin-top:var(--nav);height:52px;background:rgba(250,250,252,.94);border-bottom:1px solid rgba(0,0,0,.08)}
+.product-nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.product-title{font-size:21px;font-weight:600;letter-spacing:-.02em}
+.product-tabs{display:flex;align-items:center;gap:24px;font-size:12px;color:#424245}.product-tabs a:hover{color:#000}
+.product-buy{padding:7px 16px;background:var(--blue);color:#fff;border-radius:999px;font-size:12px;font-weight:600}
+
+/* COMMON */
+.eyebrow{font-size:16px;font-weight:600;color:#6e6e73;margin-bottom:14px;letter-spacing:-.01em}
+.eyebrow.blue{color:var(--blue)}
+.section{padding:140px 0}
+.section.dark{background:#000;color:#f5f5f7}
+.section.white{background:#fff}
+.section-header{max-width:960px;margin:0 auto 64px;text-align:center}
+.section-header h2{font-size:clamp(42px,7vw,88px);line-height:.98;letter-spacing:-.055em;font-weight:650}
+.section-header p{max-width:700px;margin:25px auto 0;font-size:21px;line-height:1.35;color:var(--muted)}
+.dark .section-header p{color:#a1a1a6}
+.caption{font-size:12px;line-height:1.45;color:#6e6e73}
+.dark .caption{color:#86868b}
+.source-row{font-size:12px;color:#6e6e73;text-align:center;margin-top:20px}
+.source-row a{color:#424245;text-decoration:underline;text-underline-offset:2px}
+
+/* HERO */
+.hero{min-height:calc(100vh - 96px);padding:120px 0 70px;background:#fff;display:flex;align-items:center;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:45px;text-align:center}
+.hero h1{font-size:clamp(56px,10vw,148px);line-height:.88;letter-spacing:-.07em;font-weight:700}
+.hero h1 span{display:block}
+.hero h1 .sub{color:#6e6e73;font-weight:550}
+.hero-copy{max-width:720px;margin:0 auto}.hero-copy p{font-size:clamp(20px,2.4vw,29px);color:var(--muted);line-height:1.25;margin-top:26px}
+.price-line{font-size:21px;margin-top:25px;font-weight:500}.price-line strong{font-size:28px}
+.hero-actions{display:flex;justify-content:center;gap:10px;margin-top:28px;flex-wrap:wrap}
+.btn{border:0;cursor:pointer;border-radius:999px;padding:12px 21px;font-size:15px;font-weight:600;transition:transform .2s var(--ease),background .2s}
+.btn.primary{background:var(--blue);color:#fff}.btn.primary:hover{transform:translateY(-1px);background:#0077ed}
+.btn.link{background:transparent;color:var(--blue);padding-left:7px;padding-right:7px}.btn.link:hover{text-decoration:underline;text-underline-offset:4px}
+.hero-media{max-width:1120px;margin:38px auto 0;position:relative}
+.hero-media img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:28px;box-shadow:0 35px 85px rgba(0,0,0,.18)}
+.hero-media .media-note{position:absolute;left:18px;bottom:18px;background:rgba(0,0,0,.66);color:#fff;padding:8px 13px;border-radius:999px;font-size:12px;backdrop-filter:blur(14px)}
+
+/* PRODUCT PHOTOGRAPHY */
+.photo-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}
+.photo-card{background:#fff;border-radius:28px;overflow:hidden;min-height:100%;box-shadow:0 20px 50px rgba(0,0,0,.08)}
+.photo-card .image-wrap{aspect-ratio:4/3;background:#f0f0f2;overflow:hidden}
+.photo-card img{width:100%;height:100%;object-fit:cover}
+.photo-card .copy{padding:26px 28px 30px}.photo-card h3{font-size:30px;letter-spacing:-.035em;margin-bottom:9px}.photo-card p{color:var(--muted);font-size:17px;line-height:1.45}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.chip{font-size:12px;padding:7px 10px;border-radius:999px;background:#f5f5f7;color:#424245}
+
+/* REAL HARDWARE SECTION */
+.hardware-stage{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:70px}
+.hardware-hero{background:#111;border-radius:34px;overflow:hidden;position:relative;min-height:590px;display:grid;place-items:center}
+.hardware-hero img{width:100%;height:100%;object-fit:cover;object-position:center;opacity:.96}
+.hardware-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.22),transparent 50%)}
+.hardware-label{position:absolute;z-index:2;left:24px;top:24px;background:rgba(255,255,255,.92);color:#111;border-radius:999px;padding:9px 13px;font-size:12px;font-weight:600}
+.hardware-copy h2{font-size:clamp(42px,5.6vw,76px);line-height:.98;letter-spacing:-.055em;margin-bottom:24px}.hardware-copy p{font-size:21px;color:#6e6e73;line-height:1.35;max-width:600px}
+.callout-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.callout{padding:18px;border-top:1px solid #d2d2d7}.callout strong{display:block;font-size:24px;letter-spacing:-.02em}.callout span{font-size:13px;color:#6e6e73}
+
+/* PROCESSOR */
+.processor-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}
+.processor-photo{border-radius:30px;overflow:hidden;background:#111;aspect-ratio:1/1;box-shadow:0 40px 100px rgba(0,0,0,.25)}
+.processor-photo img{width:100%;height:100%;object-fit:cover;object-position:center}
+.processor-copy h2{font-size:clamp(48px,6vw,88px);line-height:.92;letter-spacing:-.06em;margin-bottom:24px}.processor-copy p{font-size:21px;color:#a1a1a6;max-width:620px}
+.spec-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}.spec-pill{padding:9px 12px;border:1px solid #424245;border-radius:999px;font-size:13px;color:#d2d2d7}
+
+/* KODI */
+.kodi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.kodi-card{background:#111;border-radius:28px;overflow:hidden}
+.kodi-card .image-wrap{aspect-ratio:16/10;background:#000}.kodi-card img{width:100%;height:100%;object-fit:cover}
+.kodi-card .copy{padding:20px 21px 23px}.kodi-card h3{font-size:21px;letter-spacing:-.025em;margin-bottom:7px}.kodi-card p{font-size:14px;color:#a1a1a6;line-height:1.45}
+.kodi-badge{display:inline-block;margin-bottom:10px;font-size:11px;color:#67c7ff;text-transform:uppercase;letter-spacing:.08em}
+
+/* EXPERIENCE */
+.experience{background:#fff}.experience-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.experience-card{background:#f5f5f7;border-radius:26px;padding:34px 30px;min-height:290px}.experience-card .num{font-size:13px;color:var(--muted);margin-bottom:56px}.experience-card h3{font-size:29px;line-height:1.03;letter-spacing:-.04em;margin-bottom:11px}.experience-card p{font-size:16px;color:var(--muted);line-height:1.45}
+
+/* SPECS */
+.specs-shell{max-width:1000px;margin:0 auto;background:#fff;border-radius:30px;overflow:hidden;border:1px solid #d2d2d7}.spec-row{display:grid;grid-template-columns:270px 1fr;gap:20px;padding:22px 28px;border-bottom:1px solid #e2e2e7}.spec-row:last-child{border-bottom:0}.spec-label{font-weight:600}.spec-value{color:#6e6e73}
+
+/* BOX */
+.box-section{background:#fff}.box-visual{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:stretch}.render-card{position:relative;min-height:540px;border-radius:34px;background:linear-gradient(145deg,#fff,#e9e9ed);overflow:hidden;display:flex;align-items:center;justify-content:center;border:1px solid #d2d2d7}
+.product-box{width:62%;aspect-ratio:1.42/1;border-radius:28px;background:linear-gradient(145deg,#fdfdfd,#d8d8dc);box-shadow:25px 35px 55px rgba(0,0,0,.17);transform:rotate(-8deg) skewY(-2deg);position:relative;display:flex;align-items:center;justify-content:center}
+.product-box:before{content:"STREAMBOX";font-size:32px;letter-spacing:-.045em;font-weight:700;color:#1d1d1f}.product-box:after{content:"Kodi · Raspberry Pi 3 Model B+";position:absolute;bottom:24px;left:0;right:0;text-align:center;font-size:11px;color:#6e6e73}
+.render-note{position:absolute;left:22px;bottom:20px;font-size:12px;color:#6e6e73;background:rgba(255,255,255,.82);border-radius:999px;padding:8px 11px}
+.box-copy{padding:18px 8px}.box-copy h2{font-size:clamp(44px,6vw,82px);line-height:.95;letter-spacing:-.06em;margin-bottom:20px}.box-copy p{font-size:20px;color:#6e6e73;line-height:1.35}.inbox-list{margin-top:24px;display:grid;gap:0}.inbox-row{display:flex;justify-content:space-between;gap:18px;padding:15px 0;border-top:1px solid #d2d2d7;font-size:15px}.inbox-row strong{font-weight:600}.inbox-row span{color:#6e6e73;text-align:right}
+
+/* BUY */
+.buy{background:#f5f5f7}.buy-card{max-width:720px;margin:0 auto;background:#fff;border-radius:30px;border:1px solid #d2d2d7;padding:44px;box-shadow:0 22px 70px rgba(0,0,0,.08)}.buy-top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.buy-top h2{font-size:36px;letter-spacing:-.04em}.buy-price{font-size:36px;font-weight:650;letter-spacing:-.04em}.buy-card p{color:#6e6e73;margin-top:9px}.buy-list{list-style:none;margin:28px 0}.buy-list li{padding:13px 0;border-top:1px solid #d2d2d7;font-size:15px;display:flex;justify-content:space-between;gap:16px}.buy-list li span{color:#6e6e73;text-align:right}.buy-cta{display:flex;gap:12px;align-items:center}.buy-note{font-size:12px;color:#6e6e73;margin-top:16px}
+
+/* FAQ + FOOTER */
+.faq{background:#fff}.faq-list{max-width:850px;margin:0 auto}.faq-item{border-top:1px solid #d2d2d7}.faq-item:last-child{border-bottom:1px solid #d2d2d7}.faq-q{width:100%;background:none;border:0;padding:22px 4px;text-align:left;display:flex;justify-content:space-between;gap:20px;align-items:center;cursor:pointer;font-size:18px}.faq-q span:last-child{font-size:25px;color:#6e6e73;transition:transform .25s}.faq-item.open .faq-q span:last-child{transform:rotate(45deg)}.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s var(--ease)}.faq-a>div{overflow:hidden;color:#6e6e73;font-size:15px;line-height:1.55}.faq-item.open .faq-a{grid-template-rows:1fr}.faq-a>div{padding:0 4px 20px}
+footer{background:#f5f5f7;border-top:1px solid #d2d2d7;padding:35px 0 55px;color:#6e6e73;font-size:12px}.footer-grid{display:flex;justify-content:space-between;gap:30px;align-items:flex-start}.footer-brand{color:#1d1d1f;font-weight:600;font-size:15px}.footer-links{display:flex;flex-wrap:wrap;gap:15px 24px;justify-content:flex-end}.legal{margin-top:24px;padding-top:18px;border-top:1px solid #d2d2d7;line-height:1.6}.legal a{text-decoration:underline;text-underline-offset:2px}
+
+/* MOTION */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}.reveal.visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .nav-links,.global-search{display:none}.menu-btn{display:grid}.container{width:min(var(--max),calc(100% - 32px))}.product-tabs{display:none}.section{padding:95px 0}.hero{padding-top:80px}.hero-media img{border-radius:20px}.photo-grid,.hardware-stage,.processor-grid,.box-visual{grid-template-columns:1fr}.photo-card{min-height:0}.hardware-hero{min-height:420px}.processor-photo{max-width:650px}.kodi-grid,.experience-grid{grid-template-columns:1fr}.spec-row{grid-template-columns:1fr}.box-copy{padding:10px 0}.buy-card{padding:28px}.buy-top{flex-direction:column}.footer-grid{flex-direction:column}.footer-links{justify-content:flex-start}
+}
+@media(max-width:520px){.hero h1{font-size:62px}.section-header h2{font-size:45px}.section-header p{font-size:18px}.hero-copy p{font-size:19px}.hardware-copy h2,.processor-copy h2,.box-copy h2{font-size:52px}.render-card{min-height:390px}.product-box{width:74%}.callout-grid{grid-template-columns:1fr}.buy-cta{flex-direction:column;align-items:stretch}.buy-cta .btn{width:100%}}
+</style>
+</head>
+<body>
+
+<header class="global-nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top">Streambox</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#overview">Overview</a>
+      <a href="#hardware">Hardware</a>
+      <a href="#kodi">Kodi</a>
+      <a href="#specs">Tech Specs</a>
+      <a href="#faq">Support</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="nav-icon" aria-label="Search">⌕</button>
+      <a class="product-buy" href="#buy">Buy</a>
+      <button class="nav-icon menu-btn" aria-label="Menu" onclick="document.body.classList.toggle('menu-open')">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="product-nav">
+  <div class="container product-nav-inner">
+    <div class="product-title">Streambox</div>
+    <nav class="product-tabs">
+      <a href="#hardware">Hardware</a><a href="#kodi">Kodi</a><a href="#specs">Specs</a><a href="#box">In the box</a><a href="#faq">Support</a>
+    </nav>
+    <a class="product-buy" href="#buy">Buy</a>
+  </div>
+</div>
+
+<main id="top">
+  <section class="hero" id="overview">
+    <div class="container hero-grid">
+      <div class="hero-copy reveal">
+        <div class="eyebrow blue">Raspberry Pi 3 Model B+ · Kodi</div>
+        <h1><span>Streambox.</span><span class="sub">Made for the TV.</span></h1>
+        <p>A compact media centre built around real Raspberry Pi hardware, with Kodi ready for the big screen.</p>
+        <div class="price-line"><strong>£120</strong> · complete kit</div>
+        <div class="hero-actions"><a class="btn primary" href="#buy">Buy Streambox</a><a class="btn link" href="#hardware">See the hardware →</a></div>
+      </div>
+      <div class="hero-media reveal">
+        <img src="https://mirrors.kodi.tv/screenshots/kodi-videolibrary.jpg" alt="Kodi official video library screenshot" style="object-position:center">
+        <div class="media-note">Kodi screenshots · official Kodi mirror</div>
+      </div>
+      <div class="caption">The hero image is presented as a Kodi media-centre view. Streambox hardware photography appears below using a real Raspberry Pi 3 Model B+ image.</div>
+    </div>
+  </section>
+
+  <section class="section white" id="hardware">
+    <div class="container">
+      <div class="section-header reveal"><div class="eyebrow blue">Real hardware</div><h2>Start with the real thing.</h2><p>Streambox is built around the Raspberry Pi 3 Model B+. No fictional motherboard. No invented processor. The board and silicon shown here are real components.</p></div>
+      <div class="hardware-stage reveal">
+        <div class="hardware-hero">
+          <span class="hardware-label">Raspberry Pi 3 Model B+</span>
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Raspberry_Pi_3_Model_B%2B.jpg?width=1600" alt="Raspberry Pi 3 Model B+ board, real photograph">
+        </div>
+        <div class="hardware-copy">
+          <h2>One board.<br>One clear purpose.</h2>
+          <p>The Raspberry Pi 3 Model B+ is a 1.4GHz 64-bit quad-core single-board computer with 1GB LPDDR2 memory, dual-band Wi-Fi, Bluetooth 4.2, four USB 2.0 ports, full-size HDMI and microSD storage.</p>
+          <div class="callout-grid">
+            <div class="callout"><strong>1.4GHz</strong><span>64-bit quad-core Cortex-A53</span></div>
+            <div class="callout"><strong>1GB</strong><span>LPDDR2 SDRAM</span></div>
+            <div class="callout"><strong>4 ×</strong><span>USB 2.0</span></div>
+            <div class="callout"><strong>2.4 / 5GHz</strong><span>802.11ac Wi-Fi</span></div>
+          </div>
+          <div class="source-row">Board photo: Raspberry Pi Foundation image via Wikimedia Commons · <a href="https://commons.wikimedia.org/wiki/File:Raspberry_Pi_3_Model_B%2B.jpg" target="_blank" rel="noopener">source & licence</a> · specifications: <a href="https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/" target="_blank" rel="noopener">Raspberry Pi</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <div class="container">
+      <div class="processor-grid reveal">
+        <div class="processor-photo">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Raspberry_Pi_3_Model_B%2B.jpg?width=1400" alt="Close view of the real Raspberry Pi 3 Model B+ board and SoC area">
+        </div>
+        <div class="processor-copy">
+          <div class="eyebrow">The processor inside</div>
+          <h2>BCM2837B0.<br>1.4GHz.</h2>
+          <p>The Raspberry Pi documentation identifies the BCM2837B0 as the Broadcom SoC used in Raspberry Pi 3 Model B+. Its ARM cores are capable of 1.4GHz and the VideoCore IV GPU runs at 400MHz.</p>
+          <div class="spec-pills"><span class="spec-pill">Broadcom BCM2837B0</span><span class="spec-pill">4 × Cortex-A53</span><span class="spec-pill">ARMv8 64-bit</span><span class="spec-pill">VideoCore IV</span></div>
+          <div class="source-row">Processor information: <a href="https://www.raspberrypi.com/documentation/hardware/raspberrypi/bcm2835/" target="_blank" rel="noopener">Raspberry Pi documentation</a>. The image is a real 3B+ board photograph; the SoC itself is highlighted conceptually rather than represented by a fabricated chip render.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark" id="kodi">
+    <div class="container">
+      <div class="section-header reveal"><div class="eyebrow">Kodi</div><h2>The big-screen experience.</h2><p>Use real Kodi screenshots from Kodi's own screenshot mirror to show the software people will actually use on the box.</p></div>
+      <div class="kodi-grid">
+        <article class="kodi-card reveal"><div class="image-wrap"><img src="https://mirrors.kodi.tv/screenshots/kodi-videolibrary.jpg" alt="Kodi video library official screenshot"></div><div class="copy"><div class="kodi-badge">Kodi</div><h3>Video library</h3><p>Browse a real Kodi media library interface, not a mock-up.</p></div></article>
+        <article class="kodi-card reveal"><div class="image-wrap"><img src="https://mirrors.kodi.tv/screenshots/kodi-tvshow.jpg" alt="Kodi TV shows official screenshot"></div><div class="copy"><div class="kodi-badge">Kodi</div><h3>TV shows</h3><p>Show the actual software experience your customer receives.</p></div></article>
+        <article class="kodi-card reveal"><div class="image-wrap"><img src="https://mirrors.kodi.tv/screenshots/kodi-music-info.jpg" alt="Kodi music information official screenshot"></div><div class="copy"><div class="kodi-badge">Kodi</div><h3>Music</h3><p>Real Kodi artwork, menus and playback surfaces from the official mirror.</p></div></article>
+      </div>
+      <div class="source-row">Screenshots: <a href="https://mirrors.kodi.tv/screenshots/" target="_blank" rel="noopener">Kodi official screenshot repository</a>. Kodi is developed by the Kodi Foundation.</div>
+    </div>
+  </section>
+
+  <section class="section experience">
+    <div class="container">
+      <div class="section-header reveal"><div class="eyebrow blue">Designed around the hardware</div><h2>Less clutter.<br>More TV.</h2><p>The Streambox presentation stays deliberately restrained so the product, hardware and software do the selling.</p></div>
+      <div class="experience-grid">
+        <article class="experience-card reveal"><div class="num">01 · HARDWARE</div><h3>Real Raspberry Pi engineering.</h3><p>Built around the 3B+ platform rather than pretending the internals are custom silicon.</p></article>
+        <article class="experience-card reveal"><div class="num">02 · SOFTWARE</div><h3>Kodi on the big screen.</h3><p>A familiar ten-foot interface designed around remotes and television viewing.</p></article>
+        <article class="experience-card reveal"><div class="num">03 · TRUST</div><h3>Specifications you can verify.</h3><p>Every key hardware claim is linked back to Raspberry Pi's documentation.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section white" id="specs">
+    <div class="container">
+      <div class="section-header reveal"><div class="eyebrow blue">Tech specs</div><h2>The details matter.</h2><p>Corrected to match Raspberry Pi's published 3B+ specifications.</p></div>
+      <div class="specs-shell reveal">
+        <div class="spec-row"><div class="spec-label">Processor</div><div class="spec-value">Broadcom BCM2837B0, quad-core Cortex-A53 (ARMv8) 64-bit SoC @ 1.4GHz</div></div>
+        <div class="spec-row"><div class="spec-label">Memory</div><div class="spec-value">1GB LPDDR2 SDRAM</div></div>
+        <div class="spec-row"><div class="spec-label">Wireless</div><div class="spec-value">2.4GHz and 5GHz IEEE 802.11b/g/n/ac wireless LAN</div></div>
+        <div class="spec-row"><div class="spec-label">Bluetooth</div><div class="spec-value">Bluetooth 4.2 + BLE</div></div>
+        <div class="spec-row"><div class="spec-label">Ethernet</div><div class="spec-value">Gigabit Ethernet over USB 2.0, maximum throughput 300Mbps</div></div>
+        <div class="spec-row"><div class="spec-label">Video</div><div class="spec-value">Full-size HDMI; H.264 / MPEG-4 decode up to 1080p30</div></div>
+        <div class="spec-row"><div class="spec-label">USB</div><div class="spec-value">4 × USB 2.0</div></div>
+        <div class="spec-row"><div class="spec-label">Storage</div><div class="spec-value">MicroSD card slot for operating system and data</div></div>
+        <div class="spec-row"><div class="spec-label">Power</div><div class="spec-value">5V / 2.5A DC via micro-USB</div></div>
+        <div class="spec-row"><div class="spec-label">GPIO</div><div class="spec-value">Extended 40-pin GPIO header</div></div>
+        <div class="spec-row"><div class="spec-label">PoE</div><div class="spec-value">PoE support with separate PoE HAT</div></div>
+      </div>
+      <div class="source-row">Full specification: <a href="https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/" target="_blank" rel="noopener">Raspberry Pi 3 Model B+</a>.</div>
+    </div>
+  </section>
+
+  <section class="section box-section" id="box">
+    <div class="container">
+      <div class="section-header reveal"><div class="eyebrow blue">In the box</div><h2>Premium presentation.<br>No mystery parts.</h2><p>The packaging visual below is a product render. Component claims are separated from the render so customers are never led to believe a computer-generated image is a photograph.</p></div>
+      <div class="box-visual reveal">
+        <div class="render-card"><div class="product-box" aria-label="Streambox packaging concept render"></div><div class="render-note">Streambox packaging concept render</div></div>
+        <div class="box-copy">
+          <h2>Everything you need to get started.</h2>
+          <p>The sales page should only promise items that you actually include with the £120 bundle.</p>
+          <div class="inbox-list">
+            <div class="inbox-row"><strong>Streambox unit</strong><span>Raspberry Pi 3 Model B+ based</span></div>
+            <div class="inbox-row"><strong>microSD card</strong><span>Capacity to be specified by seller</span></div>
+            <div class="inbox-row"><strong>HDMI cable</strong><span>Only claim certification that you can verify</span></div>
+            <div class="inbox-row"><strong>Power supply</strong><span>5V / 2.5A micro-USB for the 3B+</span></div>
+            <div class="inbox-row"><strong>Case</strong><span>Your exact enclosure / finish</span></div>
+            <div class="inbox-row"><strong>Quick-start guide</strong><span>Printed or digital</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section buy" id="buy">
+    <div class="container">
+      <div class="section-header reveal"><div class="eyebrow blue">Buy Streambox</div><h2>£120.<br>Everything in one place.</h2><p>Make the final purchase area feel like a real product checkout, while keeping the specification honest.</p></div>
+      <div class="buy-card reveal">
+        <div class="buy-top"><div><h2>Streambox</h2><p>Raspberry Pi 3 Model B+ · Kodi-ready media centre</p></div><div class="buy-price">£120</div></div>
+        <ul class="buy-list">
+          <li><strong>Hardware platform</strong><span>Raspberry Pi 3 Model B+</span></li>
+          <li><strong>Processor</strong><span>BCM2837B0 · 1.4GHz</span></li>
+          <li><strong>Memory</strong><span>1GB LPDDR2</span></li>
+          <li><strong>Software</strong><span>Kodi-ready</span></li>
+          <li><strong>Storage</strong><span>microSD · capacity specified at checkout</span></li>
+        </ul>
+        <div class="buy-cta"><button class="btn primary" onclick="addToBag()">Add to bag</button><a class="btn link" href="#specs">Review specifications →</a></div>
+        <div class="buy-note" id="bagNote">Secure checkout presentation placeholder. Connect this button to your real ecommerce/payment backend before launch.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq" id="faq">
+    <div class="container">
+      <div class="section-header reveal"><div class="eyebrow blue">Support</div><h2>Questions, answered.</h2><p>Clear answers are part of the product experience.</p></div>
+      <div class="faq-list">
+        <div class="faq-item open reveal"><button class="faq-q" onclick="toggleFaq(this)"><span>What is Streambox?</span><span>+</span></button><div class="faq-a"><div>Streambox is a branded media-centre product built around real Raspberry Pi 3 Model B+ hardware and Kodi software.</div></div></div>
+        <div class="faq-item reveal"><button class="faq-q" onclick="toggleFaq(this)"><span>Does the Raspberry Pi 3 Model B+ support 4K60 HDR?</span><span>+</span></button><div class="faq-a"><div>No. The 3B+ specification is centred on full-size HDMI and H.264 / MPEG-4 decoding up to 1080p30. The previous page's 4K60 HDR claim has been removed to keep this page accurate.</div></div></div>
+        <div class="faq-item reveal"><button class="faq-q" onclick="toggleFaq(this)"><span>What power connector does it use?</span><span>+</span></button><div class="faq-a"><div>The Raspberry Pi 3 Model B+ uses a 5V / 2.5A micro-USB DC input. It is not a USB-C-powered board.</div></div></div>
+        <div class="faq-item reveal"><button class="faq-q" onclick="toggleFaq(this)"><span>Are the photographs real?</span><span>+</span></button><div class="faq-a"><div>The Raspberry Pi board and Kodi screenshots shown on this page come from real hardware/software sources. The Streambox retail-packaging graphic is explicitly labelled as a concept render because a genuine production photograph was not provided.</div></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid"><div class="footer-brand">Streambox</div><div class="footer-links"><a href="#overview">Overview</a><a href="#hardware">Hardware</a><a href="#kodi">Kodi</a><a href="#specs">Specs</a><a href="#box">In the box</a><a href="#faq">Support</a></div></div>
+    <div class="legal">Raspberry Pi and Raspberry Pi 3 Model B+ are trademarks of Raspberry Pi Ltd. Kodi is software developed by the Kodi Foundation. Raspberry Pi imagery: <a href="https://commons.wikimedia.org/wiki/File:Raspberry_Pi_3_Model_B%2B.jpg" target="_blank" rel="noopener">Wikimedia Commons / Raspberry Pi Foundation</a> (CC BY-SA 4.0). Kodi imagery: <a href="https://mirrors.kodi.tv/screenshots/" target="_blank" rel="noopener">official Kodi screenshot repository</a>. This Streambox page is not affiliated with or endorsed by Apple, Raspberry Pi Ltd., or the Kodi Foundation.</div>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(btn){btn.closest('.faq-item').classList.toggle('open')}
+function addToBag(){document.getElementById('bagNote').textContent='Streambox added to bag. Connect this action to your production checkout before taking real orders.';}
+const observer=new IntersectionObserver((entries)=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12,rootMargin:'0px 0px -40px'});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
