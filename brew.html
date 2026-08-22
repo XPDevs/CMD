@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <title>Brew & Co. — Premium Coffee</title>
 
     <!-- Favicon SVG (matches logo) -->
@@ -19,12 +19,15 @@
         }
         html {
             scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
         }
         body {
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             background: #F7F1E3;
             color: #2E241B;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         a {
             color: inherit;
@@ -33,24 +36,34 @@
         button {
             cursor: pointer;
             font: inherit;
+            touch-action: manipulation;
+            min-height: 44px;
+            min-width: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
         input,
         textarea,
         select {
             font: inherit;
+            min-height: 44px;
+            padding: 0.5rem 0.75rem;
         }
         img,
         svg {
             display: block;
             max-width: 100%;
+            height: auto;
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1.5rem;
+            width: 100%;
         }
 
-        /* ── Theme Variables (Light only) ── */
+        /* ── Theme Variables ── */
         :root {
             --background: #F7F1E3;
             --foreground: #2E241B;
@@ -183,6 +196,16 @@
                 transform: translateX(0);
             }
         }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
         .animate-fade {
             animation: fadeIn 0.4s ease forwards;
@@ -242,6 +265,7 @@
             border-bottom: 1px solid var(--border);
             background: rgba(247, 241, 227, 0.92);
             backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             position: sticky;
             top: 0;
             z-index: 50;
@@ -251,7 +275,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 4.5rem;
+            min-height: 4.5rem;
+            padding: 0.5rem 0;
             flex-wrap: wrap;
             gap: 0.5rem;
         }
@@ -266,7 +291,9 @@
             border: none;
             color: var(--foreground);
             cursor: pointer;
-            padding: 0;
+            padding: 0.25rem 0;
+            min-height: 44px;
+            min-width: 44px;
         }
         .logo svg {
             width: 2.4rem;
@@ -299,6 +326,8 @@
             transition: background 0.2s, color 0.2s;
             cursor: pointer;
             white-space: nowrap;
+            min-height: 44px;
+            min-width: 44px;
         }
         .nav-links button:hover {
             background: var(--accent);
@@ -321,15 +350,18 @@
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 0.1rem 0.3rem;
+            min-height: 44px;
         }
         .lang-currency select {
             background: transparent;
             border: none;
-            font-size: 0.75rem;
-            padding: 0.2rem 0.1rem;
+            font-size: 0.8rem;
+            padding: 0.2rem 0.3rem;
             color: var(--foreground);
             cursor: pointer;
             outline: none;
+            min-height: 36px;
+            min-width: 36px;
         }
         .lang-currency select option {
             background: var(--card);
@@ -348,6 +380,8 @@
             gap: 0.25rem;
             transition: background 0.2s;
             cursor: pointer;
+            min-height: 44px;
+            min-width: 44px;
         }
         .cart-btn:hover {
             background: var(--accent);
@@ -373,6 +407,8 @@
             gap: 0.3rem;
             transition: background 0.2s;
             cursor: pointer;
+            min-height: 44px;
+            min-width: 44px;
         }
         .account-btn:hover {
             background: var(--accent);
@@ -388,6 +424,7 @@
             justify-content: center;
             font-size: 0.7rem;
             font-weight: 600;
+            flex-shrink: 0;
         }
         .mobile-menu-btn {
             display: none;
@@ -396,6 +433,9 @@
             font-size: 1.5rem;
             color: var(--foreground);
             cursor: pointer;
+            min-height: 44px;
+            min-width: 44px;
+            padding: 0.25rem;
         }
 
         /* ── Main ── */
@@ -416,7 +456,7 @@
             padding: 2rem 0 3rem;
         }
         .hero-content h1 {
-            font-size: 3.2rem;
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
             font-weight: 800;
             letter-spacing: -0.03em;
             line-height: 1.1;
@@ -445,6 +485,7 @@
         .btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
             padding: 0.65rem 1.5rem;
             border-radius: var(--radius);
@@ -455,6 +496,9 @@
             background: var(--primary);
             color: var(--primary-foreground);
             cursor: pointer;
+            min-height: 44px;
+            min-width: 44px;
+            touch-action: manipulation;
         }
         .btn:hover {
             opacity: 0.88;
@@ -481,6 +525,8 @@
         .btn-sm {
             padding: 0.4rem 1rem;
             font-size: 0.8rem;
+            min-height: 36px;
+            min-width: 36px;
         }
         .btn-block {
             width: 100%;
@@ -503,7 +549,7 @@
             margin-bottom: 2.5rem;
         }
         .section-header h2 {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 4vw, 2rem);
             font-weight: 700;
             letter-spacing: -0.02em;
         }
@@ -583,6 +629,8 @@
             background: var(--primary);
             color: var(--primary-foreground);
             cursor: pointer;
+            min-height: 40px;
+            min-width: 40px;
         }
         .product-card .actions button.outline {
             background: transparent;
@@ -615,6 +663,8 @@
             font-weight: 500;
             transition: all 0.2s ease;
             cursor: pointer;
+            min-height: 40px;
+            min-width: 40px;
         }
         .filter-bar button.active {
             background: var(--primary);
@@ -650,7 +700,7 @@
             max-height: 360px;
         }
         .detail-info h1 {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 4vw, 2rem);
             font-weight: 700;
             letter-spacing: -0.02em;
             margin-bottom: 0.5rem;
@@ -700,11 +750,16 @@
             border-radius: var(--radius);
             background: var(--background);
             color: var(--foreground);
+            min-height: 44px;
         }
         .detail-info .actions {
             display: flex;
             gap: 0.75rem;
             flex-wrap: wrap;
+        }
+        .detail-info .actions button {
+            min-height: 44px;
+            min-width: 44px;
         }
 
         /* ── About ── */
@@ -715,7 +770,7 @@
             align-items: center;
         }
         .about-text h2 {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 4vw, 2rem);
             font-weight: 700;
             letter-spacing: -0.02em;
             margin-bottom: 1rem;
@@ -789,6 +844,7 @@
             color: var(--foreground);
             margin-bottom: 1rem;
             transition: border-color 0.2s, box-shadow 0.2s;
+            min-height: 44px;
         }
         .auth-container .auth-card input:focus {
             outline: none;
@@ -814,6 +870,9 @@
             color: var(--primary);
             font-weight: 600;
             cursor: pointer;
+            min-height: 44px;
+            min-width: 44px;
+            padding: 0.25rem 0.5rem;
         }
         .auth-container .auth-toggle button:hover {
             text-decoration: underline;
@@ -826,6 +885,7 @@
         }
         .account-dashboard .account-header {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             gap: 1.5rem;
             padding: 1.5rem;
@@ -847,12 +907,16 @@
             font-weight: 700;
             flex-shrink: 0;
         }
+        .account-dashboard .account-header .info {
+            flex: 1;
+        }
         .account-dashboard .account-header .info h2 {
             font-size: 1.3rem;
             font-weight: 700;
         }
         .account-dashboard .account-header .info p {
             color: var(--muted-foreground);
+            word-break: break-all;
         }
         .account-dashboard .account-grid {
             display: grid;
@@ -880,6 +944,7 @@
             padding: 0.3rem 0;
             border-bottom: 1px solid var(--border);
             font-size: 0.85rem;
+            flex-wrap: wrap;
         }
         .account-dashboard .account-card .order-item:last-child {
             border-bottom: none;
@@ -914,6 +979,7 @@
             color: var(--foreground);
             width: 100%;
             transition: border-color 0.2s, box-shadow 0.2s;
+            min-height: 44px;
         }
         .contact-form input:focus,
         .contact-form textarea:focus,
@@ -952,7 +1018,7 @@
         /* ── Blog ── */
         .blog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
         }
         .blog-card {
@@ -1004,7 +1070,7 @@
             font-size: 0.9rem;
         }
         .blog-detail-header h1 {
-            font-size: 2.2rem;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
             font-weight: 700;
             letter-spacing: -0.02em;
             margin: 0.5rem 0 0.75rem;
@@ -1065,10 +1131,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 0.5rem;
         }
         .faq-item .q .icon {
             font-size: 1.2rem;
             transition: transform 0.25s;
+            flex-shrink: 0;
         }
         .faq-item.open .q .icon {
             transform: rotate(180deg);
@@ -1088,7 +1156,7 @@
         /* ── Subscriptions ── */
         .sub-plans {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
             padding: 1rem 0;
         }
@@ -1126,7 +1194,7 @@
             margin: 0 auto;
         }
         .policy-content h1 {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 4vw, 2rem);
             font-weight: 700;
             letter-spacing: -0.02em;
             margin-bottom: 1.5rem;
@@ -1178,6 +1246,8 @@
             gap: 0.75rem;
             max-width: 440px;
             margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         .newsletter input {
             flex: 1;
@@ -1187,11 +1257,16 @@
             background: var(--background);
             color: var(--foreground);
             transition: border-color 0.2s, box-shadow 0.2s;
+            min-height: 44px;
+            min-width: 200px;
         }
         .newsletter input:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(188, 101, 55, 0.15);
+        }
+        .newsletter form .btn {
+            min-height: 44px;
         }
 
         /* ── Footer ── */
@@ -1224,6 +1299,7 @@
             padding: 0.25rem 0.8rem;
             border-radius: 9999px;
             border: 1px solid var(--border);
+            min-height: 36px;
         }
         .footer-brand .uk-badge svg {
             width: 1.2rem;
@@ -1246,7 +1322,11 @@
             font-size: 0.9rem;
             transition: color 0.2s;
             cursor: pointer;
-            padding: 0;
+            padding: 0.25rem 0;
+            min-height: 36px;
+            min-width: 36px;
+            display: inline-flex;
+            align-items: center;
         }
         .footer ul button:hover {
             color: var(--primary);
@@ -1256,6 +1336,9 @@
             font-size: 0.9rem;
             transition: color 0.2s;
             cursor: pointer;
+            padding: 0.25rem 0;
+            display: inline-block;
+            min-height: 36px;
         }
         .footer ul a:hover {
             color: var(--primary);
@@ -1278,6 +1361,11 @@
         .footer-social a {
             color: var(--muted-foreground);
             transition: color 0.2s;
+            min-height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .footer-social a:hover {
             color: var(--primary);
@@ -1287,7 +1375,7 @@
         .payment-icons {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.75rem;
+            gap: 0.5rem;
             align-items: center;
             justify-content: center;
             margin-top: 0.5rem;
@@ -1296,11 +1384,11 @@
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 0.3rem 0.6rem;
+            padding: 0.2rem 0.4rem;
             display: flex;
             align-items: center;
-            gap: 0.3rem;
-            font-size: 0.65rem;
+            gap: 0.2rem;
+            font-size: 0.6rem;
             font-weight: 600;
             color: var(--muted-foreground);
             transition: border-color 0.2s;
@@ -1337,6 +1425,7 @@
             inset: 0;
             background: rgba(46, 36, 27, 0.4);
             backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             z-index: 100;
             opacity: 0;
             pointer-events: none;
@@ -1384,6 +1473,11 @@
             padding: 0.25rem;
             transition: transform 0.2s;
             cursor: pointer;
+            min-height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .cart-sidebar .close-btn:hover {
             transform: rotate(90deg);
@@ -1431,6 +1525,11 @@
             border-radius: var(--radius);
             transition: background 0.2s, color 0.2s;
             cursor: pointer;
+            min-height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .cart-item .remove:hover {
             background: var(--destructive);
@@ -1456,6 +1555,7 @@
             font-size: 1rem;
             transition: all 0.2s ease;
             cursor: pointer;
+            min-height: 48px;
         }
         .cart-checkout:hover {
             opacity: 0.85;
@@ -1474,6 +1574,7 @@
             inset: 0;
             background: rgba(46, 36, 27, 0.5);
             backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             z-index: 200;
             display: flex;
             align-items: center;
@@ -1481,6 +1582,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
+            padding: 1rem;
         }
         .modal-overlay.open {
             opacity: 1;
@@ -1491,7 +1593,7 @@
             border: 1px solid var(--border);
             border-radius: var(--radius);
             max-width: 480px;
-            width: 92%;
+            width: 100%;
             padding: 2rem;
             box-shadow: var(--shadow-lg);
             transform: scale(0.95) translateY(10px);
@@ -1520,6 +1622,11 @@
             transition: transform 0.2s;
             padding: 0.25rem;
             cursor: pointer;
+            min-height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .modal-close-btn:hover {
             transform: rotate(90deg);
@@ -1532,6 +1639,7 @@
         }
         .modal-body .btn {
             margin-top: 0.5rem;
+            min-height: 44px;
         }
         .modal-body .cart-summary-item {
             display: flex;
@@ -1539,6 +1647,7 @@
             padding: 0.5rem 0;
             border-bottom: 1px solid var(--border);
             font-size: 0.95rem;
+            flex-wrap: wrap;
         }
         .modal-body .cart-summary-total {
             display: flex;
@@ -1549,10 +1658,17 @@
         }
 
         /* ── Responsive ── */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 1.25rem;
+            }
+        }
+
         @media (max-width: 900px) {
             .hero {
                 grid-template-columns: 1fr;
                 text-align: center;
+                gap: 1.5rem;
             }
             .hero-content p {
                 margin-left: auto;
@@ -1582,24 +1698,43 @@
                 padding: 0.5rem 1.5rem;
                 gap: 0.25rem;
                 box-shadow: var(--shadow-card);
+                animation: slideDown 0.25s ease forwards;
             }
             .nav-links.open {
                 display: flex;
             }
+            .nav-links button {
+                justify-content: flex-start;
+                width: 100%;
+                padding: 0.75rem;
+                min-height: 48px;
+            }
             .mobile-menu-btn {
-                display: block;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             .nav-actions .cart-btn span.label {
                 display: none;
             }
             .lang-currency select {
                 font-size: 0.7rem;
-                padding: 0.1rem 0.1rem;
+                padding: 0.1rem 0.2rem;
+                min-height: 32px;
+                min-width: 32px;
             }
             .account-dashboard .account-grid {
                 grid-template-columns: 1fr;
             }
+            .account-dashboard .account-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .account-dashboard .account-header .info {
+                width: 100%;
+            }
         }
+
         @media (max-width: 600px) {
             .footer-grid {
                 grid-template-columns: 1fr;
@@ -1612,12 +1747,16 @@
             }
             .newsletter form {
                 flex-direction: column;
+                align-items: center;
+            }
+            .newsletter input {
+                min-width: 100%;
             }
             .hero-content h1 {
-                font-size: 2.25rem;
+                font-size: clamp(1.8rem, 8vw, 2.5rem);
             }
             .section-header h2 {
-                font-size: 1.5rem;
+                font-size: clamp(1.3rem, 5vw, 1.8rem);
             }
             .detail-info .specs {
                 grid-template-columns: 1fr;
@@ -1626,36 +1765,132 @@
                 width: 100vw;
                 max-width: 100vw;
                 border-left: none;
+                border-radius: 0;
             }
             .blog-grid {
                 grid-template-columns: 1fr;
             }
             .header-inner {
-                height: auto;
-                padding: 0.5rem 0;
+                min-height: 3.5rem;
+                padding: 0.25rem 0;
+                gap: 0.25rem;
+            }
+            .logo {
+                font-size: 1rem;
+            }
+            .logo svg {
+                width: 2rem;
+                height: 2rem;
             }
             .nav-actions .lang-currency {
                 order: 10;
                 width: 100%;
                 justify-content: center;
                 margin-top: 0.25rem;
+                min-height: 40px;
             }
             .auth-container .auth-card .form-row {
                 flex-direction: column;
             }
             .payment-icons .payment-icon {
-                padding: 0.2rem 0.4rem;
-                font-size: 0.55rem;
+                padding: 0.15rem 0.3rem;
+                font-size: 0.5rem;
                 height: 1.6rem;
             }
             .payment-icons .payment-icon svg {
                 width: 1rem;
                 height: 1rem;
             }
+            .sub-plans {
+                grid-template-columns: 1fr 1fr;
+            }
+            .modal-card {
+                padding: 1.5rem;
+                margin: 0.5rem;
+            }
+            .account-dashboard .account-header {
+                padding: 1rem;
+            }
+            .account-dashboard .account-header .avatar-lg {
+                width: 3rem;
+                height: 3rem;
+                font-size: 1.2rem;
+            }
+            .account-btn {
+                font-size: 0.7rem;
+                padding: 0.25rem 0.4rem;
+                min-height: 36px;
+                min-width: 36px;
+            }
+            .account-btn .avatar {
+                width: 1.2rem;
+                height: 1.2rem;
+                font-size: 0.6rem;
+            }
         }
+
         @media (max-width: 420px) {
             .product-grid {
                 grid-template-columns: 1fr;
+            }
+            .sub-plans {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 0 0.75rem;
+            }
+            .header-inner {
+                gap: 0.1rem;
+            }
+            .lang-currency select {
+                font-size: 0.6rem;
+                min-width: 28px;
+            }
+            .cart-btn {
+                padding: 0.25rem 0.4rem;
+                min-height: 36px;
+                min-width: 36px;
+            }
+            .mobile-menu-btn {
+                font-size: 1.2rem;
+                min-height: 36px;
+                min-width: 36px;
+            }
+        }
+
+        /* Touch-friendly adjustments for all interactive elements */
+        button,
+        a,
+        input,
+        select,
+        textarea,
+        .btn,
+        .cart-btn,
+        .account-btn,
+        .nav-links button,
+        .filter-bar button,
+        .product-card .actions button,
+        .faq-item,
+        .blog-card,
+        .logo,
+        .mobile-menu-btn,
+        .close-btn,
+        .remove,
+        .modal-close-btn {
+            touch-action: manipulation;
+        }
+
+        /* Prevent text zoom on input focus for iOS */
+        input,
+        select,
+        textarea {
+            font-size: 16px !important;
+        }
+        @supports (-webkit-touch-callout: none) {
+            input,
+            select,
+            textarea {
+                font-size: 16px !important;
             }
         }
     </style>
@@ -1848,7 +2083,7 @@
                 name: 'Ethiopian Yirgacheffe',
                 category: 'beans',
                 price: 18.50,
-                description: 'Bright and complex with notes of blueberry, dark chocolate, and a silky mouthfeel. Sourced from smallholder farms in the Yirgacheffe region, this washed coffee represents the pinnacle of Ethiopian terroir.',
+                description: 'Bright and complex with notes of blueberry, dark chocolate, and a silky mouthfeel. Sourced from smallholder farms in the Yirgacheffe region.',
                 specs: { Origin: 'Ethiopia', 'Roast Level': 'Light', 'Process': 'Washed', 'Altitude': '1,900–2,200m' },
                 svg: 'ethiopia'
             }, {
@@ -1856,7 +2091,7 @@
                 name: 'Colombian Supremo',
                 category: 'beans',
                 price: 14.75,
-                description: 'Rich and balanced with caramel sweetness, nutty undertones, and a smooth finish. Grown in the renowned Huila region, this coffee is carefully roasted to medium-dark to bring out its full body.',
+                description: 'Rich and balanced with caramel sweetness, nutty undertones, and a smooth finish. Grown in the renowned Huila region.',
                 specs: { Origin: 'Colombia', 'Roast Level': 'Medium-Dark', 'Process': 'Washed', 'Altitude': '1,500–1,800m' },
                 svg: 'colombia'
             }, {
@@ -1864,7 +2099,7 @@
                 name: 'Classic Instant Coffee',
                 category: 'instant',
                 price: 9.99,
-                description: 'Premium freeze-dried instant coffee with a bold, full-bodied flavor. Made from 100% Arabica beans, this instant coffee delivers a consistently rich cup in seconds.',
+                description: 'Premium freeze-dried instant coffee with a bold, full-bodied flavor. Made from 100% Arabica beans.',
                 specs: { Type: 'Freeze-dried', 'Bean': '100% Arabica', 'Caffeine': 'High', 'Serving': '2g per cup' },
                 svg: 'instant-classic'
             }, {
@@ -1872,7 +2107,7 @@
                 name: 'Decaf Instant Smooth',
                 category: 'instant',
                 price: 10.50,
-                description: 'Swiss Water decaffeinated instant coffee with a smooth, mellow taste. Enjoy the full flavor of Arabica beans without the caffeine kick.',
+                description: 'Swiss Water decaffeinated instant coffee with a smooth, mellow taste. Enjoy the full flavor without the caffeine.',
                 specs: { Type: 'Freeze-dried', 'Bean': '100% Arabica', 'Caffeine': 'Decaf', 'Serving': '2g per cup' },
                 svg: 'instant-decaf'
             }, {
@@ -1880,7 +2115,7 @@
                 name: 'House Ground Blend',
                 category: 'beans',
                 price: 13.25,
-                description: 'Our signature house blend, medium roasted with a balanced profile of chocolate, nut, and subtle fruit notes. Perfect for everyday brewing.',
+                description: 'Our signature house blend, medium roasted with a balanced profile of chocolate, nut, and subtle fruit notes.',
                 specs: { Origin: 'Multi-origin', 'Roast Level': 'Medium', 'Process': 'Washed', 'Grind': 'Drip' },
                 svg: 'house-ground'
             }, {
@@ -1888,7 +2123,7 @@
                 name: 'Coffee Pods Variety Pack',
                 category: 'pods',
                 price: 21.00,
-                description: 'Convenient and sustainable coffee pods. Includes 24 pods featuring three distinct roast profiles — Light, Medium, and Dark. Compostable materials.',
+                description: 'Convenient and sustainable coffee pods. Includes 24 pods featuring three distinct roast profiles.',
                 specs: { Compatibility: 'Universal', 'Count': '24 pods', 'Roasts': 'Light, Medium, Dark', 'Material': 'Compostable' },
                 svg: 'pods'
             }, {
@@ -1896,7 +2131,7 @@
                 name: 'Premium Espresso Roast',
                 category: 'beans',
                 price: 16.90,
-                description: 'Dark, rich, and velvety. This espresso roast is blended specifically for a thick crema and intense flavor. Ideal for espresso machines and Moka pots.',
+                description: 'Dark, rich, and velvety. This espresso roast is blended specifically for a thick crema and intense flavor.',
                 specs: { Origin: 'South America', 'Roast Level': 'Dark', 'Process': 'Washed', 'Altitude': '1,200–1,600m' },
                 svg: 'espresso'
             }, {
@@ -1904,7 +2139,7 @@
                 name: 'Cold Brew Concentrate',
                 category: 'instant',
                 price: 19.99,
-                description: 'Smooth, low-acid cold brew concentrate. Simply mix with water or milk for a refreshing iced coffee. Made from 100% Arabica beans.',
+                description: 'Smooth, low-acid cold brew concentrate. Simply mix with water or milk for a refreshing iced coffee.',
                 specs: { Type: 'Concentrate', 'Bean': '100% Arabica', 'Serving': '8-10 cups', 'Storage': 'Refrigerated' },
                 svg: 'coldbrew'
             }, {
@@ -1912,7 +2147,7 @@
                 name: 'Brew & Co. Gift Set',
                 category: 'accessories',
                 price: 49.00,
-                description: 'The perfect gift for coffee lovers. Includes a ceramic mug, a bag of our signature roast, and a bamboo coaster set. Beautifully packaged.',
+                description: 'The perfect gift for coffee lovers. Includes a ceramic mug, a bag of our signature roast, and a bamboo coaster set.',
                 specs: { Includes: 'Mug, Beans, Coasters', 'Bean': 'House Blend', 'Mug': '12 oz Ceramic', 'Packaging': 'Premium Box' },
                 svg: 'giftset'
             }, ];
@@ -1932,21 +2167,21 @@
               <p><strong>1. Heat your water</strong> — Bring filtered water to 195–205°F (90–96°C).</p>
               <p><strong>2. Rinse the filter</strong> — Pour hot water through the filter to warm your dripper and remove any paper taste.</p>
               <p><strong>3. Grind your coffee</strong> — Use a medium-fine grind, similar to table salt. Aim for 22–25g of coffee for a 350ml brew.</p>
-              <p><strong>4. Bloom</strong> — Pour 50g of water over the grounds and let it bloom for 30–45 seconds. This releases CO₂ and prepares the coffee for extraction.</p>
-              <p><strong>5. Pour in stages</strong> — Pour the remaining water in a slow, spiral motion, maintaining a steady stream. Aim to finish pouring by 2 minutes.</p>
+              <p><strong>4. Bloom</strong> — Pour 50g of water over the grounds and let it bloom for 30–45 seconds.</p>
+              <p><strong>5. Pour in stages</strong> — Pour the remaining water in a slow, spiral motion, maintaining a steady stream.</p>
               <p><strong>6. Let it draw down</strong> — The total brew time should be around 3–3.5 minutes. Remove the dripper and enjoy!</p>
             `
             }, {
                 id: 'b2',
                 title: 'Understanding Coffee Roast Profiles',
                 date: '2026-07-02',
-                excerpt: 'Light, medium, dark — each roast level unlocks different flavor compounds. Learn how roast affects acidity, body, and aroma in your cup.',
+                excerpt: 'Light, medium, dark — each roast level unlocks different flavor compounds. Learn how roast affects acidity, body, and aroma.',
                 tag: 'Roasting',
                 content: `
               <p>Roast level is one of the most important factors in determining the flavor of your coffee. The degree of roasting transforms green coffee beans into the aromatic, flavorful beans we brew.</p>
-              <h2>Light Roast</h2><p>Light roasts are roasted to the first crack, preserving the bean's original character. They tend to be brighter, more acidic, and fruitier, with floral and citrus notes.</p>
+              <h2>Light Roast</h2><p>Light roasts are roasted to the first crack, preserving the bean's original character. They tend to be brighter, more acidic, and fruitier.</p>
               <h2>Medium Roast</h2><p>Medium roasts are roasted between the first and second crack. They offer a balance of acidity and body, with more caramel and chocolate notes.</p>
-              <h2>Dark Roast</h2><p>Dark roasts are roasted to the second crack, resulting in a bold, smoky flavor. The bean's natural acidity is diminished, replaced by rich, roasted notes of dark chocolate and nuts.</p>
+              <h2>Dark Roast</h2><p>Dark roasts are roasted to the second crack, resulting in a bold, smoky flavor with rich notes of dark chocolate and nuts.</p>
             `
             }, {
                 id: 'b3',
@@ -1956,9 +2191,9 @@
                 tag: 'Instant',
                 content: `
               <p>Instant coffee often gets a bad rap, but modern production methods have transformed it into a convenient, high-quality option. Let's separate the myths from the truths.</p>
-              <h2>Myth: Instant coffee is made from low-quality beans</h2><p>While some instant coffees use lower-grade beans, specialty instant coffee is made from 100% Arabica beans sourced from the same farms as whole bean coffee.</p>
-              <h2>Myth: Instant coffee is full of chemicals</h2><p>Quality instant coffee is made from 100% coffee beans with no additives. The freeze-drying process simply removes water, preserving the natural flavor compounds.</p>
-              <h2>Truth: Freeze-drying preserves flavor</h2><p>Freeze-drying (lyophilization) is a gentle process that locks in the coffee's volatile aromatics. When you add hot water, those flavors are released, delivering a cup that rivals fresh-brewed coffee.</p>
+              <h2>Myth: Instant coffee is made from low-quality beans</h2><p>While some instant coffees use lower-grade beans, specialty instant coffee is made from 100% Arabica beans sourced from the same farms.</p>
+              <h2>Myth: Instant coffee is full of chemicals</h2><p>Quality instant coffee is made from 100% coffee beans with no additives. The freeze-drying process simply removes water.</p>
+              <h2>Truth: Freeze-drying preserves flavor</h2><p>Freeze-drying (lyophilization) is a gentle process that locks in the coffee's volatile aromatics, delivering a cup that rivals fresh-brewed coffee.</p>
             `
             }, ];
 
@@ -1981,9 +2216,8 @@
                 filterCategory: 'all',
                 faqOpen: [],
                 newsletterEmail: '',
-                // Account system
-                user: null, // { name, email, orders: [] }
-                authMode: 'login', // 'login' | 'register'
+                user: null,
+                authMode: 'login',
             };
 
             // ─── MODAL ──────────────────────────────────────────────────
@@ -2010,29 +2244,17 @@
             const root = document.getElementById('root');
 
             function render() {
-                const productToShow = state.selectedProduct ?
-                    products.find(p => p.id === state.selectedProduct) :
-                    null;
-
-                const blogToShow = state.selectedBlog ?
-                    blogPosts.find(b => b.id === state.selectedBlog) :
-                    null;
-
-                const filtered = state.filterCategory === 'all' ?
-                    products :
-                    products.filter(p => p.category === state.filterCategory);
-
+                const productToShow = state.selectedProduct ? products.find(p => p.id === state.selectedProduct) : null;
+                const blogToShow = state.selectedBlog ? blogPosts.find(b => b.id === state.selectedBlog) : null;
+                const filtered = state.filterCategory === 'all' ? products : products.filter(p => p.category === state
+                .filterCategory);
                 const cartTotal = state.cart.reduce((sum, item) => sum + item.price * item.qty, 0);
                 const cartCount = state.cart.reduce((sum, item) => sum + item.qty, 0);
 
                 const currency = currencies[currentCurrency] || currencies.GBP;
                 const symbol = currency.symbol;
                 const rate = currency.rate;
-
-                const formatPrice = (price) => {
-                    const converted = price * rate;
-                    return symbol + converted.toFixed(2);
-                };
+                const formatPrice = (price) => symbol + (price * rate).toFixed(2);
 
                 const t = translations[currentLanguage] || translations.en;
 
@@ -2053,20 +2275,11 @@
                     </div>
                     <div class="hero-image">${HERO_SVG}</div>
                   </section>
-
                   <section class="section">
-                    <div class="section-header">
-                      <h2>${t.featured}</h2>
-                      <p>${t.featuredDesc}</p>
-                    </div>
-                    <div class="product-grid stagger">
-                      ${products.slice(0, 4).map(p => productCard(p, formatPrice)).join('')}
-                    </div>
-                    <div style="text-align:center;margin-top:1.5rem;">
-                      <button class="btn" data-action="nav" data-param="products">${t.viewAll}</button>
-                    </div>
+                    <div class="section-header"><h2>${t.featured}</h2><p>${t.featuredDesc}</p></div>
+                    <div class="product-grid stagger">${products.slice(0, 4).map(p => productCard(p, formatPrice)).join('')}</div>
+                    <div style="text-align:center;margin-top:1.5rem;"><button class="btn" data-action="nav" data-param="products">${t.viewAll}</button></div>
                   </section>
-
                   <section class="section" style="padding-top:0;">
                     <div class="about-grid">
                       <div>${SUSTAIN_SVG}</div>
@@ -2077,20 +2290,11 @@
                       </div>
                     </div>
                   </section>
-
                   <section class="section">
-                    <div class="section-header">
-                      <h2>${t.blogTitle}</h2>
-                      <p>${t.blogDesc}</p>
-                    </div>
-                    <div class="blog-grid stagger">
-                      ${blogPosts.map(post => blogCard(post)).join('')}
-                    </div>
-                    <div style="text-align:center;margin-top:1.5rem;">
-                      <button class="btn btn-outline" data-action="nav" data-param="blog">${t.readMore}</button>
-                    </div>
+                    <div class="section-header"><h2>${t.blogTitle}</h2><p>${t.blogDesc}</p></div>
+                    <div class="blog-grid stagger">${blogPosts.map(post => blogCard(post)).join('')}</div>
+                    <div style="text-align:center;margin-top:1.5rem;"><button class="btn btn-outline" data-action="nav" data-param="blog">${t.readMore}</button></div>
                   </section>
-
                   <div class="newsletter">
                     <h3>${t.newsletterTitle}</h3>
                     <p>${t.newsletterDesc}</p>
@@ -2105,32 +2309,19 @@
 
                 // ─── PRODUCTS ────────────────────────────────────────────
                 if (state.page === 'products') {
-                    const categories = [
-                        { value: 'all', label: 'All' },
-                        { value: 'beans', label: 'Whole Beans' },
-                        { value: 'instant', label: 'Instant' },
-                        { value: 'pods', label: 'Pods' },
-                        { value: 'accessories', label: 'Accessories' },
-                    ];
+                    const categories = [{ value: 'all', label: 'All' }, { value: 'beans', label: 'Whole Beans' }, { value: 'instant',
+                            label: 'Instant' }, { value: 'pods', label: 'Pods' }, { value: 'accessories',
+                            label: 'Accessories' }];
                     pageContent = `
                 <div class="page">
-                  <div class="section-header">
-                    <h2>Our Coffee Collection</h2>
-                    <p>Whole beans, instant coffee, pods, and accessories — all carefully selected.</p>
-                  </div>
-                  <div class="filter-bar">
-                    ${categories.map(c => `
-                      <button class="${state.filterCategory === c.value ? 'active' : ''}" data-action="filter" data-param="${c.value}">${c.label}</button>
-                    `).join('')}
-                  </div>
-                  <div class="product-grid stagger">
-                    ${filtered.length ? filtered.map(p => productCard(p, formatPrice)).join('') : '<p style="text-align:center;grid-column:1/-1;color:var(--muted-foreground);padding:2rem 0;">No products in this category.</p>'}
-                  </div>
+                  <div class="section-header"><h2>Our Coffee Collection</h2><p>Whole beans, instant coffee, pods, and accessories — all carefully selected.</p></div>
+                  <div class="filter-bar">${categories.map(c => `<button class="${state.filterCategory === c.value ? 'active' : ''}" data-action="filter" data-param="${c.value}">${c.label}</button>`).join('')}</div>
+                  <div class="product-grid stagger">${filtered.length ? filtered.map(p => productCard(p, formatPrice)).join('') : '<p style="text-align:center;grid-column:1/-1;color:var(--muted-foreground);padding:2rem 0;">No products in this category.</p>'}</div>
                 </div>
               `;
                 }
 
-                // ─── PRODUCT DETAIL ──────────────────────────────────────
+                // ─── DETAIL ──────────────────────────────────────────────
                 if (state.page === 'detail' && productToShow) {
                     const p = productToShow;
                     const inCart = state.cart.find(item => item.id === p.id);
@@ -2144,16 +2335,8 @@
                       <h1>${p.name}</h1>
                       <div class="price">${formatPrice(p.price)}</div>
                       <p class="desc">${p.description}</p>
-                      <dl class="specs">
-                        ${Object.entries(p.specs).map(([k,v]) => `
-                          <dt>${k}</dt>
-                          <dd>${v}</dd>
-                        `).join('')}
-                      </dl>
-                      <div class="qty">
-                        <label for="detail-qty">Quantity</label>
-                        <input type="number" id="detail-qty" value="${qtyInCart || 1}" min="1" max="10" />
-                      </div>
+                      <dl class="specs">${Object.entries(p.specs).map(([k,v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
+                      <div class="qty"><label for="detail-qty">Quantity</label><input type="number" id="detail-qty" value="${qtyInCart || 1}" min="1" max="10" /></div>
                       <div class="actions">
                         <button class="btn" data-action="add-cart" data-param="${p.id}">Add to Cart</button>
                         <button class="btn btn-outline" data-action="nav" data-param="products">Back to Shop</button>
@@ -2169,28 +2352,17 @@
                 if (state.page === 'blog' && !blogToShow) {
                     pageContent = `
                 <div class="page">
-                  <div class="section-header">
-                    <h2>Brew & Co. Blog</h2>
-                    <p>Stories, brewing guides, and coffee culture from our team.</p>
-                  </div>
-                  <div class="blog-grid stagger">
-                    ${blogPosts.map(post => blogCard(post)).join('')}
-                  </div>
+                  <div class="section-header"><h2>Brew & Co. Blog</h2><p>Stories, brewing guides, and coffee culture from our team.</p></div>
+                  <div class="blog-grid stagger">${blogPosts.map(post => blogCard(post)).join('')}</div>
                 </div>
               `;
                 }
                 if (state.page === 'blog' && blogToShow) {
                     pageContent = `
                 <div class="page">
-                  <div class="blog-detail-header">
-                    <div class="date">${blogToShow.date}</div>
-                    <h1>${blogToShow.title}</h1>
-                    <span class="tag">${blogToShow.tag}</span>
-                  </div>
+                  <div class="blog-detail-header"><div class="date">${blogToShow.date}</div><h1>${blogToShow.title}</h1><span class="tag">${blogToShow.tag}</span></div>
                   <div class="blog-detail-body">${blogToShow.content}</div>
-                  <div style="margin-top:2rem;">
-                    <button class="btn btn-outline" data-action="nav" data-param="blog">← Back to Blog</button>
-                  </div>
+                  <div style="margin-top:2rem;"><button class="btn btn-outline" data-action="nav" data-param="blog">← Back to Blog</button></div>
                 </div>
               `;
                 }
@@ -2205,17 +2377,12 @@
                       <p>Brew & Co. was born from a passion for exceptional coffee and a commitment to quality. We travel to the world's best coffee-growing regions, building relationships with farmers who share our dedication to excellence.</p>
                       <p>Every bean we source is carefully selected and roasted to perfection. Whether it's a vibrant Ethiopian Yirgacheffe or a bold Sumatran Mandheling, we ensure that each coffee tells the story of its origin.</p>
                       <p>We believe that coffee is more than a beverage — it's a moment of connection, a ritual of comfort, and a celebration of craftsmanship.</p>
-                      <div style="margin-top:1rem;display:inline-flex;align-items:center;gap:0.5rem;background:var(--accent);padding:0.4rem 1rem;border-radius:9999px;border:1px solid var(--border);font-size:0.85rem;color:var(--muted-foreground);">
-                        ${UK_FLAG_SVG} ${t.uk}
-                      </div>
+                      <div style="margin-top:1rem;display:inline-flex;align-items:center;gap:0.5rem;background:var(--accent);padding:0.4rem 1rem;border-radius:9999px;border:1px solid var(--border);font-size:0.85rem;color:var(--muted-foreground);">${UK_FLAG_SVG} ${t.uk}</div>
                     </div>
                     <div>${ABOUT_ROASTERY_SVG}</div>
                   </div>
                   <div class="section" style="padding-top:1rem;">
-                    <div class="section-header">
-                      <h2>Our Values</h2>
-                      <p>Guiding principles that shape every cup we brew.</p>
-                    </div>
+                    <div class="section-header"><h2>Our Values</h2><p>Guiding principles that shape every cup we brew.</p></div>
                     <div class="values">
                       <div class="item"><h4>Quality</h4><p>Only the top 5% of specialty beans make it into our roastery.</p></div>
                       <div class="item"><h4>Sustainability</h4><p>We support eco-friendly farming and ethical trade practices.</p></div>
@@ -2232,30 +2399,19 @@
                     pageContent = `
                 <div class="page">
                   <div class="hero" style="grid-template-columns:1fr 1fr;padding:1rem 0 2rem;">
-                    <div class="hero-content">
-                      <h1>Subscribe & <span>Save</span></h1>
-                      <p>Never run out of your favorite coffee. Choose your roast, set your schedule, and enjoy free shipping on every delivery.</p>
-                      <button class="btn" data-action="nav" data-param="products">Browse Coffees</button>
-                    </div>
+                    <div class="hero-content"><h1>Subscribe & <span>Save</span></h1><p>Never run out of your favorite coffee. Choose your roast, set your schedule, and enjoy free shipping on every delivery.</p><button class="btn" data-action="nav" data-param="products">Browse Coffees</button></div>
                     <div class="hero-image">${SUB_HERO_SVG}</div>
                   </div>
                   <div class="section" style="padding-top:0;">
-                    <div class="section-header">
-                      <h2>Choose Your Plan</h2>
-                      <p>Flexible subscription options tailored to your coffee routine.</p>
-                    </div>
+                    <div class="section-header"><h2>Choose Your Plan</h2><p>Flexible subscription options tailored to your coffee routine.</p></div>
                     <div class="sub-plans">
-                      <div class="sub-plan"><h3>Light Roast</h3><div class="sub-price">${formatPrice(15.50)}/mo</div><p>Bright, fruity, and complex. Perfect for pour-over and drip.</p><button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button></div>
-                      <div class="sub-plan"><h3>Medium Roast</h3><div class="sub-price">${formatPrice(14.50)}/mo</div><p>Balanced, smooth, and versatile. Our most popular choice.</p><button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button></div>
-                      <div class="sub-plan"><h3>Dark Roast</h3><div class="sub-price">${formatPrice(16.00)}/mo</div><p>Bold, smoky, and intense. Ideal for espresso and Moka pot.</p><button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button></div>
-                      <div class="sub-plan" style="border-color:var(--primary);"><h3>Variety Pack</h3><div class="sub-price">${formatPrice(17.50)}/mo</div><p>All three roasts in one box. Explore the full spectrum.</p><button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button></div>
+                      <div class="sub-plan"><h3>Light Roast</h3><div class="sub-price">${formatPrice(15.50)}/mo</div><p>Bright, fruity, and complex.</p><button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button></div>
+                      <div class="sub-plan"><h3>Medium Roast</h3><div class="sub-price">${formatPrice(14.50)}/mo</div><p>Balanced, smooth, and versatile.</p><button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button></div>
+                      <div class="sub-plan"><h3>Dark Roast</h3><div class="sub-price">${formatPrice(16.00)}/mo</div><p>Bold, smoky, and intense.</p><button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button></div>
+                      <div class="sub-plan" style="border-color:var(--primary);"><h3>Variety Pack</h3><div class="sub-price">${formatPrice(17.50)}/mo</div><p>All three roasts in one box.</p><button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button></div>
                     </div>
                   </div>
-                  <div class="newsletter" style="margin-top:1rem;">
-                    <h3>Customize Your Subscription</h3>
-                    <p>Adjust roast, grind size, and delivery frequency anytime.</p>
-                    <button class="btn" data-action="nav" data-param="contact">Contact Us</button>
-                  </div>
+                  <div class="newsletter" style="margin-top:1rem;"><h3>Customize Your Subscription</h3><p>Adjust roast, grind size, and delivery frequency anytime.</p><button class="btn" data-action="nav" data-param="contact">Contact Us</button></div>
                 </div>
               `;
                 }
@@ -2264,21 +2420,11 @@
                 if (state.page === 'faq') {
                     pageContent = `
                 <div class="page">
-                  <div class="section-header">
-                    <h2>Frequently Asked Questions</h2>
-                    <p>Quick answers to the most common questions about our coffee and company.</p>
-                  </div>
-                  <div class="faq-list">
-                    ${faqs.map((item, idx) => {
-                      const open = state.faqOpen.includes(idx);
-                      return `
-                        <div class="faq-item ${open ? 'open' : ''}" data-action="faq-toggle" data-param="${idx}">
-                          <div class="q"><span>${item.q}</span><span class="icon">▾</span></div>
-                          <div class="a">${item.a}</div>
-                        </div>
-                      `;
-                    }).join('')}
-                  </div>
+                  <div class="section-header"><h2>Frequently Asked Questions</h2><p>Quick answers to the most common questions about our coffee and company.</p></div>
+                  <div class="faq-list">${faqs.map((item, idx) => {
+                    const open = state.faqOpen.includes(idx);
+                    return `<div class="faq-item ${open ? 'open' : ''}" data-action="faq-toggle" data-param="${idx}"><div class="q"><span>${item.q}</span><span class="icon">▾</span></div><div class="a">${item.a}</div></div>`;
+                  }).join('')}</div>
                 </div>
               `;
                 }
@@ -2287,10 +2433,7 @@
                 if (state.page === 'contact') {
                     pageContent = `
                 <div class="page">
-                  <div class="section-header">
-                    <h2>Get in Touch</h2>
-                    <p>Have a question about our coffee, an order, or just want to say hello? Reach out to us.</p>
-                  </div>
+                  <div class="section-header"><h2>Get in Touch</h2><p>Have a question about our coffee, an order, or just want to say hello? Reach out to us.</p></div>
                   <div class="contact-grid">
                     <div>
                       <form class="contact-form" id="contact-form" data-action="submit-contact">
@@ -2305,10 +2448,7 @@
                       <div class="item">${ICONS.mail}<div><strong>Email</strong><p>hello@brewandco.com</p></div></div>
                       <div class="item">${ICONS.phone}<div><strong>Phone</strong><p>+44 800 555 COFF</p></div></div>
                       <div class="item">${ICONS.pin}<div><strong>Roastery</strong><p>142 Coffee Lane, London, UK</p></div></div>
-                      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;text-align:center;">
-                        <p style="font-weight:600;margin-bottom:0.25rem;">Visit Our Roastery</p>
-                        <p style="color:var(--muted-foreground);font-size:0.95rem;">Mon–Fri: 8am – 5pm<br />Sat: 9am – 3pm</p>
-                      </div>
+                      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;text-align:center;"><p style="font-weight:600;margin-bottom:0.25rem;">Visit Our Roastery</p><p style="color:var(--muted-foreground);font-size:0.95rem;">Mon–Fri: 8am – 5pm<br />Sat: 9am – 3pm</p></div>
                     </div>
                   </div>
                 </div>
@@ -2318,7 +2458,6 @@
                 // ─── ACCOUNT ──────────────────────────────────────────────
                 if (state.page === 'account') {
                     if (!state.user) {
-                        // Show auth page
                         const isLogin = state.authMode === 'login';
                         pageContent = `
                   <div class="page">
@@ -2333,57 +2472,26 @@
                           ${isLogin ? `<div style="text-align:right;font-size:0.85rem;color:var(--muted-foreground);margin-top:-0.5rem;"><button type="button" style="background:none;border:none;color:var(--primary);cursor:pointer;">${t.auth.forgot}</button></div>` : ''}
                           <button type="submit" class="btn btn-block">${isLogin ? t.auth.signIn : t.auth.signUp}</button>
                         </form>
-                        <div class="auth-toggle">
-                          ${isLogin ? `${t.auth.noAccount} ` : `${t.auth.hasAccount} `}
-                          <button type="button" data-action="toggle-auth">${isLogin ? t.auth.signUp : t.auth.signIn}</button>
-                        </div>
+                        <div class="auth-toggle">${isLogin ? `${t.auth.noAccount} ` : `${t.auth.hasAccount} `}<button type="button" data-action="toggle-auth">${isLogin ? t.auth.signUp : t.auth.signIn}</button></div>
                       </div>
                     </div>
                   </div>
                 `;
                     } else {
-                        // Dashboard
                         const orders = state.user.orders || [];
                         pageContent = `
                   <div class="page">
                     <div class="account-dashboard">
                       <div class="account-header">
                         <div class="avatar-lg">${state.user.name.charAt(0).toUpperCase()}</div>
-                        <div class="info">
-                          <h2>${state.user.name}</h2>
-                          <p>${state.user.email}</p>
-                          <p style="font-size:0.8rem;color:var(--muted-foreground);">📍 ${t.ukAddress}</p>
-                        </div>
-                        <div style="margin-left:auto;">
-                          <button class="btn btn-sm btn-danger" data-action="logout">${t.account.logout}</button>
-                        </div>
+                        <div class="info"><h2>${state.user.name}</h2><p>${state.user.email}</p><p style="font-size:0.8rem;color:var(--muted-foreground);">📍 ${t.ukAddress}</p></div>
+                        <div style="margin-left:auto;"><button class="btn btn-sm btn-danger" data-action="logout">${t.account.logout}</button></div>
                       </div>
                       <div class="account-grid">
-                        <div class="account-card">
-                          <h3>${t.account.orders}</h3>
-                          ${orders.length === 0 ? `<p>${t.account.noOrders}</p>` : orders.map(o => `
-                            <div class="order-item">
-                              <span>#${o.id} — ${o.date}</span>
-                              <span class="status">${o.status}</span>
-                            </div>
-                          `).join('')}
-                          <button class="btn btn-sm btn-outline" style="margin-top:0.5rem;width:100%;">${t.account.orders}</button>
-                        </div>
-                        <div class="account-card">
-                          <h3>${t.account.addresses}</h3>
-                          <p>142 Coffee Lane<br/>London, UK</p>
-                          <button class="btn btn-sm btn-outline" style="margin-top:0.5rem;width:100%;">Manage Addresses</button>
-                        </div>
-                        <div class="account-card">
-                          <h3>${t.account.settings}</h3>
-                          <p>Preferences, notifications, and profile settings.</p>
-                          <button class="btn btn-sm btn-outline" style="margin-top:0.5rem;width:100%;">Edit Profile</button>
-                        </div>
-                        <div class="account-card">
-                          <h3>Payment Methods</h3>
-                          <p>Visa •••• 4242<br/>PayPal •••• user@email.com</p>
-                          <button class="btn btn-sm btn-outline" style="margin-top:0.5rem;width:100%;">Manage Payments</button>
-                        </div>
+                        <div class="account-card"><h3>${t.account.orders}</h3>${orders.length === 0 ? `<p>${t.account.noOrders}</p>` : orders.map(o => `<div class="order-item"><span>#${o.id} — ${o.date}</span><span class="status">${o.status}</span></div>`).join('')}<button class="btn btn-sm btn-outline" style="margin-top:0.5rem;width:100%;">${t.account.orders}</button></div>
+                        <div class="account-card"><h3>${t.account.addresses}</h3><p>142 Coffee Lane<br/>London, UK</p><button class="btn btn-sm btn-outline" style="margin-top:0.5rem;width:100%;">Manage Addresses</button></div>
+                        <div class="account-card"><h3>${t.account.settings}</h3><p>Preferences, notifications, and profile settings.</p><button class="btn btn-sm btn-outline" style="margin-top:0.5rem;width:100%;">Edit Profile</button></div>
+                        <div class="account-card"><h3>Payment Methods</h3><p>Visa •••• 4242<br/>PayPal •••• user@email.com</p><button class="btn btn-sm btn-outline" style="margin-top:0.5rem;width:100%;">Manage Payments</button></div>
                       </div>
                     </div>
                   </div>
@@ -2399,11 +2507,10 @@
                             title: 'Shipping Policy',
                             content: `
                     <p>At Brew & Co., we want to ensure your coffee arrives fresh and on time. Please review our shipping policy below.</p>
-                    <h2>Processing Time</h2><p>Orders are processed within 1-2 business days (Monday–Friday). We do not ship on weekends or holidays. You will receive a confirmation email with tracking information once your order has shipped.</p>
+                    <h2>Processing Time</h2><p>Orders are processed within 1-2 business days (Monday–Friday). We do not ship on weekends or holidays.</p>
                     <h2>Shipping Rates & Delivery</h2><p>We offer standard and expedited shipping options. Rates are calculated at checkout based on weight and destination.</p>
                     <ul><li><strong>Standard Shipping:</strong> 3-7 business days</li><li><strong>Expedited Shipping:</strong> 1-3 business days</li><li><strong>Free Standard Shipping:</strong> On orders over $50 (domestic only)</li></ul>
-                    <h2>International Shipping</h2><p>We currently ship to the United States, Canada, and the United Kingdom. International shipping times vary by destination and customs processing.</p>
-                    <h2>Order Tracking</h2><p>Once your order ships, you will receive a tracking number via email. Please allow up to 24 hours for tracking information to update.</p>
+                    <h2>International Shipping</h2><p>We currently ship to the United States, Canada, and the United Kingdom. International shipping times vary by destination.</p>
                   `
                         },
                         returns: {
@@ -2412,8 +2519,7 @@
                     <p>We want you to love your Brew & Co. coffee. If you're not completely satisfied, we offer a hassle-free return policy.</p>
                     <h2>Return Eligibility</h2><p>You may return unopened coffee products within 30 days of receipt for a full refund. We cannot accept returns on opened coffee or perishable items.</p>
                     <h2>How to Initiate a Return</h2><p>Contact us at hello@brewandco.com with your order number and reason for return. We will provide you with a return shipping label and instructions.</p>
-                    <h2>Refund Process</h2><p>Once we receive your return, we will inspect the item and process your refund within 5-7 business days. Refunds will be issued to the original payment method.</p>
-                    <h2>Exchanges</h2><p>If you received a defective or incorrect item, we will exchange it at no cost. Please contact us immediately to arrange the exchange.</p>
+                    <h2>Refund Process</h2><p>Once we receive your return, we will inspect the item and process your refund within 5-7 business days.</p>
                   `
                         },
                         privacy: {
@@ -2421,9 +2527,8 @@
                             content: `
                     <p>Brew & Co. respects your privacy and is committed to protecting your personal information. This policy explains how we collect, use, and safeguard your data.</p>
                     <h2>Information We Collect</h2><p>We collect information you provide directly, such as your name, email address, phone number, and payment details when you place an order or sign up for our newsletter.</p>
-                    <h2>How We Use Your Information</h2><ul><li>To process and fulfill orders</li><li>To communicate with you about your order or account</li><li>To send promotional offers and updates (you may opt out at any time)</li><li>To improve our website and customer experience</li></ul>
-                    <h2>Data Security</h2><p>We use industry-standard encryption and security measures to protect your personal information. However, no method of transmission over the internet is 100% secure.</p>
-                    <h2>Sharing Your Information</h2><p>We do not sell, trade, or rent your personal information to third parties. We may share your information with service providers who assist us in operating our website and conducting business.</p>
+                    <h2>How We Use Your Information</h2><ul><li>To process and fulfill orders</li><li>To communicate with you about your order or account</li><li>To send promotional offers and updates (you may opt out at any time)</li></ul>
+                    <h2>Data Security</h2><p>We use industry-standard encryption and security measures to protect your personal information.</p>
                   `
                         },
                         terms: {
@@ -2432,14 +2537,10 @@
                     <p>By using the Brew & Co. website and placing an order, you agree to the following terms and conditions. Please read them carefully.</p>
                     <h2>General</h2><p>All content on this site, including text, images, and logos, is the property of Brew & Co. and may not be reproduced without permission.</p>
                     <h2>Products & Pricing</h2><p>We strive to provide accurate product descriptions and pricing. However, we reserve the right to correct any errors or omissions and to change prices without notice.</p>
-                    <h2>Orders & Payment</h2><p>All orders are subject to acceptance and availability. We may refuse or cancel any order for any reason. Payment must be received in full before your order is processed.</p>
-                    <h2>Shipping & Delivery</h2><p>We aim to ship orders within the stated processing times. However, we are not liable for delays caused by carriers or unforeseen events.</p>
-                    <h2>Returns & Refunds</h2><p>Please refer to our Returns & Exchanges policy for information on returns and refunds.</p>
-                    <h2>Limitation of Liability</h2><p>To the fullest extent permitted by law, Brew & Co. shall not be liable for any indirect, incidental, or consequential damages arising from the use of our products or website.</p>
+                    <h2>Orders & Payment</h2><p>All orders are subject to acceptance and availability. Payment must be received in full before your order is processed.</p>
                   `
                         }
                     };
-
                     const data = policyData[state.page];
                     if (data) {
                         pageContent = `
@@ -2453,7 +2554,7 @@
                     }
                 }
 
-                // ─── CART SIDEBAR ──────────────────────────────────────
+                // ─── CART ──────────────────────────────────────────────────
                 const cartItemsHtml = state.cart.length === 0 ?
                     `<div class="cart-empty">Your cart is empty.<br />Start exploring our coffee collection.</div>` :
                     state.cart.map(item => {
@@ -2461,10 +2562,7 @@
                         return `
                     <div class="cart-item">
                       <div style="width:40px;height:40px;flex-shrink:0;">${prod ? (PRODUCT_SVGS[prod.svg] || PRODUCT_SVGS.bean) : PRODUCT_SVGS.bean}</div>
-                      <div class="info">
-                        <h4>${prod ? prod.name : item.id}</h4>
-                        <div class="price">${formatPrice(item.price * item.qty)} × ${item.qty}</div>
-                      </div>
+                      <div class="info"><h4>${prod ? prod.name : item.id}</h4><div class="price">${formatPrice(item.price * item.qty)} × ${item.qty}</div></div>
                       <button class="remove" data-action="remove-cart" data-param="${item.id}">✕</button>
                     </div>
                   `;
@@ -2472,29 +2570,18 @@
 
                 // ─── FULL HTML ──────────────────────────────────────────
                 const nav = t.nav || translations.en.nav;
-                const navItems = [
-                    { key: 'home', label: nav.home },
-                    { key: 'products', label: nav.shop },
-                    { key: 'subscriptions', label: nav.subscribe },
-                    { key: 'about', label: nav.about },
-                    { key: 'blog', label: nav.blog },
-                    { key: 'faq', label: nav.faq },
-                    { key: 'contact', label: nav.contact },
-                    { key: 'account', label: nav.account },
+                const navItems = [{ key: 'home', label: nav.home }, { key: 'products', label: nav.shop }, { key: 'subscriptions',
+                        label: nav.subscribe }, { key: 'about', label: nav.about }, { key: 'blog', label: nav.blog },
+                    { key: 'faq', label: nav.faq }, { key: 'contact', label: nav.contact }, { key: 'account',
+                        label: nav.account }
                 ];
-
                 const navButtons = navItems.map(item =>
                     `<li><button data-action="nav" data-param="${item.key}" class="${state.page === item.key || (item.key === 'products' && (state.page === 'detail' || state.page === 'products')) ? 'active' : ''}">${item.label}</button></li>`
                 ).join('');
 
-                const footerLinks = [
-                    { label: 'Shipping Policy', key: 'shipping' },
-                    { label: 'Returns', key: 'returns' },
-                    { label: 'Privacy Policy', key: 'privacy' },
-                    { label: 'Terms of Service', key: 'terms' },
+                const footerLinks = [{ label: 'Shipping Policy', key: 'shipping' }, { label: 'Returns', key: 'returns' },
+                    { label: 'Privacy Policy', key: 'privacy' }, { label: 'Terms of Service', key: 'terms' }
                 ];
-
-                // Payment icons
                 const paymentIconsHtml = Object.entries(PAYMENT_ICONS).map(([key, svg]) =>
                     `<div class="payment-icon">${svg}</div>`
                 ).join('');
@@ -2507,83 +2594,37 @@
               <div class="app">
                 <header class="header">
                   <div class="container header-inner">
-                    <button class="logo" data-action="nav" data-param="home">
-                      ${LOGO_SVG}
-                      <span>Brew</span> <span class="co">& Co.</span>
-                    </button>
-                    <ul class="nav-links ${state.mobileNav ? 'open' : ''}">
-                      ${navButtons}
-                    </ul>
+                    <button class="logo" data-action="nav" data-param="home">${LOGO_SVG}<span>Brew</span> <span class="co">& Co.</span></button>
+                    <ul class="nav-links ${state.mobileNav ? 'open' : ''}">${navButtons}</ul>
                     <div class="nav-actions">
                       <div class="lang-currency">
-                        <select id="language-select" data-action="change-language">
-                          ${Object.keys(translations).map(l => `<option value="${l}" ${l === currentLanguage ? 'selected' : ''}>${l.toUpperCase()}</option>`).join('')}
-                        </select>
-                        <select id="currency-select" data-action="change-currency">
-                          ${Object.keys(currencies).map(c => `<option value="${c}" ${c === currentCurrency ? 'selected' : ''}>${c}</option>`).join('')}
-                        </select>
+                        <select id="language-select" data-action="change-language">${Object.keys(translations).map(l => `<option value="${l}" ${l === currentLanguage ? 'selected' : ''}>${l.toUpperCase()}</option>`).join('')}</select>
+                        <select id="currency-select" data-action="change-currency">${Object.keys(currencies).map(c => `<option value="${c}" ${c === currentCurrency ? 'selected' : ''}>${c}</option>`).join('')}</select>
                       </div>
                       ${accountBtnHtml}
-                      <button class="cart-btn" data-action="toggle-cart">
-                        ${ICONS.cart}
-                        <span class="label">Cart</span>
-                        ${cartCount > 0 ? `<span class="cart-badge">${cartCount}</span>` : ''}
-                      </button>
+                      <button class="cart-btn" data-action="toggle-cart">${ICONS.cart}<span class="label">Cart</span>${cartCount > 0 ? `<span class="cart-badge">${cartCount}</span>` : ''}</button>
                       <button class="mobile-menu-btn" data-action="toggle-mobile" aria-label="Menu">☰</button>
                     </div>
                   </div>
                 </header>
-
-                <main class="main">
-                  <div class="container">
-                    ${pageContent}
-                  </div>
-                </main>
-
+                <main class="main"><div class="container">${pageContent}</div></main>
                 <footer class="footer">
                   <div class="container">
                     <div class="footer-grid">
                       <div class="footer-brand">
-                        <div style="display:flex;align-items:center;gap:0.5rem;font-weight:700;font-size:1.1rem;">
-                          ${LOGO_SVG}
-                          <span>Brew & Co.</span>
-                        </div>
+                        <div style="display:flex;align-items:center;gap:0.5rem;font-weight:700;font-size:1.1rem;">${LOGO_SVG}<span>Brew & Co.</span></div>
                         <p>Specialty coffee for the discerning palate. Whole beans, instant, and accessories — crafted with care.</p>
                         <div class="uk-badge">${UK_FLAG_SVG} ${t.uk}</div>
                       </div>
-                      <div>
-                        <h4>Shop</h4>
-                        <ul>
-                          <li><button data-action="nav" data-param="products">Whole Beans</button></li>
-                          <li><button data-action="nav" data-param="products">Instant</button></li>
-                          <li><button data-action="nav" data-param="products">Pods</button></li>
-                          <li><button data-action="nav" data-param="subscriptions">Subscriptions</button></li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h4>Company</h4>
-                        <ul>
-                          <li><button data-action="nav" data-param="about">About Us</button></li>
-                          <li><button data-action="nav" data-param="blog">Blog</button></li>
-                          <li><button data-action="nav" data-param="faq">FAQ</button></li>
-                          <li><button data-action="nav" data-param="contact">Contact</button></li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h4>Support</h4>
-                        <ul>
-                          ${footerLinks.map(link => `<li><button data-action="nav" data-param="${link.key}">${link.label}</button></li>`).join('')}
-                        </ul>
-                      </div>
+                      <div><h4>Shop</h4><ul><li><button data-action="nav" data-param="products">Whole Beans</button></li><li><button data-action="nav" data-param="products">Instant</button></li><li><button data-action="nav" data-param="products">Pods</button></li><li><button data-action="nav" data-param="subscriptions">Subscriptions</button></li></ul></div>
+                      <div><h4>Company</h4><ul><li><button data-action="nav" data-param="about">About Us</button></li><li><button data-action="nav" data-param="blog">Blog</button></li><li><button data-action="nav" data-param="faq">FAQ</button></li><li><button data-action="nav" data-param="contact">Contact</button></li></ul></div>
+                      <div><h4>Support</h4><ul>${footerLinks.map(link => `<li><button data-action="nav" data-param="${link.key}">${link.label}</button></li>`).join('')}</ul></div>
                     </div>
-
-                    <!-- Payment Icons -->
                     <div style="border-top:1px solid var(--border);padding-top:1rem;margin-bottom:1rem;">
                       <p style="text-align:center;font-size:0.8rem;color:var(--muted-foreground);margin-bottom:0.5rem;">${t.payments}</p>
                       <div class="payment-icons">${paymentIconsHtml}</div>
                       <p class="payment-text">Visa · Mastercard · PayPal · Apple Pay · Google Pay · American Express · Discover · Stripe</p>
                     </div>
-
                     <div class="footer-bottom">
                       <span>&copy; 2026 Brew & Co. All rights reserved. — London, UK</span>
                       <div class="footer-social">
@@ -2595,28 +2636,20 @@
                     </div>
                   </div>
                 </footer>
-
                 <div class="cart-overlay ${state.isCartOpen ? 'open' : ''}" data-action="toggle-cart"></div>
                 <div class="cart-sidebar ${state.isCartOpen ? 'open' : ''}">
-                  <div class="head">
-                    <h2>Your Cart</h2>
-                    <button class="close-btn" data-action="toggle-cart">✕</button>
-                  </div>
+                  <div class="head"><h2>Your Cart</h2><button class="close-btn" data-action="toggle-cart">✕</button></div>
                   <div class="cart-items">${cartItemsHtml}</div>
-                  ${state.cart.length > 0 ? `
-                    <div class="cart-total"><span>Total</span><span>${formatPrice(cartTotal)}</span></div>
-                    <button class="cart-checkout" data-action="checkout">Proceed to Checkout</button>
-                  ` : ''}
+                  ${state.cart.length > 0 ? `<div class="cart-total"><span>Total</span><span>${formatPrice(cartTotal)}</span></div><button class="cart-checkout" data-action="checkout">Proceed to Checkout</button>` : ''}
                 </div>
               </div>
             `;
 
-                // ─── RE-BIND EVENTS ──────────────────────────────────────
+                // Re-bind events
                 document.querySelector('[data-action="close-modal"]')?.addEventListener('click', closeModal);
                 document.getElementById('modal-overlay')?.addEventListener('click', function(e) {
                     if (e.target === this) closeModal();
                 });
-
                 document.getElementById('currency-select')?.addEventListener('change', function() {
                     currentCurrency = this.value;
                     render();
@@ -2636,35 +2669,26 @@
 
                     if (action === 'register') {
                         if (!name || !email || !password) return;
-                        state.user = { name, email, password, orders: [{ id: 'ORD-001', date: '2026-08-20', status: 'Delivered' }] };
-                        openModal('Account Created! 🎉', `
-                  <p>Welcome ${name}! Your account has been created successfully.</p>
-                  <p style="font-size:0.9rem;color:var(--muted-foreground);">You can now track orders, save addresses, and enjoy faster checkout.</p>
-                  <button class="btn" data-action="close-modal" style="margin-top:0.5rem;">Continue</button>
-                `);
+                        state.user = { name, email, password, orders: [{ id: 'ORD-001', date: '2026-08-20',
+                                status: 'Delivered' }] };
+                        openModal('Account Created! 🎉', `<p>Welcome ${name}! Your account has been created successfully.</p><p style="font-size:0.9rem;color:var(--muted-foreground);">You can now track orders, save addresses, and enjoy faster checkout.</p><button class="btn" data-action="close-modal" style="margin-top:0.5rem;">Continue</button>`);
                         state.page = 'account';
                         render();
                     } else if (action === 'login') {
                         if (!email || !password) return;
-                        // Demo login — accept any valid email/password
-                        state.user = { name: 'Coffee Lover', email, password, orders: [{ id: 'ORD-001', date: '2026-08-20', status: 'Delivered' }, { id: 'ORD-002', date: '2026-08-15', status: 'Shipped' }] };
-                        openModal('Welcome Back! ☕', `
-                  <p>You've been signed in successfully.</p>
-                  <p style="font-size:0.9rem;color:var(--muted-foreground);">Your orders and preferences are now available.</p>
-                  <button class="btn" data-action="close-modal" style="margin-top:0.5rem;">Continue</button>
-                `);
+                        state.user = { name: 'Coffee Lover', email, password, orders: [{ id: 'ORD-001',
+                                date: '2026-08-20', status: 'Delivered' }, { id: 'ORD-002', date: '2026-08-15',
+                                status: 'Shipped' }] };
+                        openModal('Welcome Back! ☕', `<p>You've been signed in successfully.</p><p style="font-size:0.9rem;color:var(--muted-foreground);">Your orders and preferences are now available.</p><button class="btn" data-action="close-modal" style="margin-top:0.5rem;">Continue</button>`);
                         state.page = 'account';
                         render();
                     }
                 });
 
-                // Toggle auth mode
                 document.querySelector('[data-action="toggle-auth"]')?.addEventListener('click', function() {
                     state.authMode = state.authMode === 'login' ? 'register' : 'login';
                     render();
                 });
-
-                // Logout
                 document.querySelector('[data-action="logout"]')?.addEventListener('click', function() {
                     state.user = null;
                     state.page = 'home';
@@ -2689,7 +2713,6 @@
             `;
             }
 
-            // ─── BLOG CARD ──────────────────────────────────────────────
             function blogCard(post) {
                 return `
               <div class="blog-card" data-action="view-blog" data-param="${post.id}">
@@ -2819,11 +2842,7 @@
                 const input = document.getElementById('newsletter-input');
                 if (input && input.value) {
                     state.newsletterEmail = input.value;
-                    openModal('Subscribed!', `
-                <p>Thank you for subscribing to the Brew & Co. newsletter!</p>
-                <p style="font-size:0.95rem;">You'll receive brewing tips, new arrivals, and exclusive offers.</p>
-                <button class="btn" data-action="close-modal" style="margin-top:0.5rem;">Got it</button>
-              `);
+                    openModal('Subscribed!', `<p>Thank you for subscribing to the Brew & Co. newsletter!</p><p style="font-size:0.95rem;">You'll receive brewing tips, new arrivals, and exclusive offers.</p><button class="btn" data-action="close-modal" style="margin-top:0.5rem;">Got it</button>`);
                     render();
                 }
             }
@@ -2831,11 +2850,7 @@
             function handleContact(e) {
                 const name = document.getElementById('contact-name').value;
                 if (name) {
-                    openModal('Message Sent!', `
-                <p>Thanks ${name}, we've received your message.</p>
-                <p style="font-size:0.95rem;">Our team will respond within 24 hours.</p>
-                <button class="btn" data-action="close-modal" style="margin-top:0.5rem;">Close</button>
-              `);
+                    openModal('Message Sent!', `<p>Thanks ${name}, we've received your message.</p><p style="font-size:0.95rem;">Our team will respond within 24 hours.</p><button class="btn" data-action="close-modal" style="margin-top:0.5rem;">Close</button>`);
                     e.target.reset();
                 }
             }
@@ -2843,11 +2858,7 @@
             function handleCheckout() {
                 if (state.cart.length === 0) return;
                 if (!state.user) {
-                    openModal('Sign In Required', `
-                <p>Please sign in or create an account to complete your purchase.</p>
-                <button class="btn" data-action="nav" data-param="account" style="margin-top:0.5rem;">Go to Account</button>
-                <button class="btn btn-outline" data-action="close-modal" style="margin-top:0.5rem;">Close</button>
-              `);
+                    openModal('Sign In Required', `<p>Please sign in or create an account to complete your purchase.</p><button class="btn" data-action="nav" data-param="account" style="margin-top:0.5rem;">Go to Account</button><button class="btn btn-outline" data-action="close-modal" style="margin-top:0.5rem;">Close</button>`);
                     return;
                 }
                 const total = state.cart.reduce((s, i) => s + i.price * i.qty, 0);
@@ -2856,28 +2867,20 @@
                     return `<div class="cart-summary-item"><span>${prod ? prod.name : item.id} × ${item.qty}</span><span>${formatPrice(item.price * item.qty)}</span></div>`;
                 }).join('');
 
-                // Add order to user
                 const orderId = 'ORD-' + String(Math.floor(100 + Math.random() * 900));
                 if (state.user) {
                     if (!state.user.orders) state.user.orders = [];
                     state.user.orders.unshift({ id: orderId, date: new Date().toISOString().split('T')[0], status: 'Processing' });
                 }
 
-                openModal('Order Confirmed! ✅', `
-              <div style="margin-bottom:1rem;">${itemsHtml}</div>
-              <div class="cart-summary-total"><span>Total</span><span>${formatPrice(total)}</span></div>
-              <p style="font-size:0.9rem;margin-top:0.5rem;">Order #${orderId} has been placed. You'll receive a confirmation email shortly.</p>
-              <button class="btn" data-action="close-modal" style="margin-top:1rem;">Continue Shopping</button>
-            `);
+                openModal('Order Confirmed! ✅', `<div style="margin-bottom:1rem;">${itemsHtml}</div><div class="cart-summary-total"><span>Total</span><span>${formatPrice(total)}</span></div><p style="font-size:0.9rem;margin-top:0.5rem;">Order #${orderId} has been placed. You'll receive a confirmation email shortly.</p><button class="btn" data-action="close-modal" style="margin-top:1rem;">Continue Shopping</button>`);
                 state.cart = [];
                 render();
             }
 
             function formatPrice(price) {
                 const currency = currencies[currentCurrency] || currencies.GBP;
-                const symbol = currency.symbol;
-                const rate = currency.rate;
-                return symbol + (price * rate).toFixed(2);
+                return currency.symbol + (price * currency.rate).toFixed(2);
             }
 
             // ─── INIT ────────────────────────────────────────────────────
