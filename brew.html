@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Brew & Co. — Premium Coffee</title>
 
-    <!-- Favicon SVG -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><circle cx='256' cy='256' r='240' fill='%23BC6537'/><circle cx='256' cy='256' r='200' fill='%23F7F1E3'/><path d='M256 128c-40 0-72 32-72 72 0 48 72 112 72 112s72-64 72-112c0-40-32-72-72-72z' fill='%23BC6537'/><path d='M256 200c-8 0-14 6-14 14 0 12 14 28 14 28s14-16 14-28c0-8-6-14-14-14z' fill='%23F7F1E3'/><path d='M196 236l-24-8m168 8l24-8' stroke='%23BC6537' stroke-width='8' stroke-linecap='round'/></svg>" />
+    <!-- Favicon SVG (matches logo) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='96' fill='%23F7F1E3'/><circle cx='256' cy='256' r='196' fill='%232E241B'/><circle cx='256' cy='256' r='164' fill='%23BC6537'/><ellipse cx='256' cy='286' rx='112' ry='86' fill='%23F7F1E3'/><path d='M368 262c34-4 58 14 54 40-4 28-38 44-74 36' fill='none' stroke='%23F7F1E3' stroke-width='22' stroke-linecap='round'/><ellipse cx='256' cy='278' rx='84' ry='60' fill='%235A4632'/><path d='M212 150c-12-20 12-30 2-50m42 52c-12-22 12-32 2-54m42 56c-12-22 12-32 2-54' fill='none' stroke='%232E241B' stroke-width='16' stroke-linecap='round'/></svg>" />
 
     <style>
         /* ── Reset & Base ── */
@@ -183,14 +183,6 @@
                 transform: translateX(0);
             }
         }
-        @keyframes slideInLeft {
-            from {
-                transform: translateX(-100%);
-            }
-            to {
-                transform: translateX(0);
-            }
-        }
 
         .animate-fade {
             animation: fadeIn 0.4s ease forwards;
@@ -275,8 +267,9 @@
             padding: 0;
         }
         .logo svg {
-            width: 2.2rem;
-            height: 2.2rem;
+            width: 2.4rem;
+            height: 2.4rem;
+            flex-shrink: 0;
         }
         .logo span {
             color: var(--primary);
@@ -358,9 +351,6 @@
         }
         .page {
             animation: fadeInUp 0.4s ease forwards;
-        }
-        .page-inner {
-            animation: fadeInUp 0.5s ease forwards;
         }
 
         /* ── Hero ── */
@@ -1363,29 +1353,27 @@
         (function() {
             'use strict';
 
-            // ─── SVG ASSETS ──────────────────────────────────────────────
-
-            // New Logo
+            // ─── LOGO SVG (matches favicon) ─────────────────────────────
             const LOGO_SVG =
-                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><circle cx="256" cy="256" r="240" fill="#BC6537"/><circle cx="256" cy="256" r="200" fill="#F7F1E3"/><path d="M256 128c-40 0-72 32-72 72 0 48 72 112 72 112s72-64 72-112c0-40-32-72-72-72z" fill="#BC6537"/><path d="M256 200c-8 0-14 6-14 14 0 12 14 28 14 28s14-16 14-28c0-8-6-14-14-14z" fill="#F7F1E3"/><path d="M196 236l-24-8m168 8l24-8" stroke="#BC6537" stroke-width="8" stroke-linecap="round"/></svg>`;
+                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="96" fill="#F7F1E3"/><circle cx="256" cy="256" r="196" fill="#2E241B"/><circle cx="256" cy="256" r="164" fill="#BC6537"/><ellipse cx="256" cy="286" rx="112" ry="86" fill="#F7F1E3"/><path d="M368 262c34-4 58 14 54 40-4 28-38 44-74 36" fill="none" stroke="#F7F1E3" stroke-width="22" stroke-linecap="round"/><ellipse cx="256" cy="278" rx="84" ry="60" fill="#5A4632"/><path d="M212 150c-12-20 12-30 2-50m42 52c-12-22 12-32 2-54m42 56c-12-22 12-32 2-54" fill="none" stroke="#2E241B" stroke-width="16" stroke-linecap="round"/></svg>`;
 
-            // Hero SVG
+            // ─── HERO SVG ──────────────────────────────────────────────────
             const HERO_SVG =
                 `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900"><rect width="1600" height="900" fill="#F3EBDB"/><g opacity=".55" fill="#EAE0CB"><ellipse cx="260" cy="180" rx="150" ry="52"/><ellipse cx="1320" cy="130" rx="170" ry="56"/><ellipse cx="820" cy="90" rx="120" ry="42"/></g><rect x="0" y="700" width="1600" height="200" fill="#E4D9BF"/><rect x="0" y="700" width="1600" height="10" fill="#D3C5A4"/><g transform="translate(80 210)"><path d="M0 470l90-190 24 8v182z" fill="#B8945F"/><rect x="114" y="288" width="230" height="182" rx="12" fill="#241C14"/><rect x="128" y="272" width="202" height="30" rx="8" fill="#171009"/><circle cx="234" cy="380" r="58" fill="#BC6537"/><path d="M204 370h50v14c0 15-11 27-25 27s-25-12-25-27z" fill="#F3EBDB"/><path d="M254 373c17-2 26 8 22 20s-16 17-29 14" fill="none" stroke="#F3EBDB" stroke-width="7" stroke-linecap="round"/></g><g transform="translate(420 250)"><path d="M0 420l84-176 22 7v169z" fill="#A07E4C"/><rect x="106" y="270" width="212" height="170" rx="12" fill="#66754A"/><rect x="119" y="255" width="186" height="28" rx="8" fill="#55613D"/><circle cx="216" cy="360" r="54" fill="#E9C46A"/><path d="M188 350h46v13c0 14-10 25-23 25s-23-11-23-25z" fill="#55613D"/></g><g transform="translate(720 240)"><path d="M0 430l86-180 22 7v173z" fill="#B8945F"/><rect x="108" y="280" width="218" height="160" rx="12" fill="#58708A"/><rect x="121" y="264" width="192" height="28" rx="8" fill="#485D74"/><circle cx="222" cy="364" r="54" fill="#F3EBDB"/><path d="M196 376l24-30 15 18 11-12 21 24z" fill="#485D74"/><circle cx="248" cy="340" r="9" fill="#BC6537"/></g><g transform="translate(1030 270)"><path d="M0 400l78-164 20 6v158z" fill="#A07E4C"/><rect x="98" y="256" width="200" height="154" rx="12" fill="#BC6537"/><rect x="110" y="242" width="176" height="26" rx="8" fill="#93431F"/><circle cx="198" cy="338" r="50" fill="#F3EBDB"/><path d="M172 330h42v12c0 13-9 23-21 23s-21-10-21-23z" fill="#BC6537"/></g><g transform="translate(1310 300)"><ellipse cx="90" cy="330" rx="96" ry="26" fill="#D3C5A4"/><path d="M40 330c0-70 22-104 50-104s50 34 50 104z" fill="#FBF7EC"/><path d="M52 330c0-58 16-88 38-88s38 30 38 88" fill="#5A4632"/><path d="M62 262c-10-14 8-20 2-34m34 38c-10-16 8-22 2-38m32 42c-10-14 8-20 2-34" stroke="#2E241B" stroke-width="7" fill="none" stroke-linecap="round"/></g><g fill="#2E241B"><ellipse cx="600" cy="772" rx="19" ry="26" transform="rotate(-20 600 772)"/><ellipse cx="660" cy="796" rx="17" ry="24" transform="rotate(16 660 796)"/><ellipse cx="1020" cy="780" rx="19" ry="26" transform="rotate(18 1020 780)"/><ellipse cx="1080" cy="758" rx="16" ry="22" transform="rotate(-14 1080 758)"/><ellipse cx="1420" cy="790" rx="19" ry="26" transform="rotate(-18 1420 790)"/><ellipse cx="220" cy="800" rx="17" ry="24" transform="rotate(12 220 800)"/></g><g stroke="#F3EBDB" stroke-width="4"><path d="M594 750q6 20 0 40m472-40q6 18 0 36m-458 8q6 18 0 36m-1246-44q6 18 0 36"/></g></svg>`;
 
-            // About Roastery SVG
+            // ─── ABOUT ROASTERY SVG ──────────────────────────────────────
             const ABOUT_ROASTERY_SVG =
                 `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900"><rect width="1400" height="900" fill="#F3EBDB"/><rect x="0" y="740" width="1400" height="160" fill="#D3C5A4"/><rect x="90" y="80" width="420" height="640" fill="#E4D9BF"/><rect x="110" y="100" width="380" height="600" fill="#F9F4E8"/><rect x="130" y="120" width="340" height="240" fill="#EAE0CB"/><rect x="150" y="300" width="300" height="8" fill="#C9B98F"/><rect x="130" y="400" width="340" height="280" fill="#EAE0CB"/><g transform="translate(560 180)"><rect x="40" y="60" width="360" height="330" rx="26" fill="#BC6537"/><circle cx="220" cy="200" r="96" fill="#2E241B"/><circle cx="220" cy="200" r="70" fill="#F3EBDB" opacity=".18"/><circle cx="220" cy="200" r="70" fill="none" stroke="#C9A84C" stroke-width="10"/><rect x="60" y="390" width="320" height="46" rx="12" fill="#93431F"/><path d="M120 106h200l-24-56H144z" fill="#93431F"/><path d="M400 170c44-6 76 22 68 58-8 38-52 58-98 48" fill="none" stroke="#93431F" stroke-width="26" stroke-linecap="round"/><rect x="150" y="436" width="30" height="120" fill="#6E6252"/><rect x="260" y="436" width="30" height="120" fill="#6E6252"/><g transform="translate(196 176)"><ellipse cx="0" cy="0" rx="34" ry="20" fill="#171009"/><path d="M-16-24q-8-16 4-30m28 32q-8-16 4-30" stroke="#171009" stroke-width="8" fill="none" stroke-linecap="round"/></g></g><g transform="translate(1020 300)"><path d="M0 380V210a60 60 0 0 1 60-60h180a60 60 0 0 1 60 60v170z" fill="#C9A876"/><rect x="-14" y="150" width="328" height="36" rx="10" fill="#A07E4C"/><rect x="20" y="186" width="240" height="194" fill="#8A6A3C" opacity=".25"/><g fill="#5A4632"><circle cx="60" cy="230" r="9"/><circle cx="100" cy="250" r="9"/><circle cx="150" cy="228" r="9"/><circle cx="200" cy="252" r="9"/><circle cx="238" cy="232" r="9"/><circle cx="80" cy="290" r="9"/><circle cx="130" cy="308" r="9"/><circle cx="190" cy="292" r="9"/><circle cx="230" cy="310" r="9"/><circle cx="60" cy="350" r="9"/><circle cx="110" cy="366" r="9"/><circle cx="170" cy="352" r="9"/><circle cx="222" cy="370" r="9"/></g><path d="M270 380v-60m-40 60l40-60" stroke="#A07E4C" stroke-width="10"/></g><g transform="translate(120 520)"><path d="M0 200V60h150v140z" fill="#B8945F"/><path d="M0 60l75-50 75 50z" fill="#A07E4C"/><rect x="55" y="110" width="40" height="90" rx="6" fill="#8A6A3C"/></g><g><circle cx="1180" cy="560" r="34" fill="#5A4632"/><path d="M1150 620c0-40 14-64 30-64s30 24 30 64z" fill="#BC6537"/><circle cx="1290" cy="566" r="34" fill="#5A4632"/><path d="M1260 626c0-40 14-64 30-64s30 24 30 64z" fill="#66754A"/><rect x="1136" y="616" width="88" height="124" rx="8" fill="#FBF7EC"/><rect x="1246" y="622" width="88" height="118" rx="8" fill="#FBF7EC"/></g><ellipse cx="700" cy="800" rx="560" ry="30" fill="#2E241B" opacity=".08"/></svg>`;
 
-            // Subscriptions Hero
+            // ─── SUBSCRIPTIONS HERO SVG ──────────────────────────────────
             const SUB_HERO_SVG =
                 `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700"><rect width="1600" height="700" fill="#F3EBDB"/><rect x="0" y="560" width="1600" height="140" fill="#E4D9BF"/><rect x="0" y="560" width="1600" height="8" fill="#D3C5A4"/><g transform="translate(430 250)"><rect x="0" y="120" width="360" height="230" rx="14" fill="#C9A876"/><rect x="-10" y="104" width="380" height="34" rx="10" fill="#B8945F"/><path d="M0 236h360v114H0z" fill="#B8945F"/><rect x="150" y="216" width="60" height="46" rx="8" fill="#93431F"/><circle cx="180" cy="239" r="13" fill="#E9C46A"/></g><g transform="translate(800 190)"><rect x="0" y="110" width="330" height="210" rx="14" fill="#C9A876"/><rect x="-10" y="94" width="350" height="32" rx="10" fill="#B8945F"/><path d="M0 216h330v104H0z" fill="#B8945F"/><rect x="138" y="198" width="54" height="42" rx="8" fill="#93431F"/><circle cx="165" cy="219" r="12" fill="#E9C46A"/></g><g transform="translate(640 330)"><path d="M0 60l90-52 90 52v130H0z" fill="#BC6537"/><path d="M0 60l90 40 90-40v130H0z" fill="#93431F"/><circle cx="90" cy="64" r="17" fill="#E9C46A"/><path d="M90 51a13 13 0 1 1-.01 0z" fill="#FBF7EC"/></g><g transform="translate(1180 300)"><rect x="0" y="0" width="150" height="290" rx="16" fill="#241C14"/><rect x="0" y="0" width="150" height="60" rx="16" fill="#171009"/><circle cx="75" cy="150" r="44" fill="#BC6537"/><path d="M53 142h38v11c0 11-8 19-19 19s-19-8-19-19z" fill="#F3EBDB"/><path d="M91 145c13-1 20 7 17 16s-12 13-22 10" fill="none" stroke="#F3EBDB" stroke-width="6" stroke-linecap="round"/><rect x="30" y="222" width="90" height="10" rx="5" fill="#8A8070"/></g><g transform="translate(180 300)"><rect x="0" y="0" width="170" height="290" rx="16" fill="#66754A"/><rect x="0" y="0" width="170" height="62" rx="16" fill="#55613D"/><circle cx="85" cy="152" r="48" fill="#E9C46A"/><path d="M61 144h40v12c0 12-9 21-20 21s-20-9-20-21z" fill="#55613D"/><rect x="34" y="226" width="102" height="10" rx="5" fill="#F3EBDB"/></g><g fill="#2E241B"><ellipse cx="380" cy="636" rx="18" ry="25" transform="rotate(-18 380 636)"/><ellipse cx="440" cy="656" rx="16" ry="22" transform="rotate(14 440 656)"/><ellipse cx="1090" cy="646" rx="18" ry="25" transform="rotate(16 1090 646)"/><ellipse cx="1150" cy="626" rx="15" ry="21" transform="rotate(-14 1150 626)"/></g></svg>`;
 
-            // Sustainability Farm
+            // ─── SUSTAINABILITY FARM SVG ──────────────────────────────────
             const SUSTAIN_SVG =
                 `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800"><rect width="1400" height="800" fill="#F3EBDB"/><circle cx="1150" cy="150" r="90" fill="#BC6537"/><circle cx="1150" cy="150" r="70" fill="#E9C46A"/><path d="M0 560c180-120 320-60 480-130s280-40 430-110 330-20 490-80v360H0z" fill="#7C8B5E"/><path d="M0 620c200-90 340-30 520-90s300-20 450-70 290 10 430-50v190H0z" fill="#66754A"/><rect x="0" y="700" width="1400" height="100" fill="#55613D"/><g transform="translate(240 420)"><path d="M-40 160c0-90 40-150 90-150s90 60 90 150z" fill="#55613D"/><path d="M-40 160h180m-90-150v150" stroke="#3D4629" stroke-width="8"/><circle cx="-52" cy="60" r="16" fill="#BC6537"/><circle cx="-24" cy="20" r="16" fill="#BC6537"/><circle cx="42" cy="14" r="16" fill="#BC6537"/><circle cx="94" cy="44" r="16" fill="#BC6537"/><circle cx="-64" cy="112" r="14" fill="#BC6537"/><circle cx="104" cy="104" r="14" fill="#BC6537"/></g><g transform="translate(620 380)"><path d="M-36 140c0-80 36-132 80-132s80 52 80 132z" fill="#55613D"/><path d="M-36 140h160m-80-132v132" stroke="#3D4629" stroke-width="7"/><circle cx="-46" cy="56" r="14" fill="#C0392B"/><circle cx="-20" cy="18" r="14" fill="#C0392B"/><circle cx="38" cy="12" r="14" fill="#C0392B"/><circle cx="84" cy="40" r="14" fill="#C0392B"/><circle cx="-58" cy="102" r="12" fill="#C0392B"/><circle cx="92" cy="96" r="12" fill="#C0392B"/></g><g transform="translate(960 400)"><rect x="0" y="60" width="220" height="140" rx="12" fill="#FBF7EC"/><path d="M-16 60l126-84 126 84z" fill="#BC6537"/><rect x="86" y="130" width="48" height="70" rx="8" fill="#8A6A3C"/><rect x="30" y="90" width="60" height="12" rx="6" fill="#D3C5A4"/></g><g transform="translate(60 250)"><ellipse cx="90" cy="260" rx="70" ry="24" fill="#5FA46A"/><path d="M90 260V60m0 40c-26 0-40-16-44-38 26 0 40 16 44 38zm0 60c22 0 36-14 39-34-23 0-36 15-39 34zm0-118c-22 0-35-13-38-32 22 1 35 14 38 32z" stroke="#3D4629" stroke-width="9" fill="none" stroke-linecap="round"/></g></svg>`;
 
-            // Product SVGs
+            // ─── PRODUCT SVGS ──────────────────────────────────────────────
             const PRODUCT_SVGS = {
                 ethiopia: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><defs><linearGradient id="bagE" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7C8B5E"/><stop offset=".5" stop-color="#66754A"/><stop offset="1" stop-color="#7C8B5E"/></linearGradient></defs><rect width="800" height="800" fill="#F7F1E3"/><ellipse cx="400" cy="672" rx="230" ry="26" fill="#2E241B" opacity=".12"/><rect x="258" y="150" width="284" height="60" rx="10" fill="#55613D"/><rect x="240" y="196" width="320" height="470" rx="26" fill="url(#bagE)"/><circle cx="400" cy="356" r="90" fill="#E9C46A"/><circle cx="400" cy="356" r="74" fill="none" stroke="#3D4629" stroke-width="5"/><g stroke="#3D4629" stroke-width="8" stroke-linecap="round"><path d="M400 300v-26M441 318l18-18M458 356h26M342 356h-26M359 318l-18-18"/></g><circle cx="400" cy="356" r="30" fill="#BC6537"/><rect x="298" y="484" width="204" height="12" rx="6" fill="#F7F1E3"/><rect x="330" y="514" width="140" height="12" rx="6" fill="#E9C46A"/><path d="M170 640c20-16 40-16 60 0m420-10c20-16 40-16 60 0" stroke="#66754A" stroke-width="8" fill="none" stroke-linecap="round"/></svg>`,
                 colombia: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><defs><linearGradient id="bagC" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#58708A"/><stop offset=".5" stop-color="#485D74"/><stop offset="1" stop-color="#58708A"/></linearGradient></defs><rect width="800" height="800" fill="#F7F1E3"/><ellipse cx="400" cy="672" rx="230" ry="26" fill="#2E241B" opacity=".12"/><rect x="258" y="150" width="284" height="60" rx="10" fill="#3A4B5E"/><rect x="240" y="196" width="320" height="470" rx="26" fill="url(#bagC)"/><circle cx="400" cy="356" r="90" fill="#F7F1E3"/><circle cx="400" cy="356" r="74" fill="none" stroke="#314050" stroke-width="5"/><path d="M338 384l34-44 22 26 16-18 30 36z" fill="#485D74"/><path d="M330 392h140" stroke="#BC6537" stroke-width="8" stroke-linecap="round"/><circle cx="430" cy="322" r="13" fill="#E9C46A"/><rect x="300" y="486" width="200" height="12" rx="6" fill="#F7F1E3"/><rect x="332" y="516" width="136" height="12" rx="6" fill="#BC6537"/><g stroke="#314050" stroke-width="9" fill="none" stroke-linecap="round"><path d="M168 652l40-52 34 42m360-32l36-46 32 40"/></g></svg>`,
@@ -2059,7 +2047,6 @@
               </div>
             `;
 
-                // Re-bind modal close after render
                 document.querySelector('[data-action="close-modal"]')?.addEventListener('click', closeModal);
                 document.getElementById('modal-overlay')?.addEventListener('click', function(e) {
                     if (e.target === this) closeModal();
