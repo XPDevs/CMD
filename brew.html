@@ -2761,7 +2761,6 @@
                 editingProfile: false,
                 editingAddress: null,
                 editingPayment: null,
-                // Which product image is currently shown in detail view
                 currentDetailImage: 0,
             };
 
@@ -2782,11 +2781,9 @@
                 overlay.classList.add('open');
                 document.body.style.overflow = 'hidden';
 
-                // Re-bind modal close button
                 const closeBtn = document.getElementById('modal-close-btn');
                 closeBtn.onclick = function() { closeModal(); };
 
-                // Re-bind any close-modal actions inside the modal body
                 document.querySelectorAll('#modal-body [data-action="close-modal"]').forEach(el => {
                     el.onclick = function(e) {
                         e.preventDefault();
@@ -2794,7 +2791,6 @@
                     };
                 });
 
-                // Re-bind any nav actions inside the modal body
                 document.querySelectorAll('#modal-body [data-action="nav"]').forEach(el => {
                     el.onclick = function(e) {
                         e.preventDefault();
@@ -2818,7 +2814,6 @@
                 document.body.style.overflow = '';
             }
 
-            // Modal overlay click to close
             document.getElementById('modal-overlay').addEventListener('click', function(e) {
                 if (e.target === this) closeModal();
             });
@@ -2868,18 +2863,10 @@
                 return address;
             }
 
-            async function deleteAddress(addressId) {
-                await dbDelete('addresses', addressId);
-            }
-
             async function savePaymentMethod(pm) {
                 if (!pm.id) pm.id = generateId();
                 await dbPut('paymentMethods', pm);
                 return pm;
-            }
-
-            async function deletePaymentMethod(pmId) {
-                await dbDelete('paymentMethods', pmId);
             }
 
             async function saveCart(userId, items) {
@@ -2888,10 +2875,6 @@
 
             async function saveSession(session) {
                 await dbPut('sessions', session);
-            }
-
-            async function getSession(id) {
-                return await dbGet('sessions', id);
             }
 
             // ─── AUTH ──────────────────────────────────────────────────────
@@ -2909,7 +2892,6 @@
                     createdAt: new Date().toISOString(),
                 };
                 await saveUser(user);
-                // Create default address
                 await saveAddress({
                     id: generateId(),
                     userId: user.id,
@@ -3014,15 +2996,11 @@
                     const inCart = state.cart.find(item => item.id === p.id);
                     const qtyInCart = inCart ? inCart.qty : 0;
 
-                    // Build thumbnail images
                     const thumbImages = p.images || [p.svg];
                     const thumbSvgs = thumbImages.map(img => PRODUCT_SVGS[img] || PRODUCT_SVGS.bean);
-
-                    // Get current image
                     const currentImgIdx = Math.min(state.currentDetailImage || 0, thumbSvgs.length - 1);
                     const mainSvg = thumbSvgs[currentImgIdx] || thumbSvgs[0];
 
-                    // Build reviews
                     const reviewsHtml = (p.reviews || []).map(r =>
                         `<div class="review"><span class="stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</span> <span class="author">${r.author}</span><div class="text">${r.text}</div></div>`
                     ).join('');
@@ -3365,7 +3343,6 @@
                     `<div class="payment-icon">${svg}</div>`
                 ).join('');
 
-                // Show login status in account button
                 const accountBtnHtml = state.user ?
                     `<button class="account-btn" data-action="nav" data-param="account"><span class="avatar">${state.user.name.charAt(0).toUpperCase()}</span> ${state.user.name.split(' ')[0]}</button>` :
                     `<button class="account-btn" data-action="nav" data-param="account">${ICONS.user} Sign In</button>`;
@@ -3427,19 +3404,16 @@
 
                 // ─── RE-BIND EVENTS ──────────────────────────────────────
 
-                // Currency select
                 document.getElementById('currency-select')?.addEventListener('change', function() {
                     currentCurrency = this.value;
                     render();
                 });
 
-                // Language select
                 document.getElementById('language-select')?.addEventListener('change', function() {
                     currentLanguage = this.value;
                     render();
                 });
 
-                // Auth form
                 document.getElementById('auth-form')?.addEventListener('submit', async function(e) {
                     e.preventDefault();
                     const action = this.dataset.action;
@@ -3463,7 +3437,6 @@
                             localStorage.setItem('brewco_userId', user.id);
                             const cartData = await getCart(user.id);
                             if (cartData) state.cart = cartData.items || [];
-                            // Save session
                             await saveSession({ id: user.id, userId: user.id, loggedIn: true, updatedAt: new Date()
                                     .toISOString() });
                             closeModal();
@@ -3498,13 +3471,11 @@
                     }
                 });
 
-                // Toggle auth mode
                 document.querySelector('[data-action="toggle-auth"]')?.addEventListener('click', function() {
                     state.authMode = state.authMode === 'login' ? 'register' : 'login';
                     render();
                 });
 
-                // Logout
                 document.querySelector('[data-action="logout"]')?.addEventListener('click', async function() {
                     if (state.userId && state.cart.length > 0) {
                         await saveCart(state.userId, state.cart);
@@ -3518,9 +3489,6 @@
                     openModal('Logged Out', `<p>You've been signed out successfully. See you soon!</p><button class="btn" data-action="close-modal">Close</button>`);
                 });
 
-                // ─── ACCOUNT ACTIONS ──────────────────────────────────────
-
-                // Add Address
                 document.querySelector('[data-action="add-address"]')?.addEventListener('click', function() {
                     openModal('Add Address', `
                 <form id="address-form" data-action="save-address">
@@ -3565,7 +3533,6 @@
                     });
                 });
 
-                // Add Payment
                 document.querySelector('[data-action="add-payment"]')?.addEventListener('click', function() {
                     openModal('Add Payment Method', `
                 <form id="payment-form" data-action="save-payment">
@@ -3608,7 +3575,6 @@
                     });
                 });
 
-                // Edit Profile
                 document.querySelector('[data-action="edit-profile"]')?.addEventListener('click', function() {
                     const currentName = state.user?.name || '';
                     openModal('Edit Profile', `
@@ -3634,7 +3600,6 @@
                     });
                 });
 
-                // Change Password
                 document.querySelector('[data-action="change-password"]')?.addEventListener('click', function() {
                     openModal('Change Password', `
                 <form id="password-form" data-action="save-password">
@@ -3662,7 +3627,6 @@
                     });
                 });
 
-                // Sync DB
                 document.querySelector('[data-action="sync-db"]')?.addEventListener('click', async function() {
                     if (!state.userId) return;
                     try {
@@ -3684,7 +3648,6 @@
                     } finally { hideLoading(); }
                 });
 
-                // View Orders
                 document.querySelector('[data-action="view-orders"]')?.addEventListener('click', function() {
                     const orders = state.user?.orders || [];
                     if (orders.length === 0) {
@@ -3697,7 +3660,6 @@
                     openModal('Order History', `<div style="max-height:300px;overflow-y:auto;">${ordersHtml}</div><button class="btn" data-action="close-modal" style="margin-top:1rem;">Close</button>`);
                 });
 
-                // Change image in detail view
                 document.querySelectorAll('[data-action="change-image"]')?.forEach(el => {
                     el.addEventListener('click', function() {
                         const idx = parseInt(this.dataset.param);
@@ -3707,9 +3669,6 @@
                         }
                     });
                 });
-
-                // ─── NAV, CART, FILTER, FAQ, CHECKOUT ────────────────────
-                // These are handled by global event listeners below
             }
 
             // ─── PRODUCT CARD ──────────────────────────────────────────
@@ -3803,7 +3762,6 @@
                         render();
                         break;
                     case 'change-image':
-                        // handled inline in render
                         break;
                     default:
                         break;
@@ -3925,7 +3883,6 @@
             async function loadSession() {
                 try {
                     showLoading();
-                    // Try to get user from localStorage
                     const savedUserId = localStorage.getItem('brewco_userId');
                     if (savedUserId) {
                         const user = await getUser(savedUserId);
@@ -3941,6 +3898,11 @@
                             const cartData = await getCart(user.id);
                             if (cartData) state.cart = cartData.items || [];
                         }
+                    }
+                    // Check if any users exist. If none, set authMode to register.
+                    const allUsers = await dbGetAll('users');
+                    if (allUsers.length === 0 && !state.user) {
+                        state.authMode = 'register';
                     }
                 } catch (e) { /* ignore */ } finally { hideLoading(); }
             }
