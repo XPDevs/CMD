@@ -1,0 +1,2252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brew & Co. — Premium Coffee</title>
+
+    <!-- Favicon SVG -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><circle cx='256' cy='256' r='240' fill='%23BC6537'/><circle cx='256' cy='256' r='200' fill='%23F7F1E3'/><path d='M256 128c-40 0-72 32-72 72 0 48 72 112 72 112s72-64 72-112c0-40-32-72-72-72z' fill='%23BC6537'/><path d='M256 200c-8 0-14 6-14 14 0 12 14 28 14 28s14-16 14-28c0-8-6-14-14-14z' fill='%23F7F1E3'/><path d='M196 236l-24-8m168 8l24-8' stroke='%23BC6537' stroke-width='8' stroke-linecap='round'/></svg>" />
+
+    <style>
+        /* ── Reset & Base ── */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #F7F1E3;
+            color: #2E241B;
+            line-height: 1.6;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        button {
+            cursor: pointer;
+            font: inherit;
+        }
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+        img,
+        svg {
+            display: block;
+            max-width: 100%;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ── Theme Variables (Light only) ── */
+        :root {
+            --background: #F7F1E3;
+            --foreground: #2E241B;
+            --card: #FBF7EC;
+            --card-foreground: #2E241B;
+            --popover: #FFFFFF;
+            --popover-foreground: #2E241B;
+            --primary: #BC6537;
+            --primary-foreground: #FFFFFF;
+            --primary-light: #D9895A;
+            --secondary: #EAE0CB;
+            --secondary-foreground: #5A4632;
+            --muted: #E4D9BF;
+            --muted-foreground: #8A8070;
+            --accent: #EAE0CB;
+            --accent-foreground: #2E241B;
+            --destructive: #C0392B;
+            --border: #D3C5A4;
+            --input: #D3C5A4;
+            --ring: #BC6537;
+            --radius: 0.5rem;
+            --shadow-card: 0 8px 30px rgba(46, 36, 27, 0.08);
+            --shadow-lg: 0 20px 60px rgba(46, 36, 27, 0.12);
+            --transition-smooth: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* ── Utility ── */
+        .bg-background {
+            background: var(--background);
+        }
+        .text-foreground {
+            color: var(--foreground);
+        }
+        .text-muted {
+            color: var(--muted-foreground);
+        }
+        .border-theme {
+            border-color: var(--border);
+        }
+        .bg-card {
+            background: var(--card);
+        }
+        .text-card {
+            color: var(--card-foreground);
+        }
+        .bg-primary {
+            background: var(--primary);
+        }
+        .text-primary {
+            color: var(--primary);
+        }
+        .bg-primary-foreground {
+            background: var(--primary-foreground);
+        }
+        .text-primary-foreground {
+            color: var(--primary-foreground);
+        }
+        .bg-secondary {
+            background: var(--secondary);
+        }
+        .text-secondary-foreground {
+            color: var(--secondary-foreground);
+        }
+        .bg-accent {
+            background: var(--accent);
+        }
+        .text-accent-foreground {
+            color: var(--accent-foreground);
+        }
+        .bg-destructive {
+            background: var(--destructive);
+        }
+        .text-destructive-foreground {
+            color: #fff;
+        }
+        .rounded-theme {
+            border-radius: var(--radius);
+        }
+        .border-theme {
+            border: 1px solid var(--border);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        /* ── Animations ── */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        .animate-fade {
+            animation: fadeIn 0.4s ease forwards;
+        }
+        .animate-fade-up {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        .animate-scale {
+            animation: scaleIn 0.35s ease forwards;
+        }
+        .animate-slide-right {
+            animation: slideInRight 0.35s ease forwards;
+        }
+
+        .stagger>*:nth-child(1) {
+            animation-delay: 0.03s;
+        }
+        .stagger>*:nth-child(2) {
+            animation-delay: 0.06s;
+        }
+        .stagger>*:nth-child(3) {
+            animation-delay: 0.09s;
+        }
+        .stagger>*:nth-child(4) {
+            animation-delay: 0.12s;
+        }
+        .stagger>*:nth-child(5) {
+            animation-delay: 0.15s;
+        }
+        .stagger>*:nth-child(6) {
+            animation-delay: 0.18s;
+        }
+        .stagger>*:nth-child(7) {
+            animation-delay: 0.21s;
+        }
+        .stagger>*:nth-child(8) {
+            animation-delay: 0.24s;
+        }
+        .stagger>*:nth-child(9) {
+            animation-delay: 0.27s;
+        }
+        .stagger>*:nth-child(10) {
+            animation-delay: 0.30s;
+        }
+
+        /* ── Layout ── */
+        .app {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--background);
+            color: var(--foreground);
+        }
+
+        /* ── Header / Nav ── */
+        .header {
+            border-bottom: 1px solid var(--border);
+            background: rgba(247, 241, 227, 0.92);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            transition: border-color 0.3s;
+        }
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 4.5rem;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -0.02em;
+            background: none;
+            border: none;
+            color: var(--foreground);
+            cursor: pointer;
+            padding: 0;
+        }
+        .logo svg {
+            width: 2.2rem;
+            height: 2.2rem;
+        }
+        .logo span {
+            color: var(--primary);
+        }
+        .logo .co {
+            color: var(--foreground);
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            align-items: center;
+            list-style: none;
+        }
+        .nav-links button {
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 500;
+            background: transparent;
+            border: none;
+            color: var(--foreground);
+            transition: background 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+        .nav-links button:hover {
+            background: var(--accent);
+        }
+        .nav-links button.active {
+            background: var(--primary);
+            color: var(--primary-foreground);
+        }
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .cart-btn {
+            position: relative;
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--foreground);
+            font-weight: 500;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+        .cart-btn:hover {
+            background: var(--accent);
+        }
+        .cart-badge {
+            background: var(--primary);
+            color: var(--primary-foreground);
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.1rem 0.45rem;
+            border-radius: 9999px;
+            margin-left: 0.15rem;
+        }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--foreground);
+            cursor: pointer;
+        }
+
+        /* ── Main ── */
+        .main {
+            flex: 1;
+            padding: 2.5rem 0;
+        }
+        .page {
+            animation: fadeInUp 0.4s ease forwards;
+        }
+        .page-inner {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 2rem 0 3rem;
+        }
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .hero-content h1 span {
+            color: var(--primary);
+        }
+        .hero-content p {
+            font-size: 1.125rem;
+            color: var(--muted-foreground);
+            max-width: 480px;
+            margin-bottom: 1.5rem;
+        }
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-image svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 20px rgba(46, 36, 27, 0.06));
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.65rem 1.5rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            transition: all 0.25s ease;
+            background: var(--primary);
+            color: var(--primary-foreground);
+            cursor: pointer;
+        }
+        .btn:hover {
+            opacity: 0.88;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(188, 101, 55, 0.2);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--foreground);
+        }
+        .btn-outline:hover {
+            background: var(--accent);
+            box-shadow: none;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: var(--secondary);
+            color: var(--secondary-foreground);
+        }
+        .btn-secondary:hover {
+            background: #d5c9b0;
+        }
+        .btn-sm {
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem;
+        }
+
+        /* ── Section ── */
+        .section {
+            padding: 3rem 0;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .section-header p {
+            color: var(--muted-foreground);
+            max-width: 560px;
+            margin: 0.5rem auto 0;
+        }
+
+        /* ── Product Grid ── */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .product-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        .product-card .image {
+            display: flex;
+            justify-content: center;
+            padding: 0.5rem 0;
+            background: var(--background);
+            border-radius: var(--radius);
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover .image {
+            transform: scale(1.02);
+        }
+        .product-card .image svg {
+            width: 100%;
+            max-height: 140px;
+            object-fit: contain;
+        }
+        .product-card h3 {
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .product-card .category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--muted-foreground);
+        }
+        .product-card .price {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+        .product-card .actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.25rem;
+        }
+        .product-card .actions button {
+            flex: 1;
+            padding: 0.5rem;
+            border-radius: var(--radius);
+            border: none;
+            font-weight: 500;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+            background: var(--primary);
+            color: var(--primary-foreground);
+            cursor: pointer;
+        }
+        .product-card .actions button.outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--foreground);
+        }
+        .product-card .actions button.outline:hover {
+            background: var(--accent);
+        }
+        .product-card .actions button:hover {
+            opacity: 0.85;
+            transform: scale(0.97);
+        }
+
+        /* ── Categories filter ── */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        .filter-bar button {
+            padding: 0.4rem 1.2rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--foreground);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .filter-bar button.active {
+            background: var(--primary);
+            color: var(--primary-foreground);
+            border-color: var(--primary);
+        }
+        .filter-bar button:hover:not(.active) {
+            background: var(--accent);
+        }
+
+        /* ── Detail page ── */
+        .detail-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+        .detail-image {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: box-shadow 0.3s ease;
+        }
+        .detail-image:hover {
+            box-shadow: var(--shadow-lg);
+        }
+        .detail-image svg {
+            max-width: 100%;
+            max-height: 360px;
+        }
+        .detail-info h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+        .detail-info .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0.5rem 0 1rem;
+        }
+        .detail-info .desc {
+            color: var(--muted-foreground);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        .detail-info .specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem 1.5rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--accent);
+            border-radius: var(--radius);
+        }
+        .detail-info .specs dt {
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .detail-info .specs dd {
+            font-size: 0.85rem;
+            color: var(--muted-foreground);
+        }
+        .detail-info .qty {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .detail-info .qty label {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .detail-info .qty input {
+            width: 4rem;
+            padding: 0.3rem 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--background);
+            color: var(--foreground);
+        }
+        .detail-info .actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        /* ── About ── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        .about-text h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        .about-text p {
+            color: var(--muted-foreground);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        .values {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .values .item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .values .item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card);
+        }
+        .values .item h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .values .item p {
+            font-size: 0.85rem;
+            color: var(--muted-foreground);
+        }
+
+        /* ── Contact ── */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .contact-form label {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select {
+            padding: 0.6rem 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--background);
+            color: var(--foreground);
+            width: 100%;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus,
+        .contact-form select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(188, 101, 55, 0.15);
+        }
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .contact-info .item {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+        .contact-info .item svg {
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+        .contact-info .item strong {
+            display: block;
+            font-weight: 600;
+        }
+        .contact-info .item p {
+            color: var(--muted-foreground);
+            font-size: 0.95rem;
+        }
+
+        /* ── Blog ── */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .blog-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        .blog-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-card);
+            border-color: var(--primary);
+        }
+        .blog-card .date {
+            font-size: 0.8rem;
+            color: var(--muted-foreground);
+        }
+        .blog-card h3 {
+            font-weight: 600;
+            font-size: 1.15rem;
+            margin: 0.3rem 0 0.5rem;
+        }
+        .blog-card p {
+            color: var(--muted-foreground);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .blog-card .tag {
+            display: inline-block;
+            margin-top: 0.75rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            background: var(--accent);
+            padding: 0.15rem 0.6rem;
+            border-radius: 9999px;
+        }
+
+        /* Blog Detail */
+        .blog-detail-header {
+            margin-bottom: 2rem;
+        }
+        .blog-detail-header .date {
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+        }
+        .blog-detail-header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin: 0.5rem 0 0.75rem;
+        }
+        .blog-detail-header .tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            background: var(--accent);
+            padding: 0.2rem 0.8rem;
+            border-radius: 9999px;
+        }
+        .blog-detail-body {
+            max-width: 720px;
+        }
+        .blog-detail-body p {
+            color: var(--muted-foreground);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .blog-detail-body h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem;
+        }
+        .blog-detail-body ul {
+            color: var(--muted-foreground);
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-detail-body ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* ── FAQ ── */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .faq-item:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-card);
+        }
+        .faq-item .q {
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-item .q .icon {
+            font-size: 1.2rem;
+            transition: transform 0.25s;
+        }
+        .faq-item.open .q .icon {
+            transform: rotate(180deg);
+        }
+        .faq-item .a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.35s ease;
+            color: var(--muted-foreground);
+            padding-top: 0;
+        }
+        .faq-item.open .a {
+            max-height: 300px;
+            padding-top: 0.75rem;
+        }
+
+        /* ── Subscriptions ── */
+        .sub-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem 0;
+        }
+        .sub-plan {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .sub-plan:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card);
+            border-color: var(--primary);
+        }
+        .sub-plan h3 {
+            font-weight: 700;
+            font-size: 1.15rem;
+        }
+        .sub-plan .sub-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0.5rem 0;
+        }
+        .sub-plan p {
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+        }
+
+        /* ── Newsletter ── */
+        .newsletter {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 2rem;
+            transition: box-shadow 0.3s ease;
+        }
+        .newsletter:hover {
+            box-shadow: var(--shadow-card);
+        }
+        .newsletter h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .newsletter p {
+            color: var(--muted-foreground);
+            max-width: 480px;
+            margin: 0 auto 1.5rem;
+        }
+        .newsletter form {
+            display: flex;
+            gap: 0.75rem;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+        .newsletter input {
+            flex: 1;
+            padding: 0.6rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--background);
+            color: var(--foreground);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .newsletter input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(188, 101, 55, 0.15);
+        }
+
+        /* ── Footer ── */
+        .footer {
+            border-top: 1px solid var(--border);
+            background: var(--background);
+            padding: 2.5rem 0 1.5rem;
+            margin-top: 2rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .footer-brand p {
+            color: var(--muted-foreground);
+            font-size: 0.95rem;
+            max-width: 280px;
+            margin-top: 0.5rem;
+        }
+        .footer h4 {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        .footer ul {
+            list-style: none;
+        }
+        .footer ul li {
+            margin-bottom: 0.4rem;
+        }
+        .footer ul button {
+            background: none;
+            border: none;
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+            transition: color 0.2s;
+            cursor: pointer;
+            padding: 0;
+        }
+        .footer ul button:hover {
+            color: var(--primary);
+        }
+        .footer ul a {
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .footer ul a:hover {
+            color: var(--primary);
+        }
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--muted-foreground);
+        }
+        .footer-social {
+            display: flex;
+            gap: 0.75rem;
+        }
+        .footer-social a {
+            color: var(--muted-foreground);
+            transition: color 0.2s;
+        }
+        .footer-social a:hover {
+            color: var(--primary);
+        }
+
+        /* ── Cart Sidebar ── */
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(46, 36, 27, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .cart-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 420px;
+            max-width: 90vw;
+            height: 100%;
+            background: var(--card);
+            border-left: 1px solid var(--border);
+            z-index: 101;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+        .cart-sidebar.open {
+            transform: translateX(0);
+        }
+        .cart-sidebar .head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .cart-sidebar .head h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        .cart-sidebar .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--foreground);
+            padding: 0.25rem;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        .cart-sidebar .close-btn:hover {
+            transform: rotate(90deg);
+        }
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            padding-right: 0.25rem;
+        }
+        .cart-items::-webkit-scrollbar {
+            width: 4px;
+        }
+        .cart-items::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 9999px;
+        }
+        .cart-item {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+            animation: fadeIn 0.3s ease;
+        }
+        .cart-item .info {
+            flex: 1;
+        }
+        .cart-item .info h4 {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .cart-item .info .price {
+            font-size: 0.85rem;
+            color: var(--primary);
+        }
+        .cart-item .remove {
+            background: none;
+            border: none;
+            color: var(--muted-foreground);
+            font-size: 1rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius);
+            transition: background 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+        .cart-item .remove:hover {
+            background: var(--destructive);
+            color: #fff;
+        }
+        .cart-total {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .cart-checkout {
+            margin-top: 1rem;
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: var(--radius);
+            background: var(--primary);
+            color: var(--primary-foreground);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .cart-checkout:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-card);
+        }
+        .cart-empty {
+            text-align: center;
+            color: var(--muted-foreground);
+            padding: 2rem 0;
+        }
+
+        /* ── Modal ── */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(46, 36, 27, 0.5);
+            backdrop-filter: blur(8px);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            max-width: 480px;
+            width: 92%;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            transform: scale(0.95) translateY(10px);
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .modal-overlay.open .modal-card {
+            transform: scale(1) translateY(0);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .modal-header h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        .modal-close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--muted-foreground);
+            transition: transform 0.2s;
+            padding: 0.25rem;
+            cursor: pointer;
+        }
+        .modal-close-btn:hover {
+            transform: rotate(90deg);
+            color: var(--foreground);
+        }
+        .modal-body p {
+            color: var(--muted-foreground);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        .modal-body .btn {
+            margin-top: 0.5rem;
+        }
+        .modal-body .cart-summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+        .modal-body .cart-summary-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .detail-layout {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 4.5rem;
+                left: 0;
+                right: 0;
+                background: var(--card);
+                border-bottom: 1px solid var(--border);
+                padding: 0.5rem 1.5rem;
+                gap: 0.25rem;
+                box-shadow: var(--shadow-card);
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .nav-actions .cart-btn span.label {
+                display: none;
+            }
+        }
+        @media (max-width: 600px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .values {
+                grid-template-columns: 1fr;
+            }
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .newsletter form {
+                flex-direction: column;
+            }
+            .hero-content h1 {
+                font-size: 2.25rem;
+            }
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+            .detail-info .specs {
+                grid-template-columns: 1fr;
+            }
+            .cart-sidebar {
+                width: 100vw;
+                max-width: 100vw;
+                border-left: none;
+            }
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 420px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <!-- Modal -->
+    <div id="modal-overlay" class="modal-overlay" data-action="close-modal">
+        <div class="modal-card" onclick="event.stopPropagation();">
+            <div class="modal-header">
+                <h3 id="modal-title">Title</h3>
+                <button class="modal-close-btn" data-action="close-modal">✕</button>
+            </div>
+            <div id="modal-body" class="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ─── SVG ASSETS ──────────────────────────────────────────────
+
+            // New Logo
+            const LOGO_SVG =
+                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><circle cx="256" cy="256" r="240" fill="#BC6537"/><circle cx="256" cy="256" r="200" fill="#F7F1E3"/><path d="M256 128c-40 0-72 32-72 72 0 48 72 112 72 112s72-64 72-112c0-40-32-72-72-72z" fill="#BC6537"/><path d="M256 200c-8 0-14 6-14 14 0 12 14 28 14 28s14-16 14-28c0-8-6-14-14-14z" fill="#F7F1E3"/><path d="M196 236l-24-8m168 8l24-8" stroke="#BC6537" stroke-width="8" stroke-linecap="round"/></svg>`;
+
+            // Hero SVG
+            const HERO_SVG =
+                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900"><rect width="1600" height="900" fill="#F3EBDB"/><g opacity=".55" fill="#EAE0CB"><ellipse cx="260" cy="180" rx="150" ry="52"/><ellipse cx="1320" cy="130" rx="170" ry="56"/><ellipse cx="820" cy="90" rx="120" ry="42"/></g><rect x="0" y="700" width="1600" height="200" fill="#E4D9BF"/><rect x="0" y="700" width="1600" height="10" fill="#D3C5A4"/><g transform="translate(80 210)"><path d="M0 470l90-190 24 8v182z" fill="#B8945F"/><rect x="114" y="288" width="230" height="182" rx="12" fill="#241C14"/><rect x="128" y="272" width="202" height="30" rx="8" fill="#171009"/><circle cx="234" cy="380" r="58" fill="#BC6537"/><path d="M204 370h50v14c0 15-11 27-25 27s-25-12-25-27z" fill="#F3EBDB"/><path d="M254 373c17-2 26 8 22 20s-16 17-29 14" fill="none" stroke="#F3EBDB" stroke-width="7" stroke-linecap="round"/></g><g transform="translate(420 250)"><path d="M0 420l84-176 22 7v169z" fill="#A07E4C"/><rect x="106" y="270" width="212" height="170" rx="12" fill="#66754A"/><rect x="119" y="255" width="186" height="28" rx="8" fill="#55613D"/><circle cx="216" cy="360" r="54" fill="#E9C46A"/><path d="M188 350h46v13c0 14-10 25-23 25s-23-11-23-25z" fill="#55613D"/></g><g transform="translate(720 240)"><path d="M0 430l86-180 22 7v173z" fill="#B8945F"/><rect x="108" y="280" width="218" height="160" rx="12" fill="#58708A"/><rect x="121" y="264" width="192" height="28" rx="8" fill="#485D74"/><circle cx="222" cy="364" r="54" fill="#F3EBDB"/><path d="M196 376l24-30 15 18 11-12 21 24z" fill="#485D74"/><circle cx="248" cy="340" r="9" fill="#BC6537"/></g><g transform="translate(1030 270)"><path d="M0 400l78-164 20 6v158z" fill="#A07E4C"/><rect x="98" y="256" width="200" height="154" rx="12" fill="#BC6537"/><rect x="110" y="242" width="176" height="26" rx="8" fill="#93431F"/><circle cx="198" cy="338" r="50" fill="#F3EBDB"/><path d="M172 330h42v12c0 13-9 23-21 23s-21-10-21-23z" fill="#BC6537"/></g><g transform="translate(1310 300)"><ellipse cx="90" cy="330" rx="96" ry="26" fill="#D3C5A4"/><path d="M40 330c0-70 22-104 50-104s50 34 50 104z" fill="#FBF7EC"/><path d="M52 330c0-58 16-88 38-88s38 30 38 88" fill="#5A4632"/><path d="M62 262c-10-14 8-20 2-34m34 38c-10-16 8-22 2-38m32 42c-10-14 8-20 2-34" stroke="#2E241B" stroke-width="7" fill="none" stroke-linecap="round"/></g><g fill="#2E241B"><ellipse cx="600" cy="772" rx="19" ry="26" transform="rotate(-20 600 772)"/><ellipse cx="660" cy="796" rx="17" ry="24" transform="rotate(16 660 796)"/><ellipse cx="1020" cy="780" rx="19" ry="26" transform="rotate(18 1020 780)"/><ellipse cx="1080" cy="758" rx="16" ry="22" transform="rotate(-14 1080 758)"/><ellipse cx="1420" cy="790" rx="19" ry="26" transform="rotate(-18 1420 790)"/><ellipse cx="220" cy="800" rx="17" ry="24" transform="rotate(12 220 800)"/></g><g stroke="#F3EBDB" stroke-width="4"><path d="M594 750q6 20 0 40m472-40q6 18 0 36m-458 8q6 18 0 36m-1246-44q6 18 0 36"/></g></svg>`;
+
+            // About Roastery SVG
+            const ABOUT_ROASTERY_SVG =
+                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900"><rect width="1400" height="900" fill="#F3EBDB"/><rect x="0" y="740" width="1400" height="160" fill="#D3C5A4"/><rect x="90" y="80" width="420" height="640" fill="#E4D9BF"/><rect x="110" y="100" width="380" height="600" fill="#F9F4E8"/><rect x="130" y="120" width="340" height="240" fill="#EAE0CB"/><rect x="150" y="300" width="300" height="8" fill="#C9B98F"/><rect x="130" y="400" width="340" height="280" fill="#EAE0CB"/><g transform="translate(560 180)"><rect x="40" y="60" width="360" height="330" rx="26" fill="#BC6537"/><circle cx="220" cy="200" r="96" fill="#2E241B"/><circle cx="220" cy="200" r="70" fill="#F3EBDB" opacity=".18"/><circle cx="220" cy="200" r="70" fill="none" stroke="#C9A84C" stroke-width="10"/><rect x="60" y="390" width="320" height="46" rx="12" fill="#93431F"/><path d="M120 106h200l-24-56H144z" fill="#93431F"/><path d="M400 170c44-6 76 22 68 58-8 38-52 58-98 48" fill="none" stroke="#93431F" stroke-width="26" stroke-linecap="round"/><rect x="150" y="436" width="30" height="120" fill="#6E6252"/><rect x="260" y="436" width="30" height="120" fill="#6E6252"/><g transform="translate(196 176)"><ellipse cx="0" cy="0" rx="34" ry="20" fill="#171009"/><path d="M-16-24q-8-16 4-30m28 32q-8-16 4-30" stroke="#171009" stroke-width="8" fill="none" stroke-linecap="round"/></g></g><g transform="translate(1020 300)"><path d="M0 380V210a60 60 0 0 1 60-60h180a60 60 0 0 1 60 60v170z" fill="#C9A876"/><rect x="-14" y="150" width="328" height="36" rx="10" fill="#A07E4C"/><rect x="20" y="186" width="240" height="194" fill="#8A6A3C" opacity=".25"/><g fill="#5A4632"><circle cx="60" cy="230" r="9"/><circle cx="100" cy="250" r="9"/><circle cx="150" cy="228" r="9"/><circle cx="200" cy="252" r="9"/><circle cx="238" cy="232" r="9"/><circle cx="80" cy="290" r="9"/><circle cx="130" cy="308" r="9"/><circle cx="190" cy="292" r="9"/><circle cx="230" cy="310" r="9"/><circle cx="60" cy="350" r="9"/><circle cx="110" cy="366" r="9"/><circle cx="170" cy="352" r="9"/><circle cx="222" cy="370" r="9"/></g><path d="M270 380v-60m-40 60l40-60" stroke="#A07E4C" stroke-width="10"/></g><g transform="translate(120 520)"><path d="M0 200V60h150v140z" fill="#B8945F"/><path d="M0 60l75-50 75 50z" fill="#A07E4C"/><rect x="55" y="110" width="40" height="90" rx="6" fill="#8A6A3C"/></g><g><circle cx="1180" cy="560" r="34" fill="#5A4632"/><path d="M1150 620c0-40 14-64 30-64s30 24 30 64z" fill="#BC6537"/><circle cx="1290" cy="566" r="34" fill="#5A4632"/><path d="M1260 626c0-40 14-64 30-64s30 24 30 64z" fill="#66754A"/><rect x="1136" y="616" width="88" height="124" rx="8" fill="#FBF7EC"/><rect x="1246" y="622" width="88" height="118" rx="8" fill="#FBF7EC"/></g><ellipse cx="700" cy="800" rx="560" ry="30" fill="#2E241B" opacity=".08"/></svg>`;
+
+            // Subscriptions Hero
+            const SUB_HERO_SVG =
+                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700"><rect width="1600" height="700" fill="#F3EBDB"/><rect x="0" y="560" width="1600" height="140" fill="#E4D9BF"/><rect x="0" y="560" width="1600" height="8" fill="#D3C5A4"/><g transform="translate(430 250)"><rect x="0" y="120" width="360" height="230" rx="14" fill="#C9A876"/><rect x="-10" y="104" width="380" height="34" rx="10" fill="#B8945F"/><path d="M0 236h360v114H0z" fill="#B8945F"/><rect x="150" y="216" width="60" height="46" rx="8" fill="#93431F"/><circle cx="180" cy="239" r="13" fill="#E9C46A"/></g><g transform="translate(800 190)"><rect x="0" y="110" width="330" height="210" rx="14" fill="#C9A876"/><rect x="-10" y="94" width="350" height="32" rx="10" fill="#B8945F"/><path d="M0 216h330v104H0z" fill="#B8945F"/><rect x="138" y="198" width="54" height="42" rx="8" fill="#93431F"/><circle cx="165" cy="219" r="12" fill="#E9C46A"/></g><g transform="translate(640 330)"><path d="M0 60l90-52 90 52v130H0z" fill="#BC6537"/><path d="M0 60l90 40 90-40v130H0z" fill="#93431F"/><circle cx="90" cy="64" r="17" fill="#E9C46A"/><path d="M90 51a13 13 0 1 1-.01 0z" fill="#FBF7EC"/></g><g transform="translate(1180 300)"><rect x="0" y="0" width="150" height="290" rx="16" fill="#241C14"/><rect x="0" y="0" width="150" height="60" rx="16" fill="#171009"/><circle cx="75" cy="150" r="44" fill="#BC6537"/><path d="M53 142h38v11c0 11-8 19-19 19s-19-8-19-19z" fill="#F3EBDB"/><path d="M91 145c13-1 20 7 17 16s-12 13-22 10" fill="none" stroke="#F3EBDB" stroke-width="6" stroke-linecap="round"/><rect x="30" y="222" width="90" height="10" rx="5" fill="#8A8070"/></g><g transform="translate(180 300)"><rect x="0" y="0" width="170" height="290" rx="16" fill="#66754A"/><rect x="0" y="0" width="170" height="62" rx="16" fill="#55613D"/><circle cx="85" cy="152" r="48" fill="#E9C46A"/><path d="M61 144h40v12c0 12-9 21-20 21s-20-9-20-21z" fill="#55613D"/><rect x="34" y="226" width="102" height="10" rx="5" fill="#F3EBDB"/></g><g fill="#2E241B"><ellipse cx="380" cy="636" rx="18" ry="25" transform="rotate(-18 380 636)"/><ellipse cx="440" cy="656" rx="16" ry="22" transform="rotate(14 440 656)"/><ellipse cx="1090" cy="646" rx="18" ry="25" transform="rotate(16 1090 646)"/><ellipse cx="1150" cy="626" rx="15" ry="21" transform="rotate(-14 1150 626)"/></g></svg>`;
+
+            // Sustainability Farm
+            const SUSTAIN_SVG =
+                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800"><rect width="1400" height="800" fill="#F3EBDB"/><circle cx="1150" cy="150" r="90" fill="#BC6537"/><circle cx="1150" cy="150" r="70" fill="#E9C46A"/><path d="M0 560c180-120 320-60 480-130s280-40 430-110 330-20 490-80v360H0z" fill="#7C8B5E"/><path d="M0 620c200-90 340-30 520-90s300-20 450-70 290 10 430-50v190H0z" fill="#66754A"/><rect x="0" y="700" width="1400" height="100" fill="#55613D"/><g transform="translate(240 420)"><path d="M-40 160c0-90 40-150 90-150s90 60 90 150z" fill="#55613D"/><path d="M-40 160h180m-90-150v150" stroke="#3D4629" stroke-width="8"/><circle cx="-52" cy="60" r="16" fill="#BC6537"/><circle cx="-24" cy="20" r="16" fill="#BC6537"/><circle cx="42" cy="14" r="16" fill="#BC6537"/><circle cx="94" cy="44" r="16" fill="#BC6537"/><circle cx="-64" cy="112" r="14" fill="#BC6537"/><circle cx="104" cy="104" r="14" fill="#BC6537"/></g><g transform="translate(620 380)"><path d="M-36 140c0-80 36-132 80-132s80 52 80 132z" fill="#55613D"/><path d="M-36 140h160m-80-132v132" stroke="#3D4629" stroke-width="7"/><circle cx="-46" cy="56" r="14" fill="#C0392B"/><circle cx="-20" cy="18" r="14" fill="#C0392B"/><circle cx="38" cy="12" r="14" fill="#C0392B"/><circle cx="84" cy="40" r="14" fill="#C0392B"/><circle cx="-58" cy="102" r="12" fill="#C0392B"/><circle cx="92" cy="96" r="12" fill="#C0392B"/></g><g transform="translate(960 400)"><rect x="0" y="60" width="220" height="140" rx="12" fill="#FBF7EC"/><path d="M-16 60l126-84 126 84z" fill="#BC6537"/><rect x="86" y="130" width="48" height="70" rx="8" fill="#8A6A3C"/><rect x="30" y="90" width="60" height="12" rx="6" fill="#D3C5A4"/></g><g transform="translate(60 250)"><ellipse cx="90" cy="260" rx="70" ry="24" fill="#5FA46A"/><path d="M90 260V60m0 40c-26 0-40-16-44-38 26 0 40 16 44 38zm0 60c22 0 36-14 39-34-23 0-36 15-39 34zm0-118c-22 0-35-13-38-32 22 1 35 14 38 32z" stroke="#3D4629" stroke-width="9" fill="none" stroke-linecap="round"/></g></svg>`;
+
+            // Product SVGs
+            const PRODUCT_SVGS = {
+                ethiopia: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><defs><linearGradient id="bagE" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7C8B5E"/><stop offset=".5" stop-color="#66754A"/><stop offset="1" stop-color="#7C8B5E"/></linearGradient></defs><rect width="800" height="800" fill="#F7F1E3"/><ellipse cx="400" cy="672" rx="230" ry="26" fill="#2E241B" opacity=".12"/><rect x="258" y="150" width="284" height="60" rx="10" fill="#55613D"/><rect x="240" y="196" width="320" height="470" rx="26" fill="url(#bagE)"/><circle cx="400" cy="356" r="90" fill="#E9C46A"/><circle cx="400" cy="356" r="74" fill="none" stroke="#3D4629" stroke-width="5"/><g stroke="#3D4629" stroke-width="8" stroke-linecap="round"><path d="M400 300v-26M441 318l18-18M458 356h26M342 356h-26M359 318l-18-18"/></g><circle cx="400" cy="356" r="30" fill="#BC6537"/><rect x="298" y="484" width="204" height="12" rx="6" fill="#F7F1E3"/><rect x="330" y="514" width="140" height="12" rx="6" fill="#E9C46A"/><path d="M170 640c20-16 40-16 60 0m420-10c20-16 40-16 60 0" stroke="#66754A" stroke-width="8" fill="none" stroke-linecap="round"/></svg>`,
+                colombia: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><defs><linearGradient id="bagC" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#58708A"/><stop offset=".5" stop-color="#485D74"/><stop offset="1" stop-color="#58708A"/></linearGradient></defs><rect width="800" height="800" fill="#F7F1E3"/><ellipse cx="400" cy="672" rx="230" ry="26" fill="#2E241B" opacity=".12"/><rect x="258" y="150" width="284" height="60" rx="10" fill="#3A4B5E"/><rect x="240" y="196" width="320" height="470" rx="26" fill="url(#bagC)"/><circle cx="400" cy="356" r="90" fill="#F7F1E3"/><circle cx="400" cy="356" r="74" fill="none" stroke="#314050" stroke-width="5"/><path d="M338 384l34-44 22 26 16-18 30 36z" fill="#485D74"/><path d="M330 392h140" stroke="#BC6537" stroke-width="8" stroke-linecap="round"/><circle cx="430" cy="322" r="13" fill="#E9C46A"/><rect x="300" y="486" width="200" height="12" rx="6" fill="#F7F1E3"/><rect x="332" y="516" width="136" height="12" rx="6" fill="#BC6537"/><g stroke="#314050" stroke-width="9" fill="none" stroke-linecap="round"><path d="M168 652l40-52 34 42m360-32l36-46 32 40"/></g></svg>`,
+                'instant-classic': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><defs><linearGradient id="glass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#EFE8D8" stop-opacity=".9"/><stop offset=".45" stop-color="#FBF7EC"/><stop offset="1" stop-color="#E4DCC8" stop-opacity=".95"/></linearGradient><linearGradient id="lid" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#D9A441"/><stop offset=".5" stop-color="#C08A2A"/><stop offset="1" stop-color="#D9A441"/></linearGradient></defs><rect width="800" height="800" fill="#F7F1E3"/><ellipse cx="400" cy="686" rx="220" ry="24" fill="#2E241B" opacity=".12"/><rect x="290" y="150" width="220" height="58" rx="18" fill="url(#lid)"/><rect x="290" y="176" width="220" height="10" fill="#8A6420" opacity=".55"/><path d="M280 208h240c14 40 20 70 20 110v250c0 60-40 96-140 96s-140-36-140-96V318c0-40 6-70 20-110z" fill="url(#glass)" stroke="#C9BEA4" stroke-width="3"/><path d="M300 330h200l-8 236c-2 40-30 62-92 62s-90-22-92-62z" fill="#5A4632"/><g fill="#3D3021"><circle cx="340" cy="380" r="7"/><circle cx="382" cy="360" r="6"/><circle cx="428" cy="392" r="7"/><circle cx="366" cy="430" r="6"/><circle cx="420" cy="452" r="7"/><circle cx="338" cy="472" r="6"/><circle cx="398" cy="502" r="6"/><circle cx="446" cy="492" r="6"/><circle cx="352" cy="520" r="7"/><circle cx="410" cy="556" r="6"/><circle cx="370" cy="578" r="6"/><circle cx="440" cy="540" r="5"/></g><rect x="308" y="296" width="184" height="52" rx="10" fill="#F7F1E3" opacity=".92"/><rect x="336" y="310" width="128" height="10" rx="5" fill="#2E241B"/><rect x="352" y="330" width="96" height="8" rx="4" fill="#BC6537"/><g transform="rotate(24 590 560)"><ellipse cx="590" cy="500" rx="56" ry="20" fill="#EFE8D8"/><ellipse cx="590" cy="494" rx="48" ry="15" fill="#5A4632"/><rect x="582" y="512" width="16" height="180" rx="8" fill="#C08A2A"/></g></svg>`,
+                'instant-decaf': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><defs><linearGradient id="glass2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#EFE8D8" stop-opacity=".9"/><stop offset=".45" stop-color="#FBF7EC"/><stop offset="1" stop-color="#E4DCC8" stop-opacity=".95"/></linearGradient><linearGradient id="lid2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B0562F"/><stop offset=".5" stop-color="#93431F"/><stop offset="1" stop-color="#B0562F"/></linearGradient></defs><rect width="800" height="800" fill="#F7F1E3"/><ellipse cx="400" cy="686" rx="220" ry="24" fill="#2E241B" opacity=".12"/><rect x="290" y="150" width="220" height="58" rx="18" fill="url(#lid2)"/><rect x="290" y="176" width="220" height="10" fill="#6E2F12" opacity=".55"/><path d="M280 208h240c14 40 20 70 20 110v250c0 60-40 96-140 96s-140-36-140-96V318c0-40 6-70 20-110z" fill="url(#glass2)" stroke="#C9BEA4" stroke-width="3"/><path d="M300 330h200l-8 236c-2 40-30 62-92 62s-90-22-92-62z" fill="#6B5138"/><g fill="#4A3826"><circle cx="342" cy="386" r="7"/><circle cx="386" cy="362" r="6"/><circle cx="428" cy="396" r="7"/><circle cx="364" cy="436" r="6"/><circle cx="420" cy="456" r="7"/><circle cx="338" cy="478" r="6"/><circle cx="400" cy="508" r="6"/><circle cx="448" cy="496" r="6"/><circle cx="354" cy="526" r="7"/><circle cx="412" cy="560" r="6"/><circle cx="372" cy="582" r="6"/></g><rect x="308" y="296" width="184" height="52" rx="10" fill="#F7F1E3" opacity=".92"/><rect x="344" y="310" width="112" height="10" rx="5" fill="#2E241B"/><rect x="356" y="330" width="88" height="8" rx="4" fill="#93431F"/><g stroke="#7C8B5E" stroke-width="6" fill="none" stroke-linecap="round"><path d="M170 640q-4-60 26-96m-26 96q30-14 40-52m-40 52q-30-10-44-44"/><path d="M640 620q4-56-26-90m26 90q-28-14-38-48m38 48q28-10 42-40"/></g><g fill="#E8D9E4"><circle cx="196" cy="544" r="11"/><circle cx="210" cy="588" r="9"/><circle cx="614" cy="530" r="11"/><circle cx="602" cy="572" r="9"/></g><g fill="#C9A84C"><circle cx="196" cy="544" r="5"/><circle cx="614" cy="530" r="5"/></g></svg>`,
+                'house-ground': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><defs><linearGradient id="kraft" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C9A876"/><stop offset=".5" stop-color="#B8945F"/><stop offset="1" stop-color="#C9A876"/></linearGradient></defs><rect width="800" height="800" fill="#F7F1E3"/><ellipse cx="400" cy="672" rx="230" ry="26" fill="#2E241B" opacity=".12"/><rect x="258" y="150" width="284" height="60" rx="10" fill="#A07E4C"/><rect x="240" y="196" width="320" height="470" rx="26" fill="url(#kraft)"/><path d="M240 300h320" stroke="#8A6A3C" stroke-width="3" opacity=".5"/><circle cx="400" cy="360" r="88" fill="#F7F1E3"/><circle cx="400" cy="360" r="72" fill="none" stroke="#BC6537" stroke-width="5"/><path d="M358 350h72v17c0 19-15 34-36 34s-36-15-36-34z" fill="#BC6537"/><path d="M430 354c20-2 32 9 28 24-3 14-19 21-35 17" fill="none" stroke="#BC6537" stroke-width="9" stroke-linecap="round"/><rect x="300" y="488" width="200" height="12" rx="6" fill="#2E241B"/><rect x="330" y="518" width="140" height="12" rx="6" fill="#5A4632" opacity=".65"/><g fill="#5A4632"><ellipse cx="182" cy="660" rx="16" ry="22" transform="rotate(-22 182 660)"/><ellipse cx="600" cy="664" rx="16" ry="22" transform="rotate(20 600 664)"/></g></svg>`,
+                pods: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><rect width="800" height="800" fill="#F7F1E3"/><ellipse cx="400" cy="686" rx="250" ry="26" fill="#2E241B" opacity=".12"/><rect x="230" y="200" width="340" height="360" rx="18" fill="#66754A"/><rect x="230" y="200" width="340" height="70" rx="18" fill="#55613D"/><path d="M230 270h340" stroke="#3D4629" stroke-width="4" opacity=".6"/><circle cx="400" cy="330" r="52" fill="#F7F1E3"/><path d="M372 322h44v11c0 12-9 21-22 21s-22-9-22-21z" fill="#66754A"/><rect x="266" y="420" width="268" height="110" rx="12" fill="#F7F1E3" opacity=".95"/><g fill="#55613D"><circle cx="304" cy="452" r="17"/><circle cx="352" cy="452" r="17"/><circle cx="400" cy="452" r="17"/><circle cx="448" cy="452" r="17"/><circle cx="496" cy="452" r="17"/><circle cx="328" cy="496" r="17"/><circle cx="376" cy="496" r="17"/><circle cx="424" cy="496" r="17"/><circle cx="472" cy="496" r="17"/></g><g fill="#3D4629"><circle cx="304" cy="452" r="6"/><circle cx="352" cy="452" r="6"/><circle cx="400" cy="452" r="6"/><circle cx="448" cy="452" r="6"/><circle cx="496" cy="452" r="6"/><circle cx="328" cy="496" r="6"/><circle cx="376" cy="496" r="6"/><circle cx="424" cy="496" r="6"/><circle cx="472" cy="496" r="6"/></g><g fill="#EAE5D6"><circle cx="150" cy="640" r="24"/><circle cx="206" cy="668" r="24"/><circle cx="594" cy="640" r="24"/><circle cx="650" cy="668" r="24"/></g><g fill="#66754A"><circle cx="150" cy="640" r="9"/><circle cx="206" cy="668" r="9"/><circle cx="594" cy="640" r="9"/><circle cx="650" cy="668" r="9"/></g></svg>`,
+                espresso: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><defs><linearGradient id="bag" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#33291F"/><stop offset=".5" stop-color="#241C14"/><stop offset="1" stop-color="#33291F"/></linearGradient></defs><rect width="800" height="800" fill="#F7F1E3"/><ellipse cx="400" cy="672" rx="230" ry="26" fill="#2E241B" opacity=".12"/><rect x="258" y="150" width="284" height="60" rx="10" fill="#1B140E"/><rect x="240" y="196" width="320" height="470" rx="26" fill="url(#bag)"/><rect x="240" y="196" width="320" height="470" rx="26" fill="#FFFFFF" opacity=".04"/><circle cx="400" cy="360" r="92" fill="#BC6537"/><circle cx="400" cy="360" r="76" fill="none" stroke="#F7F1E3" stroke-width="5"/><path d="M354 348h74v18c0 20-16 36-37 36s-37-16-37-36z" fill="#F7F1E3"/><path d="M428 352c22-2 34 10 30 26-3 15-20 22-38 18" fill="none" stroke="#F7F1E3" stroke-width="9" stroke-linecap="round"/><rect x="300" y="492" width="200" height="12" rx="6" fill="#BC6537"/><rect x="330" y="522" width="140" height="12" rx="6" fill="#8A8070" opacity=".8"/><g fill="#2E241B"><ellipse cx="176" cy="656" rx="17" ry="23" transform="rotate(-24 176 656)"/><ellipse cx="216" cy="682" rx="15" ry="21" transform="rotate(18 216 682)"/><ellipse cx="596" cy="668" rx="17" ry="23" transform="rotate(22 596 668)"/><ellipse cx="638" cy="640" rx="14" ry="19" transform="rotate(-16 638 640)"/></g><path d="M170 640q6 16 0 32m458 8q6 16 0 32" stroke="#F7F1E3" stroke-width="3" fill="none"/></svg>`,
+                coldbrew: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><defs><linearGradient id="btl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#33291F"/><stop offset=".5" stop-color="#211A12"/><stop offset="1" stop-color="#33291F"/></linearGradient></defs><rect width="800" height="800" fill="#F7F1E3"/><ellipse cx="400" cy="682" rx="240" ry="26" fill="#2E241B" opacity=".12"/><rect x="330" y="120" width="70" height="70" fill="#211A12"/><rect x="322" y="104" width="86" height="34" rx="10" fill="#BC6537"/><path d="M336 190h58c40 34 62 62 62 118v250c0 52-38 84-91 84s-91-32-91-84V308c0-56 22-84 62-118z" fill="url(#btl)"/><rect x="274" y="380" width="182" height="130" rx="14" fill="#F7F1E3"/><rect x="298" y="404" width="134" height="11" rx="5" fill="#2E241B"/><rect x="312" y="426" width="106" height="9" rx="4" fill="#8A8070"/><path d="M310 480h110" stroke="#BC6537" stroke-width="10" stroke-linecap="round"/><g transform="translate(520 380)"><path d="M0 0h150v96a75 60 0 0 1-150 0z" fill="#FBF7EC" opacity=".9" stroke="#C9BEA4" stroke-width="4"/><path d="M8 30h134v64a67 52 0 0 1-134 0z" fill="#4A3826"/><g fill="#FBF7EC" opacity=".85"><rect x="30" y="18" width="34" height="34" rx="9" transform="rotate(-12 47 35)"/><rect x="82" y="30" width="30" height="30" rx="9" transform="rotate(14 97 45)"/><rect x="52" y="66" width="32" height="32" rx="9" transform="rotate(-8 68 82)"/></g><path d="M158 22c26-4 44 12 40 34s-30 34-58 28" fill="none" stroke="#FBF7EC" stroke-width="12" stroke-linecap="round"/></g></svg>`,
+                giftset: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><rect width="800" height="800" fill="#F7F1E3"/><ellipse cx="400" cy="692" rx="280" ry="26" fill="#2E241B" opacity=".12"/><path d="M160 380l240-120 240 120v210H160z" fill="#C9A876"/><path d="M160 380l240 96 240-96v210H160z" fill="#B8945F"/><path d="M400 476L160 380v-36l240 100 240-100v36z" fill="#A07E4C"/><g><rect x="238" y="252" width="104" height="130" rx="12" fill="#241C14"/><circle cx="290" cy="306" r="34" fill="#BC6537"/><rect x="348" y="240" width="104" height="142" rx="12" fill="#66754A"/><circle cx="400" cy="296" r="34" fill="#E9C46A"/><rect x="458" y="252" width="104" height="130" rx="12" fill="#58708A"/><circle cx="510" cy="306" r="34" fill="#F7F1E3"/></g><path d="M330 560c40 26 100 26 140 0" stroke="#8A6A3C" stroke-width="8" fill="none" stroke-linecap="round"/><g fill="#2E241B"><ellipse cx="170" cy="672" rx="15" ry="21" transform="rotate(-18 170 672)"/><ellipse cx="212" cy="690" rx="13" ry="19" transform="rotate(14 212 690)"/><ellipse cx="600" cy="682" rx="15" ry="21" transform="rotate(16 600 682)"/><ellipse cx="642" cy="664" rx="13" ry="18" transform="rotate(-14 642 664)"/></g><path d="M164 650q6 18 0 34m472-32q6 16 0 32" stroke="#BC6537" stroke-width="5" fill="none" stroke-linecap="round"/></svg>`,
+                bean: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="34" rx="18" ry="24" fill="#BC6537" stroke="#93431F" stroke-width="1.5"/><path d="M32 10 C28 8 22 10 20 16 C18 22 22 28 28 30 C34 32 40 28 42 22 C44 16 40 10 32 10Z" fill="#D9895A" stroke="#93431F" stroke-width="1"/><path d="M32 58 C28 60 22 58 20 52 C18 46 22 40 28 38 C34 36 40 40 42 46 C44 52 40 58 32 58Z" fill="#D9895A" stroke="#93431F" stroke-width="1"/><path d="M26 18 Q30 14 34 18" stroke="#93431F" stroke-width="1.5" stroke-linecap="round"/><path d="M28 50 Q32 46 36 50" stroke="#93431F" stroke-width="1.5" stroke-linecap="round"/><circle cx="32" cy="34" r="2" fill="#93431F"/></svg>`
+            };
+
+            // ─── ICONS ──────────────────────────────────────────────────
+            const ICONS = {
+                cart: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>`,
+                mail: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
+                phone: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
+                pin: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+                facebook: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`,
+                instagram: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
+                twitter: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`,
+                youtube: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>`
+            };
+
+            // ─── PRODUCTS DATA ──────────────────────────────────────────
+            const products = [{
+                id: 'p1',
+                name: 'Ethiopian Yirgacheffe',
+                category: 'beans',
+                price: 18.50,
+                description: 'Bright and complex with notes of blueberry, dark chocolate, and a silky mouthfeel. Sourced from smallholder farms in the Yirgacheffe region, this washed coffee represents the pinnacle of Ethiopian terroir.',
+                specs: { Origin: 'Ethiopia', 'Roast Level': 'Light', 'Process': 'Washed', 'Altitude': '1,900–2,200m' },
+                svg: 'ethiopia'
+            }, {
+                id: 'p2',
+                name: 'Colombian Supremo',
+                category: 'beans',
+                price: 14.75,
+                description: 'Rich and balanced with caramel sweetness, nutty undertones, and a smooth finish. Grown in the renowned Huila region, this coffee is carefully roasted to medium-dark to bring out its full body.',
+                specs: { Origin: 'Colombia', 'Roast Level': 'Medium-Dark', 'Process': 'Washed', 'Altitude': '1,500–1,800m' },
+                svg: 'colombia'
+            }, {
+                id: 'p3',
+                name: 'Classic Instant Coffee',
+                category: 'instant',
+                price: 9.99,
+                description: 'Premium freeze-dried instant coffee with a bold, full-bodied flavor. Made from 100% Arabica beans, this instant coffee delivers a consistently rich cup in seconds.',
+                specs: { Type: 'Freeze-dried', 'Bean': '100% Arabica', 'Caffeine': 'High', 'Serving': '2g per cup' },
+                svg: 'instant-classic'
+            }, {
+                id: 'p4',
+                name: 'Decaf Instant Smooth',
+                category: 'instant',
+                price: 10.50,
+                description: 'Swiss Water decaffeinated instant coffee with a smooth, mellow taste. Enjoy the full flavor of Arabica beans without the caffeine kick.',
+                specs: { Type: 'Freeze-dried', 'Bean': '100% Arabica', 'Caffeine': 'Decaf', 'Serving': '2g per cup' },
+                svg: 'instant-decaf'
+            }, {
+                id: 'p5',
+                name: 'House Ground Blend',
+                category: 'beans',
+                price: 13.25,
+                description: 'Our signature house blend, medium roasted with a balanced profile of chocolate, nut, and subtle fruit notes. Perfect for everyday brewing.',
+                specs: { Origin: 'Multi-origin', 'Roast Level': 'Medium', 'Process': 'Washed', 'Grind': 'Drip' },
+                svg: 'house-ground'
+            }, {
+                id: 'p6',
+                name: 'Coffee Pods Variety Pack',
+                category: 'pods',
+                price: 21.00,
+                description: 'Convenient and sustainable coffee pods. Includes 24 pods featuring three distinct roast profiles — Light, Medium, and Dark. Compostable materials.',
+                specs: { Compatibility: 'Universal', 'Count': '24 pods', 'Roasts': 'Light, Medium, Dark', 'Material': 'Compostable' },
+                svg: 'pods'
+            }, {
+                id: 'p7',
+                name: 'Premium Espresso Roast',
+                category: 'beans',
+                price: 16.90,
+                description: 'Dark, rich, and velvety. This espresso roast is blended specifically for a thick crema and intense flavor. Ideal for espresso machines and Moka pots.',
+                specs: { Origin: 'South America', 'Roast Level': 'Dark', 'Process': 'Washed', 'Altitude': '1,200–1,600m' },
+                svg: 'espresso'
+            }, {
+                id: 'p8',
+                name: 'Cold Brew Concentrate',
+                category: 'instant',
+                price: 19.99,
+                description: 'Smooth, low-acid cold brew concentrate. Simply mix with water or milk for a refreshing iced coffee. Made from 100% Arabica beans.',
+                specs: { Type: 'Concentrate', 'Bean': '100% Arabica', 'Serving': '8-10 cups', 'Storage': 'Refrigerated' },
+                svg: 'coldbrew'
+            }, {
+                id: 'p9',
+                name: 'Brew & Co. Gift Set',
+                category: 'accessories',
+                price: 49.00,
+                description: 'The perfect gift for coffee lovers. Includes a ceramic mug, a bag of our signature roast, and a bamboo coaster set. Beautifully packaged.',
+                specs: { Includes: 'Mug, Beans, Coasters', 'Bean': 'House Blend', 'Mug': '12 oz Ceramic', 'Packaging': 'Premium Box' },
+                svg: 'giftset'
+            }, ];
+
+            // ─── BLOG DATA ──────────────────────────────────────────────
+            const blogPosts = [{
+                id: 'b1',
+                title: 'The Art of Pour-Over Brewing',
+                date: '2026-07-15',
+                excerpt: 'Master the pour-over method with our step-by-step guide. From water temperature to bloom time, discover how to extract the perfect cup.',
+                tag: 'Brewing',
+                content: `
+              <p>Pour-over brewing is one of the most rewarding ways to make coffee. It allows for precise control over every variable, resulting in a clean, flavorful cup that highlights the unique characteristics of your beans.</p>
+              <h2>What You'll Need</h2>
+              <ul>
+                <li>A pour-over dripper (V60, Chemex, or Kalita Wave)</li>
+                <li>Filter paper</li>
+                <li>Freshly roasted coffee beans</li>
+                <li>A gooseneck kettle</li>
+                <li>A scale and timer</li>
+              </ul>
+              <h2>Step-by-Step Guide</h2>
+              <p><strong>1. Heat your water</strong> — Bring filtered water to 195–205°F (90–96°C).</p>
+              <p><strong>2. Rinse the filter</strong> — Pour hot water through the filter to warm your dripper and remove any paper taste.</p>
+              <p><strong>3. Grind your coffee</strong> — Use a medium-fine grind, similar to table salt. Aim for 22–25g of coffee for a 350ml brew.</p>
+              <p><strong>4. Bloom</strong> — Pour 50g of water over the grounds and let it bloom for 30–45 seconds. This releases CO₂ and prepares the coffee for extraction.</p>
+              <p><strong>5. Pour in stages</strong> — Pour the remaining water in a slow, spiral motion, maintaining a steady stream. Aim to finish pouring by 2 minutes.</p>
+              <p><strong>6. Let it draw down</strong> — The total brew time should be around 3–3.5 minutes. Remove the dripper and enjoy!</p>
+              <p>With practice, you'll develop a intuition for timing and pouring technique. The result is a coffee that's complex, aromatic, and deeply satisfying.</p>
+            `
+            }, {
+                id: 'b2',
+                title: 'Understanding Coffee Roast Profiles',
+                date: '2026-07-02',
+                excerpt: 'Light, medium, dark — each roast level unlocks different flavor compounds. Learn how roast affects acidity, body, and aroma in your cup.',
+                tag: 'Roasting',
+                content: `
+              <p>Roast level is one of the most important factors in determining the flavor of your coffee. The degree of roasting transforms green coffee beans into the aromatic, flavorful beans we brew.</p>
+              <h2>Light Roast</h2>
+              <p>Light roasts are roasted to the first crack, preserving the bean's original character. They tend to be brighter, more acidic, and fruitier, with floral and citrus notes. The bean retains more caffeine and a lighter body.</p>
+              <h2>Medium Roast</h2>
+              <p>Medium roasts are roasted between the first and second crack. They offer a balance of acidity and body, with more caramel and chocolate notes. This is the most popular roast level for everyday drinking.</p>
+              <h2>Dark Roast</h2>
+              <p>Dark roasts are roasted to the second crack, resulting in a bold, smoky flavor. The bean's natural acidity is diminished, replaced by rich, roasted notes of dark chocolate, nuts, and sometimes a hint of spice.</p>
+              <p>Choosing the right roast comes down to personal preference. We recommend trying different roasts to discover what suits your palate best.</p>
+            `
+            }, {
+                id: 'b3',
+                title: 'Instant Coffee: Myths and Truths',
+                date: '2026-06-18',
+                excerpt: 'Instant coffee has come a long way. We explore the science behind modern freeze-drying and how it preserves the integrity of specialty beans.',
+                tag: 'Instant',
+                content: `
+              <p>Instant coffee often gets a bad rap, but modern production methods have transformed it into a convenient, high-quality option. Let's separate the myths from the truths.</p>
+              <h2>Myth: Instant coffee is made from low-quality beans</h2>
+              <p>While some instant coffees use lower-grade beans, specialty instant coffee is made from 100% Arabica beans sourced from the same farms as whole bean coffee. The difference is in the processing.</p>
+              <h2>Myth: Instant coffee is full of chemicals</h2>
+              <p>Quality instant coffee is made from 100% coffee beans with no additives. The freeze-drying process simply removes water, preserving the natural flavor compounds.</p>
+              <h2>Truth: Freeze-drying preserves flavor</h2>
+              <p>Freeze-drying (lyophilization) is a gentle process that locks in the coffee's volatile aromatics. When you add hot water, those flavors are released, delivering a cup that rivals fresh-brewed coffee.</p>
+              <h2>Truth: It's more sustainable</h2>
+              <p>Instant coffee produces less waste and has a smaller carbon footprint than single-serve pods. It's a convenient, eco-friendly choice for your daily brew.</p>
+              <p>Next time you reach for instant, choose a specialty brand like Brew & Co. for a truly satisfying experience.</p>
+            `
+            }, ];
+
+            // ─── FAQ DATA ──────────────────────────────────────────────
+            const faqs = [
+                { q: 'What is the shelf life of your whole bean coffee?', a: 'Our whole bean coffee is roasted fresh and has a shelf life of 12 months when stored in a cool, dark place. For optimal flavor, we recommend consuming within 4-6 weeks of opening.' },
+                { q: 'Is your instant coffee gluten-free?', a: 'Yes, all our instant coffee products are 100% gluten-free and contain no artificial additives. They are suitable for vegan and kosher diets.' },
+                { q: 'Do you offer international shipping?', a: 'We currently ship to the United States, Canada, and the United Kingdom. International shipping rates and delivery times vary by destination.' },
+                { q: 'How should I store my coffee beans?', a: 'Store beans in an airtight container away from light, heat, and moisture. We recommend grinding only what you need for each brew to preserve freshness.' },
+            ];
+
+            // ─── STATE ──────────────────────────────────────────────────
+            let state = {
+                page: 'home',
+                selectedProduct: null,
+                selectedBlog: null,
+                cart: [],
+                isCartOpen: false,
+                mobileNav: false,
+                filterCategory: 'all',
+                faqOpen: [],
+                newsletterEmail: '',
+            };
+
+            // ─── MODAL ──────────────────────────────────────────────────
+            function openModal(title, bodyHTML) {
+                const overlay = document.getElementById('modal-overlay');
+                document.getElementById('modal-title').innerText = title;
+                document.getElementById('modal-body').innerHTML = bodyHTML;
+                overlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal() {
+                const overlay = document.getElementById('modal-overlay');
+                overlay.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+
+            document.getElementById('modal-overlay').addEventListener('click', function(e) {
+                if (e.target === this) closeModal();
+            });
+            document.querySelector('[data-action="close-modal"]')?.addEventListener('click', closeModal);
+
+            // ─── RENDER ──────────────────────────────────────────────────
+            const root = document.getElementById('root');
+
+            function render() {
+                const productToShow = state.selectedProduct ?
+                    products.find(p => p.id === state.selectedProduct) :
+                    null;
+
+                const blogToShow = state.selectedBlog ?
+                    blogPosts.find(b => b.id === state.selectedBlog) :
+                    null;
+
+                const filtered = state.filterCategory === 'all' ?
+                    products :
+                    products.filter(p => p.category === state.filterCategory);
+
+                const cartTotal = state.cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+                const cartCount = state.cart.reduce((sum, item) => sum + item.qty, 0);
+
+                let pageContent = '';
+
+                // ─── HOME ────────────────────────────────────────────────
+                if (state.page === 'home') {
+                    pageContent = `
+                <div class="page">
+                  <section class="hero">
+                    <div class="hero-content">
+                      <h1>Brew & Co. <span>Premium Coffee</span></h1>
+                      <p>Specialty coffee from the world's finest growing regions. Whole beans, instant, and accessories — crafted for the discerning palate.</p>
+                      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;">
+                        <button class="btn" data-action="nav" data-param="products">Explore Coffee</button>
+                        <button class="btn btn-outline" data-action="nav" data-param="subscriptions">Subscribe</button>
+                      </div>
+                    </div>
+                    <div class="hero-image">${HERO_SVG}</div>
+                  </section>
+
+                  <section class="section">
+                    <div class="section-header">
+                      <h2>Featured Products</h2>
+                      <p>Our most loved coffees, selected for their exceptional flavor and quality.</p>
+                    </div>
+                    <div class="product-grid stagger">
+                      ${products.slice(0, 4).map(p => productCard(p)).join('')}
+                    </div>
+                    <div style="text-align:center;margin-top:1.5rem;">
+                      <button class="btn" data-action="nav" data-param="products">View All Products</button>
+                    </div>
+                  </section>
+
+                  <section class="section" style="padding-top:0;">
+                    <div class="about-grid">
+                      <div>${SUSTAIN_SVG}</div>
+                      <div class="about-text">
+                        <h2>From Bean to Cup</h2>
+                        <p>Brew & Co. was founded on a simple belief: great coffee starts with great beans. We work directly with farmers to source exceptional coffees, then roast them with precision to unlock their full potential.</p>
+                        <p>Whether you prefer the ritual of grinding whole beans or the convenience of instant, we bring the world's best coffee to your cup.</p>
+                        <button class="btn" data-action="nav" data-param="about" style="margin-top:0.5rem;">Learn More</button>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section class="section">
+                    <div class="section-header">
+                      <h2>From Our Blog</h2>
+                      <p>Insights, guides, and stories from the world of coffee.</p>
+                    </div>
+                    <div class="blog-grid stagger">
+                      ${blogPosts.map(post => blogCard(post)).join('')}
+                    </div>
+                    <div style="text-align:center;margin-top:1.5rem;">
+                      <button class="btn btn-outline" data-action="nav" data-param="blog">Read More</button>
+                    </div>
+                  </section>
+
+                  <div class="newsletter">
+                    <h3>Fresh Coffee, Delivered</h3>
+                    <p>Subscribe to our newsletter for brewing tips, new arrivals, and exclusive offers.</p>
+                    <form id="newsletter-form" data-action="submit-newsletter">
+                      <input type="email" placeholder="Enter your email" required id="newsletter-input" value="${state.newsletterEmail || ''}" />
+                      <button type="submit" class="btn">Subscribe</button>
+                    </form>
+                  </div>
+                </div>
+              `;
+                }
+
+                // ─── PRODUCTS ────────────────────────────────────────────
+                if (state.page === 'products') {
+                    const categories = [
+                        { value: 'all', label: 'All' },
+                        { value: 'beans', label: 'Whole Beans' },
+                        { value: 'instant', label: 'Instant' },
+                        { value: 'pods', label: 'Pods' },
+                        { value: 'accessories', label: 'Accessories' },
+                    ];
+                    pageContent = `
+                <div class="page">
+                  <div class="section-header">
+                    <h2>Our Coffee Collection</h2>
+                    <p>Whole beans, instant coffee, pods, and accessories — all carefully selected.</p>
+                  </div>
+                  <div class="filter-bar">
+                    ${categories.map(c => `
+                      <button class="${state.filterCategory === c.value ? 'active' : ''}" data-action="filter" data-param="${c.value}">${c.label}</button>
+                    `).join('')}
+                  </div>
+                  <div class="product-grid stagger">
+                    ${filtered.length ? filtered.map(p => productCard(p)).join('') : '<p style="text-align:center;grid-column:1/-1;color:var(--muted-foreground);padding:2rem 0;">No products in this category.</p>'}
+                  </div>
+                </div>
+              `;
+                }
+
+                // ─── PRODUCT DETAIL ──────────────────────────────────────
+                if (state.page === 'detail' && productToShow) {
+                    const p = productToShow;
+                    const inCart = state.cart.find(item => item.id === p.id);
+                    const qtyInCart = inCart ? inCart.qty : 0;
+                    pageContent = `
+                <div class="page">
+                  <div class="detail-layout">
+                    <div class="detail-image">${PRODUCT_SVGS[p.svg] || PRODUCT_SVGS.bean}</div>
+                    <div class="detail-info">
+                      <span style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--muted-foreground);">${p.category}</span>
+                      <h1>${p.name}</h1>
+                      <div class="price">$${p.price.toFixed(2)}</div>
+                      <p class="desc">${p.description}</p>
+                      <dl class="specs">
+                        ${Object.entries(p.specs).map(([k,v]) => `
+                          <dt>${k}</dt>
+                          <dd>${v}</dd>
+                        `).join('')}
+                      </dl>
+                      <div class="qty">
+                        <label for="detail-qty">Quantity</label>
+                        <input type="number" id="detail-qty" value="${qtyInCart || 1}" min="1" max="10" />
+                      </div>
+                      <div class="actions">
+                        <button class="btn" data-action="add-cart" data-param="${p.id}">Add to Cart</button>
+                        <button class="btn btn-outline" data-action="nav" data-param="products">Back to Shop</button>
+                      </div>
+                      ${qtyInCart > 0 ? `<p style="font-size:0.85rem;color:var(--muted-foreground);margin-top:0.5rem;">Already in cart: ${qtyInCart} item(s)</p>` : ''}
+                    </div>
+                  </div>
+                </div>
+              `;
+                }
+
+                // ─── BLOG LIST ───────────────────────────────────────────
+                if (state.page === 'blog' && !blogToShow) {
+                    pageContent = `
+                <div class="page">
+                  <div class="section-header">
+                    <h2>Brew & Co. Blog</h2>
+                    <p>Stories, brewing guides, and coffee culture from our team.</p>
+                  </div>
+                  <div class="blog-grid stagger">
+                    ${blogPosts.map(post => blogCard(post)).join('')}
+                  </div>
+                </div>
+              `;
+                }
+
+                // ─── BLOG DETAIL ─────────────────────────────────────────
+                if (state.page === 'blog' && blogToShow) {
+                    pageContent = `
+                <div class="page">
+                  <div class="blog-detail-header">
+                    <div class="date">${blogToShow.date}</div>
+                    <h1>${blogToShow.title}</h1>
+                    <span class="tag">${blogToShow.tag}</span>
+                  </div>
+                  <div class="blog-detail-body">${blogToShow.content}</div>
+                  <div style="margin-top:2rem;">
+                    <button class="btn btn-outline" data-action="nav" data-param="blog">← Back to Blog</button>
+                  </div>
+                </div>
+              `;
+                }
+
+                // ─── ABOUT ───────────────────────────────────────────────
+                if (state.page === 'about') {
+                    pageContent = `
+                <div class="page">
+                  <div class="about-grid">
+                    <div class="about-text">
+                      <h2>Our Story</h2>
+                      <p>Brew & Co. was born from a passion for exceptional coffee and a commitment to quality. We travel to the world's best coffee-growing regions, building relationships with farmers who share our dedication to excellence.</p>
+                      <p>Every bean we source is carefully selected and roasted to perfection. Whether it's a vibrant Ethiopian Yirgacheffe or a bold Sumatran Mandheling, we ensure that each coffee tells the story of its origin.</p>
+                      <p>We believe that coffee is more than a beverage — it's a moment of connection, a ritual of comfort, and a celebration of craftsmanship.</p>
+                    </div>
+                    <div>${ABOUT_ROASTERY_SVG}</div>
+                  </div>
+
+                  <div class="section" style="padding-top:1rem;">
+                    <div class="section-header">
+                      <h2>Our Values</h2>
+                      <p>Guiding principles that shape every cup we brew.</p>
+                    </div>
+                    <div class="values">
+                      <div class="item"><h4>Quality</h4><p>Only the top 5% of specialty beans make it into our roastery.</p></div>
+                      <div class="item"><h4>Sustainability</h4><p>We support eco-friendly farming and ethical trade practices.</p></div>
+                      <div class="item"><h4>Transparency</h4><p>Know exactly where your coffee comes from and how it was processed.</p></div>
+                      <div class="item"><h4>Craftsmanship</h4><p>Small-batch roasting with precision to highlight each bean's character.</p></div>
+                    </div>
+                  </div>
+                </div>
+              `;
+                }
+
+                // ─── SUBSCRIPTIONS ──────────────────────────────────────
+                if (state.page === 'subscriptions') {
+                    pageContent = `
+                <div class="page">
+                  <div class="hero" style="grid-template-columns:1fr 1fr;padding:1rem 0 2rem;">
+                    <div class="hero-content">
+                      <h1>Subscribe & <span>Save</span></h1>
+                      <p>Never run out of your favorite coffee. Choose your roast, set your schedule, and enjoy free shipping on every delivery.</p>
+                      <button class="btn" data-action="nav" data-param="products">Browse Coffees</button>
+                    </div>
+                    <div class="hero-image">${SUB_HERO_SVG}</div>
+                  </div>
+
+                  <div class="section" style="padding-top:0;">
+                    <div class="section-header">
+                      <h2>Choose Your Plan</h2>
+                      <p>Flexible subscription options tailored to your coffee routine.</p>
+                    </div>
+                    <div class="sub-plans">
+                      <div class="sub-plan">
+                        <h3>Light Roast</h3>
+                        <div class="sub-price">$15.50/mo</div>
+                        <p>Bright, fruity, and complex. Perfect for pour-over and drip.</p>
+                        <button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button>
+                      </div>
+                      <div class="sub-plan">
+                        <h3>Medium Roast</h3>
+                        <div class="sub-price">$14.50/mo</div>
+                        <p>Balanced, smooth, and versatile. Our most popular choice.</p>
+                        <button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button>
+                      </div>
+                      <div class="sub-plan">
+                        <h3>Dark Roast</h3>
+                        <div class="sub-price">$16.00/mo</div>
+                        <p>Bold, smoky, and intense. Ideal for espresso and Moka pot.</p>
+                        <button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button>
+                      </div>
+                      <div class="sub-plan" style="border-color:var(--primary);">
+                        <h3>Variety Pack</h3>
+                        <div class="sub-price">$17.50/mo</div>
+                        <p>All three roasts in one box. Explore the full spectrum.</p>
+                        <button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="newsletter" style="margin-top:1rem;">
+                    <h3>Customize Your Subscription</h3>
+                    <p>Adjust roast, grind size, and delivery frequency anytime.</p>
+                    <button class="btn" data-action="nav" data-param="contact">Contact Us</button>
+                  </div>
+                </div>
+              `;
+                }
+
+                // ─── FAQ ──────────────────────────────────────────────────
+                if (state.page === 'faq') {
+                    pageContent = `
+                <div class="page">
+                  <div class="section-header">
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Quick answers to the most common questions about our coffee and company.</p>
+                  </div>
+                  <div class="faq-list">
+                    ${faqs.map((item, idx) => {
+                      const open = state.faqOpen.includes(idx);
+                      return `
+                        <div class="faq-item ${open ? 'open' : ''}" data-action="faq-toggle" data-param="${idx}">
+                          <div class="q">
+                            <span>${item.q}</span>
+                            <span class="icon">▾</span>
+                          </div>
+                          <div class="a">${item.a}</div>
+                        </div>
+                      `;
+                    }).join('')}
+                  </div>
+                </div>
+              `;
+                }
+
+                // ─── CONTACT ─────────────────────────────────────────────
+                if (state.page === 'contact') {
+                    pageContent = `
+                <div class="page">
+                  <div class="section-header">
+                    <h2>Get in Touch</h2>
+                    <p>Have a question about our coffee, an order, or just want to say hello? Reach out to us.</p>
+                  </div>
+                  <div class="contact-grid">
+                    <div>
+                      <form class="contact-form" id="contact-form" data-action="submit-contact">
+                        <div>
+                          <label for="contact-name">Full Name</label>
+                          <input type="text" id="contact-name" placeholder="Your name" required />
+                        </div>
+                        <div>
+                          <label for="contact-email">Email Address</label>
+                          <input type="email" id="contact-email" placeholder="you@example.com" required />
+                        </div>
+                        <div>
+                          <label for="contact-subject">Subject</label>
+                          <select id="contact-subject">
+                            <option>General Inquiry</option>
+                            <option>Order Status</option>
+                            <option>Wholesale</option>
+                            <option>Partnership</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label for="contact-message">Message</label>
+                          <textarea id="contact-message" placeholder="Tell us how we can help…" required></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="align-self:flex-start;">Send Message</button>
+                      </form>
+                    </div>
+                    <div class="contact-info">
+                      <div class="item">
+                        ${ICONS.mail}
+                        <div><strong>Email</strong><p>hello@brewandco.com</p></div>
+                      </div>
+                      <div class="item">
+                        ${ICONS.phone}
+                        <div><strong>Phone</strong><p>+1 (800) 555-COFF</p></div>
+                      </div>
+                      <div class="item">
+                        ${ICONS.pin}
+                        <div><strong>Roastery</strong><p>1420 Coffee Lane, Portland, OR 97201</p></div>
+                      </div>
+                      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;text-align:center;">
+                        <p style="font-weight:600;margin-bottom:0.25rem;">Visit Our Roastery</p>
+                        <p style="color:var(--muted-foreground);font-size:0.95rem;">Mon–Fri: 8am – 5pm<br />Sat: 9am – 3pm</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `;
+                }
+
+                // ─── CART SIDEBAR ──────────────────────────────────────
+                const cartItemsHtml = state.cart.length === 0 ?
+                    `<div class="cart-empty">Your cart is empty.<br />Start exploring our coffee collection.</div>` :
+                    state.cart.map(item => {
+                        const prod = products.find(p => p.id === item.id);
+                        return `
+                    <div class="cart-item">
+                      <div style="width:40px;height:40px;flex-shrink:0;">${prod ? (PRODUCT_SVGS[prod.svg] || PRODUCT_SVGS.bean) : PRODUCT_SVGS.bean}</div>
+                      <div class="info">
+                        <h4>${prod ? prod.name : item.id}</h4>
+                        <div class="price">$${(item.price * item.qty).toFixed(2)} × ${item.qty}</div>
+                      </div>
+                      <button class="remove" data-action="remove-cart" data-param="${item.id}">✕</button>
+                    </div>
+                  `;
+                    }).join('');
+
+                // ─── FULL HTML ──────────────────────────────────────────
+                root.innerHTML = `
+              <div class="app">
+                <header class="header">
+                  <div class="container header-inner">
+                    <button class="logo" data-action="nav" data-param="home">
+                      ${LOGO_SVG}
+                      <span>Brew</span> <span class="co">& Co.</span>
+                    </button>
+                    <ul class="nav-links ${state.mobileNav ? 'open' : ''}">
+                      <li><button data-action="nav" data-param="home" class="${state.page === 'home' ? 'active' : ''}">Home</button></li>
+                      <li><button data-action="nav" data-param="products" class="${state.page === 'products' || state.page === 'detail' ? 'active' : ''}">Shop</button></li>
+                      <li><button data-action="nav" data-param="subscriptions" class="${state.page === 'subscriptions' ? 'active' : ''}">Subscribe</button></li>
+                      <li><button data-action="nav" data-param="about" class="${state.page === 'about' ? 'active' : ''}">About</button></li>
+                      <li><button data-action="nav" data-param="blog" class="${state.page === 'blog' ? 'active' : ''}">Blog</button></li>
+                      <li><button data-action="nav" data-param="faq" class="${state.page === 'faq' ? 'active' : ''}">FAQ</button></li>
+                      <li><button data-action="nav" data-param="contact" class="${state.page === 'contact' ? 'active' : ''}">Contact</button></li>
+                    </ul>
+                    <div class="nav-actions">
+                      <button class="cart-btn" data-action="toggle-cart">
+                        ${ICONS.cart}
+                        <span class="label">Cart</span>
+                        ${cartCount > 0 ? `<span class="cart-badge">${cartCount}</span>` : ''}
+                      </button>
+                      <button class="mobile-menu-btn" data-action="toggle-mobile" aria-label="Menu">☰</button>
+                    </div>
+                  </div>
+                </header>
+
+                <main class="main">
+                  <div class="container">
+                    ${pageContent}
+                  </div>
+                </main>
+
+                <footer class="footer">
+                  <div class="container">
+                    <div class="footer-grid">
+                      <div class="footer-brand">
+                        <div style="display:flex;align-items:center;gap:0.5rem;font-weight:700;font-size:1.1rem;">
+                          ${LOGO_SVG}
+                          <span>Brew & Co.</span>
+                        </div>
+                        <p>Specialty coffee for the discerning palate. Whole beans, instant, and accessories — crafted with care.</p>
+                      </div>
+                      <div>
+                        <h4>Shop</h4>
+                        <ul>
+                          <li><button data-action="nav" data-param="products">Whole Beans</button></li>
+                          <li><button data-action="nav" data-param="products">Instant</button></li>
+                          <li><button data-action="nav" data-param="products">Pods</button></li>
+                          <li><button data-action="nav" data-param="subscriptions">Subscriptions</button></li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4>Company</h4>
+                        <ul>
+                          <li><button data-action="nav" data-param="about">About Us</button></li>
+                          <li><button data-action="nav" data-param="blog">Blog</button></li>
+                          <li><button data-action="nav" data-param="faq">FAQ</button></li>
+                          <li><button data-action="nav" data-param="contact">Contact</button></li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4>Support</h4>
+                        <ul>
+                          <li><a href="#">Shipping Policy</a></li>
+                          <li><a href="#">Returns</a></li>
+                          <li><a href="#">Privacy Policy</a></li>
+                          <li><a href="#">Terms of Service</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="footer-bottom">
+                      <span>&copy; 2026 Brew & Co. All rights reserved.</span>
+                      <div class="footer-social">
+                        <a href="#" aria-label="Facebook">${ICONS.facebook}</a>
+                        <a href="#" aria-label="Instagram">${ICONS.instagram}</a>
+                        <a href="#" aria-label="Twitter">${ICONS.twitter}</a>
+                        <a href="#" aria-label="YouTube">${ICONS.youtube}</a>
+                      </div>
+                    </div>
+                  </div>
+                </footer>
+
+                <div class="cart-overlay ${state.isCartOpen ? 'open' : ''}" data-action="toggle-cart"></div>
+                <div class="cart-sidebar ${state.isCartOpen ? 'open' : ''}">
+                  <div class="head">
+                    <h2>Your Cart</h2>
+                    <button class="close-btn" data-action="toggle-cart">✕</button>
+                  </div>
+                  <div class="cart-items">${cartItemsHtml}</div>
+                  ${state.cart.length > 0 ? `
+                    <div class="cart-total">
+                      <span>Total</span>
+                      <span>$${cartTotal.toFixed(2)}</span>
+                    </div>
+                    <button class="cart-checkout" data-action="checkout">Proceed to Checkout</button>
+                  ` : ''}
+                </div>
+              </div>
+            `;
+
+                // Re-bind modal close after render
+                document.querySelector('[data-action="close-modal"]')?.addEventListener('click', closeModal);
+                document.getElementById('modal-overlay')?.addEventListener('click', function(e) {
+                    if (e.target === this) closeModal();
+                });
+            }
+
+            // ─── PRODUCT CARD ──────────────────────────────────────────
+            function productCard(p) {
+                return `
+              <div class="product-card">
+                <div class="image">${PRODUCT_SVGS[p.svg] || PRODUCT_SVGS.bean}</div>
+                <span class="category">${p.category}</span>
+                <h3>${p.name}</h3>
+                <div class="price">$${p.price.toFixed(2)}</div>
+                <div class="actions">
+                  <button data-action="view-detail" data-param="${p.id}">View Details</button>
+                  <button class="outline" data-action="add-cart" data-param="${p.id}">Add</button>
+                </div>
+              </div>
+            `;
+            }
+
+            // ─── BLOG CARD ──────────────────────────────────────────────
+            function blogCard(post) {
+                return `
+              <div class="blog-card" data-action="view-blog" data-param="${post.id}">
+                <div class="date">${post.date}</div>
+                <h3>${post.title}</h3>
+                <p>${post.excerpt}</p>
+                <span class="tag">${post.tag}</span>
+              </div>
+            `;
+            }
+
+            // ─── EVENT HANDLING ─────────────────────────────────────────
+            document.addEventListener('click', function(e) {
+                const target = e.target.closest('[data-action]');
+                if (!target) return;
+                const action = target.dataset.action;
+                const param = target.dataset.param || null;
+
+                switch (action) {
+                    case 'nav':
+                        state.page = param;
+                        state.selectedProduct = null;
+                        state.selectedBlog = null;
+                        state.mobileNav = false;
+                        render();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        break;
+                    case 'view-detail':
+                        state.page = 'detail';
+                        state.selectedProduct = param;
+                        state.mobileNav = false;
+                        render();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        break;
+                    case 'view-blog':
+                        state.page = 'blog';
+                        state.selectedBlog = param;
+                        state.mobileNav = false;
+                        render();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        break;
+                    case 'add-cart':
+                        addToCart(param);
+                        break;
+                    case 'remove-cart':
+                        removeFromCart(param);
+                        break;
+                    case 'toggle-cart':
+                        state.isCartOpen = !state.isCartOpen;
+                        render();
+                        break;
+                    case 'toggle-mobile':
+                        state.mobileNav = !state.mobileNav;
+                        render();
+                        break;
+                    case 'filter':
+                        state.filterCategory = param;
+                        render();
+                        break;
+                    case 'faq-toggle':
+                        toggleFaq(param);
+                        break;
+                    case 'checkout':
+                        handleCheckout();
+                        break;
+                    case 'close-modal':
+                        closeModal();
+                        break;
+                    default:
+                        break;
+                }
+            });
+
+            document.addEventListener('submit', function(e) {
+                const form = e.target;
+                if (form.id === 'newsletter-form') {
+                    e.preventDefault();
+                    handleNewsletter(e);
+                }
+                if (form.id === 'contact-form') {
+                    e.preventDefault();
+                    handleContact(e);
+                }
+            });
+
+            // ─── ACTION FUNCTIONS ──────────────────────────────────────
+            function addToCart(productId) {
+                const product = products.find(p => p.id === productId);
+                if (!product) return;
+
+                let qty = 1;
+                const qtyInput = document.getElementById('detail-qty');
+                if (qtyInput) qty = parseInt(qtyInput.value) || 1;
+                qty = Math.max(1, Math.min(10, qty));
+
+                const existing = state.cart.find(item => item.id === productId);
+                if (existing) {
+                    existing.qty = Math.min(10, existing.qty + qty);
+                } else {
+                    state.cart.push({ id: productId, price: product.price, qty });
+                }
+                render();
+            }
+
+            function removeFromCart(productId) {
+                state.cart = state.cart.filter(item => item.id !== productId);
+                render();
+            }
+
+            function toggleFaq(index) {
+                const idx = parseInt(index);
+                if (isNaN(idx)) return;
+                const open = state.faqOpen.includes(idx);
+                state.faqOpen = open ?
+                    state.faqOpen.filter(i => i !== idx) :
+                    [...state.faqOpen, idx];
+                render();
+            }
+
+            function handleNewsletter(e) {
+                const input = document.getElementById('newsletter-input');
+                if (input && input.value) {
+                    state.newsletterEmail = input.value;
+                    openModal('Subscribed!', `
+                <p>Thank you for subscribing to the Brew & Co. newsletter!</p>
+                <p style="font-size:0.95rem;">You'll receive brewing tips, new arrivals, and exclusive offers.</p>
+                <button class="btn" data-action="close-modal" style="margin-top:0.5rem;">Got it</button>
+              `);
+                    render();
+                }
+            }
+
+            function handleContact(e) {
+                const name = document.getElementById('contact-name').value;
+                if (name) {
+                    openModal('Message Sent!', `
+                <p>Thanks ${name}, we've received your message.</p>
+                <p style="font-size:0.95rem;">Our team will respond within 24 hours.</p>
+                <button class="btn" data-action="close-modal" style="margin-top:0.5rem;">Close</button>
+              `);
+                    e.target.reset();
+                }
+            }
+
+            function handleCheckout() {
+                if (state.cart.length === 0) return;
+                const total = state.cart.reduce((s, i) => s + i.price * i.qty, 0);
+                const itemsHtml = state.cart.map(item => {
+                    const prod = products.find(p => p.id === item.id);
+                    return `<div class="cart-summary-item"><span>${prod ? prod.name : item.id} × ${item.qty}</span><span>$${(item.price * item.qty).toFixed(2)}</span></div>`;
+                }).join('');
+
+                openModal('Order Summary', `
+              <div style="margin-bottom:1rem;">${itemsHtml}</div>
+              <div class="cart-summary-total"><span>Total</span><span>$${total.toFixed(2)}</span></div>
+              <p style="font-size:0.9rem;margin-top:0.5rem;">Proceed to payment to complete your order.</p>
+              <button class="btn" data-action="close-modal" style="margin-top:1rem;">Close</button>
+            `);
+            }
+
+            // ─── INIT ────────────────────────────────────────────────────
+            render();
+
+        })();
+    </script>
+</body>
+</html>
