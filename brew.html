@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <title>Brew & Co. — Premium Coffee</title>
 
-    <!-- Favicon SVG (matches logo) -->
+    <!-- Favicon SVG -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='96' fill='%23F7F1E3'/><circle cx='256' cy='256' r='196' fill='%232E241B'/><circle cx='256' cy='256' r='164' fill='%23BC6537'/><ellipse cx='256' cy='286' rx='112' ry='86' fill='%23F7F1E3'/><path d='M368 262c34-4 58 14 54 40-4 28-38 44-74 36' fill='none' stroke='%23F7F1E3' stroke-width='22' stroke-linecap='round'/><ellipse cx='256' cy='278' rx='84' ry='60' fill='%235A4632'/><path d='M212 150c-12-20 12-30 2-50m42 52c-12-22 12-32 2-54m42 56c-12-22 12-32 2-54' fill='none' stroke='%232E241B' stroke-width='16' stroke-linecap='round'/></svg>" />
 
     <style>
@@ -688,16 +688,64 @@
             border-radius: var(--radius);
             padding: 2rem;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            gap: 1rem;
             transition: box-shadow 0.3s ease;
         }
         .detail-image:hover {
             box-shadow: var(--shadow-lg);
         }
-        .detail-image svg {
+        .detail-image .main-img svg {
             max-width: 100%;
-            max-height: 360px;
+            max-height: 320px;
+        }
+        .detail-image .thumbnails {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .detail-image .thumbnails .thumb {
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.25rem;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            background: var(--background);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .detail-image .thumbnails .thumb:hover {
+            border-color: var(--primary);
+        }
+        .detail-image .thumbnails .thumb.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+        .detail-image .thumbnails .thumb svg {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .detail-image .badge-row {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .detail-image .badge-row .badge {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            background: var(--accent);
+            padding: 0.15rem 0.6rem;
+            border-radius: 9999px;
+            color: var(--muted-foreground);
+            border: 1px solid var(--border);
         }
         .detail-info h1 {
             font-size: clamp(1.5rem, 4vw, 2rem);
@@ -715,6 +763,16 @@
             color: var(--muted-foreground);
             margin-bottom: 1.5rem;
             line-height: 1.7;
+        }
+        .detail-info .desc p {
+            margin-bottom: 0.75rem;
+        }
+        .detail-info .desc ul {
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .detail-info .desc ul li {
+            margin-bottom: 0.25rem;
         }
         .detail-info .specs {
             display: grid;
@@ -760,6 +818,36 @@
         .detail-info .actions button {
             min-height: 44px;
             min-width: 44px;
+        }
+        .detail-info .reviews {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        .detail-info .reviews h3 {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .detail-info .reviews .review {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+        .detail-info .reviews .review:last-child {
+            border-bottom: none;
+        }
+        .detail-info .reviews .review .author {
+            font-weight: 600;
+            color: var(--foreground);
+        }
+        .detail-info .reviews .review .stars {
+            color: var(--primary);
+            letter-spacing: 0.05rem;
+        }
+        .detail-info .reviews .review .text {
+            color: var(--muted-foreground);
+            margin-top: 0.15rem;
         }
 
         /* ── About ── */
@@ -880,7 +968,7 @@
 
         /* Account Dashboard */
         .account-dashboard {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
         .account-dashboard .account-header {
@@ -933,6 +1021,17 @@
             font-weight: 600;
             font-size: 1rem;
             margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .account-dashboard .account-card h3 .badge {
+            font-size: 0.6rem;
+            font-weight: 400;
+            color: var(--muted-foreground);
+            background: var(--accent);
+            padding: 0.1rem 0.5rem;
+            border-radius: 9999px;
         }
         .account-dashboard .account-card p {
             color: var(--muted-foreground);
@@ -945,6 +1044,7 @@
             border-bottom: 1px solid var(--border);
             font-size: 0.85rem;
             flex-wrap: wrap;
+            gap: 0.25rem;
         }
         .account-dashboard .account-card .order-item:last-child {
             border-bottom: none;
@@ -952,6 +1052,75 @@
         .account-dashboard .account-card .order-item .status {
             color: var(--primary);
             font-weight: 500;
+        }
+        .account-dashboard .account-card .address-item,
+        .account-dashboard .account-card .payment-item {
+            padding: 0.3rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+        }
+        .account-dashboard .account-card .address-item:last-child,
+        .account-dashboard .account-card .payment-item:last-child {
+            border-bottom: none;
+        }
+        .account-dashboard .account-card .address-item .default-badge,
+        .account-dashboard .account-card .payment-item .default-badge {
+            font-size: 0.6rem;
+            background: var(--primary);
+            color: #fff;
+            padding: 0.05rem 0.4rem;
+            border-radius: 9999px;
+        }
+        .account-dashboard .account-card .add-btn {
+            margin-top: 0.5rem;
+            width: 100%;
+            padding: 0.4rem;
+            border: 1px dashed var(--border);
+            border-radius: var(--radius);
+            background: transparent;
+            color: var(--muted-foreground);
+            font-size: 0.8rem;
+            cursor: pointer;
+            min-height: 40px;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .account-dashboard .account-card .add-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .account-dashboard .account-card .profile-field {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+        }
+        .account-dashboard .account-card .profile-field .label {
+            color: var(--muted-foreground);
+            font-weight: 500;
+        }
+        .account-dashboard .account-card .profile-field .value {
+            font-weight: 500;
+        }
+        .account-dashboard .account-card .profile-field .edit-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 0.75rem;
+            cursor: pointer;
+            min-height: 28px;
+            min-width: 28px;
+            padding: 0 0.25rem;
+        }
+        .account-dashboard .account-card .profile-field .edit-btn:hover {
+            text-decoration: underline;
         }
 
         /* ── Contact ── */
@@ -1641,6 +1810,9 @@
             margin-top: 0.5rem;
             min-height: 44px;
         }
+        .modal-body .btn:not(:last-child) {
+            margin-right: 0.5rem;
+        }
         .modal-body .cart-summary-item {
             display: flex;
             justify-content: space-between;
@@ -1655,6 +1827,48 @@
             padding: 0.75rem 0;
             font-weight: 700;
             font-size: 1.1rem;
+        }
+        .modal-body .form-group {
+            margin-bottom: 0.75rem;
+        }
+        .modal-body .form-group label {
+            display: block;
+            font-weight: 500;
+            font-size: 0.85rem;
+            margin-bottom: 0.15rem;
+        }
+        .modal-body .form-group input,
+        .modal-body .form-group select {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--background);
+            color: var(--foreground);
+            min-height: 40px;
+        }
+        .modal-body .form-group input:focus,
+        .modal-body .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(188, 101, 55, 0.15);
+        }
+        .modal-body .form-row {
+            display: flex;
+            gap: 0.75rem;
+        }
+        .modal-body .form-row>* {
+            flex: 1;
+        }
+        .modal-body .btn-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+        .modal-body .btn-group .btn {
+            flex: 1;
+            min-width: 80px;
         }
 
         /* ── Responsive ── */
@@ -1732,6 +1946,10 @@
             }
             .account-dashboard .account-header .info {
                 width: 100%;
+            }
+            .detail-image .thumbnails .thumb {
+                width: 48px;
+                height: 48px;
             }
         }
 
@@ -1827,6 +2045,19 @@
                 height: 1.2rem;
                 font-size: 0.6rem;
             }
+            .modal-body .form-row {
+                flex-direction: column;
+            }
+            .modal-body .btn-group {
+                flex-direction: column;
+            }
+            .modal-body .btn-group .btn {
+                flex: 1 1 auto;
+            }
+            .detail-image .thumbnails .thumb {
+                width: 40px;
+                height: 40px;
+            }
         }
 
         @media (max-width: 420px) {
@@ -1858,7 +2089,6 @@
             }
         }
 
-        /* Touch-friendly adjustments for all interactive elements */
         button,
         a,
         input,
@@ -1880,7 +2110,6 @@
             touch-action: manipulation;
         }
 
-        /* Prevent text zoom on input focus for iOS */
         input,
         select,
         textarea {
@@ -1893,6 +2122,49 @@
                 font-size: 16px !important;
             }
         }
+        .loading-spinner {
+            display: inline-block;
+            width: 1.2rem;
+            height: 1.2rem;
+            border: 2px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(247, 241, 227, 0.7);
+            backdrop-filter: blur(2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 300;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .loading-overlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .login-status {
+            font-size: 0.7rem;
+            color: var(--muted-foreground);
+            padding: 0.2rem 0.6rem;
+            background: var(--accent);
+            border-radius: 9999px;
+            border: 1px solid var(--border);
+        }
+        .login-status.logged-in {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
     </style>
 </head>
 <body>
@@ -1900,19 +2172,139 @@
     <div id="root"></div>
 
     <!-- Modal -->
-    <div id="modal-overlay" class="modal-overlay" data-action="close-modal">
+    <div id="modal-overlay" class="modal-overlay">
         <div class="modal-card" onclick="event.stopPropagation();">
             <div class="modal-header">
                 <h3 id="modal-title">Title</h3>
-                <button class="modal-close-btn" data-action="close-modal">✕</button>
+                <button class="modal-close-btn" id="modal-close-btn">✕</button>
             </div>
             <div id="modal-body" class="modal-body"></div>
         </div>
     </div>
 
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
     <script>
         (function() {
             'use strict';
+
+            // ─── INDEXEDDB SERVICE ──────────────────────────────────────
+            const DB_NAME = 'BrewCoDB';
+            const DB_VERSION = 2;
+
+            function openDB() {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open(DB_NAME, DB_VERSION);
+                    request.onerror = () => reject(request.error);
+                    request.onsuccess = () => resolve(request.result);
+                    request.onupgradeneeded = (e) => {
+                        const db = e.target.result;
+                        if (!db.objectStoreNames.contains('users')) {
+                            const store = db.createObjectStore('users', { keyPath: 'id' });
+                            store.createIndex('email', 'email', { unique: true });
+                        }
+                        if (!db.objectStoreNames.contains('orders')) {
+                            const ordersStore = db.createObjectStore('orders', { keyPath: 'id' });
+                            ordersStore.createIndex('userId', 'userId', { unique: false });
+                        }
+                        if (!db.objectStoreNames.contains('addresses')) {
+                            const addrStore = db.createObjectStore('addresses', { keyPath: 'id' });
+                            addrStore.createIndex('userId', 'userId', { unique: false });
+                        }
+                        if (!db.objectStoreNames.contains('paymentMethods')) {
+                            const pmStore = db.createObjectStore('paymentMethods', { keyPath: 'id' });
+                            pmStore.createIndex('userId', 'userId', { unique: false });
+                        }
+                        if (!db.objectStoreNames.contains('cart')) {
+                            db.createObjectStore('cart', { keyPath: 'userId' });
+                        }
+                        if (!db.objectStoreNames.contains('sessions')) {
+                            db.createObjectStore('sessions', { keyPath: 'id' });
+                        }
+                    };
+                });
+            }
+
+            function dbGetAll(storeName) {
+                return openDB().then(db => {
+                    return new Promise((resolve, reject) => {
+                        const tx = db.transaction(storeName, 'readonly');
+                        const store = tx.objectStore(storeName);
+                        const req = store.getAll();
+                        req.onsuccess = () => resolve(req.result);
+                        req.onerror = () => reject(req.error);
+                    });
+                });
+            }
+
+            function dbGet(storeName, id) {
+                return openDB().then(db => {
+                    return new Promise((resolve, reject) => {
+                        const tx = db.transaction(storeName, 'readonly');
+                        const store = tx.objectStore(storeName);
+                        const req = store.get(id);
+                        req.onsuccess = () => resolve(req.result || null);
+                        req.onerror = () => reject(req.error);
+                    });
+                });
+            }
+
+            function dbPut(storeName, data) {
+                return openDB().then(db => {
+                    return new Promise((resolve, reject) => {
+                        const tx = db.transaction(storeName, 'readwrite');
+                        const store = tx.objectStore(storeName);
+                        const req = store.put(data);
+                        req.onsuccess = () => resolve(req.result);
+                        req.onerror = () => reject(req.error);
+                    });
+                });
+            }
+
+            function dbDelete(storeName, id) {
+                return openDB().then(db => {
+                    return new Promise((resolve, reject) => {
+                        const tx = db.transaction(storeName, 'readwrite');
+                        const store = tx.objectStore(storeName);
+                        const req = store.delete(id);
+                        req.onsuccess = () => resolve();
+                        req.onerror = () => reject(req.error);
+                    });
+                });
+            }
+
+            function dbGetIndex(storeName, indexName, value) {
+                return openDB().then(db => {
+                    return new Promise((resolve, reject) => {
+                        const tx = db.transaction(storeName, 'readonly');
+                        const store = tx.objectStore(storeName);
+                        const index = store.index(indexName);
+                        const req = index.getAll(value);
+                        req.onsuccess = () => resolve(req.result);
+                        req.onerror = () => reject(req.error);
+                    });
+                });
+            }
+
+            function dbGetByIndex(storeName, indexName, value) {
+                return openDB().then(db => {
+                    return new Promise((resolve, reject) => {
+                        const tx = db.transaction(storeName, 'readonly');
+                        const store = tx.objectStore(storeName);
+                        const index = store.index(indexName);
+                        const req = index.get(value);
+                        req.onsuccess = () => resolve(req.result || null);
+                        req.onerror = () => reject(req.error);
+                    });
+                });
+            }
+
+            function generateId() {
+                return 'id_' + Date.now().toString(36) + '_' + Math.random().toString(36).substr(2, 6);
+            }
 
             // ─── LOGO SVG ──────────────────────────────────────────────────
             const LOGO_SVG =
@@ -1965,7 +2357,7 @@
                 youtube: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>`
             };
 
-            // ─── PAYMENT ICONS (SVG) ──────────────────────────────────────
+            // ─── PAYMENT ICONS ──────────────────────────────────────────
             const PAYMENT_ICONS = {
                 visa: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 32" width="48" height="32"><rect width="48" height="32" rx="4" fill="#1434CB"/><text x="24" y="21" font-family="Arial, sans-serif" font-weight="700" font-size="12" fill="white" text-anchor="middle">VISA</text></svg>`,
                 mastercard: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 32" width="48" height="32"><rect width="48" height="32" rx="4" fill="#F5F5F5"/><circle cx="19" cy="16" r="11" fill="#EB001B"/><circle cx="29" cy="16" r="11" fill="#F79E1B"/><circle cx="24" cy="16" r="11" fill="none" stroke="#FF5F00" stroke-width="2"/></svg>`,
@@ -1978,11 +2370,8 @@
             };
 
             // ─── CURRENCY & LANGUAGE ──────────────────────────────────────
-            const currencies = {
-                USD: { symbol: '$', rate: 1 },
-                EUR: { symbol: '€', rate: 0.92 },
-                GBP: { symbol: '£', rate: 0.79 },
-            };
+            const currencies = { USD: { symbol: '$', rate: 1 }, EUR: { symbol: '€', rate: 0.92 }, GBP: { symbol: '£',
+                    rate: 0.79 } };
             let currentCurrency = 'GBP';
             let currentLanguage = 'en';
 
@@ -1990,14 +2379,14 @@
                 en: {
                     nav: { home: 'Home', shop: 'Shop', subscribe: 'Subscribe', about: 'About', blog: 'Blog', faq: 'FAQ',
                         contact: 'Contact', account: 'Account' },
-                    hero: { title: 'Brew & Co. Premium Coffee', subtitle: "Specialty coffee from the world's finest growing regions. Whole beans, instant, and accessories — crafted for the discerning palate." },
+                    hero: { title: 'Brew & Co. Premium Coffee', subtitle: "Specialty coffee from the world's finest growing regions." },
                     explore: 'Explore Coffee',
                     subscribe: 'Subscribe',
                     featured: 'Featured Products',
                     featuredDesc: 'Our most loved coffees, selected for their exceptional flavor and quality.',
                     viewAll: 'View All Products',
                     fromBean: 'From Bean to Cup',
-                    fromBeanDesc: 'Brew & Co. was founded on a simple belief: great coffee starts with great beans. We work directly with farmers to source exceptional coffees, then roast them with precision to unlock their full potential.',
+                    fromBeanDesc: 'Brew & Co. was founded on a simple belief: great coffee starts with great beans.',
                     learnMore: 'Learn More',
                     blogTitle: 'From Our Blog',
                     blogDesc: 'Insights, guides, and stories from the world of coffee.',
@@ -2014,19 +2403,20 @@
                     account: { dashboard: 'Dashboard', orders: 'Order History', addresses: 'Saved Addresses',
                         settings: 'Settings', logout: 'Log Out', orderPlaced: 'Order Placed', status: 'Status',
                         total: 'Total', shipping: 'Shipping Address', noOrders: 'No orders yet.' },
-                    ukAddress: 'London, United Kingdom'
+                    ukAddress: 'London, United Kingdom',
+                    profile: { edit: 'Edit', save: 'Save', cancel: 'Cancel' }
                 },
                 es: {
                     nav: { home: 'Inicio', shop: 'Tienda', subscribe: 'Suscribirse', about: 'Nosotros', blog: 'Blog',
                         faq: 'Preguntas', contact: 'Contacto', account: 'Cuenta' },
-                    hero: { title: 'Brew & Co. Café Premium', subtitle: 'Café de especialidad de las mejores regiones del mundo. Granos, instantáneo y accesorios — elaborados para el paladar exigente.' },
+                    hero: { title: 'Brew & Co. Café Premium', subtitle: 'Café de especialidad de las mejores regiones del mundo.' },
                     explore: 'Explorar Café',
                     subscribe: 'Suscribirse',
                     featured: 'Productos Destacados',
                     featuredDesc: 'Nuestros cafés más queridos, seleccionados por su sabor y calidad excepcionales.',
                     viewAll: 'Ver Todos los Productos',
                     fromBean: 'Del Grano a la Taza',
-                    fromBeanDesc: 'Brew & Co. nació de una creencia simple: el buen café comienza con buenos granos. Trabajamos directamente con agricultores para obtener cafés excepcionales, y los tostamos con precisión para desbloquear su máximo potencial.',
+                    fromBeanDesc: 'Brew & Co. nació de una creencia simple: el buen café comienza con buenos granos.',
                     learnMore: 'Conocer Más',
                     blogTitle: 'Desde Nuestro Blog',
                     blogDesc: 'Ideas, guías e historias del mundo del café.',
@@ -2043,19 +2433,20 @@
                     account: { dashboard: 'Panel', orders: 'Historial de Pedidos', addresses: 'Direcciones Guardadas',
                         settings: 'Configuración', logout: 'Cerrar Sesión', orderPlaced: 'Pedido Realizado',
                         status: 'Estado', total: 'Total', shipping: 'Dirección de Envío', noOrders: 'Sin pedidos aún.' },
-                    ukAddress: 'Londres, Reino Unido'
+                    ukAddress: 'Londres, Reino Unido',
+                    profile: { edit: 'Editar', save: 'Guardar', cancel: 'Cancelar' }
                 },
                 fr: {
                     nav: { home: 'Accueil', shop: 'Boutique', subscribe: 'S\'abonner', about: 'À propos', blog: 'Blog',
                         faq: 'FAQ', contact: 'Contact', account: 'Compte' },
-                    hero: { title: 'Brew & Co. Café Premium', subtitle: 'Café de spécialité des plus belles régions du monde. Grains, instantané et accessoires — conçus pour les palais exigeants.' },
+                    hero: { title: 'Brew & Co. Café Premium', subtitle: 'Café de spécialité des plus belles régions du monde.' },
                     explore: 'Explorer le Café',
                     subscribe: 'S\'abonner',
                     featured: 'Produits Vedettes',
                     featuredDesc: 'Nos cafés les plus appréciés, sélectionnés pour leur saveur et leur qualité exceptionnelles.',
                     viewAll: 'Voir Tous les Produits',
                     fromBean: 'Du Grain à la Tasse',
-                    fromBeanDesc: 'Brew & Co. est né d\'une conviction simple : un bon café commence par de bons grains. Nous travaillons directement avec les agriculteurs pour nous procurer des cafés d\'exception, que nous torréfions avec précision pour révéler tout leur potentiel.',
+                    fromBeanDesc: 'Brew & Co. est né d\'une conviction simple : un bon café commence par de bons grains.',
                     learnMore: 'En Savoir Plus',
                     blogTitle: 'De Notre Blog',
                     blogDesc: 'Idées, guides et histoires du monde du café.',
@@ -2073,83 +2464,219 @@
                         addresses: 'Adresses Enregistrées', settings: 'Paramètres', logout: 'Déconnexion',
                         orderPlaced: 'Commande Passée', status: 'Statut', total: 'Total',
                         shipping: 'Adresse de Livraison', noOrders: 'Aucune commande encore.' },
-                    ukAddress: 'Londres, Royaume-Uni'
+                    ukAddress: 'Londres, Royaume-Uni',
+                    profile: { edit: 'Modifier', save: 'Enregistrer', cancel: 'Annuler' }
                 }
             };
 
-            // ─── PRODUCTS DATA ──────────────────────────────────────────
+            // ─── PRODUCTS DATA (with rich descriptions) ──────────────────
             const products = [{
                 id: 'p1',
                 name: 'Ethiopian Yirgacheffe',
                 category: 'beans',
                 price: 18.50,
-                description: 'Bright and complex with notes of blueberry, dark chocolate, and a silky mouthfeel. Sourced from smallholder farms in the Yirgacheffe region.',
-                specs: { Origin: 'Ethiopia', 'Roast Level': 'Light', 'Process': 'Washed', 'Altitude': '1,900–2,200m' },
-                svg: 'ethiopia'
+                description: `<p>Bright and complex with notes of blueberry, dark chocolate, and a silky mouthfeel. Sourced from smallholder farms in the Yirgacheffe region, this washed coffee represents the pinnacle of Ethiopian terroir.</p>
+                          <p>Yirgacheffe is often considered the birthplace of Arabica coffee. The high altitude, rich volcanic soil, and traditional processing methods create a coffee that is both elegant and intensely flavorful.</p>
+                          <ul>
+                            <li><strong>Flavor Profile:</strong> Blueberry, dark chocolate, jasmine, and a silky body</li>
+                            <li><strong>Growing Region:</strong> Yirgacheffe, Ethiopia — 1,900-2,200m elevation</li>
+                            <li><strong>Processing:</strong> Washed — fully washed and dried on raised beds</li>
+                            <li><strong>Roast Level:</strong> Light — roasted to preserve the delicate floral notes</li>
+                            <li><strong>Best For:</strong> Pour-over, Chemex, and drip coffee</li>
+                          </ul>
+                          <p>This coffee is ethically sourced through direct trade relationships with the Worka Cooperative, supporting sustainable farming practices and community development.</p>`,
+                specs: { Origin: 'Ethiopia', 'Roast Level': 'Light', 'Process': 'Washed', 'Altitude': '1,900–2,200m',
+                    'Varietal': 'Heirloom', 'Flavor Notes': 'Blueberry, Dark Chocolate, Jasmine' },
+                svg: 'ethiopia',
+                images: ['ethiopia', 'bean', 'house-ground'],
+                reviews: [
+                    { author: 'Sarah M.', stars: 5, text: 'Absolutely stunning coffee. The blueberry notes are incredible.' },
+                    { author: 'James K.', stars: 5, text: 'My go-to for pour-over. Clean, bright, and complex.' }
+                ]
             }, {
                 id: 'p2',
                 name: 'Colombian Supremo',
                 category: 'beans',
                 price: 14.75,
-                description: 'Rich and balanced with caramel sweetness, nutty undertones, and a smooth finish. Grown in the renowned Huila region.',
-                specs: { Origin: 'Colombia', 'Roast Level': 'Medium-Dark', 'Process': 'Washed', 'Altitude': '1,500–1,800m' },
-                svg: 'colombia'
+                description: `<p>Rich and balanced with caramel sweetness, nutty undertones, and a smooth finish. Grown in the renowned Huila region, this coffee is carefully roasted to medium-dark to bring out its full body.</p>
+                          <p>Colombian Supremo represents the best of Colombian coffee — carefully selected beans from the highest quality lots, roasted to perfection for a consistently satisfying cup.</p>
+                          <ul>
+                            <li><strong>Flavor Profile:</strong> Caramel, almond, milk chocolate, with a smooth finish</li>
+                            <li><strong>Growing Region:</strong> Huila, Colombia — 1,500-1,800m elevation</li>
+                            <li><strong>Processing:</strong> Washed — fermented and sun-dried</li>
+                            <li><strong>Roast Level:</strong> Medium-Dark — balanced and full-bodied</li>
+                            <li><strong>Best For:</strong> Espresso, drip, and French press</li>
+                          </ul>
+                          <p>Sourced from smallholder farms in the Huila department, this coffee supports sustainable farming and provides fair wages to local communities.</p>`,
+                specs: { Origin: 'Colombia', 'Roast Level': 'Medium-Dark', 'Process': 'Washed', 'Altitude': '1,500–1,800m',
+                    'Varietal': 'Caturra, Castillo', 'Flavor Notes': 'Caramel, Almond, Milk Chocolate' },
+                svg: 'colombia',
+                images: ['colombia', 'bean', 'espresso'],
+                reviews: [
+                    { author: 'Emma R.', stars: 4, text: 'Smooth and delicious. Perfect for my morning latte.' },
+                    { author: 'David L.', stars: 5, text: 'Rich caramel notes. This is my daily driver.' }
+                ]
             }, {
                 id: 'p3',
                 name: 'Classic Instant Coffee',
                 category: 'instant',
                 price: 9.99,
-                description: 'Premium freeze-dried instant coffee with a bold, full-bodied flavor. Made from 100% Arabica beans.',
-                specs: { Type: 'Freeze-dried', 'Bean': '100% Arabica', 'Caffeine': 'High', 'Serving': '2g per cup' },
-                svg: 'instant-classic'
+                description: `<p>Premium freeze-dried instant coffee with a bold, full-bodied flavor. Made from 100% Arabica beans, this instant coffee delivers a consistently rich cup in seconds.</p>
+                          <p>Our instant coffee is crafted using a gentle freeze-drying process that preserves the natural flavors and aromas of freshly roasted beans. Simply add hot water and enjoy a barista-quality cup anytime, anywhere.</p>
+                          <ul>
+                            <li><strong>Flavor Profile:</strong> Bold, rich, with chocolate and nutty undertones</li>
+                            <li><strong>Bean Origin:</strong> 100% Arabica from South America</li>
+                            <li><strong>Processing:</strong> Freeze-dried — preserves freshness and flavor</li>
+                            <li><strong>Caffeine Level:</strong> High — perfect for a morning boost</li>
+                            <li><strong>Serving:</strong> 2g per cup — makes 50 cups per jar</li>
+                          </ul>
+                          <p>Perfect for camping, travel, or busy mornings when you need quality coffee fast. 100% gluten-free with no artificial additives.</p>`,
+                specs: { Type: 'Freeze-dried', 'Bean': '100% Arabica', 'Caffeine': 'High', 'Serving': '2g per cup',
+                    'Origin': 'South America', 'Shelf Life': '24 months' },
+                svg: 'instant-classic',
+                images: ['instant-classic', 'instant-decaf', 'bean'],
+                reviews: [
+                    { author: 'Lisa T.', stars: 5, text: 'Surprisingly good for instant! Rich and smooth.' },
+                    { author: 'Mark P.', stars: 4, text: 'Perfect for camping. Tastes like real coffee.' }
+                ]
             }, {
                 id: 'p4',
                 name: 'Decaf Instant Smooth',
                 category: 'instant',
                 price: 10.50,
-                description: 'Swiss Water decaffeinated instant coffee with a smooth, mellow taste. Enjoy the full flavor without the caffeine.',
-                specs: { Type: 'Freeze-dried', 'Bean': '100% Arabica', 'Caffeine': 'Decaf', 'Serving': '2g per cup' },
-                svg: 'instant-decaf'
+                description: `<p>Swiss Water decaffeinated instant coffee with a smooth, mellow taste. Enjoy the full flavor of Arabica beans without the caffeine kick.</p>
+                          <p>Our decaf instant coffee uses the Swiss Water Process — a chemical-free method that removes 99.9% of caffeine while preserving the coffee's natural flavor compounds. It's the perfect choice for evening cups or those sensitive to caffeine.</p>
+                          <ul>
+                            <li><strong>Flavor Profile:</strong> Smooth, mellow, with hints of chocolate and caramel</li>
+                            <li><strong>Bean Origin:</strong> 100% Arabica from Central America</li>
+                            <li><strong>Processing:</strong> Swiss Water decaffeinated, freeze-dried</li>
+                            <li><strong>Caffeine Level:</strong> Decaf — 99.9% caffeine-free</li>
+                            <li><strong>Serving:</strong> 2g per cup — makes 50 cups per jar</li>
+                          </ul>
+                          <p>All the taste, none of the jitters. Enjoy a warm cup of coffee any time of day without affecting your sleep.</p>`,
+                specs: { Type: 'Freeze-dried', 'Bean': '100% Arabica', 'Caffeine': 'Decaf', 'Serving': '2g per cup',
+                    'Process': 'Swiss Water', 'Shelf Life': '24 months' },
+                svg: 'instant-decaf',
+                images: ['instant-decaf', 'instant-classic', 'bean'],
+                reviews: [
+                    { author: 'Susan W.', stars: 5, text: 'Finally a decaf that actually tastes good!' },
+                    { author: 'Robert C.', stars: 4, text: 'Smooth and satisfying. No caffeine crash.' }
+                ]
             }, {
                 id: 'p5',
                 name: 'House Ground Blend',
                 category: 'beans',
                 price: 13.25,
-                description: 'Our signature house blend, medium roasted with a balanced profile of chocolate, nut, and subtle fruit notes.',
-                specs: { Origin: 'Multi-origin', 'Roast Level': 'Medium', 'Process': 'Washed', 'Grind': 'Drip' },
-                svg: 'house-ground'
+                description: `<p>Our signature house blend, medium roasted with a balanced profile of chocolate, nut, and subtle fruit notes. Perfect for everyday brewing.</p>
+                          <p>This blend combines beans from three different origins — Brazil, Colombia, and Ethiopia — to create a harmonious cup that's approachable yet complex. It's the coffee we brew in our own roastery and the one we serve to visitors.</p>
+                          <ul>
+                            <li><strong>Flavor Profile:</strong> Chocolate, hazelnut, dried fruit, with a smooth finish</li>
+                            <li><strong>Growing Regions:</strong> Brazil, Colombia, Ethiopia</li>
+                            <li><strong>Processing:</strong> Washed and natural mixed</li>
+                            <li><strong>Roast Level:</strong> Medium — balanced and versatile</li>
+                            <li><strong>Best For:</strong> Drip, French press, and everyday drinking</li>
+                          </ul>
+                          <p>This is the coffee that started it all — our original blend that's been perfected over 15 years of roasting. It's the heart of Brew & Co.</p>`,
+                specs: { Origin: 'Multi-origin', 'Roast Level': 'Medium', 'Process': 'Washed & Natural',
+                    'Grind': 'Drip', 'Flavor Notes': 'Chocolate, Hazelnut, Dried Fruit' },
+                svg: 'house-ground',
+                images: ['house-ground', 'bean', 'espresso'],
+                reviews: [
+                    { author: 'Tom H.', stars: 5, text: 'Perfect everyday coffee. Balanced and delicious.' },
+                    { author: 'Anna S.', stars: 5, text: 'This is my favorite. Always consistent.' }
+                ]
             }, {
                 id: 'p6',
                 name: 'Coffee Pods Variety Pack',
                 category: 'pods',
                 price: 21.00,
-                description: 'Convenient and sustainable coffee pods. Includes 24 pods featuring three distinct roast profiles.',
-                specs: { Compatibility: 'Universal', 'Count': '24 pods', 'Roasts': 'Light, Medium, Dark', 'Material': 'Compostable' },
-                svg: 'pods'
+                description: `<p>Convenient and sustainable coffee pods. Includes 24 pods featuring three distinct roast profiles — Light, Medium, and Dark. Compostable materials.</p>
+                          <p>Our coffee pods are designed for convenience without compromise. Each pod is filled with freshly roasted, specialty-grade coffee and sealed to preserve freshness. The pods are 100% compostable, so you can enjoy great coffee while reducing waste.</p>
+                          <ul>
+                            <li><strong>Compatibility:</strong> Universal — works with most pod machines</li>
+                            <li><strong>Count:</strong> 24 pods — 8 light, 8 medium, 8 dark</li>
+                            <li><strong>Roasts:</strong> Light (fruity), Medium (balanced), Dark (bold)</li>
+                            <li><strong>Material:</strong> Compostable — eco-friendly and sustainable</li>
+                            <li><strong>Bean Origin:</strong> 100% Arabica from multiple origins</li>
+                          </ul>
+                          <p>Perfect for exploring different roast profiles and finding your favorite. Each pod delivers a consistently delicious cup every time.</p>`,
+                specs: { Compatibility: 'Universal', 'Count': '24 pods', 'Roasts': 'Light, Medium, Dark',
+                    'Material': 'Compostable', 'Bean': '100% Arabica' },
+                svg: 'pods',
+                images: ['pods', 'bean', 'house-ground'],
+                reviews: [
+                    { author: 'Kate B.', stars: 5, text: 'Love the variety! The dark roast is my favorite.' },
+                    { author: 'Jake R.', stars: 4, text: 'Great taste and eco-friendly. Win-win.' }
+                ]
             }, {
                 id: 'p7',
                 name: 'Premium Espresso Roast',
                 category: 'beans',
                 price: 16.90,
-                description: 'Dark, rich, and velvety. This espresso roast is blended specifically for a thick crema and intense flavor.',
-                specs: { Origin: 'South America', 'Roast Level': 'Dark', 'Process': 'Washed', 'Altitude': '1,200–1,600m' },
-                svg: 'espresso'
+                description: `<p>Dark, rich, and velvety. This espresso roast is blended specifically for a thick crema and intense flavor. Ideal for espresso machines and Moka pots.</p>
+                          <p>Our espresso roast is a carefully crafted blend of beans from South America and Africa, roasted to a dark level that brings out deep chocolate, toasted nut, and subtle spice notes. It's designed to shine in espresso-based drinks.</p>
+                          <ul>
+                            <li><strong>Flavor Profile:</strong> Dark chocolate, toasted nuts, warm spice, with a creamy body</li>
+                            <li><strong>Growing Regions:</strong> Brazil, Ethiopia, Colombia</li>
+                            <li><strong>Processing:</strong> Washed and natural</li>
+                            <li><strong>Roast Level:</strong> Dark — bold and intense</li>
+                            <li><strong>Best For:</strong> Espresso, Americano, latte, cappuccino</li>
+                          </ul>
+                          <p>This roast is the result of years of experimentation to find the perfect espresso blend. It produces a thick, golden crema and a flavor that stands up to milk without being bitter.</p>`,
+                specs: { Origin: 'South America', 'Roast Level': 'Dark', 'Process': 'Washed & Natural',
+                    'Altitude': '1,200–1,600m', 'Flavor Notes': 'Dark Chocolate, Toasted Nuts, Spice' },
+                svg: 'espresso',
+                images: ['espresso', 'bean', 'colombia'],
+                reviews: [
+                    { author: 'Maria G.', stars: 5, text: 'Amazing crema! Best espresso I\'ve made at home.' },
+                    { author: 'Paul D.', stars: 5, text: 'Rich and smooth. Perfect for my daily cortado.' }
+                ]
             }, {
                 id: 'p8',
                 name: 'Cold Brew Concentrate',
                 category: 'instant',
                 price: 19.99,
-                description: 'Smooth, low-acid cold brew concentrate. Simply mix with water or milk for a refreshing iced coffee.',
-                specs: { Type: 'Concentrate', 'Bean': '100% Arabica', 'Serving': '8-10 cups', 'Storage': 'Refrigerated' },
-                svg: 'coldbrew'
+                description: `<p>Smooth, low-acid cold brew concentrate. Simply mix with water or milk for a refreshing iced coffee. Made from 100% Arabica beans.</p>
+                          <p>Our cold brew concentrate is made using a slow, cold extraction process that takes 24 hours. This method produces a coffee that's smooth, naturally sweet, and low in acidity — perfect for hot summer days or anyone with a sensitive stomach.</p>
+                          <ul>
+                            <li><strong>Flavor Profile:</strong> Smooth, chocolatey, with notes of caramel</li>
+                            <li><strong>Bean Origin:</strong> 100% Arabica from Central America</li>
+                            <li><strong>Process:</strong> Cold brew — 24-hour slow extraction</li>
+                            <li><strong>Serving:</strong> Mix 1:2 with water or milk — makes 8-10 cups</li>
+                            <li><strong>Storage:</strong> Refrigerated — keeps fresh for 2 weeks</li>
+                          </ul>
+                          <p>Perfect for hot summer days, this concentrate makes it easy to enjoy premium cold brew at home. Just add ice, water, or your favorite milk.</p>`,
+                specs: { Type: 'Concentrate', 'Bean': '100% Arabica', 'Serving': '8-10 cups', 'Storage': 'Refrigerated',
+                    'Acidity': 'Low', 'Shelf Life': '2 weeks' },
+                svg: 'coldbrew',
+                images: ['coldbrew', 'bean', 'instant-classic'],
+                reviews: [
+                    { author: 'Chloe H.', stars: 5, text: 'So smooth! Best cold brew I\'ve ever had.' },
+                    { author: 'Alex R.', stars: 5, text: 'Low acidity is a game changer. Love it.' }
+                ]
             }, {
                 id: 'p9',
                 name: 'Brew & Co. Gift Set',
                 category: 'accessories',
                 price: 49.00,
-                description: 'The perfect gift for coffee lovers. Includes a ceramic mug, a bag of our signature roast, and a bamboo coaster set.',
-                specs: { Includes: 'Mug, Beans, Coasters', 'Bean': 'House Blend', 'Mug': '12 oz Ceramic', 'Packaging': 'Premium Box' },
-                svg: 'giftset'
+                description: `<p>The perfect gift for coffee lovers. Includes a ceramic mug, a bag of our signature roast, and a bamboo coaster set. Beautifully packaged.</p>
+                          <p>Our gift set is thoughtfully curated to provide a complete coffee experience. It includes everything a coffee enthusiast needs to start their day right — premium coffee, a stylish mug, and sustainable coasters, all presented in a gift-ready box.</p>
+                          <ul>
+                            <li><strong>Includes:</strong> Ceramic mug, 250g house blend, 4 bamboo coasters</li>
+                            <li><strong>Mug:</strong> 12 oz ceramic with Brew & Co. logo — dishwasher safe</li>
+                            <li><strong>Bean:</strong> Our signature house blend — medium roast</li>
+                            <li><strong>Coasters:</strong> Set of 4 natural bamboo coasters with cork backing</li>
+                            <li><strong>Packaging:</strong> Premium gift box — ready to give</li>
+                          </ul>
+                          <p>Whether for birthdays, holidays, or just because, this gift set is the perfect way to share the love of great coffee.</p>`,
+                specs: { Includes: 'Mug, Beans, Coasters', 'Bean': 'House Blend', 'Mug': '12 oz Ceramic',
+                    'Packaging': 'Premium Box', 'Coasters': 'Set of 4 Bamboo' },
+                svg: 'giftset',
+                images: ['giftset', 'bean', 'house-ground'],
+                reviews: [
+                    { author: 'Emily W.', stars: 5, text: 'Beautiful presentation! The mug is lovely.' },
+                    { author: 'Daniel S.', stars: 5, text: 'Bought this as a gift. They loved it.' }
+                ]
             }, ];
 
             // ─── BLOG DATA ──────────────────────────────────────────────
@@ -2159,42 +2686,53 @@
                 date: '2026-07-15',
                 excerpt: 'Master the pour-over method with our step-by-step guide. From water temperature to bloom time, discover how to extract the perfect cup.',
                 tag: 'Brewing',
-                content: `
-              <p>Pour-over brewing is one of the most rewarding ways to make coffee. It allows for precise control over every variable, resulting in a clean, flavorful cup that highlights the unique characteristics of your beans.</p>
-              <h2>What You'll Need</h2>
-              <ul><li>A pour-over dripper (V60, Chemex, or Kalita Wave)</li><li>Filter paper</li><li>Freshly roasted coffee beans</li><li>A gooseneck kettle</li><li>A scale and timer</li></ul>
-              <h2>Step-by-Step Guide</h2>
-              <p><strong>1. Heat your water</strong> — Bring filtered water to 195–205°F (90–96°C).</p>
-              <p><strong>2. Rinse the filter</strong> — Pour hot water through the filter to warm your dripper and remove any paper taste.</p>
-              <p><strong>3. Grind your coffee</strong> — Use a medium-fine grind, similar to table salt. Aim for 22–25g of coffee for a 350ml brew.</p>
-              <p><strong>4. Bloom</strong> — Pour 50g of water over the grounds and let it bloom for 30–45 seconds.</p>
-              <p><strong>5. Pour in stages</strong> — Pour the remaining water in a slow, spiral motion, maintaining a steady stream.</p>
-              <p><strong>6. Let it draw down</strong> — The total brew time should be around 3–3.5 minutes. Remove the dripper and enjoy!</p>
-            `
+                content: `<p>Pour-over brewing is one of the most rewarding ways to make coffee. It allows for precise control over every variable, resulting in a clean, flavorful cup that highlights the unique characteristics of your beans.</p>
+                          <p>The beauty of pour-over lies in its simplicity — just hot water, coffee grounds, and a filter. Yet the technique you develop over time transforms it into a ritual that produces consistently exceptional coffee.</p>
+                          <h2>What You'll Need</h2>
+                          <ul><li>A pour-over dripper (V60, Chemex, or Kalita Wave)</li><li>Filter paper</li><li>Freshly roasted coffee beans</li><li>A gooseneck kettle</li><li>A scale and timer</li></ul>
+                          <h2>Step-by-Step Guide</h2>
+                          <p><strong>1. Heat your water</strong> — Bring filtered water to 195–205°F (90–96°C). The temperature is crucial; too hot and you'll scorch the grounds, too cool and you'll under-extract.</p>
+                          <p><strong>2. Rinse the filter</strong> — Pour hot water through the filter to warm your dripper and remove any paper taste. This also preheats your serving vessel.</p>
+                          <p><strong>3. Grind your coffee</strong> — Use a medium-fine grind, similar to table salt. Aim for 22–25g of coffee for a 350ml brew. The grind size affects extraction time and flavor.</p>
+                          <p><strong>4. Bloom</strong> — Pour 50g of water over the grounds and let it bloom for 30–45 seconds. This releases CO₂ and prepares the coffee for extraction.</p>
+                          <p><strong>5. Pour in stages</strong> — Pour the remaining water in a slow, spiral motion, maintaining a steady stream. Aim to finish pouring by 2 minutes.</p>
+                          <p><strong>6. Let it draw down</strong> — The total brew time should be around 3–3.5 minutes. Remove the dripper and enjoy!</p>
+                          <p>With practice, you'll develop intuition for timing and pouring technique. The result is a coffee that's complex, aromatic, and deeply satisfying.</p>`
             }, {
                 id: 'b2',
                 title: 'Understanding Coffee Roast Profiles',
                 date: '2026-07-02',
-                excerpt: 'Light, medium, dark — each roast level unlocks different flavor compounds. Learn how roast affects acidity, body, and aroma.',
+                excerpt: 'Light, medium, dark — each roast level unlocks different flavor compounds. Learn how roast affects acidity, body, and aroma in your cup.',
                 tag: 'Roasting',
-                content: `
-              <p>Roast level is one of the most important factors in determining the flavor of your coffee. The degree of roasting transforms green coffee beans into the aromatic, flavorful beans we brew.</p>
-              <h2>Light Roast</h2><p>Light roasts are roasted to the first crack, preserving the bean's original character. They tend to be brighter, more acidic, and fruitier.</p>
-              <h2>Medium Roast</h2><p>Medium roasts are roasted between the first and second crack. They offer a balance of acidity and body, with more caramel and chocolate notes.</p>
-              <h2>Dark Roast</h2><p>Dark roasts are roasted to the second crack, resulting in a bold, smoky flavor with rich notes of dark chocolate and nuts.</p>
-            `
+                content: `<p>Roast level is one of the most important factors in determining the flavor of your coffee. The degree of roasting transforms green coffee beans into the aromatic, flavorful beans we brew.</p>
+                          <p>The roasting process is both science and art. The roaster must carefully control temperature and time to develop the desired flavor profile while avoiding defects.</p>
+                          <h2>Light Roast</h2>
+                          <p>Light roasts are roasted to the first crack, preserving the bean's original character. They tend to be brighter, more acidic, and fruitier, with floral and citrus notes. The bean retains more caffeine and a lighter body.</p>
+                          <p><strong>Best for:</strong> Pour-over, drip, and single-origin exploration.</p>
+                          <h2>Medium Roast</h2>
+                          <p>Medium roasts are roasted between the first and second crack. They offer a balance of acidity and body, with more caramel and chocolate notes. This is the most popular roast level for everyday drinking.</p>
+                          <p><strong>Best for:</strong> Everyday drinking, drip, and French press.</p>
+                          <h2>Dark Roast</h2>
+                          <p>Dark roasts are roasted to the second crack, resulting in a bold, smoky flavor. The bean's natural acidity is diminished, replaced by rich, roasted notes of dark chocolate, nuts, and sometimes a hint of spice.</p>
+                          <p><strong>Best for:</strong> Espresso, French press, and those who prefer a full-bodied cup.</p>
+                          <p>Choosing the right roast comes down to personal preference. We recommend trying different roasts to discover what suits your palate best.</p>`
             }, {
                 id: 'b3',
                 title: 'Instant Coffee: Myths and Truths',
                 date: '2026-06-18',
                 excerpt: 'Instant coffee has come a long way. We explore the science behind modern freeze-drying and how it preserves the integrity of specialty beans.',
                 tag: 'Instant',
-                content: `
-              <p>Instant coffee often gets a bad rap, but modern production methods have transformed it into a convenient, high-quality option. Let's separate the myths from the truths.</p>
-              <h2>Myth: Instant coffee is made from low-quality beans</h2><p>While some instant coffees use lower-grade beans, specialty instant coffee is made from 100% Arabica beans sourced from the same farms.</p>
-              <h2>Myth: Instant coffee is full of chemicals</h2><p>Quality instant coffee is made from 100% coffee beans with no additives. The freeze-drying process simply removes water.</p>
-              <h2>Truth: Freeze-drying preserves flavor</h2><p>Freeze-drying (lyophilization) is a gentle process that locks in the coffee's volatile aromatics, delivering a cup that rivals fresh-brewed coffee.</p>
-            `
+                content: `<p>Instant coffee often gets a bad rap, but modern production methods have transformed it into a convenient, high-quality option. Let's separate the myths from the truths.</p>
+                          <p>Today's specialty instant coffee is a far cry from the stale, bitter powder of the past. Advances in freeze-drying technology now preserve the delicate flavors of freshly roasted beans.</p>
+                          <h2>Myth: Instant coffee is made from low-quality beans</h2>
+                          <p>While some instant coffees use lower-grade beans, specialty instant coffee is made from 100% Arabica beans sourced from the same farms as whole bean coffee. The difference is in the processing.</p>
+                          <h2>Myth: Instant coffee is full of chemicals</h2>
+                          <p>Quality instant coffee is made from 100% coffee beans with no additives. The freeze-drying process simply removes water, preserving the natural flavor compounds.</p>
+                          <h2>Truth: Freeze-drying preserves flavor</h2>
+                          <p>Freeze-drying (lyophilization) is a gentle process that locks in the coffee's volatile aromatics. When you add hot water, those flavors are released, delivering a cup that rivals fresh-brewed coffee.</p>
+                          <h2>Truth: It's more sustainable</h2>
+                          <p>Instant coffee produces less waste and has a smaller carbon footprint than single-serve pods. It's a convenient, eco-friendly choice for your daily brew.</p>
+                          <p>Next time you reach for instant, choose a specialty brand like Brew & Co. for a truly satisfying experience.</p>`
             }, ];
 
             // ─── FAQ DATA ──────────────────────────────────────────────
@@ -2217,8 +2755,24 @@
                 faqOpen: [],
                 newsletterEmail: '',
                 user: null,
+                userId: null,
                 authMode: 'login',
+                isLoading: false,
+                editingProfile: false,
+                editingAddress: null,
+                editingPayment: null,
+                // Which product image is currently shown in detail view
+                currentDetailImage: 0,
             };
+
+            // ─── LOADING ──────────────────────────────────────────────────
+            function showLoading() {
+                document.getElementById('loading-overlay').classList.add('visible');
+            }
+
+            function hideLoading() {
+                document.getElementById('loading-overlay').classList.remove('visible');
+            }
 
             // ─── MODAL ──────────────────────────────────────────────────
             function openModal(title, bodyHTML) {
@@ -2227,6 +2781,35 @@
                 document.getElementById('modal-body').innerHTML = bodyHTML;
                 overlay.classList.add('open');
                 document.body.style.overflow = 'hidden';
+
+                // Re-bind modal close button
+                const closeBtn = document.getElementById('modal-close-btn');
+                closeBtn.onclick = function() { closeModal(); };
+
+                // Re-bind any close-modal actions inside the modal body
+                document.querySelectorAll('#modal-body [data-action="close-modal"]').forEach(el => {
+                    el.onclick = function(e) {
+                        e.preventDefault();
+                        closeModal();
+                    };
+                });
+
+                // Re-bind any nav actions inside the modal body
+                document.querySelectorAll('#modal-body [data-action="nav"]').forEach(el => {
+                    el.onclick = function(e) {
+                        e.preventDefault();
+                        const param = this.dataset.param;
+                        if (param) {
+                            closeModal();
+                            state.page = param;
+                            state.selectedProduct = null;
+                            state.selectedBlog = null;
+                            state.mobileNav = false;
+                            render();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                    };
+                });
             }
 
             function closeModal() {
@@ -2235,10 +2818,118 @@
                 document.body.style.overflow = '';
             }
 
+            // Modal overlay click to close
             document.getElementById('modal-overlay').addEventListener('click', function(e) {
                 if (e.target === this) closeModal();
             });
-            document.querySelector('[data-action="close-modal"]')?.addEventListener('click', closeModal);
+
+            // ─── DB HELPERS ──────────────────────────────────────────────
+
+            async function getUser(userId) {
+                if (!userId) return null;
+                return await dbGet('users', userId);
+            }
+
+            async function getOrders(userId) {
+                if (!userId) return [];
+                return await dbGetIndex('orders', 'userId', userId) || [];
+            }
+
+            async function getAddresses(userId) {
+                if (!userId) return [];
+                return await dbGetIndex('addresses', 'userId', userId) || [];
+            }
+
+            async function getPaymentMethods(userId) {
+                if (!userId) return [];
+                return await dbGetIndex('paymentMethods', 'userId', userId) || [];
+            }
+
+            async function getCart(userId) {
+                if (!userId) return null;
+                return await dbGet('cart', userId);
+            }
+
+            async function saveUser(user) {
+                if (!user.id) user.id = generateId();
+                await dbPut('users', user);
+                return user;
+            }
+
+            async function saveOrder(order) {
+                if (!order.id) order.id = generateId();
+                await dbPut('orders', order);
+                return order;
+            }
+
+            async function saveAddress(address) {
+                if (!address.id) address.id = generateId();
+                await dbPut('addresses', address);
+                return address;
+            }
+
+            async function deleteAddress(addressId) {
+                await dbDelete('addresses', addressId);
+            }
+
+            async function savePaymentMethod(pm) {
+                if (!pm.id) pm.id = generateId();
+                await dbPut('paymentMethods', pm);
+                return pm;
+            }
+
+            async function deletePaymentMethod(pmId) {
+                await dbDelete('paymentMethods', pmId);
+            }
+
+            async function saveCart(userId, items) {
+                await dbPut('cart', { userId, items });
+            }
+
+            async function saveSession(session) {
+                await dbPut('sessions', session);
+            }
+
+            async function getSession(id) {
+                return await dbGet('sessions', id);
+            }
+
+            // ─── AUTH ──────────────────────────────────────────────────────
+
+            async function registerUser(name, email, password) {
+                const allUsers = await dbGetAll('users');
+                if (allUsers.find(u => u.email === email)) {
+                    throw new Error('Email already registered');
+                }
+                const user = {
+                    id: generateId(),
+                    name,
+                    email,
+                    password: btoa(password),
+                    createdAt: new Date().toISOString(),
+                };
+                await saveUser(user);
+                // Create default address
+                await saveAddress({
+                    id: generateId(),
+                    userId: user.id,
+                    label: 'Home',
+                    line1: '142 Coffee Lane',
+                    city: 'London',
+                    postcode: 'SW1A 1AA',
+                    country: 'UK',
+                    isDefault: true,
+                });
+                return user;
+            }
+
+            async function loginUser(email, password) {
+                const allUsers = await dbGetAll('users');
+                const user = allUsers.find(u => u.email.toLowerCase() === email.toLowerCase());
+                if (!user) throw new Error('User not found');
+                if (user.password !== btoa(password)) throw new Error('Invalid password');
+                return user;
+            }
 
             // ─── RENDER ──────────────────────────────────────────────────
             const root = document.getElementById('root');
@@ -2248,13 +2939,9 @@
                 const blogToShow = state.selectedBlog ? blogPosts.find(b => b.id === state.selectedBlog) : null;
                 const filtered = state.filterCategory === 'all' ? products : products.filter(p => p.category === state
                 .filterCategory);
-                const cartTotal = state.cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-                const cartCount = state.cart.reduce((sum, item) => sum + item.qty, 0);
 
                 const currency = currencies[currentCurrency] || currencies.GBP;
-                const symbol = currency.symbol;
-                const rate = currency.rate;
-                const formatPrice = (price) => symbol + (price * rate).toFixed(2);
+                const formatPrice = (price) => currency.symbol + (price * currency.rate).toFixed(2);
 
                 const t = translations[currentLanguage] || translations.en;
 
@@ -2326,15 +3013,42 @@
                     const p = productToShow;
                     const inCart = state.cart.find(item => item.id === p.id);
                     const qtyInCart = inCart ? inCart.qty : 0;
+
+                    // Build thumbnail images
+                    const thumbImages = p.images || [p.svg];
+                    const thumbSvgs = thumbImages.map(img => PRODUCT_SVGS[img] || PRODUCT_SVGS.bean);
+
+                    // Get current image
+                    const currentImgIdx = Math.min(state.currentDetailImage || 0, thumbSvgs.length - 1);
+                    const mainSvg = thumbSvgs[currentImgIdx] || thumbSvgs[0];
+
+                    // Build reviews
+                    const reviewsHtml = (p.reviews || []).map(r =>
+                        `<div class="review"><span class="stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</span> <span class="author">${r.author}</span><div class="text">${r.text}</div></div>`
+                    ).join('');
+
                     pageContent = `
                 <div class="page">
                   <div class="detail-layout">
-                    <div class="detail-image">${PRODUCT_SVGS[p.svg] || PRODUCT_SVGS.bean}</div>
+                    <div class="detail-image">
+                      <div class="main-img">${mainSvg}</div>
+                      <div class="thumbnails">
+                        ${thumbSvgs.map((svg, idx) => `
+                          <div class="thumb ${idx === currentImgIdx ? 'active' : ''}" data-action="change-image" data-param="${idx}" title="View image ${idx+1}">
+                            ${svg}
+                          </div>
+                        `).join('')}
+                      </div>
+                      <div class="badge-row">
+                        <span class="badge">${p.category}</span>
+                        <span class="badge">${p.specs['Roast Level'] || p.specs['Roast'] || 'Specialty'}</span>
+                        <span class="badge">${p.specs['Origin'] || 'Premium'}</span>
+                      </div>
+                    </div>
                     <div class="detail-info">
-                      <span style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--muted-foreground);">${p.category}</span>
                       <h1>${p.name}</h1>
                       <div class="price">${formatPrice(p.price)}</div>
-                      <p class="desc">${p.description}</p>
+                      <div class="desc">${p.description}</div>
                       <dl class="specs">${Object.entries(p.specs).map(([k,v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
                       <div class="qty"><label for="detail-qty">Quantity</label><input type="number" id="detail-qty" value="${qtyInCart || 1}" min="1" max="10" /></div>
                       <div class="actions">
@@ -2342,6 +3056,7 @@
                         <button class="btn btn-outline" data-action="nav" data-param="products">Back to Shop</button>
                       </div>
                       ${qtyInCart > 0 ? `<p style="font-size:0.85rem;color:var(--muted-foreground);margin-top:0.5rem;">Already in cart: ${qtyInCart} item(s)</p>` : ''}
+                      ${reviewsHtml ? `<div class="reviews"><h3>Customer Reviews</h3>${reviewsHtml}</div>` : ''}
                     </div>
                   </div>
                 </div>
@@ -2376,7 +3091,8 @@
                       <h2>Our Story</h2>
                       <p>Brew & Co. was born from a passion for exceptional coffee and a commitment to quality. We travel to the world's best coffee-growing regions, building relationships with farmers who share our dedication to excellence.</p>
                       <p>Every bean we source is carefully selected and roasted to perfection. Whether it's a vibrant Ethiopian Yirgacheffe or a bold Sumatran Mandheling, we ensure that each coffee tells the story of its origin.</p>
-                      <p>We believe that coffee is more than a beverage — it's a moment of connection, a ritual of comfort, and a celebration of craftsmanship.</p>
+                      <p>We believe that coffee is more than a beverage — it's a moment of connection, a ritual of comfort, and a celebration of craftsmanship. Our roastery in London is where the magic happens, and we invite you to be part of our journey.</p>
+                      <p>From our direct trade relationships with farmers to our commitment to sustainable packaging, every aspect of our business is designed to honor the coffee and the people who make it possible.</p>
                       <div style="margin-top:1rem;display:inline-flex;align-items:center;gap:0.5rem;background:var(--accent);padding:0.4rem 1rem;border-radius:9999px;border:1px solid var(--border);font-size:0.85rem;color:var(--muted-foreground);">${UK_FLAG_SVG} ${t.uk}</div>
                     </div>
                     <div>${ABOUT_ROASTERY_SVG}</div>
@@ -2384,10 +3100,10 @@
                   <div class="section" style="padding-top:1rem;">
                     <div class="section-header"><h2>Our Values</h2><p>Guiding principles that shape every cup we brew.</p></div>
                     <div class="values">
-                      <div class="item"><h4>Quality</h4><p>Only the top 5% of specialty beans make it into our roastery.</p></div>
-                      <div class="item"><h4>Sustainability</h4><p>We support eco-friendly farming and ethical trade practices.</p></div>
-                      <div class="item"><h4>Transparency</h4><p>Know exactly where your coffee comes from and how it was processed.</p></div>
-                      <div class="item"><h4>Craftsmanship</h4><p>Small-batch roasting with precision to highlight each bean's character.</p></div>
+                      <div class="item"><h4>Quality</h4><p>Only the top 5% of specialty beans make it into our roastery. We cup every batch to ensure consistency and excellence.</p></div>
+                      <div class="item"><h4>Sustainability</h4><p>We support eco-friendly farming, use compostable packaging, and offset our carbon footprint through reforestation projects.</p></div>
+                      <div class="item"><h4>Transparency</h4><p>Know exactly where your coffee comes from and how it was processed. We publish origin information and pricing for every bean we source.</p></div>
+                      <div class="item"><h4>Craftsmanship</h4><p>Small-batch roasting with precision to highlight each bean's character. Every roast is a labour of love.</p></div>
                     </div>
                   </div>
                 </div>
@@ -2399,19 +3115,19 @@
                     pageContent = `
                 <div class="page">
                   <div class="hero" style="grid-template-columns:1fr 1fr;padding:1rem 0 2rem;">
-                    <div class="hero-content"><h1>Subscribe & <span>Save</span></h1><p>Never run out of your favorite coffee. Choose your roast, set your schedule, and enjoy free shipping on every delivery.</p><button class="btn" data-action="nav" data-param="products">Browse Coffees</button></div>
+                    <div class="hero-content"><h1>Subscribe & <span>Save</span></h1><p>Never run out of your favorite coffee. Choose your roast, set your schedule, and enjoy free shipping on every delivery. Plus, get 15% off every order.</p><button class="btn" data-action="nav" data-param="products">Browse Coffees</button></div>
                     <div class="hero-image">${SUB_HERO_SVG}</div>
                   </div>
                   <div class="section" style="padding-top:0;">
-                    <div class="section-header"><h2>Choose Your Plan</h2><p>Flexible subscription options tailored to your coffee routine.</p></div>
+                    <div class="section-header"><h2>Choose Your Plan</h2><p>Flexible subscription options tailored to your coffee routine. Cancel or modify anytime.</p></div>
                     <div class="sub-plans">
-                      <div class="sub-plan"><h3>Light Roast</h3><div class="sub-price">${formatPrice(15.50)}/mo</div><p>Bright, fruity, and complex.</p><button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button></div>
-                      <div class="sub-plan"><h3>Medium Roast</h3><div class="sub-price">${formatPrice(14.50)}/mo</div><p>Balanced, smooth, and versatile.</p><button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button></div>
-                      <div class="sub-plan"><h3>Dark Roast</h3><div class="sub-price">${formatPrice(16.00)}/mo</div><p>Bold, smoky, and intense.</p><button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button></div>
-                      <div class="sub-plan" style="border-color:var(--primary);"><h3>Variety Pack</h3><div class="sub-price">${formatPrice(17.50)}/mo</div><p>All three roasts in one box.</p><button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button></div>
+                      <div class="sub-plan"><h3>Light Roast</h3><div class="sub-price">${formatPrice(15.50)}/mo</div><p>Bright, fruity, and complex. Perfect for pour-over and drip.</p><button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button></div>
+                      <div class="sub-plan"><h3>Medium Roast</h3><div class="sub-price">${formatPrice(14.50)}/mo</div><p>Balanced, smooth, and versatile. Our most popular choice.</p><button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button></div>
+                      <div class="sub-plan"><h3>Dark Roast</h3><div class="sub-price">${formatPrice(16.00)}/mo</div><p>Bold, smoky, and intense. Ideal for espresso and Moka pot.</p><button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button></div>
+                      <div class="sub-plan" style="border-color:var(--primary);"><h3>Variety Pack</h3><div class="sub-price">${formatPrice(17.50)}/mo</div><p>All three roasts in one box. Explore the full spectrum.</p><button class="btn btn-sm" style="margin-top:0.75rem;" data-action="nav" data-param="products">Select</button></div>
                     </div>
                   </div>
-                  <div class="newsletter" style="margin-top:1rem;"><h3>Customize Your Subscription</h3><p>Adjust roast, grind size, and delivery frequency anytime.</p><button class="btn" data-action="nav" data-param="contact">Contact Us</button></div>
+                  <div class="newsletter" style="margin-top:1rem;"><h3>Customize Your Subscription</h3><p>Adjust roast, grind size, and delivery frequency anytime. You're in control.</p><button class="btn" data-action="nav" data-param="contact">Contact Us</button></div>
                 </div>
               `;
                 }
@@ -2433,13 +3149,13 @@
                 if (state.page === 'contact') {
                     pageContent = `
                 <div class="page">
-                  <div class="section-header"><h2>Get in Touch</h2><p>Have a question about our coffee, an order, or just want to say hello? Reach out to us.</p></div>
+                  <div class="section-header"><h2>Get in Touch</h2><p>Have a question about our coffee, an order, or just want to say hello? Reach out to us. We'd love to hear from you.</p></div>
                   <div class="contact-grid">
                     <div>
                       <form class="contact-form" id="contact-form" data-action="submit-contact">
                         <div><label for="contact-name">Full Name</label><input type="text" id="contact-name" placeholder="Your name" required /></div>
                         <div><label for="contact-email">Email Address</label><input type="email" id="contact-email" placeholder="you@example.com" required /></div>
-                        <div><label for="contact-subject">Subject</label><select id="contact-subject"><option>General Inquiry</option><option>Order Status</option><option>Wholesale</option><option>Partnership</option></select></div>
+                        <div><label for="contact-subject">Subject</label><select id="contact-subject"><option>General Inquiry</option><option>Order Status</option><option>Wholesale</option><option>Partnership</option><option>Feedback</option></select></div>
                         <div><label for="contact-message">Message</label><textarea id="contact-message" placeholder="Tell us how we can help…" required></textarea></div>
                         <button type="submit" class="btn" style="align-self:flex-start;">Send Message</button>
                       </form>
@@ -2447,8 +3163,8 @@
                     <div class="contact-info">
                       <div class="item">${ICONS.mail}<div><strong>Email</strong><p>hello@brewandco.com</p></div></div>
                       <div class="item">${ICONS.phone}<div><strong>Phone</strong><p>+44 800 555 COFF</p></div></div>
-                      <div class="item">${ICONS.pin}<div><strong>Roastery</strong><p>142 Coffee Lane, London, UK</p></div></div>
-                      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;text-align:center;"><p style="font-weight:600;margin-bottom:0.25rem;">Visit Our Roastery</p><p style="color:var(--muted-foreground);font-size:0.95rem;">Mon–Fri: 8am – 5pm<br />Sat: 9am – 3pm</p></div>
+                      <div class="item">${ICONS.pin}<div><strong>Roastery</strong><p>142 Coffee Lane, London, SW1A 1AA, UK</p></div></div>
+                      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;text-align:center;"><p style="font-weight:600;margin-bottom:0.25rem;">Visit Our Roastery</p><p style="color:var(--muted-foreground);font-size:0.95rem;">Mon–Fri: 8am – 5pm<br />Sat: 9am – 3pm<br />Closed Sundays</p></div>
                     </div>
                   </div>
                 </div>
@@ -2464,7 +3180,7 @@
                     <div class="auth-container">
                       <div class="auth-card">
                         <h2>${isLogin ? t.auth.welcome : t.auth.create}</h2>
-                        <p>${isLogin ? 'Sign in to your account to track orders and manage preferences.' : 'Create an account to enjoy faster checkout and order tracking.'}</p>
+                        <p>${isLogin ? 'Sign in to your account to track orders and manage preferences.' : 'Create an account to enjoy faster checkout, order tracking, and personalised recommendations.'}</p>
                         <form id="auth-form" data-action="${isLogin ? 'login' : 'register'}">
                           ${!isLogin ? `<div><label>${t.auth.name}</label><input type="text" id="auth-name" placeholder="John Doe" required /></div>` : ''}
                           <div><label>${t.auth.email}</label><input type="email" id="auth-email" placeholder="you@example.com" required /></div>
@@ -2478,20 +3194,77 @@
                   </div>
                 `;
                     } else {
-                        const orders = state.user.orders || [];
+                        const userName = state.user.name || 'Coffee Lover';
+                        const userEmail = state.user.email || '';
+                        const userOrders = state.user.orders || [];
+                        const userAddresses = state.user.addresses || [];
+                        const userPaymentMethods = state.user.paymentMethods || [];
+
                         pageContent = `
                   <div class="page">
                     <div class="account-dashboard">
                       <div class="account-header">
-                        <div class="avatar-lg">${state.user.name.charAt(0).toUpperCase()}</div>
-                        <div class="info"><h2>${state.user.name}</h2><p>${state.user.email}</p><p style="font-size:0.8rem;color:var(--muted-foreground);">📍 ${t.ukAddress}</p></div>
-                        <div style="margin-left:auto;"><button class="btn btn-sm btn-danger" data-action="logout">${t.account.logout}</button></div>
+                        <div class="avatar-lg">${userName.charAt(0).toUpperCase()}</div>
+                        <div class="info">
+                          <h2>${userName}</h2>
+                          <p>${userEmail}</p>
+                          <p style="font-size:0.8rem;color:var(--muted-foreground);">📍 ${t.ukAddress}</p>
+                          <span class="login-status logged-in">✓ Signed in</span>
+                          <span style="font-size:0.7rem;color:var(--muted-foreground);margin-left:0.5rem;">Data saved in IndexedDB</span>
+                        </div>
+                        <div style="margin-left:auto;display:flex;gap:0.5rem;flex-wrap:wrap;">
+                          <button class="btn btn-sm btn-danger" data-action="logout">${t.account.logout}</button>
+                        </div>
                       </div>
                       <div class="account-grid">
-                        <div class="account-card"><h3>${t.account.orders}</h3>${orders.length === 0 ? `<p>${t.account.noOrders}</p>` : orders.map(o => `<div class="order-item"><span>#${o.id} — ${o.date}</span><span class="status">${o.status}</span></div>`).join('')}<button class="btn btn-sm btn-outline" style="margin-top:0.5rem;width:100%;">${t.account.orders}</button></div>
-                        <div class="account-card"><h3>${t.account.addresses}</h3><p>142 Coffee Lane<br/>London, UK</p><button class="btn btn-sm btn-outline" style="margin-top:0.5rem;width:100%;">Manage Addresses</button></div>
-                        <div class="account-card"><h3>${t.account.settings}</h3><p>Preferences, notifications, and profile settings.</p><button class="btn btn-sm btn-outline" style="margin-top:0.5rem;width:100%;">Edit Profile</button></div>
-                        <div class="account-card"><h3>Payment Methods</h3><p>Visa •••• 4242<br/>PayPal •••• user@email.com</p><button class="btn btn-sm btn-outline" style="margin-top:0.5rem;width:100%;">Manage Payments</button></div>
+                        <div class="account-card">
+                          <h3>${t.account.orders} <span class="badge">${userOrders.length}</span></h3>
+                          ${userOrders.length === 0 ? `<p>${t.account.noOrders}</p>` : userOrders.slice(0, 5).map(o => `
+                            <div class="order-item">
+                              <span>#${o.id.slice(0,8)} — ${o.date || 'N/A'}</span>
+                              <span class="status">${o.status || 'Processing'}</span>
+                            </div>
+                          `).join('')}
+                          <button class="add-btn" data-action="view-orders">${userOrders.length > 0 ? 'View All Orders' : 'Start Shopping'}</button>
+                        </div>
+                        <div class="account-card">
+                          <h3>${t.account.addresses} <span class="badge">${userAddresses.length}</span></h3>
+                          ${userAddresses.length === 0 ? `<p>No addresses saved.</p>` : userAddresses.slice(0, 3).map(a => `
+                            <div class="address-item">
+                              <span>${a.label}: ${a.line1}, ${a.city}</span>
+                              ${a.isDefault ? '<span class="default-badge">Default</span>' : ''}
+                            </div>
+                          `).join('')}
+                          <button class="add-btn" data-action="add-address">+ Add Address</button>
+                        </div>
+                        <div class="account-card">
+                          <h3>Payment Methods <span class="badge">${userPaymentMethods.length}</span></h3>
+                          ${userPaymentMethods.length === 0 ? `<p>No payment methods saved.</p>` : userPaymentMethods.slice(0, 3).map(pm => `
+                            <div class="payment-item">
+                              <span>${pm.type || 'Card'} •••• ${pm.last4 || '****'}</span>
+                              ${pm.isDefault ? '<span class="default-badge">Default</span>' : ''}
+                            </div>
+                          `).join('')}
+                          <button class="add-btn" data-action="add-payment">+ Add Payment Method</button>
+                        </div>
+                        <div class="account-card">
+                          <h3>${t.account.settings}</h3>
+                          <div class="profile-field">
+                            <span class="label">Name</span>
+                            <span class="value">${userName}</span>
+                            <button class="edit-btn" data-action="edit-profile">${t.profile.edit}</button>
+                          </div>
+                          <div class="profile-field">
+                            <span class="label">Email</span>
+                            <span class="value">${userEmail}</span>
+                          </div>
+                          <div class="profile-field">
+                            <span class="label">Password</span>
+                            <span class="value">••••••••</span>
+                            <button class="edit-btn" data-action="change-password">Change</button>
+                          </div>
+                          <button class="add-btn" style="margin-top:0.75rem;" data-action="sync-db">🔄 Sync with IndexedDB</button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -2505,40 +3278,43 @@
                     const policyData = {
                         shipping: {
                             title: 'Shipping Policy',
-                            content: `
-                    <p>At Brew & Co., we want to ensure your coffee arrives fresh and on time. Please review our shipping policy below.</p>
-                    <h2>Processing Time</h2><p>Orders are processed within 1-2 business days (Monday–Friday). We do not ship on weekends or holidays.</p>
-                    <h2>Shipping Rates & Delivery</h2><p>We offer standard and expedited shipping options. Rates are calculated at checkout based on weight and destination.</p>
-                    <ul><li><strong>Standard Shipping:</strong> 3-7 business days</li><li><strong>Expedited Shipping:</strong> 1-3 business days</li><li><strong>Free Standard Shipping:</strong> On orders over $50 (domestic only)</li></ul>
-                    <h2>International Shipping</h2><p>We currently ship to the United States, Canada, and the United Kingdom. International shipping times vary by destination.</p>
-                  `
+                            content: `<p>At Brew & Co., we want to ensure your coffee arrives fresh and on time. Please review our shipping policy below.</p>
+                          <h2>Processing Time</h2><p>Orders are processed within 1-2 business days (Monday–Friday). We do not ship on weekends or bank holidays. You will receive a confirmation email with tracking information once your order has shipped.</p>
+                          <h2>Shipping Rates & Delivery</h2><p>We offer standard and expedited shipping options. Rates are calculated at checkout based on weight and destination.</p>
+                          <ul><li><strong>Standard Shipping:</strong> 3-7 business days — £3.99</li><li><strong>Expedited Shipping:</strong> 1-3 business days — £6.99</li><li><strong>Free Standard Shipping:</strong> On orders over £40 (UK only)</li></ul>
+                          <h2>International Shipping</h2><p>We currently ship to the United States, Canada, and the United Kingdom. International shipping times vary by destination and customs processing. Import duties may apply.</p>
+                          <h2>Order Tracking</h2><p>Once your order ships, you will receive a tracking number via email. Please allow up to 24 hours for tracking information to update.</p>
+                          <h2>Shipping Delays</h2><p>While we strive to meet delivery estimates, we are not responsible for delays caused by carriers, weather, or customs. We appreciate your patience.</p>`
                         },
                         returns: {
                             title: 'Returns & Exchanges',
-                            content: `
-                    <p>We want you to love your Brew & Co. coffee. If you're not completely satisfied, we offer a hassle-free return policy.</p>
-                    <h2>Return Eligibility</h2><p>You may return unopened coffee products within 30 days of receipt for a full refund. We cannot accept returns on opened coffee or perishable items.</p>
-                    <h2>How to Initiate a Return</h2><p>Contact us at hello@brewandco.com with your order number and reason for return. We will provide you with a return shipping label and instructions.</p>
-                    <h2>Refund Process</h2><p>Once we receive your return, we will inspect the item and process your refund within 5-7 business days.</p>
-                  `
+                            content: `<p>We want you to love your Brew & Co. coffee. If you're not completely satisfied, we offer a hassle-free return policy.</p>
+                          <h2>Return Eligibility</h2><p>You may return unopened coffee products within 30 days of receipt for a full refund. We cannot accept returns on opened coffee or perishable items for hygiene reasons.</p>
+                          <h2>How to Initiate a Return</h2><p>Contact us at hello@brewandco.com with your order number and reason for return. We will provide you with a return shipping label and instructions.</p>
+                          <h2>Refund Process</h2><p>Once we receive your return, we will inspect the item and process your refund within 5-7 business days. Refunds will be issued to the original payment method.</p>
+                          <h2>Exchanges</h2><p>If you received a defective or incorrect item, we will exchange it at no cost. Please contact us immediately to arrange the exchange.</p>
+                          <h2>Return Shipping Costs</h2><p>If the return is due to our error (defective, incorrect item), we will cover the return shipping. Otherwise, return shipping costs are the responsibility of the customer.</p>`
                         },
                         privacy: {
                             title: 'Privacy Policy',
-                            content: `
-                    <p>Brew & Co. respects your privacy and is committed to protecting your personal information. This policy explains how we collect, use, and safeguard your data.</p>
-                    <h2>Information We Collect</h2><p>We collect information you provide directly, such as your name, email address, phone number, and payment details when you place an order or sign up for our newsletter.</p>
-                    <h2>How We Use Your Information</h2><ul><li>To process and fulfill orders</li><li>To communicate with you about your order or account</li><li>To send promotional offers and updates (you may opt out at any time)</li></ul>
-                    <h2>Data Security</h2><p>We use industry-standard encryption and security measures to protect your personal information.</p>
-                  `
+                            content: `<p>Brew & Co. respects your privacy and is committed to protecting your personal information. This policy explains how we collect, use, and safeguard your data.</p>
+                          <h2>Information We Collect</h2><p>We collect information you provide directly, such as your name, email address, phone number, and payment details when you place an order or sign up for our newsletter.</p>
+                          <h2>How We Use Your Information</h2><ul><li>To process and fulfill orders</li><li>To communicate with you about your order or account</li><li>To send promotional offers and updates (you may opt out at any time)</li><li>To improve our website and customer experience</li></ul>
+                          <h2>Data Security</h2><p>We use industry-standard encryption and security measures to protect your personal information. However, no method of transmission over the internet is 100% secure.</p>
+                          <h2>Sharing Your Information</h2><p>We do not sell, trade, or rent your personal information to third parties. We may share your information with service providers who assist us in operating our website and conducting business, subject to confidentiality agreements.</p>
+                          <h2>Cookies</h2><p>We use cookies to enhance your browsing experience and analyze site traffic. You can control cookie preferences through your browser settings.</p>
+                          <h2>Your Rights</h2><p>You have the right to access, correct, or delete your personal information. Please contact us at hello@brewandco.com to make a request.</p>`
                         },
                         terms: {
                             title: 'Terms of Service',
-                            content: `
-                    <p>By using the Brew & Co. website and placing an order, you agree to the following terms and conditions. Please read them carefully.</p>
-                    <h2>General</h2><p>All content on this site, including text, images, and logos, is the property of Brew & Co. and may not be reproduced without permission.</p>
-                    <h2>Products & Pricing</h2><p>We strive to provide accurate product descriptions and pricing. However, we reserve the right to correct any errors or omissions and to change prices without notice.</p>
-                    <h2>Orders & Payment</h2><p>All orders are subject to acceptance and availability. Payment must be received in full before your order is processed.</p>
-                  `
+                            content: `<p>By using the Brew & Co. website and placing an order, you agree to the following terms and conditions. Please read them carefully.</p>
+                          <h2>General</h2><p>All content on this site, including text, images, and logos, is the property of Brew & Co. and may not be reproduced without permission.</p>
+                          <h2>Products & Pricing</h2><p>We strive to provide accurate product descriptions and pricing. However, we reserve the right to correct any errors or omissions and to change prices without notice.</p>
+                          <h2>Orders & Payment</h2><p>All orders are subject to acceptance and availability. We may refuse or cancel any order for any reason. Payment must be received in full before your order is processed.</p>
+                          <h2>Shipping & Delivery</h2><p>We aim to ship orders within the stated processing times. However, we are not liable for delays caused by carriers or unforeseen events.</p>
+                          <h2>Returns & Refunds</h2><p>Please refer to our Returns & Exchanges policy for information on returns and refunds.</p>
+                          <h2>Limitation of Liability</h2><p>To the fullest extent permitted by law, Brew & Co. shall not be liable for any indirect, incidental, or consequential damages arising from the use of our products or website.</p>
+                          <h2>Governing Law</h2><p>These terms are governed by the laws of England and Wales. Any disputes shall be resolved in the courts of London.</p>`
                         }
                     };
                     const data = policyData[state.page];
@@ -2568,6 +3344,9 @@
                   `;
                     }).join('');
 
+                const cartTotal = state.cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+                const cartCount = state.cart.reduce((sum, item) => sum + item.qty, 0);
+
                 // ─── FULL HTML ──────────────────────────────────────────
                 const nav = t.nav || translations.en.nav;
                 const navItems = [{ key: 'home', label: nav.home }, { key: 'products', label: nav.shop }, { key: 'subscriptions',
@@ -2586,6 +3365,7 @@
                     `<div class="payment-icon">${svg}</div>`
                 ).join('');
 
+                // Show login status in account button
                 const accountBtnHtml = state.user ?
                     `<button class="account-btn" data-action="nav" data-param="account"><span class="avatar">${state.user.name.charAt(0).toUpperCase()}</span> ${state.user.name.split(' ')[0]}</button>` :
                     `<button class="account-btn" data-action="nav" data-param="account">${ICONS.user} Sign In</button>`;
@@ -2613,7 +3393,7 @@
                     <div class="footer-grid">
                       <div class="footer-brand">
                         <div style="display:flex;align-items:center;gap:0.5rem;font-weight:700;font-size:1.1rem;">${LOGO_SVG}<span>Brew & Co.</span></div>
-                        <p>Specialty coffee for the discerning palate. Whole beans, instant, and accessories — crafted with care.</p>
+                        <p>Specialty coffee for the discerning palate. Whole beans, instant, and accessories — crafted with care in London.</p>
                         <div class="uk-badge">${UK_FLAG_SVG} ${t.uk}</div>
                       </div>
                       <div><h4>Shop</h4><ul><li><button data-action="nav" data-param="products">Whole Beans</button></li><li><button data-action="nav" data-param="products">Instant</button></li><li><button data-action="nav" data-param="products">Pods</button></li><li><button data-action="nav" data-param="subscriptions">Subscriptions</button></li></ul></div>
@@ -2645,56 +3425,291 @@
               </div>
             `;
 
-                // Re-bind events
-                document.querySelector('[data-action="close-modal"]')?.addEventListener('click', closeModal);
-                document.getElementById('modal-overlay')?.addEventListener('click', function(e) {
-                    if (e.target === this) closeModal();
-                });
+                // ─── RE-BIND EVENTS ──────────────────────────────────────
+
+                // Currency select
                 document.getElementById('currency-select')?.addEventListener('change', function() {
                     currentCurrency = this.value;
                     render();
                 });
+
+                // Language select
                 document.getElementById('language-select')?.addEventListener('change', function() {
                     currentLanguage = this.value;
                     render();
                 });
 
                 // Auth form
-                document.getElementById('auth-form')?.addEventListener('submit', function(e) {
+                document.getElementById('auth-form')?.addEventListener('submit', async function(e) {
                     e.preventDefault();
                     const action = this.dataset.action;
-                    const email = document.getElementById('auth-email')?.value;
+                    const email = document.getElementById('auth-email')?.value.trim();
                     const password = document.getElementById('auth-password')?.value;
-                    const name = document.getElementById('auth-name')?.value;
+                    const name = document.getElementById('auth-name')?.value.trim();
 
-                    if (action === 'register') {
-                        if (!name || !email || !password) return;
-                        state.user = { name, email, password, orders: [{ id: 'ORD-001', date: '2026-08-20',
-                                status: 'Delivered' }] };
-                        openModal('Account Created! 🎉', `<p>Welcome ${name}! Your account has been created successfully.</p><p style="font-size:0.9rem;color:var(--muted-foreground);">You can now track orders, save addresses, and enjoy faster checkout.</p><button class="btn" data-action="close-modal" style="margin-top:0.5rem;">Continue</button>`);
-                        state.page = 'account';
-                        render();
-                    } else if (action === 'login') {
-                        if (!email || !password) return;
-                        state.user = { name: 'Coffee Lover', email, password, orders: [{ id: 'ORD-001',
-                                date: '2026-08-20', status: 'Delivered' }, { id: 'ORD-002', date: '2026-08-15',
-                                status: 'Shipped' }] };
-                        openModal('Welcome Back! ☕', `<p>You've been signed in successfully.</p><p style="font-size:0.9rem;color:var(--muted-foreground);">Your orders and preferences are now available.</p><button class="btn" data-action="close-modal" style="margin-top:0.5rem;">Continue</button>`);
-                        state.page = 'account';
-                        render();
+                    try {
+                        showLoading();
+                        if (action === 'register') {
+                            if (!name || !email || !password) throw new Error('Please fill in all fields');
+                            const user = await registerUser(name, email, password);
+                            const addresses = await getAddresses(user.id);
+                            const orders = await getOrders(user.id);
+                            const paymentMethods = await getPaymentMethods(user.id);
+                            user.addresses = addresses;
+                            user.orders = orders;
+                            user.paymentMethods = paymentMethods;
+                            state.user = user;
+                            state.userId = user.id;
+                            localStorage.setItem('brewco_userId', user.id);
+                            const cartData = await getCart(user.id);
+                            if (cartData) state.cart = cartData.items || [];
+                            // Save session
+                            await saveSession({ id: user.id, userId: user.id, loggedIn: true, updatedAt: new Date()
+                                    .toISOString() });
+                            closeModal();
+                            openModal('Account Created! 🎉', `<p>Welcome ${name}! Your account has been created successfully.</p><p style="font-size:0.9rem;color:var(--muted-foreground);">All your data is saved locally in IndexedDB.</p><div class="btn-group"><button class="btn" data-action="close-modal">Continue</button><button class="btn btn-outline" data-action="nav" data-param="account">Go to Dashboard</button></div>`);
+                            state.page = 'account';
+                            render();
+                        } else if (action === 'login') {
+                            if (!email || !password) throw new Error('Please fill in all fields');
+                            const user = await loginUser(email, password);
+                            const addresses = await getAddresses(user.id);
+                            const orders = await getOrders(user.id);
+                            const paymentMethods = await getPaymentMethods(user.id);
+                            user.addresses = addresses;
+                            user.orders = orders;
+                            user.paymentMethods = paymentMethods;
+                            state.user = user;
+                            state.userId = user.id;
+                            localStorage.setItem('brewco_userId', user.id);
+                            const cartData = await getCart(user.id);
+                            if (cartData) state.cart = cartData.items || [];
+                            await saveSession({ id: user.id, userId: user.id, loggedIn: true, updatedAt: new Date()
+                                    .toISOString() });
+                            closeModal();
+                            openModal('Welcome Back! ☕', `<p>You've been signed in successfully.</p><p style="font-size:0.9rem;color:var(--muted-foreground);">Your orders and preferences are now available.</p><div class="btn-group"><button class="btn" data-action="close-modal">Continue</button><button class="btn btn-outline" data-action="nav" data-param="account">Go to Dashboard</button></div>`);
+                            state.page = 'account';
+                            render();
+                        }
+                    } catch (err) {
+                        openModal('Error', `<p style="color:var(--destructive);">${err.message}</p><button class="btn" data-action="close-modal">Try Again</button>`);
+                    } finally {
+                        hideLoading();
                     }
                 });
 
+                // Toggle auth mode
                 document.querySelector('[data-action="toggle-auth"]')?.addEventListener('click', function() {
                     state.authMode = state.authMode === 'login' ? 'register' : 'login';
                     render();
                 });
-                document.querySelector('[data-action="logout"]')?.addEventListener('click', function() {
+
+                // Logout
+                document.querySelector('[data-action="logout"]')?.addEventListener('click', async function() {
+                    if (state.userId && state.cart.length > 0) {
+                        await saveCart(state.userId, state.cart);
+                    }
+                    localStorage.removeItem('brewco_userId');
                     state.user = null;
+                    state.userId = null;
+                    state.cart = [];
                     state.page = 'home';
                     render();
                     openModal('Logged Out', `<p>You've been signed out successfully. See you soon!</p><button class="btn" data-action="close-modal">Close</button>`);
                 });
+
+                // ─── ACCOUNT ACTIONS ──────────────────────────────────────
+
+                // Add Address
+                document.querySelector('[data-action="add-address"]')?.addEventListener('click', function() {
+                    openModal('Add Address', `
+                <form id="address-form" data-action="save-address">
+                  <div class="form-group"><label>Label</label><input type="text" id="addr-label" value="Home" /></div>
+                  <div class="form-group"><label>Address Line 1</label><input type="text" id="addr-line1" placeholder="Street address" required /></div>
+                  <div class="form-group"><label>City</label><input type="text" id="addr-city" placeholder="London" required /></div>
+                  <div class="form-group"><label>Postcode</label><input type="text" id="addr-postcode" placeholder="SW1A 1AA" required /></div>
+                  <div class="form-group"><label>Country</label><input type="text" id="addr-country" value="UK" /></div>
+                  <div class="form-group"><label><input type="checkbox" id="addr-default" checked /> Set as default</label></div>
+                  <button type="submit" class="btn btn-block">Save Address</button>
+                </form>
+              `);
+                    document.getElementById('address-form')?.addEventListener('submit', async function(e) {
+                        e.preventDefault();
+                        try {
+                            const label = document.getElementById('addr-label')?.value || 'Home';
+                            const line1 = document.getElementById('addr-line1')?.value;
+                            const city = document.getElementById('addr-city')?.value;
+                            const postcode = document.getElementById('addr-postcode')?.value;
+                            const country = document.getElementById('addr-country')?.value || 'UK';
+                            const isDefault = document.getElementById('addr-default')?.checked || false;
+                            if (!line1 || !city || !postcode) throw new Error('Please fill in all required fields');
+                            showLoading();
+                            if (isDefault && state.userId) {
+                                const existing = await getAddresses(state.userId);
+                                for (const a of existing) {
+                                    if (a.isDefault) { a.isDefault = false;
+                                        await saveAddress(a); }
+                                }
+                            }
+                            const addr = { id: generateId(), userId: state.userId, label, line1, city, postcode,
+                                country, isDefault };
+                            await saveAddress(addr);
+                            const addresses = await getAddresses(state.userId);
+                            state.user.addresses = addresses;
+                            closeModal();
+                            render();
+                            openModal('Address Saved', `<p>Your address has been saved successfully.</p><button class="btn" data-action="close-modal">OK</button>`);
+                        } catch (err) {
+                            openModal('Error', `<p style="color:var(--destructive);">${err.message}</p><button class="btn" data-action="close-modal">Try Again</button>`);
+                        } finally { hideLoading(); }
+                    });
+                });
+
+                // Add Payment
+                document.querySelector('[data-action="add-payment"]')?.addEventListener('click', function() {
+                    openModal('Add Payment Method', `
+                <form id="payment-form" data-action="save-payment">
+                  <div class="form-group"><label>Card Type</label><select id="pm-type"><option value="Visa">Visa</option><option value="Mastercard">Mastercard</option><option value="Amex">American Express</option><option value="Discover">Discover</option></select></div>
+                  <div class="form-group"><label>Card Number</label><input type="text" id="pm-number" placeholder="•••• •••• •••• ••••" required /></div>
+                  <div class="form-row">
+                    <div class="form-group"><label>Expiry</label><input type="text" id="pm-expiry" placeholder="MM/YY" required /></div>
+                    <div class="form-group"><label>CVC</label><input type="text" id="pm-cvc" placeholder="•••" required /></div>
+                  </div>
+                  <div class="form-group"><label><input type="checkbox" id="pm-default" checked /> Set as default</label></div>
+                  <button type="submit" class="btn btn-block">Save Payment Method</button>
+                </form>
+              `);
+                    document.getElementById('payment-form')?.addEventListener('submit', async function(e) {
+                        e.preventDefault();
+                        try {
+                            const type = document.getElementById('pm-type')?.value || 'Card';
+                            const number = document.getElementById('pm-number')?.value.replace(/\s/g, '');
+                            const expiry = document.getElementById('pm-expiry')?.value;
+                            const isDefault = document.getElementById('pm-default')?.checked || false;
+                            if (!number || number.length < 4) throw new Error('Please enter a valid card number');
+                            if (!expiry) throw new Error('Please enter expiry date');
+                            showLoading();
+                            if (isDefault && state.userId) {
+                                const existing = await getPaymentMethods(state.userId);
+                                for (const p of existing) { if (p.isDefault) { p.isDefault = false;
+                                        await savePaymentMethod(p); } }
+                            }
+                            const pm = { id: generateId(), userId: state.userId, type, last4: number.slice(-4),
+                                expiry, isDefault };
+                            await savePaymentMethod(pm);
+                            const paymentMethods = await getPaymentMethods(state.userId);
+                            state.user.paymentMethods = paymentMethods;
+                            closeModal();
+                            render();
+                            openModal('Payment Method Added', `<p>Your payment method has been saved.</p><button class="btn" data-action="close-modal">OK</button>`);
+                        } catch (err) {
+                            openModal('Error', `<p style="color:var(--destructive);">${err.message}</p><button class="btn" data-action="close-modal">Try Again</button>`);
+                        } finally { hideLoading(); }
+                    });
+                });
+
+                // Edit Profile
+                document.querySelector('[data-action="edit-profile"]')?.addEventListener('click', function() {
+                    const currentName = state.user?.name || '';
+                    openModal('Edit Profile', `
+                <form id="profile-form" data-action="save-profile">
+                  <div class="form-group"><label>Full Name</label><input type="text" id="profile-name" value="${currentName}" required /></div>
+                  <button type="submit" class="btn btn-block">Save Changes</button>
+                </form>
+              `);
+                    document.getElementById('profile-form')?.addEventListener('submit', async function(e) {
+                        e.preventDefault();
+                        try {
+                            const name = document.getElementById('profile-name')?.value.trim();
+                            if (!name) throw new Error('Name is required');
+                            showLoading();
+                            state.user.name = name;
+                            await saveUser(state.user);
+                            closeModal();
+                            render();
+                            openModal('Profile Updated', `<p>Your profile has been updated successfully.</p><button class="btn" data-action="close-modal">OK</button>`);
+                        } catch (err) {
+                            openModal('Error', `<p style="color:var(--destructive);">${err.message}</p><button class="btn" data-action="close-modal">Try Again</button>`);
+                        } finally { hideLoading(); }
+                    });
+                });
+
+                // Change Password
+                document.querySelector('[data-action="change-password"]')?.addEventListener('click', function() {
+                    openModal('Change Password', `
+                <form id="password-form" data-action="save-password">
+                  <div class="form-group"><label>New Password</label><input type="password" id="new-password" placeholder="••••••••" required minlength="6" /></div>
+                  <div class="form-group"><label>Confirm Password</label><input type="password" id="confirm-password" placeholder="••••••••" required /></div>
+                  <button type="submit" class="btn btn-block">Update Password</button>
+                </form>
+              `);
+                    document.getElementById('password-form')?.addEventListener('submit', async function(e) {
+                        e.preventDefault();
+                        try {
+                            const pwd = document.getElementById('new-password')?.value;
+                            const confirm = document.getElementById('confirm-password')?.value;
+                            if (!pwd || pwd.length < 6) throw new Error('Password must be at least 6 characters');
+                            if (pwd !== confirm) throw new Error('Passwords do not match');
+                            showLoading();
+                            state.user.password = btoa(pwd);
+                            await saveUser(state.user);
+                            closeModal();
+                            render();
+                            openModal('Password Updated', `<p>Your password has been changed successfully.</p><button class="btn" data-action="close-modal">OK</button>`);
+                        } catch (err) {
+                            openModal('Error', `<p style="color:var(--destructive);">${err.message}</p><button class="btn" data-action="close-modal">Try Again</button>`);
+                        } finally { hideLoading(); }
+                    });
+                });
+
+                // Sync DB
+                document.querySelector('[data-action="sync-db"]')?.addEventListener('click', async function() {
+                    if (!state.userId) return;
+                    try {
+                        showLoading();
+                        const user = await getUser(state.userId);
+                        if (user) {
+                            const addresses = await getAddresses(state.userId);
+                            const orders = await getOrders(state.userId);
+                            const paymentMethods = await getPaymentMethods(state.userId);
+                            user.addresses = addresses;
+                            user.orders = orders;
+                            user.paymentMethods = paymentMethods;
+                            state.user = user;
+                            render();
+                            openModal('Sync Complete', `<p>All your data has been synced with IndexedDB.</p><p style="font-size:0.85rem;color:var(--muted-foreground);">📦 ${addresses.length} addresses · 💳 ${paymentMethods.length} payment methods · 📋 ${orders.length} orders</p><button class="btn" data-action="close-modal">OK</button>`);
+                        }
+                    } catch (err) {
+                        openModal('Sync Error', `<p style="color:var(--destructive);">${err.message}</p><button class="btn" data-action="close-modal">Close</button>`);
+                    } finally { hideLoading(); }
+                });
+
+                // View Orders
+                document.querySelector('[data-action="view-orders"]')?.addEventListener('click', function() {
+                    const orders = state.user?.orders || [];
+                    if (orders.length === 0) {
+                        openModal('No Orders', `<p>You haven't placed any orders yet. Start exploring our coffee collection!</p><button class="btn" data-action="nav" data-param="products">Browse Coffee</button>`);
+                        return;
+                    }
+                    const ordersHtml = orders.map(o =>
+                        `<div class="order-item"><span>#${o.id.slice(0,8)} — ${o.date || 'N/A'}</span><span class="status">${o.status || 'Processing'}</span></div>`
+                    ).join('');
+                    openModal('Order History', `<div style="max-height:300px;overflow-y:auto;">${ordersHtml}</div><button class="btn" data-action="close-modal" style="margin-top:1rem;">Close</button>`);
+                });
+
+                // Change image in detail view
+                document.querySelectorAll('[data-action="change-image"]')?.forEach(el => {
+                    el.addEventListener('click', function() {
+                        const idx = parseInt(this.dataset.param);
+                        if (!isNaN(idx) && state.selectedProduct) {
+                            state.currentDetailImage = idx;
+                            render();
+                        }
+                    });
+                });
+
+                // ─── NAV, CART, FILTER, FAQ, CHECKOUT ────────────────────
+                // These are handled by global event listeners below
             }
 
             // ─── PRODUCT CARD ──────────────────────────────────────────
@@ -2724,7 +3739,7 @@
             `;
             }
 
-            // ─── EVENT HANDLING ─────────────────────────────────────────
+            // ─── GLOBAL EVENT HANDLING ──────────────────────────────────
             document.addEventListener('click', function(e) {
                 const target = e.target.closest('[data-action]');
                 if (!target) return;
@@ -2737,6 +3752,7 @@
                         state.selectedProduct = null;
                         state.selectedBlog = null;
                         state.mobileNav = false;
+                        state.currentDetailImage = 0;
                         render();
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                         break;
@@ -2744,6 +3760,7 @@
                         state.page = 'detail';
                         state.selectedProduct = param;
                         state.mobileNav = false;
+                        state.currentDetailImage = 0;
                         render();
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                         break;
@@ -2785,11 +3802,8 @@
                         state.authMode = state.authMode === 'login' ? 'register' : 'login';
                         render();
                         break;
-                    case 'logout':
-                        state.user = null;
-                        state.page = 'home';
-                        render();
-                        openModal('Logged Out', `<p>You've been signed out successfully.</p><button class="btn" data-action="close-modal">Close</button>`);
+                    case 'change-image':
+                        // handled inline in render
                         break;
                     default:
                         break;
@@ -2809,7 +3823,7 @@
             });
 
             // ─── ACTION FUNCTIONS ──────────────────────────────────────
-            function addToCart(productId) {
+            async function addToCart(productId) {
                 const product = products.find(p => p.id === productId);
                 if (!product) return;
                 let qty = 1;
@@ -2822,11 +3836,17 @@
                 } else {
                     state.cart.push({ id: productId, price: product.price, qty });
                 }
+                if (state.userId) {
+                    try { await saveCart(state.userId, state.cart); } catch (e) { /* ignore */ }
+                }
                 render();
             }
 
-            function removeFromCart(productId) {
+            async function removeFromCart(productId) {
                 state.cart = state.cart.filter(item => item.id !== productId);
+                if (state.userId) {
+                    try { await saveCart(state.userId, state.cart); } catch (e) { /* ignore */ }
+                }
                 render();
             }
 
@@ -2855,10 +3875,10 @@
                 }
             }
 
-            function handleCheckout() {
+            async function handleCheckout() {
                 if (state.cart.length === 0) return;
                 if (!state.user) {
-                    openModal('Sign In Required', `<p>Please sign in or create an account to complete your purchase.</p><button class="btn" data-action="nav" data-param="account" style="margin-top:0.5rem;">Go to Account</button><button class="btn btn-outline" data-action="close-modal" style="margin-top:0.5rem;">Close</button>`);
+                    openModal('Sign In Required', `<p>Please sign in or create an account to complete your purchase.</p><div class="btn-group"><button class="btn" data-action="nav" data-param="account">Go to Account</button><button class="btn btn-outline" data-action="close-modal">Close</button></div>`);
                     return;
                 }
                 const total = state.cart.reduce((s, i) => s + i.price * i.qty, 0);
@@ -2868,14 +3888,32 @@
                 }).join('');
 
                 const orderId = 'ORD-' + String(Math.floor(100 + Math.random() * 900));
-                if (state.user) {
+                try {
+                    showLoading();
+                    const order = {
+                        id: orderId,
+                        userId: state.userId,
+                        items: state.cart.map(item => ({
+                            productId: item.id,
+                            name: products.find(p => p.id === item.id)?.name || item.id,
+                            price: item.price,
+                            qty: item.qty
+                        })),
+                        total: total,
+                        status: 'Processing',
+                        date: new Date().toISOString().split('T')[0],
+                    };
+                    await saveOrder(order);
                     if (!state.user.orders) state.user.orders = [];
-                    state.user.orders.unshift({ id: orderId, date: new Date().toISOString().split('T')[0], status: 'Processing' });
-                }
-
-                openModal('Order Confirmed! ✅', `<div style="margin-bottom:1rem;">${itemsHtml}</div><div class="cart-summary-total"><span>Total</span><span>${formatPrice(total)}</span></div><p style="font-size:0.9rem;margin-top:0.5rem;">Order #${orderId} has been placed. You'll receive a confirmation email shortly.</p><button class="btn" data-action="close-modal" style="margin-top:1rem;">Continue Shopping</button>`);
-                state.cart = [];
-                render();
+                    state.user.orders.unshift({ id: orderId, date: order.date, status: order.status });
+                    await saveUser(state.user);
+                    state.cart = [];
+                    if (state.userId) await saveCart(state.userId, []);
+                    render();
+                    openModal('Order Confirmed! ✅', `<div style="margin-bottom:1rem;">${itemsHtml}</div><div class="cart-summary-total"><span>Total</span><span>${formatPrice(total)}</span></div><p style="font-size:0.9rem;margin-top:0.5rem;">Order #${orderId} has been placed. You'll receive a confirmation email shortly.</p><p style="font-size:0.8rem;color:var(--muted-foreground);">Saved to IndexedDB</p><button class="btn" data-action="close-modal" style="margin-top:1rem;">Continue Shopping</button>`);
+                } catch (err) {
+                    openModal('Checkout Error', `<p style="color:var(--destructive);">${err.message}</p><button class="btn" data-action="close-modal">Try Again</button>`);
+                } finally { hideLoading(); }
             }
 
             function formatPrice(price) {
@@ -2883,8 +3921,32 @@
                 return currency.symbol + (price * currency.rate).toFixed(2);
             }
 
+            // ─── LOAD SESSION ──────────────────────────────────────────
+            async function loadSession() {
+                try {
+                    showLoading();
+                    // Try to get user from localStorage
+                    const savedUserId = localStorage.getItem('brewco_userId');
+                    if (savedUserId) {
+                        const user = await getUser(savedUserId);
+                        if (user) {
+                            const addresses = await getAddresses(user.id);
+                            const orders = await getOrders(user.id);
+                            const paymentMethods = await getPaymentMethods(user.id);
+                            user.addresses = addresses;
+                            user.orders = orders;
+                            user.paymentMethods = paymentMethods;
+                            state.user = user;
+                            state.userId = user.id;
+                            const cartData = await getCart(user.id);
+                            if (cartData) state.cart = cartData.items || [];
+                        }
+                    }
+                } catch (e) { /* ignore */ } finally { hideLoading(); }
+            }
+
             // ─── INIT ────────────────────────────────────────────────────
-            render();
+            loadSession().then(() => render());
 
         })();
     </script>
